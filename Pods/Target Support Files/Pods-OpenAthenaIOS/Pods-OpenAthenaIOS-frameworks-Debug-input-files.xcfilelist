@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-frameworks.sh
+${BUILT_PRODUCTS_DIR}/color-ios/color_ios.framework
+${BUILT_PRODUCTS_DIR}/grid-ios/grid_ios.framework
+${BUILT_PRODUCTS_DIR}/mgrs-ios/mgrs_ios.framework
+${BUILT_PRODUCTS_DIR}/sf-ios/sf_ios.framework
+${BUILT_PRODUCTS_DIR}/tiff-ios/tiff_ios.framework

@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		592CABB52A0ACF61006E28AF /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
+		5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */; };
+		5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */; };
+		5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */; };
+		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
+		59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */; };
+		59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0929844B6D00F0C6B1 /* ViewController.swift */; };
+		59B62B0D29844B6D00F0C6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59B62B0B29844B6D00F0C6B1 /* Main.storyboard */; };
+		59B62B0F29844B6F00F0C6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59B62B0E29844B6F00F0C6B1 /* Assets.xcassets */; };
+		59B62B1229844B6F00F0C6B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59B62B1029844B6F00F0C6B1 /* LaunchScreen.storyboard */; };
+		59B62B1E2984564300F0C6B1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B1D2984564300F0C6B1 /* AboutViewController.swift */; };
+		59B62B2029860BF400F0C6B1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B1F29860BF400F0C6B1 /* ImageViewController.swift */; };
+		59B62B2229876E6A00F0C6B1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */; };
+		59B62B242988133000F0C6B1 /* AthenaSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B232988133000F0C6B1 /* AthenaSettings.swift */; };
+		59B62B262989B97900F0C6B1 /* ElevationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B252989B97900F0C6B1 /* ElevationViewController.swift */; };
+		59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B27298B15CC00F0C6B1 /* CalculateViewController.swift */; };
+		59B62B3F298DAE7300F0C6B1 /* DigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */; };
+		59B62B42298DE4C900F0C6B1 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */; };
+		59B62B46298F3D5200F0C6B1 /* DroneImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B45298F3D5200F0C6B1 /* DroneImage.swift */; };
+		90C0D64DD6EBFC3B16422909 /* Pods_OpenAthenaIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		59B62B37298C514300F0C6B1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		15B6AE10F93BC82815BD1AD0 /* Pods-OpenAthenaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.debug.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		592CABB42A0ACF61006E28AF /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = examples; sourceTree = "<group>"; };
+		5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42Geodetic.swift; sourceTree = "<group>"; };
+		5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42GaussKruger.swift; sourceTree = "<group>"; };
+		5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSGeodetic.swift; sourceTree = "<group>"; };
+		59B62B0229844B6D00F0C6B1 /* OpenAthenaIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthenaIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		59B62B0929844B6D00F0C6B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		59B62B0C29844B6D00F0C6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		59B62B0E29844B6F00F0C6B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		59B62B1129844B6F00F0C6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		59B62B1329844B6F00F0C6B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59B62B1D2984564300F0C6B1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		59B62B1F29860BF400F0C6B1 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		59B62B232988133000F0C6B1 /* AthenaSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthenaSettings.swift; sourceTree = "<group>"; };
+		59B62B252989B97900F0C6B1 /* ElevationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevationViewController.swift; sourceTree = "<group>"; };
+		59B62B27298B15CC00F0C6B1 /* CalculateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateViewController.swift; sourceTree = "<group>"; };
+		59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalElevationModel.swift; sourceTree = "<group>"; };
+		59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
+		59B62B45298F3D5200F0C6B1 /* DroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneImage.swift; sourceTree = "<group>"; };
+		6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenAthenaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		59B62AFF29844B6D00F0C6B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90C0D64DD6EBFC3B16422909 /* Pods_OpenAthenaIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A7C963E998C236042872AA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15B6AE10F93BC82815BD1AD0 /* Pods-OpenAthenaIOS.debug.xcconfig */,
+				7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		59B62AF929844B6D00F0C6B1 = {
+			isa = PBXGroup;
+			children = (
+				59B62B0429844B6D00F0C6B1 /* OpenAthenaIOS */,
+				59B62B0329844B6D00F0C6B1 /* Products */,
+				4A7C963E998C236042872AA1 /* Pods */,
+				7F64EC53C1FAEA0A4381BF79 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		59B62B0329844B6D00F0C6B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				59B62B0229844B6D00F0C6B1 /* OpenAthenaIOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		59B62B0429844B6D00F0C6B1 /* OpenAthenaIOS */ = {
+			isa = PBXGroup;
+			children = (
+				592CABB42A0ACF61006E28AF /* examples */,
+				59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */,
+				59B62B232988133000F0C6B1 /* AthenaSettings.swift */,
+				59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */,
+				59B62B27298B15CC00F0C6B1 /* CalculateViewController.swift */,
+				5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */,
+				5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */,
+				59B62B252989B97900F0C6B1 /* ElevationViewController.swift */,
+				5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */,
+				59B62B0929844B6D00F0C6B1 /* ViewController.swift */,
+				59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */,
+				59B62B1F29860BF400F0C6B1 /* ImageViewController.swift */,
+				59B62B45298F3D5200F0C6B1 /* DroneImage.swift */,
+				59B62B1D2984564300F0C6B1 /* AboutViewController.swift */,
+				59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */,
+				59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */,
+				59B62B0B29844B6D00F0C6B1 /* Main.storyboard */,
+				59B62B0E29844B6F00F0C6B1 /* Assets.xcassets */,
+				59B62B1029844B6F00F0C6B1 /* LaunchScreen.storyboard */,
+				59B62B1329844B6F00F0C6B1 /* Info.plist */,
+			);
+			path = OpenAthenaIOS;
+			sourceTree = "<group>";
+		};
+		7F64EC53C1FAEA0A4381BF79 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		59B62B0129844B6D00F0C6B1 /* OpenAthenaIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59B62B1629844B6F00F0C6B1 /* Build configuration list for PBXNativeTarget "OpenAthenaIOS" */;
+			buildPhases = (
+				14A73AF9F78D4BAC8DFE6B21 /* [CP] Check Pods Manifest.lock */,
+				59B62AFE29844B6D00F0C6B1 /* Sources */,
+				59B62AFF29844B6D00F0C6B1 /* Frameworks */,
+				59B62B0029844B6D00F0C6B1 /* Resources */,
+				59B62B37298C514300F0C6B1 /* Embed Frameworks */,
+				C41B499726B89A88170F2AA2 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenAthenaIOS;
+			productName = OpenAthenaIOS;
+			productReference = 59B62B0229844B6D00F0C6B1 /* OpenAthenaIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		59B62AFA29844B6D00F0C6B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					59B62B0129844B6D00F0C6B1 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 59B62AFD29844B6D00F0C6B1 /* Build configuration list for PBXProject "OpenAthenaIOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 59B62AF929844B6D00F0C6B1;
+			productRefGroup = 59B62B0329844B6D00F0C6B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				59B62B0129844B6D00F0C6B1 /* OpenAthenaIOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		59B62B0029844B6D00F0C6B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59B62B1229844B6F00F0C6B1 /* LaunchScreen.storyboard in Resources */,
+				59B62B0F29844B6F00F0C6B1 /* Assets.xcassets in Resources */,
+				59B62B0D29844B6D00F0C6B1 /* Main.storyboard in Resources */,
+				592CABB52A0ACF61006E28AF /* examples in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14A73AF9F78D4BAC8DFE6B21 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OpenAthenaIOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C41B499726B89A88170F2AA2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		59B62AFE29844B6D00F0C6B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */,
+				59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */,
+				59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */,
+				59B62B242988133000F0C6B1 /* AthenaSettings.swift in Sources */,
+				59B62B3F298DAE7300F0C6B1 /* DigitalElevationModel.swift in Sources */,
+				59B62B42298DE4C900F0C6B1 /* DebugViewController.swift in Sources */,
+				59B62B2029860BF400F0C6B1 /* ImageViewController.swift in Sources */,
+				59B62B1E2984564300F0C6B1 /* AboutViewController.swift in Sources */,
+				5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */,
+				5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */,
+				59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */,
+				59B62B46298F3D5200F0C6B1 /* DroneImage.swift in Sources */,
+				59B62B262989B97900F0C6B1 /* ElevationViewController.swift in Sources */,
+				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
+				59B62B2229876E6A00F0C6B1 /* SettingsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		59B62B0B29844B6D00F0C6B1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59B62B0C29844B6D00F0C6B1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		59B62B1029844B6F00F0C6B1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59B62B1129844B6F00F0C6B1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		59B62B1429844B6F00F0C6B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		59B62B1529844B6F00F0C6B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		59B62B1729844B6F00F0C6B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15B6AE10F93BC82815BD1AD0 /* Pods-OpenAthenaIOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = S9737SV7NZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		59B62B1829844B6F00F0C6B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = S9737SV7NZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		59B62AFD29844B6D00F0C6B1 /* Build configuration list for PBXProject "OpenAthenaIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59B62B1429844B6F00F0C6B1 /* Debug */,
+				59B62B1529844B6F00F0C6B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59B62B1629844B6F00F0C6B1 /* Build configuration list for PBXNativeTarget "OpenAthenaIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59B62B1729844B6F00F0C6B1 /* Debug */,
+				59B62B1829844B6F00F0C6B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 59B62AFA29844B6D00F0C6B1 /* Project object */;
+}

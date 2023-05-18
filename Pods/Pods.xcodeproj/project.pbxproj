@@ -1,0 +1,2200 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000B67CE0BD537ABC6AFC30B71C6B5FE /* TIFFDeflateCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 75667F08C6A7C25057806FB4B6217AB2 /* TIFFDeflateCompression.m */; };
+		007C6F3D3D1A1984B9AECCC2FE232B5E /* TIFFImage.h in Headers */ = {isa = PBXBuildFile; fileRef = F3808D9AA86990B64D1FEA67BE1ADC50 /* TIFFImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		008AB830C55BF84FA05BF2826262C4EF /* SFSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = 280A6054E3F34A7F5A830C7F12512EB4 /* SFSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		029CDDE208EC0E645BEC4172DBAC3ADC /* TIFFByteWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 36DA41E05512839A6DD70F328F40D0AC /* TIFFByteWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04B3A6327E57113297E147F45AB86AC2 /* BaseZoomGrids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313D5F2283544CF1E457CDD50717D334 /* BaseZoomGrids.swift */; };
+		067C7ED7510521BE277F755220E822C5 /* ZoneNumberRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC7DDE8E078FC9C3E8F2A325108C6C4 /* ZoneNumberRange.swift */; };
+		06D18D87D8504AC2715A0863CCDAED96 /* Hemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2763E4E0C43C0ED250D40D6D8D59B0DF /* Hemisphere.swift */; };
+		071F303DFF627313B76DE65A777F15C1 /* LongitudinalStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBB8078ABA0614731D69FC64DE96A12 /* LongitudinalStrip.swift */; };
+		08A82D98A2958761B0C37502C499ECCC /* GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902A1E8E2E3C518DCC4E04A86070F65D /* GridPoint.swift */; };
+		08C54D7201D9695F9F189A3929D553FA /* TIFFPackbitsCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 912FDC912D8B5D54E61E4F45E256ED34 /* TIFFPackbitsCompression.m */; };
+		09A55B5B12C8F97AD7A9F4A5E4DC98C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		0A242384E0435218C082BF7DE3E2A1BE /* sf-ios-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = F90C6C73406FB9D85F23EA8D3FEDCC9A /* sf-ios-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A42D4949996376A528CC9DE5933FFED /* PropertyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623E09214478BFFA321738446533EAF6 /* PropertyConstants.swift */; };
+		0B820F87F9E00AC2DC2C51C3C9087702 /* TIFFRawCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = E49EF8A04A33394C0BE19750A0594DDB /* TIFFRawCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D16C71CF738F3BBA2C63FEC24CBAE3F /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBCA79BA142A74F694A403E80F1CEC /* Grid.swift */; };
+		0E48F269B264AC4DF3B3DC9E834251FC /* color-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D8E42CEF22B7848DC0156B6B3740A9 /* color-ios-dummy.m */; };
+		0E5315654CEB0D3CDCB1D867EC2A2926 /* TIFFImageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C241E2BA5A3C01AFD8B47646A668CD4 /* TIFFImageWindow.m */; };
+		0E85400F6FA0583D4B037EBE40C486B3 /* SFMultiSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E9CAADDE676BEE6E9109FB7E519791 /* SFMultiSurface.m */; };
+		1285DC1E6013E405D8B1E0C286B8A5B1 /* SFLineString.h in Headers */ = {isa = PBXBuildFile; fileRef = 078571FB15C4F12B4DF64CC96638E56E /* SFLineString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12C72C459546562A4C7A8D046B5BE963 /* Grids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E2F204A7777C86E036D5D424419444 /* Grids.swift */; };
+		14BD570D1E847A9DA6E21301F81DE062 /* TIFFConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = FEBE1D7B33886C714B24A96C44CBEA61 /* TIFFConstants.m */; };
+		1540D66739ACAFD92B486E0B815A9E9B /* SFPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC313FB5829BDB69E9B21BB6756A28A /* SFPoint.m */; };
+		15D104DFC69293F17D328C97880DC435 /* SFCircularString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2690140253AC89F37DF25639C189CA3B /* SFCircularString.m */; };
+		15E1D56261B931CC40CC621DDC48A4BD /* SFPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 12BBF15504AFA0B03F8F720253A20B59 /* SFPolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		160CBE7D8FA327133E533D273B7EBB67 /* TIFFUnsupportedCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A4919161F527F16CFEA86F95657B31 /* TIFFUnsupportedCompression.m */; };
+		19F88EAE85E295DCD82C93E32D3AB43C /* tiff-ios-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFE2B6FD924F4DD7ABA1E02111D78CC /* tiff-ios-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E171B9B76F9C0769D43798A9C578904 /* TIFFPredictor.h in Headers */ = {isa = PBXBuildFile; fileRef = 435AB48B46D1F777A22194F4C70D3C85 /* TIFFPredictor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2434B0932B6387B4D38C7C2A4F3C8E52 /* TIFFFieldTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FCA2032C86D386F0009400CF5A19850 /* TIFFFieldTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2707E54E5687678334F2D3EFED3BC7B1 /* SFLinearRing.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EE7E2E5DC266430C4F65C53A92EA044 /* SFLinearRing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		28DAE7F5ABD699F6FC054E085261A064 /* SFMultiPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7925AA08FAFC7B06BBF0F4A21AD97BCB /* SFMultiPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2BC88CE7E6445E80829E17F94F5371DB /* SFCurvePolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6EB9C3FDC8385926CAE5B8D4ADBDB7 /* SFCurvePolygon.m */; };
+		2BF2359BDCBD9036C81B19D20C19EB42 /* TIFFIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 386FE36C6C539B29435839CB0A7A1A82 /* TIFFIOUtils.m */; };
+		2C74199EF0596BFFBE63F87083B1B421 /* TIFFRasters.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5E395D7CB5D89474535FD0CEAB8E3A /* TIFFRasters.m */; };
+		2CE5C67A345FBFEA853C263802C74F7F /* SFEventQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DF117415350A7C2A647035CA6DD065 /* SFEventQueue.m */; };
+		2F2CC67743B9B656450B490F68A3345C /* Pods-OpenAthenaIOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 775B14CA9383F28568275FB3444F7BC7 /* Pods-OpenAthenaIOS-dummy.m */; };
+		30FAF8693C2A7F235B5C2B7DC5C2E8CD /* SFGeometryPrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = BB32BA0ED4539EF4570B6C99F9BDA798 /* SFGeometryPrinter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32B7BFFB5BE1F64B88F4D896789CD0D4 /* SFGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C600B3AA22667B016BA891E02CECFB /* SFGeometry.m */; };
+		353FD5B9040B17A872BC4D84F48EB895 /* TIFFConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B9FC0261B04B40693B8C3380475B6EBD /* TIFFConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		35A0D6930B1375D439168D1746877049 /* BaseGrids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578FFD062974492FA8297D1ABD2CCB3F /* BaseGrids.swift */; };
+		35B827D0FD3EBAEF016A7B5AA66012BB /* SFSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC7787965766394F0A112FA9A55F8F7 /* SFSegment.m */; };
+		38984FB7E1C139144C41CF065ECC98F3 /* SFByteReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDECF980F1D982C081F8A608A13C986 /* SFByteReader.m */; };
+		391601FB8693640EBE5D411023C746A9 /* GridUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30FFC4404A6F6AB66CC9319FEC21537 /* GridUtils.swift */; };
+		3C16A039197901FF9C409D50AE1291EE /* SFCentroidSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = 950A2C34C000F43B0E61787480B228E1 /* SFCentroidSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C7D68F8E5EDDE42F17C854084421F44 /* SFGeometryPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC45CC25913E050E606DA567A1085CE /* SFGeometryPrinter.m */; };
+		3CD803A89F48503EDFB120BF71FBE80E /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C39AB1EA4B75DDFA04920C6E8A1E3D /* Unit.swift */; };
+		3EB6DB0F8EF92B9260A877ABACFFA3E8 /* SFFiniteFilterTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B904215FE6A40FCF08574B19684A65 /* SFFiniteFilterTypes.m */; };
+		3FB14D2026CA40BEDF2F6ED9DB75B5C5 /* SFMultiLineString.h in Headers */ = {isa = PBXBuildFile; fileRef = E236ECDDC69D750B9CDD18951A5D7035 /* SFMultiLineString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3FF79CF793921C983AB163AB4420E322 /* SFShamosHoey.m in Sources */ = {isa = PBXBuildFile; fileRef = 08139AB6D2965F52444A29C93D597C4B /* SFShamosHoey.m */; };
+		416A8B5F8C0A21F0560F7D603364CAFB /* TIFFByteWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EA5F2709DB94CE4CF342AC6311070C /* TIFFByteWriter.m */; };
+		442F51285B69CDC948D567A74D8FF7E9 /* TIFFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 115D39F4B3194E2ECFDCD859A6DB8F1D /* TIFFImage.m */; };
+		4537F41D4957086FC5C6244B1F553A36 /* SFEventQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 332C3F46E7046607B4E143665E4ABE00 /* SFEventQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45FAE0AE275B0268A3A0AFF513BD46D1 /* MGRSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD33F78CCA19AFA06EC402AB2B337ED /* MGRSConstants.swift */; };
+		46FE39A1EC9526B863075403E33BF3C2 /* SFGeometryCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FCD88095FE31C99875CBE3BBDF4CE46 /* SFGeometryCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4857891EB4E50C0313B47AAE82257B91 /* PixelRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12B0FF15257F96F8090D50E92CDFD3F /* PixelRange.swift */; };
+		49FBE9B941636B9B5853193295FDEA4A /* SFPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A11D7CE2DCA91B2F4A04714A532AEF0 /* SFPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios-mgrs-ios in Resources */ = {isa = PBXBuildFile; fileRef = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */; };
+		4B92ADE95854EA972CA7CB9DEFE604C4 /* TIFFIOUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F2A8C01C798C591B54A3AC0332454AB0 /* TIFFIOUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E42C82FAA1C009DF82BD7811FCF6DA7 /* mgrs.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0EE2D6149A8215A527EE8B1F6F6DF9 /* mgrs.plist */; };
+		4E9DB3A55799AD6A7BB6CABC2792DA9D /* GridLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05313B35A0CCA8A66122CF1AF17AB82 /* GridLabeler.swift */; };
+		4EC70B12BFD48F48745F1F420497ABAC /* SFByteReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA34FDC21E670FFA3039350649BF041 /* SFByteReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FAEF057D06A2FE9452EC6402A646935 /* CLRColorConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC482959C48061AB6992E5117867F33 /* CLRColorConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		504452CAC12585B620DE82B41AE2F0EF /* GridType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B0198E27671F04BD620115E3E4FAFC /* GridType.swift */; };
+		506DEA0E161329D6D6444A0C5413EF67 /* SFTextReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E3B37C98647DE19F921399B377FD247 /* SFTextReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50FB8E96576DB20E37E10991BF9EBE5B /* SFTIN.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A56E130DB49BA0DDD41345A63C30305 /* SFTIN.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		51B187B78752011457F906F6CA73374C /* SFCentroidSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BE825441F27DD3FC24EC8F381CDB34 /* SFCentroidSurface.m */; };
+		52FDD3007BA9563472388232521F60BF /* SFLinearRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 420708E9BADE1D3FFEC9F5ED6AD854D8 /* SFLinearRing.m */; };
+		539BCE18921C024AD4CC18118A24FFEA /* TIFFFieldTagTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C0D3439BF2A520CE0D18FA98A6E647 /* TIFFFieldTagTypes.m */; };
+		57F672F1B087A58D633C3DAE47DF3E52 /* SFSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = BACB7F89DBB1D2673E1CF4218718833C /* SFSurface.m */; };
+		58090A8C68FE54524677FD5B059D279B /* MGRSTileOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF4B87BD96A319178E96CFA4C885EB1 /* MGRSTileOverlay.swift */; };
+		59AFBCF13B9B5A836A14B3AC19C2B25A /* SFLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F6493B7DB6D109D3A9EE0BA64B18AD /* SFLine.m */; };
+		5BA776B1FB8E1F07188956160CF8C179 /* TIFFByteReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F0817AF4997B368F84EA394E5B59F4 /* TIFFByteReader.m */; };
+		5C76257CC3B514C567B1D216B6197533 /* SFPolyhedralSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = D60A195E3F7BFF939B95379D421E3BC1 /* SFPolyhedralSurface.m */; };
+		5DEEDED84D1B4B01781E6DABA90EDF98 /* GZDLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB6340434F9F748D7AB32C17C02388 /* GZDLabeler.swift */; };
+		5E8C298257FC8FA288AB6E017CF94ADF /* Bounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72285FEA2A6B7CF8ECE6BA932C71D0B5 /* Bounds.swift */; };
+		5F16E3EF1FAABDF6C5C1DDB451948919 /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3827C9C01287667082F1AB9F623303EA /* GridLabel.swift */; };
+		5F657D10EC9C1F621FE145E6961CDBDA /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E9ABFB5B2EB22454276A3C402EC3E /* Pixel.swift */; };
+		655B618AA7337F91593380D603986548 /* GridStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55825358EFCE805C29059C1162D36241 /* GridStyle.swift */; };
+		66AAA766D7293D6DE733D3C0DFD53472 /* TileDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1336BD6EFEDC56A246EA5F3B5E9C32D2 /* TileDraw.swift */; };
+		675A720CFEA8E9E9FAEDDD680F5A6415 /* SFMultiCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 46C687545B7F5BFC9C0522DABA11EBA8 /* SFMultiCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		689B2DF51EECBC692E7C2507180E7696 /* CLRColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 004EDC95A66AF4FEC78A432AED2343B8 /* CLRColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		694526B97D1C8D1CF17B34CC6A3F7EAC /* SFFiniteFilterTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 21AD401BB6907C43D69C1D833BE2D3B6 /* SFFiniteFilterTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		739F45F0898D7C29EAD7730C7B1393BD /* SFDegreesCentroid.h in Headers */ = {isa = PBXBuildFile; fileRef = 2932354F5ECF0D9609F30878D663CFAA /* SFDegreesCentroid.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		749E2FD2C71359FE66149C6051EA19C3 /* TIFFRawCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A08658CFCE0F2DDE58F4808D12958 /* TIFFRawCompression.m */; };
+		74F1329C82E4828F2F194750AD905B3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		7531B4F97700F1C84513A7A8B43C75FE /* BaseGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA519222B51C257F9C34507E2825AC4 /* BaseGrid.swift */; };
+		76A2667AC3D5A9289F4096B5D4522068 /* TIFFUnsupportedCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = E8561F967BCE652BFACB1A1C36235EE6 /* TIFFUnsupportedCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		777A50EBD16803D587BBD81C04498066 /* SFGeometryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6E245C92257B8421E426024D1859D6 /* SFGeometryConstants.m */; };
+		78E31C26D1AFD99A1C59E7BC23C8D3F1 /* TIFFFieldTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = A871B98A593B18040121FD2474C34981 /* TIFFFieldTypes.m */; };
+		7A6DE2368E75FC0B63C8D1B2713D8141 /* SFGeometryTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BC340FFE552CB55A3F48C8D19A3A5B8 /* SFGeometryTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AB45672E1B9BF48632144D30410BEE8 /* grid-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 43F2F153ED3D4E085F988DF8BDD99C26 /* grid-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7EF8EC16FEE885449ECBAF1C96B2CF72 /* TIFFImageWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = C6424DC2D3585E237FE7A1EF37428EAC /* TIFFImageWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7FA49CA3EDC298CA7C55C460F06B0DC2 /* mgrs-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666706DBB3C3F4E91E0ADD6295730E3 /* mgrs-ios-dummy.m */; };
+		80D88E572323F730914E160F15C51A13 /* SFMultiPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = C77FD0D8EFB90B03D1AFFB31DE1F0D70 /* SFMultiPolygon.m */; };
+		818C427C745CD422865AC833155F8000 /* tiff-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B69901AD642CB5AAA6BBD5848F2E0570 /* tiff-ios-dummy.m */; };
+		8227F5CAB10EA54913B76407F4F7D5E5 /* SFTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3FC89473D967D2396625E180E607B2 /* SFTriangle.m */; };
+		82A7854787F2A2497D8B263DB4D2018D /* SFLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 297E14963C4F8F12F824FD53F23FF653 /* SFLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8447B58BA06145AA077143850FFDDFD6 /* MGRS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDFB0C27D774B49C6A2206F643E95D1 /* MGRS.swift */; };
+		85033FED5CBFB7D24E7CAB85F76D7DED /* GridZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8CE8E5C59D9AF4BF9B6FE50D9E815E /* GridZone.swift */; };
+		85AAF0A3AC4CD3338C2A13D9725DBE20 /* TIFFPredictor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0CE567DF83A263C4153AE6EBBF6654 /* TIFFPredictor.m */; };
+		85C46ECE6E7913A71EA37024AD214F35 /* sf-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AB127FC1E56FD369DBF0AA9A9D581 /* sf-ios-dummy.m */; };
+		86534A5DA37AB53A2E591F19BCD6A99E /* tiff_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 031E1AED73DFC7C4E0890B067B1290BF /* tiff_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		87B4F35CFC3D22EBECC7FE51C7F3DFE2 /* SFByteWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A7981EC0F7305C9ECBD1F8819EBF23 /* SFByteWriter.m */; };
+		8835AA54DB54211C2DF9E367D2CBB7CF /* SFPointFiniteFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = FCEF99B0E86B32B71456B9584BB07C0A /* SFPointFiniteFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8996617A71D0C4DCD14B2C10EFEC0365 /* TIFFLZWCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 44392F5C0C6EEED55BBDE80EEB2FB4B2 /* TIFFLZWCompression.m */; };
+		8A9C922ED4DF00776894D04B686EE707 /* SFPolyhedralSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = F243BE73B88C95614D9B6BE5522AA536 /* SFPolyhedralSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B6D28D7EA24274D3A74883423A076E0 /* SFLineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D6F9B9AC0D1684F250B16AE5864E9F /* SFLineString.m */; };
+		8F154488591D092AEE00509C27CC70C2 /* SFGeometryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E33D2124006EEC9989341974B027F59F /* SFGeometryUtils.m */; };
+		8F9B48CAFB8EF8FA660E34FFA0BD8358 /* TIFFLZWCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DFD97918330C5EE3261EF852E3E6316 /* TIFFLZWCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9038A6A51BF3D454D04072F2C4D24EE8 /* TIFFReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2665BCB50E7149FB867FA76B8395C70D /* TIFFReader.m */; };
+		9199F3D813C5616AB348DC0D123B0A9A /* CLRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C3251211D542711C92BC993A8B46D4 /* CLRColor.m */; };
+		91F63124C58284E9C8B2F0953B0C1965 /* SFExtendedGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9798DC8847D5C8B0330E2F14545D6576 /* SFExtendedGeometryCollection.m */; };
+		92AD7B6978B043A6D87647E147EE2763 /* GridRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E02C2727813C695ECF45EAFA2BCF9E /* GridRange.swift */; };
+		93794322C09441ACD0DA0F750777A311 /* SFGeometryConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = A762E9E7EBA2EAE4151DF2C649372964 /* SFGeometryConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9395E5C643977B45E13CADFFCE0F1267 /* SFGeometryFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = D0CB75BDDFE34B13144D13E67D0716E2 /* SFGeometryFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		974340009C77D3550097791AE500DB3A /* SFExtendedGeometryCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 229D9E0C77E94DCF80F2C7F709AA82FC /* SFExtendedGeometryCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		99D63002859B00ED49BE5D481965B751 /* LatitudeBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241152D2845301F7A721415186827DFF /* LatitudeBand.swift */; };
+		99E4E19507B477F15411DFCE4AE588E7 /* SFTIN.m in Sources */ = {isa = PBXBuildFile; fileRef = C637AF5385CC7B822BA93452054AAA3E /* SFTIN.m */; };
+		9A1CF5F77CBB50B95AB79D27214BF2FC /* CLRColorUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB0D172C932A4107DD6391F6F0755D3 /* CLRColorUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9E7FCA2E85062ADDBA2806FE3B6263E2 /* SFMultiCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF0067F26720164A7FA13E68CA795B8 /* SFMultiCurve.m */; };
+		A008C186686E9F69378C2FD0FAB920BB /* SFCircularString.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB2EC7219F62D9515ACCEFF8BE06CD8 /* SFCircularString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A00B035E8FA8D0A678F760D43E08D392 /* SFShamosHoey.h in Headers */ = {isa = PBXBuildFile; fileRef = 496E34186FBBDDA8EE94500651CFC417 /* SFShamosHoey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A0204486528D2F0CEE49A0B20D43CBEA /* SFCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 44B3EE411078E94D47A75D66CA700DB5 /* SFCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A16558F768F8CAC9D15FA3D6931A8178 /* SFEventTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EBE87643C9D7C84D07344A5B804A5F8 /* SFEventTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2048BFA7B8EC6E4D2B53B0C5F835B53 /* SFGeometryEnvelopeBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FA173BA08306BA46956BE64091361B /* SFGeometryEnvelopeBuilder.m */; };
+		A35B26A68ABF0ECC8E2DA4C6A3CB0455 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		A65B818C2E801CBF3F4DC3438CCE0145 /* TIFFRasters.h in Headers */ = {isa = PBXBuildFile; fileRef = C5329A5E1F25324E2A0A9089CDCCDFBD /* TIFFRasters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A69006FCFAAF7FFDF0B248C6AE7DADA3 /* TIFFByteReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EAADC766E43230FCE585D8B51CC8AC4 /* TIFFByteReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A75578DA2FC40EE8F8B7A0194BA055B5 /* SFCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A87B68A3B85285ED8A310AFEFA38157 /* SFCurve.m */; };
+		AA2D10115A1F20F13F50BEE91B8E1DA3 /* SFSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = ACAB10C71136FD1DB61154D087E249A1 /* SFSegment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AB3DC4FD687915524BA91E2B632B405E /* SFGeometryEnvelopeBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 3524567A6921E5B7A34070D3354AE20C /* SFGeometryEnvelopeBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD7B6AE0CEFA03582E353909AFCF5D77 /* SFCurvePolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BA6AB7ACF323B235984FA7F3138BE1E /* SFCurvePolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE270B033A858FA5658B73007E950499 /* SFGeometryTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D021AEF00CBD74DAA09E80A1E5ED39 /* SFGeometryTypes.m */; };
+		AE7434CD15CBEFF4168F1B9A071887E2 /* CLRColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D2B2BDB1311D7B13DB2D48147D1B5F /* CLRColorUtils.m */; };
+		B1BFDB9E4706D492A8052A8DCB2FBB3F /* GridTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9250A6B2F2B20FD00ED0F6C24A022E8 /* GridTile.swift */; };
+		B24B8FFE803B311FEDBFFE062E43F64F /* SFGeometryUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2613F2CDF4DACFED52FDB86B36FA44AB /* SFGeometryUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3D24A91D499AE8FA8686B61B67C8DE5 /* MGRSLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A4298ACF9FCF75630D022AB9230D9 /* MGRSLine.swift */; };
+		B4AA3CFD0A84A50024FCEAA4086910CF /* TIFFWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = E229C49CF7B0C5DC76377802E9E363BE /* TIFFWriter.m */; };
+		B4F4C32DFCFB3C65A42B52D5F553732F /* SFEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7D8BE8B3032C3607CCC72CB0CCDDB /* SFEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6B7F078A9E25D6FDD9BE0E250D01133 /* SFPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CEB7D68F0C194ADC2D8031323B9DBB /* SFPolygon.m */; };
+		B9CE441CDCD318CB9A977B27705DE792 /* GridZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDAB38613712F674BBCCF35C0872B2 /* GridZones.swift */; };
+		BA8605217080848434455418EDFDDB9F /* Pods-OpenAthenaIOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0138D5B2805451FFDCF21F3E15030F9B /* Pods-OpenAthenaIOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA9B017F981681D723B04E09B2CE99A4 /* SFDegreesCentroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7774518DD832B40D992A8A5F81775D16 /* SFDegreesCentroid.m */; };
+		BB3C1E32F4CB3C431A70A0DFD66C88AB /* sf_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = C00F9B925447A0B210EE71EC4220A979 /* sf_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BB96D30A65951B91E4B552F04F39E1BF /* SFCentroidCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE0127BCA31D35445181131F20C10C /* SFCentroidCurve.m */; };
+		BBC03A1AA1179E92E3E417002CC16623 /* SFMultiSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = 336839F8EB118718D7DB01C99378A048 /* SFMultiSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD91B3EB0B78F7A15C9D6C9F4BB42D45 /* TIFFDeflateCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD65D9C7D34AEFE844CE9557809F795 /* TIFFDeflateCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C1A99C38DE8AD8351521E2822380350D /* mgrs-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D71818AF4D7D88D1955E517FC690980 /* mgrs-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C384C7BBDC6738761E5E4283B403866E /* TIFFCompressionEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = C545C38A867BC5326217E06DE42BF09D /* TIFFCompressionEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C58C3CBDFADC280064A3E6AC33A1BE85 /* MGRSLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74C8FD74EBB8A11B94617CE3D2452E5 /* MGRSLabeler.swift */; };
+		C6320635F844040303AB9BC1ADBAF2D5 /* TIFFFileDirectoryEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 654C857024B56D9B21C3DFC24647B2BC /* TIFFFileDirectoryEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6A5D8E4DD188C1E843BF5E5FDE5F7F5 /* sf-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5FD9B15D8B08EE2BBFE56E2E1A982C /* sf-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA2FB94CA557D030DE4F32CD717D0002 /* TIFFWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A03D9C67FF2FB672B3B83E127E7350 /* TIFFWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA6074303ACD8EB44C364EEBB53F6259 /* tiff-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 05433B9435F3F1E2DA35A7A7CE7D74C6 /* tiff-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA931BED8FFF97222F2E4C1DD002C117 /* Labeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF3956F30A33245C9BF7EF8307BA748 /* Labeler.swift */; };
+		CADA2601EAA2068C3187325E4781B24E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		CBE4B0DD5EB99846D944A9B844CC89DC /* SFPointFiniteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C16F35989FD3EE7E3E5C1A7C20D58D38 /* SFPointFiniteFilter.m */; };
+		CC7199929D23E0E61A664FFDA34C9A64 /* TIFFFileDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4F05F02FA77BF7DE0B9656A4B8816D /* TIFFFileDirectory.m */; };
+		CC84DD78ED5D0A7A5BFE03608F6740EF /* SFMultiLineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B60458E85FEEA65743839059B7AF6C /* SFMultiLineString.m */; };
+		CCD08223144FE4D740965F323BB0DB2E /* SFCompoundCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 894B0BEB72B0B92CC2E059112DF09743 /* SFCompoundCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD58FCD440C3CB39746FC62196361E7C /* GridProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB848DEDD1E8B7586A382F0887717E2A /* GridProperties.swift */; };
+		CD7C88F27F98E1D9D6FE102DA5EABB69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		D369506EE964E4709F4E08B54CE47FDD /* SFTextReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C07B59C64AB67B3F8A59241810417720 /* SFTextReader.m */; };
+		D44DE821DFFDF9E4D6EFB1E9E76EE024 /* TIFFFileDirectoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3287E49461AFD8EF04C0B7F0760C3332 /* TIFFFileDirectoryEntry.m */; };
+		D4955B2DF791E5B9B607DB44D88AA5EF /* TIFFPackbitsCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 79DEEBC3CDD634134B51217010F30B8D /* TIFFPackbitsCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4A82FE97D097418A6D469327D543E5B /* grid-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F569B2124B436C8AB26ED2DAA507CADF /* grid-ios-dummy.m */; };
+		D4DAC4C6FD67F3DC48CEFCE364AB28EC /* SFGeometryEnvelope.m in Sources */ = {isa = PBXBuildFile; fileRef = D96DC4713B79083C64A9D795E4739A98 /* SFGeometryEnvelope.m */; };
+		D644C1FE1189C35282159D0B5792AD55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		D65623E8247D82A67F1E4F65042F136A /* SFCentroidCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = A530F20EF6B4801AA3F0EF542B18FFA7 /* SFCentroidCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6986F69154B9E96DC3F6C7DFD30234A /* SFCentroidPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 90246A9C2EFC2B376B51D25B3AA7B91D /* SFCentroidPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6B186A7D42AD382DCEC0325D9455B58 /* TIFFFieldTagTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 948756BB8A47C835EB3A48DFDC96ECD1 /* TIFFFieldTagTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D9A1DF495BF9773DD784205359712CC5 /* GridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9823F604DDFFC08F4AABE8D2F1EB1422 /* GridConstants.swift */; };
+		D9CCB32CE212BD1C0627530D6DD996E1 /* SFGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EE1CAB8815C7209C87DA1D86057F96 /* SFGeometryCollection.m */; };
+		DD7E4A195D7CBF4D39D53E252D671230 /* SFEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD8A92AFA5FE0A5CCDEB861A8778732 /* SFEvent.m */; };
+		DDED62BD2C447F6C5E7297D20D697A1A /* MGRSProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EFEC78DEFD7CE1C14564AD9A43CE74 /* MGRSProperties.swift */; };
+		DE0812E35F28B6F0E1647226542ACC11 /* TileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B42066D18202F25EB1DBD8E836059 /* TileUtils.swift */; };
+		DF9D7D1FCFA243E6EFE52B9ADBAFF56D /* CLRColorConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 999F9DCCCEE0CEFE10E9052FA24AD02B /* CLRColorConstants.m */; };
+		DFF609F96F5349B37F75183BAEE2912E /* SFSweepLine.h in Headers */ = {isa = PBXBuildFile; fileRef = C7186430126B355052D447ABDD4589E5 /* SFSweepLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3840E747531FB038D2B561451D6346F /* SFByteWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 67890A3557E6641D03FF9D31F82AF5D1 /* SFByteWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E40A6196FD02E25130F9B64A3A209A82 /* SFMultiPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 5485C44AED9E0396E6CC7C1FA7F989FB /* SFMultiPolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E4FCEA16DE75F4A694D3726150FB3E93 /* ZoomGrids.swift in Sources */ = {isa = PBXBuildFile; fileRef = E990D67C52DCDC5572BECC4EAF86D62C /* ZoomGrids.swift */; };
+		E64263964B8DE8C1B86DEEDB979C33C9 /* SFMultiPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E973BF28FDFBBC6D442FF3FB9A2B2F /* SFMultiPoint.m */; };
+		E64839B7C4FE208D30D8FF2ACFD1E585 /* SFSweepLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D74E820C15FDB9F2508222F888D85899 /* SFSweepLine.m */; };
+		E886FC5E230ABC08FFEC928161635560 /* SFGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 955E939B0DA5ED0CA55E7462E659DAB1 /* SFGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE12BDF6B07146DCE7D71A1FD9BB5C58 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5A6EA7B0BE090719B55AA819E4A3AC /* Line.swift */; };
+		EF1C288D10C68E69DA5FCF9BFAB6F854 /* color-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0C4263B5DC076E2C684AF181F214A6 /* color-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF5617B6EA018C9735071AFD28F53A61 /* TIFFCompressionDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 25FED3DBFADE06969C386DA4D59E60B8 /* TIFFCompressionDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF7FB19EC749C2AF91625156E43FDED4 /* color-ios-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = F52142769A10A085700FDE9C87E1E741 /* color-ios-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F1474DF0C8F4B7B190EE02BB8FE93E88 /* SFCompoundCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = EE37118AB549608456A2967D6DD3C9E5 /* SFCompoundCurve.m */; };
+		F34A8D038911871CCE6E9379DE6E17CB /* SFEventTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 224CBFF6DC675B552A32860A91A1B6B9 /* SFEventTypes.m */; };
+		F42D64979E8D9107B25EF4EA55FB9A79 /* SFCentroidPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E5BD450CCCECC7A698016D47DAC12D /* SFCentroidPoint.m */; };
+		F5DA2BD5458F7EA65CD2E599D35CC4F8 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC4C66C6D3034B446868D38C4EF2E1 /* Label.swift */; };
+		F74B1D2D126E49BB9B0FF8DA9CC05E63 /* MGRSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A88DA226AA1BDD52F0E58984D2DEEC /* MGRSUtils.swift */; };
+		F84FCFCAC9BCAB72DD72486E6B8E7A68 /* UTM.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4ECC4D6B43357827C1806A56112C19 /* UTM.swift */; };
+		FAC870BD65884F77514BBBFAE7FF2425 /* TIFFReader.h in Headers */ = {isa = PBXBuildFile; fileRef = C581A93F2A2885CBF1E51EE657EDFBA1 /* TIFFReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FBA0B6116F184AEE48111DCA56484F4F /* color_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C0D4FE9238C79B44AAAC95A098464AA /* color_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCA27CA88F2C0AC93FFDCD9ABA73CBFC /* SFGeometryEnvelope.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AB6FB3FD932AF31BA158CF74DEB4A3D /* SFGeometryEnvelope.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF19505D11C33812FC5ED6E54BBEF44F /* TIFFFileDirectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 149F22BBAC3785B53F98475ABB56AE01 /* TIFFFileDirectory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF828B06B69B612AF17AE40C3149481C /* BandLetterRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68B55ABA9B4936C4002A0F08C145BDF /* BandLetterRange.swift */; };
+		FFD470F352CF66AD126A605F77CE70F2 /* SFTriangle.h in Headers */ = {isa = PBXBuildFile; fileRef = C0BC15852AAC2D3A5D933CC19F99A9B9 /* SFTriangle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		270AEB3A32D8FE093BB988317630792D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 577E91B04D12C328F76DD4B7C16DBAEF;
+			remoteInfo = "mgrs-ios-mgrs-ios";
+		};
+		33E4CB068C261AEC07D59C92E0D103CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D942CA48BAB353546F6B788AC3EA195;
+			remoteInfo = "color-ios";
+		};
+		3956673C8256951581D56C7DF0D2BE96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D3A419CC7A327DAABA72019D5CE9F57;
+			remoteInfo = "sf-ios";
+		};
+		4433045883FD105543BC22C16D628FC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D942CA48BAB353546F6B788AC3EA195;
+			remoteInfo = "color-ios";
+		};
+		4B3FC5566DE31F126532E04E9A15AADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F99C60B9711DB2529FC6C4FC9904B3F9;
+			remoteInfo = "grid-ios";
+		};
+		6606872D29BE610AC76057BBA12D89D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AED3CD45D039D7912074525C078AD57E;
+			remoteInfo = "tiff-ios";
+		};
+		7299785E670E431451987A7442AE69B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F99C60B9711DB2529FC6C4FC9904B3F9;
+			remoteInfo = "grid-ios";
+		};
+		D37F17BA788CDE8C06491755E65CFDD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA341BB40DB010A6FF2E54DFC3D1E5D8;
+			remoteInfo = "mgrs-ios";
+		};
+		FC033C19302E35FFA0890A3A20C61E2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D3A419CC7A327DAABA72019D5CE9F57;
+			remoteInfo = "sf-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		004EDC95A66AF4FEC78A432AED2343B8 /* CLRColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLRColor.h; path = "color-ios/CLRColor.h"; sourceTree = "<group>"; };
+		0138D5B2805451FFDCF21F3E15030F9B /* Pods-OpenAthenaIOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OpenAthenaIOS-umbrella.h"; sourceTree = "<group>"; };
+		01926091B26761FC441FC24EF26BB73A /* Pods-OpenAthenaIOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OpenAthenaIOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		02BE0127BCA31D35445181131F20C10C /* SFCentroidCurve.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCentroidCurve.m; path = "sf-ios/util/centroid/SFCentroidCurve.m"; sourceTree = "<group>"; };
+		031E1AED73DFC7C4E0890B067B1290BF /* tiff_ios.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tiff_ios.h; path = "tiff-ios/tiff_ios.h"; sourceTree = "<group>"; };
+		05433B9435F3F1E2DA35A7A7CE7D74C6 /* tiff-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "tiff-ios-umbrella.h"; sourceTree = "<group>"; };
+		0666706DBB3C3F4E91E0ADD6295730E3 /* mgrs-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "mgrs-ios-dummy.m"; sourceTree = "<group>"; };
+		078571FB15C4F12B4DF64CC96638E56E /* SFLineString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFLineString.h; path = "sf-ios/SFLineString.h"; sourceTree = "<group>"; };
+		07B904215FE6A40FCF08574B19684A65 /* SFFiniteFilterTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFFiniteFilterTypes.m; path = "sf-ios/util/filter/SFFiniteFilterTypes.m"; sourceTree = "<group>"; };
+		08139AB6D2965F52444A29C93D597C4B /* SFShamosHoey.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFShamosHoey.m; path = "sf-ios/util/sweep/SFShamosHoey.m"; sourceTree = "<group>"; };
+		0A2A93A5EBF7AE2F14E2A7BCEA2D12F3 /* Pods-OpenAthenaIOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-OpenAthenaIOS"; path = Pods_OpenAthenaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B4F05F02FA77BF7DE0B9656A4B8816D /* TIFFFileDirectory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFFileDirectory.m; path = "tiff-ios/TIFFFileDirectory.m"; sourceTree = "<group>"; };
+		0BC340FFE552CB55A3F48C8D19A3A5B8 /* SFGeometryTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryTypes.h; path = "sf-ios/SFGeometryTypes.h"; sourceTree = "<group>"; };
+		0EE7E2E5DC266430C4F65C53A92EA044 /* SFLinearRing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFLinearRing.h; path = "sf-ios/SFLinearRing.h"; sourceTree = "<group>"; };
+		0F3AF445143C6794317785E47C01A0ED /* Pods-OpenAthenaIOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		115D39F4B3194E2ECFDCD859A6DB8F1D /* TIFFImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFImage.m; path = "tiff-ios/TIFFImage.m"; sourceTree = "<group>"; };
+		12BBF15504AFA0B03F8F720253A20B59 /* SFPolygon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFPolygon.h; path = "sf-ios/SFPolygon.h"; sourceTree = "<group>"; };
+		1336BD6EFEDC56A246EA5F3B5E9C32D2 /* TileDraw.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TileDraw.swift; path = "grid-ios/tile/TileDraw.swift"; sourceTree = "<group>"; };
+		149F22BBAC3785B53F98475ABB56AE01 /* TIFFFileDirectory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFileDirectory.h; path = "tiff-ios/TIFFFileDirectory.h"; sourceTree = "<group>"; };
+		15BE825441F27DD3FC24EC8F381CDB34 /* SFCentroidSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCentroidSurface.m; path = "sf-ios/util/centroid/SFCentroidSurface.m"; sourceTree = "<group>"; };
+		188D998A867D9D6A795A06660BC45595 /* mgrs-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "mgrs-ios-prefix.pch"; sourceTree = "<group>"; };
+		1B3D8CDF9533616EB3058FB3EC72BB15 /* grid-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "grid-ios-prefix.pch"; sourceTree = "<group>"; };
+		1C3FC89473D967D2396625E180E607B2 /* SFTriangle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFTriangle.m; path = "sf-ios/SFTriangle.m"; sourceTree = "<group>"; };
+		1CB6C43D4078B45C4F1804620C0DE2E7 /* sf-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sf-ios-prefix.pch"; sourceTree = "<group>"; };
+		1D71818AF4D7D88D1955E517FC690980 /* mgrs-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "mgrs-ios-umbrella.h"; sourceTree = "<group>"; };
+		1EDFB0C27D774B49C6A2206F643E95D1 /* MGRS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRS.swift; path = "mgrs-ios/MGRS.swift"; sourceTree = "<group>"; };
+		1FD65D9C7D34AEFE844CE9557809F795 /* TIFFDeflateCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFDeflateCompression.h; path = "tiff-ios/compression/TIFFDeflateCompression.h"; sourceTree = "<group>"; };
+		1FD7D8BE8B3032C3607CCC72CB0CCDDB /* SFEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFEvent.h; path = "sf-ios/util/sweep/SFEvent.h"; sourceTree = "<group>"; };
+		20B2A9C3C05B51B6DB93833E31040317 /* grid-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "grid-ios.release.xcconfig"; sourceTree = "<group>"; };
+		21AD401BB6907C43D69C1D833BE2D3B6 /* SFFiniteFilterTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFFiniteFilterTypes.h; path = "sf-ios/util/filter/SFFiniteFilterTypes.h"; sourceTree = "<group>"; };
+		21B60458E85FEEA65743839059B7AF6C /* SFMultiLineString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFMultiLineString.m; path = "sf-ios/SFMultiLineString.m"; sourceTree = "<group>"; };
+		224CBFF6DC675B552A32860A91A1B6B9 /* SFEventTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFEventTypes.m; path = "sf-ios/util/sweep/SFEventTypes.m"; sourceTree = "<group>"; };
+		229D9E0C77E94DCF80F2C7F709AA82FC /* SFExtendedGeometryCollection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFExtendedGeometryCollection.h; path = "sf-ios/extended/SFExtendedGeometryCollection.h"; sourceTree = "<group>"; };
+		22B919EB6D091E9F91E84A4E270E55B7 /* color-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "color-ios-Info.plist"; sourceTree = "<group>"; };
+		231818D27864555D4F10B0D1EC8F72EF /* sf-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "sf-ios.modulemap"; sourceTree = "<group>"; };
+		23E9CAADDE676BEE6E9109FB7E519791 /* SFMultiSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFMultiSurface.m; path = "sf-ios/SFMultiSurface.m"; sourceTree = "<group>"; };
+		241152D2845301F7A721415186827DFF /* LatitudeBand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LatitudeBand.swift; path = "mgrs-ios/gzd/LatitudeBand.swift"; sourceTree = "<group>"; };
+		25EFEC78DEFD7CE1C14564AD9A43CE74 /* MGRSProperties.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSProperties.swift; path = "mgrs-ios/property/MGRSProperties.swift"; sourceTree = "<group>"; };
+		25FED3DBFADE06969C386DA4D59E60B8 /* TIFFCompressionDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFCompressionDecoder.h; path = "tiff-ios/compression/TIFFCompressionDecoder.h"; sourceTree = "<group>"; };
+		2613F2CDF4DACFED52FDB86B36FA44AB /* SFGeometryUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryUtils.h; path = "sf-ios/util/SFGeometryUtils.h"; sourceTree = "<group>"; };
+		262AB127FC1E56FD369DBF0AA9A9D581 /* sf-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "sf-ios-dummy.m"; sourceTree = "<group>"; };
+		2665BCB50E7149FB867FA76B8395C70D /* TIFFReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFReader.m; path = "tiff-ios/TIFFReader.m"; sourceTree = "<group>"; };
+		2690140253AC89F37DF25639C189CA3B /* SFCircularString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCircularString.m; path = "sf-ios/SFCircularString.m"; sourceTree = "<group>"; };
+		2763E4E0C43C0ED250D40D6D8D59B0DF /* Hemisphere.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hemisphere.swift; path = "grid-ios/Hemisphere.swift"; sourceTree = "<group>"; };
+		27D021AEF00CBD74DAA09E80A1E5ED39 /* SFGeometryTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryTypes.m; path = "sf-ios/SFGeometryTypes.m"; sourceTree = "<group>"; };
+		280A6054E3F34A7F5A830C7F12512EB4 /* SFSurface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFSurface.h; path = "sf-ios/SFSurface.h"; sourceTree = "<group>"; };
+		2932354F5ECF0D9609F30878D663CFAA /* SFDegreesCentroid.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFDegreesCentroid.h; path = "sf-ios/util/centroid/SFDegreesCentroid.h"; sourceTree = "<group>"; };
+		297E14963C4F8F12F824FD53F23FF653 /* SFLine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFLine.h; path = "sf-ios/SFLine.h"; sourceTree = "<group>"; };
+		29D89BE41281ACE27788B3BF860F55E7 /* Pods-OpenAthenaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		2B5665576C8E65DD396A82EC25FF9BDE /* tiff-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "tiff-ios-Info.plist"; sourceTree = "<group>"; };
+		2BA6AB7ACF323B235984FA7F3138BE1E /* SFCurvePolygon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCurvePolygon.h; path = "sf-ios/SFCurvePolygon.h"; sourceTree = "<group>"; };
+		2DA34FDC21E670FFA3039350649BF041 /* SFByteReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFByteReader.h; path = "sf-ios/util/SFByteReader.h"; sourceTree = "<group>"; };
+		2DC8DF6C6C468DF679DDB215A800D8C2 /* tiff-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "tiff-ios-prefix.pch"; sourceTree = "<group>"; };
+		2DFD97918330C5EE3261EF852E3E6316 /* TIFFLZWCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFLZWCompression.h; path = "tiff-ios/compression/TIFFLZWCompression.h"; sourceTree = "<group>"; };
+		2EBB8078ABA0614731D69FC64DE96A12 /* LongitudinalStrip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LongitudinalStrip.swift; path = "mgrs-ios/gzd/LongitudinalStrip.swift"; sourceTree = "<group>"; };
+		2F6EB9C3FDC8385926CAE5B8D4ADBDB7 /* SFCurvePolygon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCurvePolygon.m; path = "sf-ios/SFCurvePolygon.m"; sourceTree = "<group>"; };
+		2FCA2032C86D386F0009400CF5A19850 /* TIFFFieldTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFieldTypes.h; path = "tiff-ios/TIFFFieldTypes.h"; sourceTree = "<group>"; };
+		313D5F2283544CF1E457CDD50717D334 /* BaseZoomGrids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseZoomGrids.swift; path = "grid-ios/BaseZoomGrids.swift"; sourceTree = "<group>"; };
+		3287E49461AFD8EF04C0B7F0760C3332 /* TIFFFileDirectoryEntry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFFileDirectoryEntry.m; path = "tiff-ios/TIFFFileDirectoryEntry.m"; sourceTree = "<group>"; };
+		332C3F46E7046607B4E143665E4ABE00 /* SFEventQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFEventQueue.h; path = "sf-ios/util/sweep/SFEventQueue.h"; sourceTree = "<group>"; };
+		336839F8EB118718D7DB01C99378A048 /* SFMultiSurface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMultiSurface.h; path = "sf-ios/SFMultiSurface.h"; sourceTree = "<group>"; };
+		3524567A6921E5B7A34070D3354AE20C /* SFGeometryEnvelopeBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryEnvelopeBuilder.h; path = "sf-ios/util/SFGeometryEnvelopeBuilder.h"; sourceTree = "<group>"; };
+		36DA41E05512839A6DD70F328F40D0AC /* TIFFByteWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFByteWriter.h; path = "tiff-ios/io/TIFFByteWriter.h"; sourceTree = "<group>"; };
+		36F0817AF4997B368F84EA394E5B59F4 /* TIFFByteReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFByteReader.m; path = "tiff-ios/io/TIFFByteReader.m"; sourceTree = "<group>"; };
+		3827C9C01287667082F1AB9F623303EA /* GridLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridLabel.swift; path = "mgrs-ios/grid/GridLabel.swift"; sourceTree = "<group>"; };
+		386FE36C6C539B29435839CB0A7A1A82 /* TIFFIOUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFIOUtils.m; path = "tiff-ios/io/TIFFIOUtils.m"; sourceTree = "<group>"; };
+		3AC45CC25913E050E606DA567A1085CE /* SFGeometryPrinter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryPrinter.m; path = "sf-ios/util/SFGeometryPrinter.m"; sourceTree = "<group>"; };
+		3C0D4FE9238C79B44AAAC95A098464AA /* color_ios.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = color_ios.h; path = "color-ios/color_ios.h"; sourceTree = "<group>"; };
+		3C43ACDA76CFB912A70DA6B9909FB8C2 /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
+		3DAC4C66C6D3034B446868D38C4EF2E1 /* Label.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Label.swift; path = "grid-ios/Label.swift"; sourceTree = "<group>"; };
+		3EFE2B6FD924F4DD7ABA1E02111D78CC /* tiff-ios-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "tiff-ios-Bridging-Header.h"; path = "tiff-ios/tiff-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		3F8CE8E5C59D9AF4BF9B6FE50D9E815E /* GridZone.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridZone.swift; path = "mgrs-ios/gzd/GridZone.swift"; sourceTree = "<group>"; };
+		420708E9BADE1D3FFEC9F5ED6AD854D8 /* SFLinearRing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFLinearRing.m; path = "sf-ios/SFLinearRing.m"; sourceTree = "<group>"; };
+		435AB48B46D1F777A22194F4C70D3C85 /* TIFFPredictor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFPredictor.h; path = "tiff-ios/compression/TIFFPredictor.h"; sourceTree = "<group>"; };
+		43F2F153ED3D4E085F988DF8BDD99C26 /* grid-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "grid-ios-umbrella.h"; sourceTree = "<group>"; };
+		44392F5C0C6EEED55BBDE80EEB2FB4B2 /* TIFFLZWCompression.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFLZWCompression.m; path = "tiff-ios/compression/TIFFLZWCompression.m"; sourceTree = "<group>"; };
+		44B3EE411078E94D47A75D66CA700DB5 /* SFCurve.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCurve.h; path = "sf-ios/SFCurve.h"; sourceTree = "<group>"; };
+		46C687545B7F5BFC9C0522DABA11EBA8 /* SFMultiCurve.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMultiCurve.h; path = "sf-ios/SFMultiCurve.h"; sourceTree = "<group>"; };
+		47E5BD450CCCECC7A698016D47DAC12D /* SFCentroidPoint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCentroidPoint.m; path = "sf-ios/util/centroid/SFCentroidPoint.m"; sourceTree = "<group>"; };
+		496E34186FBBDDA8EE94500651CFC417 /* SFShamosHoey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFShamosHoey.h; path = "sf-ios/util/sweep/SFShamosHoey.h"; sourceTree = "<group>"; };
+		49C39AB1EA4B75DDFA04920C6E8A1E3D /* Unit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Unit.swift; path = "grid-ios/features/Unit.swift"; sourceTree = "<group>"; };
+		4A11D7CE2DCA91B2F4A04714A532AEF0 /* SFPoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFPoint.h; path = "sf-ios/SFPoint.h"; sourceTree = "<group>"; };
+		4AB6FB3FD932AF31BA158CF74DEB4A3D /* SFGeometryEnvelope.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryEnvelope.h; path = "sf-ios/SFGeometryEnvelope.h"; sourceTree = "<group>"; };
+		4BD33F78CCA19AFA06EC402AB2B337ED /* MGRSConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSConstants.swift; path = "mgrs-ios/MGRSConstants.swift"; sourceTree = "<group>"; };
+		4C5FD9B15D8B08EE2BBFE56E2E1A982C /* sf-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sf-ios-umbrella.h"; sourceTree = "<group>"; };
+		4D6E245C92257B8421E426024D1859D6 /* SFGeometryConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryConstants.m; path = "sf-ios/util/SFGeometryConstants.m"; sourceTree = "<group>"; };
+		52A4919161F527F16CFEA86F95657B31 /* TIFFUnsupportedCompression.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFUnsupportedCompression.m; path = "tiff-ios/compression/TIFFUnsupportedCompression.m"; sourceTree = "<group>"; };
+		539BC24B0AD0AB20E3FEAE83DF803322 /* tiff-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "tiff-ios.release.xcconfig"; sourceTree = "<group>"; };
+		53C0D3439BF2A520CE0D18FA98A6E647 /* TIFFFieldTagTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFFieldTagTypes.m; path = "tiff-ios/TIFFFieldTagTypes.m"; sourceTree = "<group>"; };
+		5485C44AED9E0396E6CC7C1FA7F989FB /* SFMultiPolygon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMultiPolygon.h; path = "sf-ios/SFMultiPolygon.h"; sourceTree = "<group>"; };
+		55825358EFCE805C29059C1162D36241 /* GridStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridStyle.swift; path = "grid-ios/GridStyle.swift"; sourceTree = "<group>"; };
+		578FFD062974492FA8297D1ABD2CCB3F /* BaseGrids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseGrids.swift; path = "grid-ios/BaseGrids.swift"; sourceTree = "<group>"; };
+		5A56E130DB49BA0DDD41345A63C30305 /* SFTIN.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFTIN.h; path = "sf-ios/SFTIN.h"; sourceTree = "<group>"; };
+		5A65557CDA568E775E84D5CE7C04B40A /* tiff-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "tiff-ios"; path = tiff_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B260DFEB8DBC53207000EDFF503C37C /* tiff-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "tiff-ios.modulemap"; sourceTree = "<group>"; };
+		5B45F5C16D33F27B23DEAD2235C84ACA /* sf-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "sf-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		5D5E395D7CB5D89474535FD0CEAB8E3A /* TIFFRasters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFRasters.m; path = "tiff-ios/TIFFRasters.m"; sourceTree = "<group>"; };
+		5E8A08658CFCE0F2DDE58F4808D12958 /* TIFFRawCompression.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFRawCompression.m; path = "tiff-ios/compression/TIFFRawCompression.m"; sourceTree = "<group>"; };
+		5FCD88095FE31C99875CBE3BBDF4CE46 /* SFGeometryCollection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryCollection.h; path = "sf-ios/SFGeometryCollection.h"; sourceTree = "<group>"; };
+		609A66B0408FEA3705AF04DFE8D00E69 /* grid-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "grid-ios.modulemap"; sourceTree = "<group>"; };
+		623E09214478BFFA321738446533EAF6 /* PropertyConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PropertyConstants.swift; path = "grid-ios/property/PropertyConstants.swift"; sourceTree = "<group>"; };
+		62A03D9C67FF2FB672B3B83E127E7350 /* TIFFWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFWriter.h; path = "tiff-ios/TIFFWriter.h"; sourceTree = "<group>"; };
+		63EA5F2709DB94CE4CF342AC6311070C /* TIFFByteWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFByteWriter.m; path = "tiff-ios/io/TIFFByteWriter.m"; sourceTree = "<group>"; };
+		64F6493B7DB6D109D3A9EE0BA64B18AD /* SFLine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFLine.m; path = "sf-ios/SFLine.m"; sourceTree = "<group>"; };
+		654C857024B56D9B21C3DFC24647B2BC /* TIFFFileDirectoryEntry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFileDirectoryEntry.h; path = "tiff-ios/TIFFFileDirectoryEntry.h"; sourceTree = "<group>"; };
+		6701E1E7881E37B884FEEA9B3F803E0B /* color-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "color-ios"; path = color_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67890A3557E6641D03FF9D31F82AF5D1 /* SFByteWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFByteWriter.h; path = "sf-ios/util/SFByteWriter.h"; sourceTree = "<group>"; };
+		69E2F204A7777C86E036D5D424419444 /* Grids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Grids.swift; path = "mgrs-ios/grid/Grids.swift"; sourceTree = "<group>"; };
+		6A061146D4A13114AD42354D323094B0 /* sf-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "sf-ios-Info.plist"; sourceTree = "<group>"; };
+		6CC7DDE8E078FC9C3E8F2A325108C6C4 /* ZoneNumberRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZoneNumberRange.swift; path = "mgrs-ios/gzd/ZoneNumberRange.swift"; sourceTree = "<group>"; };
+		6DC482959C48061AB6992E5117867F33 /* CLRColorConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLRColorConstants.h; path = "color-ios/CLRColorConstants.h"; sourceTree = "<group>"; };
+		6DF3956F30A33245C9BF7EF8307BA748 /* Labeler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Labeler.swift; path = "grid-ios/Labeler.swift"; sourceTree = "<group>"; };
+		6EAADC766E43230FCE585D8B51CC8AC4 /* TIFFByteReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFByteReader.h; path = "tiff-ios/io/TIFFByteReader.h"; sourceTree = "<group>"; };
+		6FFB6340434F9F748D7AB32C17C02388 /* GZDLabeler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GZDLabeler.swift; path = "mgrs-ios/gzd/GZDLabeler.swift"; sourceTree = "<group>"; };
+		72285FEA2A6B7CF8ECE6BA932C71D0B5 /* Bounds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Bounds.swift; path = "grid-ios/features/Bounds.swift"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		75667F08C6A7C25057806FB4B6217AB2 /* TIFFDeflateCompression.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFDeflateCompression.m; path = "tiff-ios/compression/TIFFDeflateCompression.m"; sourceTree = "<group>"; };
+		75A0422A41985162159A1B54FCC8A14F /* mgrs-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "mgrs-ios.modulemap"; sourceTree = "<group>"; };
+		775B14CA9383F28568275FB3444F7BC7 /* Pods-OpenAthenaIOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OpenAthenaIOS-dummy.m"; sourceTree = "<group>"; };
+		7774518DD832B40D992A8A5F81775D16 /* SFDegreesCentroid.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFDegreesCentroid.m; path = "sf-ios/util/centroid/SFDegreesCentroid.m"; sourceTree = "<group>"; };
+		7925AA08FAFC7B06BBF0F4A21AD97BCB /* SFMultiPoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMultiPoint.h; path = "sf-ios/SFMultiPoint.h"; sourceTree = "<group>"; };
+		79DEEBC3CDD634134B51217010F30B8D /* TIFFPackbitsCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFPackbitsCompression.h; path = "tiff-ios/compression/TIFFPackbitsCompression.h"; sourceTree = "<group>"; };
+		7A87B68A3B85285ED8A310AFEFA38157 /* SFCurve.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCurve.m; path = "sf-ios/SFCurve.m"; sourceTree = "<group>"; };
+		7E3B37C98647DE19F921399B377FD247 /* SFTextReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFTextReader.h; path = "sf-ios/util/SFTextReader.h"; sourceTree = "<group>"; };
+		7EBE87643C9D7C84D07344A5B804A5F8 /* SFEventTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFEventTypes.h; path = "sf-ios/util/sweep/SFEventTypes.h"; sourceTree = "<group>"; };
+		7EE66363A245AC8A4B45D95E5CEC6B09 /* grid-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "grid-ios"; path = grid_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80C3251211D542711C92BC993A8B46D4 /* CLRColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLRColor.m; path = "color-ios/CLRColor.m"; sourceTree = "<group>"; };
+		80CEB7D68F0C194ADC2D8031323B9DBB /* SFPolygon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPolygon.m; path = "sf-ios/SFPolygon.m"; sourceTree = "<group>"; };
+		80D8E42CEF22B7848DC0156B6B3740A9 /* color-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "color-ios-dummy.m"; sourceTree = "<group>"; };
+		81D6F9B9AC0D1684F250B16AE5864E9F /* SFLineString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFLineString.m; path = "sf-ios/SFLineString.m"; sourceTree = "<group>"; };
+		8245BADE952EDA92D26604308AE7C7ED /* mgrs-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "mgrs-ios.release.xcconfig"; sourceTree = "<group>"; };
+		863B42066D18202F25EB1DBD8E836059 /* TileUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TileUtils.swift; path = "grid-ios/tile/TileUtils.swift"; sourceTree = "<group>"; };
+		894B0BEB72B0B92CC2E059112DF09743 /* SFCompoundCurve.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCompoundCurve.h; path = "sf-ios/SFCompoundCurve.h"; sourceTree = "<group>"; };
+		8C241E2BA5A3C01AFD8B47646A668CD4 /* TIFFImageWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFImageWindow.m; path = "tiff-ios/TIFFImageWindow.m"; sourceTree = "<group>"; };
+		8DC7787965766394F0A112FA9A55F8F7 /* SFSegment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFSegment.m; path = "sf-ios/util/sweep/SFSegment.m"; sourceTree = "<group>"; };
+		8E0C4263B5DC076E2C684AF181F214A6 /* color-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "color-ios-umbrella.h"; sourceTree = "<group>"; };
+		8F0CE567DF83A263C4153AE6EBBF6654 /* TIFFPredictor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFPredictor.m; path = "tiff-ios/compression/TIFFPredictor.m"; sourceTree = "<group>"; };
+		90246A9C2EFC2B376B51D25B3AA7B91D /* SFCentroidPoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCentroidPoint.h; path = "sf-ios/util/centroid/SFCentroidPoint.h"; sourceTree = "<group>"; };
+		902A1E8E2E3C518DCC4E04A86070F65D /* GridPoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridPoint.swift; path = "grid-ios/features/GridPoint.swift"; sourceTree = "<group>"; };
+		909E9ABFB5B2EB22454276A3C402EC3E /* Pixel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pixel.swift; path = "grid-ios/tile/Pixel.swift"; sourceTree = "<group>"; };
+		912FDC912D8B5D54E61E4F45E256ED34 /* TIFFPackbitsCompression.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFPackbitsCompression.m; path = "tiff-ios/compression/TIFFPackbitsCompression.m"; sourceTree = "<group>"; };
+		948756BB8A47C835EB3A48DFDC96ECD1 /* TIFFFieldTagTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFieldTagTypes.h; path = "tiff-ios/TIFFFieldTagTypes.h"; sourceTree = "<group>"; };
+		950A2C34C000F43B0E61787480B228E1 /* SFCentroidSurface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCentroidSurface.h; path = "sf-ios/util/centroid/SFCentroidSurface.h"; sourceTree = "<group>"; };
+		955E939B0DA5ED0CA55E7462E659DAB1 /* SFGeometry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometry.h; path = "sf-ios/SFGeometry.h"; sourceTree = "<group>"; };
+		9798DC8847D5C8B0330E2F14545D6576 /* SFExtendedGeometryCollection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFExtendedGeometryCollection.m; path = "sf-ios/extended/SFExtendedGeometryCollection.m"; sourceTree = "<group>"; };
+		9823F604DDFFC08F4AABE8D2F1EB1422 /* GridConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridConstants.swift; path = "grid-ios/GridConstants.swift"; sourceTree = "<group>"; };
+		999F9DCCCEE0CEFE10E9052FA24AD02B /* CLRColorConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLRColorConstants.m; path = "color-ios/CLRColorConstants.m"; sourceTree = "<group>"; };
+		9AB2EC7219F62D9515ACCEFF8BE06CD8 /* SFCircularString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCircularString.h; path = "sf-ios/SFCircularString.h"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9DC2BD7887537AC73F24C85FF748EB7C /* color-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "color-ios.release.xcconfig"; sourceTree = "<group>"; };
+		9EB0BD91BAACEE66D99833866984EDCF /* color-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "color-ios.modulemap"; sourceTree = "<group>"; };
+		9FB0D172C932A4107DD6391F6F0755D3 /* CLRColorUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLRColorUtils.h; path = "color-ios/CLRColorUtils.h"; sourceTree = "<group>"; };
+		A1B0198E27671F04BD620115E3E4FAFC /* GridType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridType.swift; path = "mgrs-ios/grid/GridType.swift"; sourceTree = "<group>"; };
+		A4AD4BC7EF987A9780E369341B5845D8 /* ResourceBundle-mgrs-ios-mgrs-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-mgrs-ios-mgrs-ios-Info.plist"; sourceTree = "<group>"; };
+		A530F20EF6B4801AA3F0EF542B18FFA7 /* SFCentroidCurve.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCentroidCurve.h; path = "sf-ios/util/centroid/SFCentroidCurve.h"; sourceTree = "<group>"; };
+		A68B55ABA9B4936C4002A0F08C145BDF /* BandLetterRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BandLetterRange.swift; path = "mgrs-ios/gzd/BandLetterRange.swift"; sourceTree = "<group>"; };
+		A74C8FD74EBB8A11B94617CE3D2452E5 /* MGRSLabeler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSLabeler.swift; path = "mgrs-ios/grid/MGRSLabeler.swift"; sourceTree = "<group>"; };
+		A762E9E7EBA2EAE4151DF2C649372964 /* SFGeometryConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryConstants.h; path = "sf-ios/util/SFGeometryConstants.h"; sourceTree = "<group>"; };
+		A871B98A593B18040121FD2474C34981 /* TIFFFieldTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFFieldTypes.m; path = "tiff-ios/TIFFFieldTypes.m"; sourceTree = "<group>"; };
+		A8E02C2727813C695ECF45EAFA2BCF9E /* GridRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridRange.swift; path = "mgrs-ios/gzd/GridRange.swift"; sourceTree = "<group>"; };
+		A9BDAB38613712F674BBCCF35C0872B2 /* GridZones.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridZones.swift; path = "mgrs-ios/gzd/GridZones.swift"; sourceTree = "<group>"; };
+		ACAB10C71136FD1DB61154D087E249A1 /* SFSegment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFSegment.h; path = "sf-ios/util/sweep/SFSegment.h"; sourceTree = "<group>"; };
+		AD3893EF966BF113F1D231B69D76F56C /* Pods-OpenAthenaIOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOS-Info.plist"; sourceTree = "<group>"; };
+		B04836534E6E2FDD5EA76AAF264EE0FD /* mgrs-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "mgrs-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		B1932E5C471EFF016C8DF73740AA4178 /* sf-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "sf-ios.release.xcconfig"; sourceTree = "<group>"; };
+		B5EE1CAB8815C7209C87DA1D86057F96 /* SFGeometryCollection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryCollection.m; path = "sf-ios/SFGeometryCollection.m"; sourceTree = "<group>"; };
+		B606B87D25A2D69C8551CC9E2DC05E16 /* Pods-OpenAthenaIOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OpenAthenaIOS-frameworks.sh"; sourceTree = "<group>"; };
+		B69901AD642CB5AAA6BBD5848F2E0570 /* tiff-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "tiff-ios-dummy.m"; sourceTree = "<group>"; };
+		B916D54AD0B44DBC5AB0632904DF66C4 /* color-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "color-ios-prefix.pch"; sourceTree = "<group>"; };
+		B9250A6B2F2B20FD00ED0F6C24A022E8 /* GridTile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridTile.swift; path = "grid-ios/tile/GridTile.swift"; sourceTree = "<group>"; };
+		B9FC0261B04B40693B8C3380475B6EBD /* TIFFConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFConstants.h; path = "tiff-ios/util/TIFFConstants.h"; sourceTree = "<group>"; };
+		BAC313FB5829BDB69E9B21BB6756A28A /* SFPoint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPoint.m; path = "sf-ios/SFPoint.m"; sourceTree = "<group>"; };
+		BACB7F89DBB1D2673E1CF4218718833C /* SFSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFSurface.m; path = "sf-ios/SFSurface.m"; sourceTree = "<group>"; };
+		BAF4B87BD96A319178E96CFA4C885EB1 /* MGRSTileOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSTileOverlay.swift; path = "mgrs-ios/tile/MGRSTileOverlay.swift"; sourceTree = "<group>"; };
+		BB32BA0ED4539EF4570B6C99F9BDA798 /* SFGeometryPrinter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryPrinter.h; path = "sf-ios/util/SFGeometryPrinter.h"; sourceTree = "<group>"; };
+		BB848DEDD1E8B7586A382F0887717E2A /* GridProperties.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridProperties.swift; path = "grid-ios/property/GridProperties.swift"; sourceTree = "<group>"; };
+		C00F9B925447A0B210EE71EC4220A979 /* sf_ios.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sf_ios.h; path = "sf-ios/sf_ios.h"; sourceTree = "<group>"; };
+		C05313B35A0CCA8A66122CF1AF17AB82 /* GridLabeler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridLabeler.swift; path = "mgrs-ios/grid/GridLabeler.swift"; sourceTree = "<group>"; };
+		C07B59C64AB67B3F8A59241810417720 /* SFTextReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFTextReader.m; path = "sf-ios/util/SFTextReader.m"; sourceTree = "<group>"; };
+		C0BC15852AAC2D3A5D933CC19F99A9B9 /* SFTriangle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFTriangle.h; path = "sf-ios/SFTriangle.h"; sourceTree = "<group>"; };
+		C16F35989FD3EE7E3E5C1A7C20D58D38 /* SFPointFiniteFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPointFiniteFilter.m; path = "sf-ios/util/filter/SFPointFiniteFilter.m"; sourceTree = "<group>"; };
+		C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "mgrs-ios"; path = mgrs_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C30FFC4404A6F6AB66CC9319FEC21537 /* GridUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridUtils.swift; path = "grid-ios/GridUtils.swift"; sourceTree = "<group>"; };
+		C5329A5E1F25324E2A0A9089CDCCDFBD /* TIFFRasters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFRasters.h; path = "tiff-ios/TIFFRasters.h"; sourceTree = "<group>"; };
+		C545C38A867BC5326217E06DE42BF09D /* TIFFCompressionEncoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFCompressionEncoder.h; path = "tiff-ios/compression/TIFFCompressionEncoder.h"; sourceTree = "<group>"; };
+		C581A93F2A2885CBF1E51EE657EDFBA1 /* TIFFReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFReader.h; path = "tiff-ios/TIFFReader.h"; sourceTree = "<group>"; };
+		C5E3DBC3FAD63A3D57BFF382B1C12C26 /* grid-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "grid-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		C637AF5385CC7B822BA93452054AAA3E /* SFTIN.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFTIN.m; path = "sf-ios/SFTIN.m"; sourceTree = "<group>"; };
+		C6424DC2D3585E237FE7A1EF37428EAC /* TIFFImageWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFImageWindow.h; path = "tiff-ios/TIFFImageWindow.h"; sourceTree = "<group>"; };
+		C6FA173BA08306BA46956BE64091361B /* SFGeometryEnvelopeBuilder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryEnvelopeBuilder.m; path = "sf-ios/util/SFGeometryEnvelopeBuilder.m"; sourceTree = "<group>"; };
+		C7186430126B355052D447ABDD4589E5 /* SFSweepLine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFSweepLine.h; path = "sf-ios/util/sweep/SFSweepLine.h"; sourceTree = "<group>"; };
+		C77FD0D8EFB90B03D1AFFB31DE1F0D70 /* SFMultiPolygon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFMultiPolygon.m; path = "sf-ios/SFMultiPolygon.m"; sourceTree = "<group>"; };
+		CBDBCA79BA142A74F694A403E80F1CEC /* Grid.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = "mgrs-ios/grid/Grid.swift"; sourceTree = "<group>"; };
+		CCF0067F26720164A7FA13E68CA795B8 /* SFMultiCurve.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFMultiCurve.m; path = "sf-ios/SFMultiCurve.m"; sourceTree = "<group>"; };
+		D0CB75BDDFE34B13144D13E67D0716E2 /* SFGeometryFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryFilter.h; path = "sf-ios/util/filter/SFGeometryFilter.h"; sourceTree = "<group>"; };
+		D39A4298ACF9FCF75630D022AB9230D9 /* MGRSLine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSLine.swift; path = "mgrs-ios/features/MGRSLine.swift"; sourceTree = "<group>"; };
+		D57C1FAB77A663260850740EEB9C3590 /* sf-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "sf-ios"; path = sf_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5A88DA226AA1BDD52F0E58984D2DEEC /* MGRSUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSUtils.swift; path = "mgrs-ios/MGRSUtils.swift"; sourceTree = "<group>"; };
+		D60A195E3F7BFF939B95379D421E3BC1 /* SFPolyhedralSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPolyhedralSurface.m; path = "sf-ios/SFPolyhedralSurface.m"; sourceTree = "<group>"; };
+		D74E820C15FDB9F2508222F888D85899 /* SFSweepLine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFSweepLine.m; path = "sf-ios/util/sweep/SFSweepLine.m"; sourceTree = "<group>"; };
+		D96DC4713B79083C64A9D795E4739A98 /* SFGeometryEnvelope.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryEnvelope.m; path = "sf-ios/SFGeometryEnvelope.m"; sourceTree = "<group>"; };
+		DCA519222B51C257F9C34507E2825AC4 /* BaseGrid.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseGrid.swift; path = "grid-ios/BaseGrid.swift"; sourceTree = "<group>"; };
+		DCBCFC1F8EE68B32FF9E83D7DFFA22E1 /* grid-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "grid-ios-Info.plist"; sourceTree = "<group>"; };
+		DD4ECC4D6B43357827C1806A56112C19 /* UTM.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UTM.swift; path = "mgrs-ios/utm/UTM.swift"; sourceTree = "<group>"; };
+		DE4FC1CCC008F09BFDA535170CEC5541 /* tiff-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "tiff-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		DFDECF980F1D982C081F8A608A13C986 /* SFByteReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFByteReader.m; path = "sf-ios/util/SFByteReader.m"; sourceTree = "<group>"; };
+		E229C49CF7B0C5DC76377802E9E363BE /* TIFFWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFWriter.m; path = "tiff-ios/TIFFWriter.m"; sourceTree = "<group>"; };
+		E236ECDDC69D750B9CDD18951A5D7035 /* SFMultiLineString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMultiLineString.h; path = "sf-ios/SFMultiLineString.h"; sourceTree = "<group>"; };
+		E2A7981EC0F7305C9ECBD1F8819EBF23 /* SFByteWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFByteWriter.m; path = "sf-ios/util/SFByteWriter.m"; sourceTree = "<group>"; };
+		E33D2124006EEC9989341974B027F59F /* SFGeometryUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryUtils.m; path = "sf-ios/util/SFGeometryUtils.m"; sourceTree = "<group>"; };
+		E3D2B2BDB1311D7B13DB2D48147D1B5F /* CLRColorUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLRColorUtils.m; path = "color-ios/CLRColorUtils.m"; sourceTree = "<group>"; };
+		E49EF8A04A33394C0BE19750A0594DDB /* TIFFRawCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFRawCompression.h; path = "tiff-ios/compression/TIFFRawCompression.h"; sourceTree = "<group>"; };
+		E5DF117415350A7C2A647035CA6DD065 /* SFEventQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFEventQueue.m; path = "sf-ios/util/sweep/SFEventQueue.m"; sourceTree = "<group>"; };
+		E8561F967BCE652BFACB1A1C36235EE6 /* TIFFUnsupportedCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFUnsupportedCompression.h; path = "tiff-ios/compression/TIFFUnsupportedCompression.h"; sourceTree = "<group>"; };
+		E990D67C52DCDC5572BECC4EAF86D62C /* ZoomGrids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZoomGrids.swift; path = "mgrs-ios/grid/ZoomGrids.swift"; sourceTree = "<group>"; };
+		E9E973BF28FDFBBC6D442FF3FB9A2B2F /* SFMultiPoint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFMultiPoint.m; path = "sf-ios/SFMultiPoint.m"; sourceTree = "<group>"; };
+		EE37118AB549608456A2967D6DD3C9E5 /* SFCompoundCurve.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCompoundCurve.m; path = "sf-ios/SFCompoundCurve.m"; sourceTree = "<group>"; };
+		EFD8A92AFA5FE0A5CCDEB861A8778732 /* SFEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFEvent.m; path = "sf-ios/util/sweep/SFEvent.m"; sourceTree = "<group>"; };
+		F12B0FF15257F96F8090D50E92CDFD3F /* PixelRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PixelRange.swift; path = "grid-ios/tile/PixelRange.swift"; sourceTree = "<group>"; };
+		F170244622796EDC2C5B0144F77AB0DA /* color-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "color-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		F243BE73B88C95614D9B6BE5522AA536 /* SFPolyhedralSurface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFPolyhedralSurface.h; path = "sf-ios/SFPolyhedralSurface.h"; sourceTree = "<group>"; };
+		F2A8C01C798C591B54A3AC0332454AB0 /* TIFFIOUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFIOUtils.h; path = "tiff-ios/io/TIFFIOUtils.h"; sourceTree = "<group>"; };
+		F3808D9AA86990B64D1FEA67BE1ADC50 /* TIFFImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFImage.h; path = "tiff-ios/TIFFImage.h"; sourceTree = "<group>"; };
+		F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "mgrs-ios-mgrs-ios"; path = "mgrs-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F52142769A10A085700FDE9C87E1E741 /* color-ios-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "color-ios-Bridging-Header.h"; path = "color-ios/color-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		F569B2124B436C8AB26ED2DAA507CADF /* grid-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "grid-ios-dummy.m"; sourceTree = "<group>"; };
+		F5C600B3AA22667B016BA891E02CECFB /* SFGeometry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometry.m; path = "sf-ios/SFGeometry.m"; sourceTree = "<group>"; };
+		F90C6C73406FB9D85F23EA8D3FEDCC9A /* sf-ios-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "sf-ios-Bridging-Header.h"; path = "sf-ios/sf-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA0EE2D6149A8215A527EE8B1F6F6DF9 /* mgrs.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = mgrs.plist; path = "mgrs-ios/mgrs.plist"; sourceTree = "<group>"; };
+		FABC46C4BE4279386954EB91C84282F7 /* Pods-OpenAthenaIOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-OpenAthenaIOS.modulemap"; sourceTree = "<group>"; };
+		FCEF99B0E86B32B71456B9584BB07C0A /* SFPointFiniteFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFPointFiniteFilter.h; path = "sf-ios/util/filter/SFPointFiniteFilter.h"; sourceTree = "<group>"; };
+		FD5A6EA7B0BE090719B55AA819E4A3AC /* Line.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Line.swift; path = "grid-ios/features/Line.swift"; sourceTree = "<group>"; };
+		FDBFC2EE3B3D8CC14638B62390CF394C /* mgrs-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "mgrs-ios-Info.plist"; sourceTree = "<group>"; };
+		FEBE1D7B33886C714B24A96C44CBEA61 /* TIFFConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFConstants.m; path = "tiff-ios/util/TIFFConstants.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03ABBDA1A0A90F8A8212CA140C7A692D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D644C1FE1189C35282159D0B5792AD55 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		381A9782F1D9B75C5A96B90151B0A7C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35B26A68ABF0ECC8E2DA4C6A3CB0455 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6308171C03AEF1CDA84E20E11290150A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD7C88F27F98E1D9D6FE102DA5EABB69 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90E77324A8ACAB801EF05724514791D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA9BABFCA67B682ADB3266375EB612ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74F1329C82E4828F2F194750AD905B3A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C097081D1FF513514B88F3881164333E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADA2601EAA2068C3187325E4781B24E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8B41C70B6573A19AA0DF5D423643549 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09A55B5B12C8F97AD7A9F4A5E4DC98C4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B4A31EF0517F3BDCE4561A00526E1F4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				231818D27864555D4F10B0D1EC8F72EF /* sf-ios.modulemap */,
+				262AB127FC1E56FD369DBF0AA9A9D581 /* sf-ios-dummy.m */,
+				6A061146D4A13114AD42354D323094B0 /* sf-ios-Info.plist */,
+				1CB6C43D4078B45C4F1804620C0DE2E7 /* sf-ios-prefix.pch */,
+				4C5FD9B15D8B08EE2BBFE56E2E1A982C /* sf-ios-umbrella.h */,
+				5B45F5C16D33F27B23DEAD2235C84ACA /* sf-ios.debug.xcconfig */,
+				B1932E5C471EFF016C8DF73740AA4178 /* sf-ios.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/sf-ios";
+			sourceTree = "<group>";
+		};
+		2ED79B7E0F8CD9DD1992C9C346E20CEA /* Pods-OpenAthenaIOS */ = {
+			isa = PBXGroup;
+			children = (
+				FABC46C4BE4279386954EB91C84282F7 /* Pods-OpenAthenaIOS.modulemap */,
+				01926091B26761FC441FC24EF26BB73A /* Pods-OpenAthenaIOS-acknowledgements.markdown */,
+				0F3AF445143C6794317785E47C01A0ED /* Pods-OpenAthenaIOS-acknowledgements.plist */,
+				775B14CA9383F28568275FB3444F7BC7 /* Pods-OpenAthenaIOS-dummy.m */,
+				B606B87D25A2D69C8551CC9E2DC05E16 /* Pods-OpenAthenaIOS-frameworks.sh */,
+				AD3893EF966BF113F1D231B69D76F56C /* Pods-OpenAthenaIOS-Info.plist */,
+				0138D5B2805451FFDCF21F3E15030F9B /* Pods-OpenAthenaIOS-umbrella.h */,
+				29D89BE41281ACE27788B3BF860F55E7 /* Pods-OpenAthenaIOS.debug.xcconfig */,
+				3C43ACDA76CFB912A70DA6B9909FB8C2 /* Pods-OpenAthenaIOS.release.xcconfig */,
+			);
+			name = "Pods-OpenAthenaIOS";
+			path = "Target Support Files/Pods-OpenAthenaIOS";
+			sourceTree = "<group>";
+		};
+		3109604551382F41BB253B528695A02C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6701E1E7881E37B884FEEA9B3F803E0B /* color-ios */,
+				7EE66363A245AC8A4B45D95E5CEC6B09 /* grid-ios */,
+				C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs-ios */,
+				F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */,
+				0A2A93A5EBF7AE2F14E2A7BCEA2D12F3 /* Pods-OpenAthenaIOS */,
+				D57C1FAB77A663260850740EEB9C3590 /* sf-ios */,
+				5A65557CDA568E775E84D5CE7C04B40A /* tiff-ios */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EACA7447960D419658A37EA19930B74 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5B260DFEB8DBC53207000EDFF503C37C /* tiff-ios.modulemap */,
+				B69901AD642CB5AAA6BBD5848F2E0570 /* tiff-ios-dummy.m */,
+				2B5665576C8E65DD396A82EC25FF9BDE /* tiff-ios-Info.plist */,
+				2DC8DF6C6C468DF679DDB215A800D8C2 /* tiff-ios-prefix.pch */,
+				05433B9435F3F1E2DA35A7A7CE7D74C6 /* tiff-ios-umbrella.h */,
+				DE4FC1CCC008F09BFDA535170CEC5541 /* tiff-ios.debug.xcconfig */,
+				539BC24B0AD0AB20E3FEAE83DF803322 /* tiff-ios.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/tiff-ios";
+			sourceTree = "<group>";
+		};
+		4062FA01D4A5AFB19161388B0111CD8B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				609A66B0408FEA3705AF04DFE8D00E69 /* grid-ios.modulemap */,
+				F569B2124B436C8AB26ED2DAA507CADF /* grid-ios-dummy.m */,
+				DCBCFC1F8EE68B32FF9E83D7DFFA22E1 /* grid-ios-Info.plist */,
+				1B3D8CDF9533616EB3058FB3EC72BB15 /* grid-ios-prefix.pch */,
+				43F2F153ED3D4E085F988DF8BDD99C26 /* grid-ios-umbrella.h */,
+				C5E3DBC3FAD63A3D57BFF382B1C12C26 /* grid-ios.debug.xcconfig */,
+				20B2A9C3C05B51B6DB93833E31040317 /* grid-ios.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/grid-ios";
+			sourceTree = "<group>";
+		};
+		4F8329E92136C08C08419F77FB1BBE65 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2ED79B7E0F8CD9DD1992C9C346E20CEA /* Pods-OpenAthenaIOS */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		512F30DFDDD8B62EDB5FC1A99AE006C4 /* sf-ios */ = {
+			isa = PBXGroup;
+			children = (
+				F90C6C73406FB9D85F23EA8D3FEDCC9A /* sf-ios-Bridging-Header.h */,
+				C00F9B925447A0B210EE71EC4220A979 /* sf_ios.h */,
+				2DA34FDC21E670FFA3039350649BF041 /* SFByteReader.h */,
+				DFDECF980F1D982C081F8A608A13C986 /* SFByteReader.m */,
+				67890A3557E6641D03FF9D31F82AF5D1 /* SFByteWriter.h */,
+				E2A7981EC0F7305C9ECBD1F8819EBF23 /* SFByteWriter.m */,
+				A530F20EF6B4801AA3F0EF542B18FFA7 /* SFCentroidCurve.h */,
+				02BE0127BCA31D35445181131F20C10C /* SFCentroidCurve.m */,
+				90246A9C2EFC2B376B51D25B3AA7B91D /* SFCentroidPoint.h */,
+				47E5BD450CCCECC7A698016D47DAC12D /* SFCentroidPoint.m */,
+				950A2C34C000F43B0E61787480B228E1 /* SFCentroidSurface.h */,
+				15BE825441F27DD3FC24EC8F381CDB34 /* SFCentroidSurface.m */,
+				9AB2EC7219F62D9515ACCEFF8BE06CD8 /* SFCircularString.h */,
+				2690140253AC89F37DF25639C189CA3B /* SFCircularString.m */,
+				894B0BEB72B0B92CC2E059112DF09743 /* SFCompoundCurve.h */,
+				EE37118AB549608456A2967D6DD3C9E5 /* SFCompoundCurve.m */,
+				44B3EE411078E94D47A75D66CA700DB5 /* SFCurve.h */,
+				7A87B68A3B85285ED8A310AFEFA38157 /* SFCurve.m */,
+				2BA6AB7ACF323B235984FA7F3138BE1E /* SFCurvePolygon.h */,
+				2F6EB9C3FDC8385926CAE5B8D4ADBDB7 /* SFCurvePolygon.m */,
+				2932354F5ECF0D9609F30878D663CFAA /* SFDegreesCentroid.h */,
+				7774518DD832B40D992A8A5F81775D16 /* SFDegreesCentroid.m */,
+				1FD7D8BE8B3032C3607CCC72CB0CCDDB /* SFEvent.h */,
+				EFD8A92AFA5FE0A5CCDEB861A8778732 /* SFEvent.m */,
+				332C3F46E7046607B4E143665E4ABE00 /* SFEventQueue.h */,
+				E5DF117415350A7C2A647035CA6DD065 /* SFEventQueue.m */,
+				7EBE87643C9D7C84D07344A5B804A5F8 /* SFEventTypes.h */,
+				224CBFF6DC675B552A32860A91A1B6B9 /* SFEventTypes.m */,
+				229D9E0C77E94DCF80F2C7F709AA82FC /* SFExtendedGeometryCollection.h */,
+				9798DC8847D5C8B0330E2F14545D6576 /* SFExtendedGeometryCollection.m */,
+				21AD401BB6907C43D69C1D833BE2D3B6 /* SFFiniteFilterTypes.h */,
+				07B904215FE6A40FCF08574B19684A65 /* SFFiniteFilterTypes.m */,
+				955E939B0DA5ED0CA55E7462E659DAB1 /* SFGeometry.h */,
+				F5C600B3AA22667B016BA891E02CECFB /* SFGeometry.m */,
+				5FCD88095FE31C99875CBE3BBDF4CE46 /* SFGeometryCollection.h */,
+				B5EE1CAB8815C7209C87DA1D86057F96 /* SFGeometryCollection.m */,
+				A762E9E7EBA2EAE4151DF2C649372964 /* SFGeometryConstants.h */,
+				4D6E245C92257B8421E426024D1859D6 /* SFGeometryConstants.m */,
+				4AB6FB3FD932AF31BA158CF74DEB4A3D /* SFGeometryEnvelope.h */,
+				D96DC4713B79083C64A9D795E4739A98 /* SFGeometryEnvelope.m */,
+				3524567A6921E5B7A34070D3354AE20C /* SFGeometryEnvelopeBuilder.h */,
+				C6FA173BA08306BA46956BE64091361B /* SFGeometryEnvelopeBuilder.m */,
+				D0CB75BDDFE34B13144D13E67D0716E2 /* SFGeometryFilter.h */,
+				BB32BA0ED4539EF4570B6C99F9BDA798 /* SFGeometryPrinter.h */,
+				3AC45CC25913E050E606DA567A1085CE /* SFGeometryPrinter.m */,
+				0BC340FFE552CB55A3F48C8D19A3A5B8 /* SFGeometryTypes.h */,
+				27D021AEF00CBD74DAA09E80A1E5ED39 /* SFGeometryTypes.m */,
+				2613F2CDF4DACFED52FDB86B36FA44AB /* SFGeometryUtils.h */,
+				E33D2124006EEC9989341974B027F59F /* SFGeometryUtils.m */,
+				297E14963C4F8F12F824FD53F23FF653 /* SFLine.h */,
+				64F6493B7DB6D109D3A9EE0BA64B18AD /* SFLine.m */,
+				0EE7E2E5DC266430C4F65C53A92EA044 /* SFLinearRing.h */,
+				420708E9BADE1D3FFEC9F5ED6AD854D8 /* SFLinearRing.m */,
+				078571FB15C4F12B4DF64CC96638E56E /* SFLineString.h */,
+				81D6F9B9AC0D1684F250B16AE5864E9F /* SFLineString.m */,
+				46C687545B7F5BFC9C0522DABA11EBA8 /* SFMultiCurve.h */,
+				CCF0067F26720164A7FA13E68CA795B8 /* SFMultiCurve.m */,
+				E236ECDDC69D750B9CDD18951A5D7035 /* SFMultiLineString.h */,
+				21B60458E85FEEA65743839059B7AF6C /* SFMultiLineString.m */,
+				7925AA08FAFC7B06BBF0F4A21AD97BCB /* SFMultiPoint.h */,
+				E9E973BF28FDFBBC6D442FF3FB9A2B2F /* SFMultiPoint.m */,
+				5485C44AED9E0396E6CC7C1FA7F989FB /* SFMultiPolygon.h */,
+				C77FD0D8EFB90B03D1AFFB31DE1F0D70 /* SFMultiPolygon.m */,
+				336839F8EB118718D7DB01C99378A048 /* SFMultiSurface.h */,
+				23E9CAADDE676BEE6E9109FB7E519791 /* SFMultiSurface.m */,
+				4A11D7CE2DCA91B2F4A04714A532AEF0 /* SFPoint.h */,
+				BAC313FB5829BDB69E9B21BB6756A28A /* SFPoint.m */,
+				FCEF99B0E86B32B71456B9584BB07C0A /* SFPointFiniteFilter.h */,
+				C16F35989FD3EE7E3E5C1A7C20D58D38 /* SFPointFiniteFilter.m */,
+				12BBF15504AFA0B03F8F720253A20B59 /* SFPolygon.h */,
+				80CEB7D68F0C194ADC2D8031323B9DBB /* SFPolygon.m */,
+				F243BE73B88C95614D9B6BE5522AA536 /* SFPolyhedralSurface.h */,
+				D60A195E3F7BFF939B95379D421E3BC1 /* SFPolyhedralSurface.m */,
+				ACAB10C71136FD1DB61154D087E249A1 /* SFSegment.h */,
+				8DC7787965766394F0A112FA9A55F8F7 /* SFSegment.m */,
+				496E34186FBBDDA8EE94500651CFC417 /* SFShamosHoey.h */,
+				08139AB6D2965F52444A29C93D597C4B /* SFShamosHoey.m */,
+				280A6054E3F34A7F5A830C7F12512EB4 /* SFSurface.h */,
+				BACB7F89DBB1D2673E1CF4218718833C /* SFSurface.m */,
+				C7186430126B355052D447ABDD4589E5 /* SFSweepLine.h */,
+				D74E820C15FDB9F2508222F888D85899 /* SFSweepLine.m */,
+				7E3B37C98647DE19F921399B377FD247 /* SFTextReader.h */,
+				C07B59C64AB67B3F8A59241810417720 /* SFTextReader.m */,
+				5A56E130DB49BA0DDD41345A63C30305 /* SFTIN.h */,
+				C637AF5385CC7B822BA93452054AAA3E /* SFTIN.m */,
+				C0BC15852AAC2D3A5D933CC19F99A9B9 /* SFTriangle.h */,
+				1C3FC89473D967D2396625E180E607B2 /* SFTriangle.m */,
+				0B4A31EF0517F3BDCE4561A00526E1F4 /* Support Files */,
+			);
+			name = "sf-ios";
+			path = "sf-ios";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		60142FE5B245DA0774F9C55C991C87BC /* grid-ios */ = {
+			isa = PBXGroup;
+			children = (
+				DCA519222B51C257F9C34507E2825AC4 /* BaseGrid.swift */,
+				578FFD062974492FA8297D1ABD2CCB3F /* BaseGrids.swift */,
+				313D5F2283544CF1E457CDD50717D334 /* BaseZoomGrids.swift */,
+				72285FEA2A6B7CF8ECE6BA932C71D0B5 /* Bounds.swift */,
+				9823F604DDFFC08F4AABE8D2F1EB1422 /* GridConstants.swift */,
+				902A1E8E2E3C518DCC4E04A86070F65D /* GridPoint.swift */,
+				BB848DEDD1E8B7586A382F0887717E2A /* GridProperties.swift */,
+				55825358EFCE805C29059C1162D36241 /* GridStyle.swift */,
+				B9250A6B2F2B20FD00ED0F6C24A022E8 /* GridTile.swift */,
+				C30FFC4404A6F6AB66CC9319FEC21537 /* GridUtils.swift */,
+				2763E4E0C43C0ED250D40D6D8D59B0DF /* Hemisphere.swift */,
+				3DAC4C66C6D3034B446868D38C4EF2E1 /* Label.swift */,
+				6DF3956F30A33245C9BF7EF8307BA748 /* Labeler.swift */,
+				FD5A6EA7B0BE090719B55AA819E4A3AC /* Line.swift */,
+				909E9ABFB5B2EB22454276A3C402EC3E /* Pixel.swift */,
+				F12B0FF15257F96F8090D50E92CDFD3F /* PixelRange.swift */,
+				623E09214478BFFA321738446533EAF6 /* PropertyConstants.swift */,
+				1336BD6EFEDC56A246EA5F3B5E9C32D2 /* TileDraw.swift */,
+				863B42066D18202F25EB1DBD8E836059 /* TileUtils.swift */,
+				49C39AB1EA4B75DDFA04920C6E8A1E3D /* Unit.swift */,
+				4062FA01D4A5AFB19161388B0111CD8B /* Support Files */,
+			);
+			name = "grid-ios";
+			path = "grid-ios";
+			sourceTree = "<group>";
+		};
+		6AF0D020BC8B04451E028F045CEF52BE /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9EB0BD91BAACEE66D99833866984EDCF /* color-ios.modulemap */,
+				80D8E42CEF22B7848DC0156B6B3740A9 /* color-ios-dummy.m */,
+				22B919EB6D091E9F91E84A4E270E55B7 /* color-ios-Info.plist */,
+				B916D54AD0B44DBC5AB0632904DF66C4 /* color-ios-prefix.pch */,
+				8E0C4263B5DC076E2C684AF181F214A6 /* color-ios-umbrella.h */,
+				F170244622796EDC2C5B0144F77AB0DA /* color-ios.debug.xcconfig */,
+				9DC2BD7887537AC73F24C85FF748EB7C /* color-ios.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/color-ios";
+			sourceTree = "<group>";
+		};
+		7DF05A485F04A3588774824D98001DF1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA0EE2D6149A8215A527EE8B1F6F6DF9 /* mgrs.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		8039CD735D6099CB57A252ACA4929E52 /* mgrs-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A68B55ABA9B4936C4002A0F08C145BDF /* BandLetterRange.swift */,
+				CBDBCA79BA142A74F694A403E80F1CEC /* Grid.swift */,
+				3827C9C01287667082F1AB9F623303EA /* GridLabel.swift */,
+				C05313B35A0CCA8A66122CF1AF17AB82 /* GridLabeler.swift */,
+				A8E02C2727813C695ECF45EAFA2BCF9E /* GridRange.swift */,
+				69E2F204A7777C86E036D5D424419444 /* Grids.swift */,
+				A1B0198E27671F04BD620115E3E4FAFC /* GridType.swift */,
+				3F8CE8E5C59D9AF4BF9B6FE50D9E815E /* GridZone.swift */,
+				A9BDAB38613712F674BBCCF35C0872B2 /* GridZones.swift */,
+				6FFB6340434F9F748D7AB32C17C02388 /* GZDLabeler.swift */,
+				241152D2845301F7A721415186827DFF /* LatitudeBand.swift */,
+				2EBB8078ABA0614731D69FC64DE96A12 /* LongitudinalStrip.swift */,
+				1EDFB0C27D774B49C6A2206F643E95D1 /* MGRS.swift */,
+				4BD33F78CCA19AFA06EC402AB2B337ED /* MGRSConstants.swift */,
+				A74C8FD74EBB8A11B94617CE3D2452E5 /* MGRSLabeler.swift */,
+				D39A4298ACF9FCF75630D022AB9230D9 /* MGRSLine.swift */,
+				25EFEC78DEFD7CE1C14564AD9A43CE74 /* MGRSProperties.swift */,
+				BAF4B87BD96A319178E96CFA4C885EB1 /* MGRSTileOverlay.swift */,
+				D5A88DA226AA1BDD52F0E58984D2DEEC /* MGRSUtils.swift */,
+				DD4ECC4D6B43357827C1806A56112C19 /* UTM.swift */,
+				6CC7DDE8E078FC9C3E8F2A325108C6C4 /* ZoneNumberRange.swift */,
+				E990D67C52DCDC5572BECC4EAF86D62C /* ZoomGrids.swift */,
+				7DF05A485F04A3588774824D98001DF1 /* Resources */,
+				C12FDB249D5A2E8E0880BD3CEFC5CC50 /* Support Files */,
+			);
+			name = "mgrs-ios";
+			path = "mgrs-ios";
+			sourceTree = "<group>";
+		};
+		8C6A59037204E47CE96D0D458C92EB1C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B0D9A201EFBB171BBFA4034EBFF6DF1B /* color-ios */,
+				60142FE5B245DA0774F9C55C991C87BC /* grid-ios */,
+				8039CD735D6099CB57A252ACA4929E52 /* mgrs-ios */,
+				512F30DFDDD8B62EDB5FC1A99AE006C4 /* sf-ios */,
+				DC061DC9EFD4D7779CEC37544905480C /* tiff-ios */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B0D9A201EFBB171BBFA4034EBFF6DF1B /* color-ios */ = {
+			isa = PBXGroup;
+			children = (
+				004EDC95A66AF4FEC78A432AED2343B8 /* CLRColor.h */,
+				80C3251211D542711C92BC993A8B46D4 /* CLRColor.m */,
+				6DC482959C48061AB6992E5117867F33 /* CLRColorConstants.h */,
+				999F9DCCCEE0CEFE10E9052FA24AD02B /* CLRColorConstants.m */,
+				9FB0D172C932A4107DD6391F6F0755D3 /* CLRColorUtils.h */,
+				E3D2B2BDB1311D7B13DB2D48147D1B5F /* CLRColorUtils.m */,
+				F52142769A10A085700FDE9C87E1E741 /* color-ios-Bridging-Header.h */,
+				3C0D4FE9238C79B44AAAC95A098464AA /* color_ios.h */,
+				6AF0D020BC8B04451E028F045CEF52BE /* Support Files */,
+			);
+			name = "color-ios";
+			path = "color-ios";
+			sourceTree = "<group>";
+		};
+		C12FDB249D5A2E8E0880BD3CEFC5CC50 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				75A0422A41985162159A1B54FCC8A14F /* mgrs-ios.modulemap */,
+				0666706DBB3C3F4E91E0ADD6295730E3 /* mgrs-ios-dummy.m */,
+				FDBFC2EE3B3D8CC14638B62390CF394C /* mgrs-ios-Info.plist */,
+				188D998A867D9D6A795A06660BC45595 /* mgrs-ios-prefix.pch */,
+				1D71818AF4D7D88D1955E517FC690980 /* mgrs-ios-umbrella.h */,
+				B04836534E6E2FDD5EA76AAF264EE0FD /* mgrs-ios.debug.xcconfig */,
+				8245BADE952EDA92D26604308AE7C7ED /* mgrs-ios.release.xcconfig */,
+				A4AD4BC7EF987A9780E369341B5845D8 /* ResourceBundle-mgrs-ios-mgrs-ios-Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/mgrs-ios";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				8C6A59037204E47CE96D0D458C92EB1C /* Pods */,
+				3109604551382F41BB253B528695A02C /* Products */,
+				4F8329E92136C08C08419F77FB1BBE65 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC061DC9EFD4D7779CEC37544905480C /* tiff-ios */ = {
+			isa = PBXGroup;
+			children = (
+				3EFE2B6FD924F4DD7ABA1E02111D78CC /* tiff-ios-Bridging-Header.h */,
+				031E1AED73DFC7C4E0890B067B1290BF /* tiff_ios.h */,
+				6EAADC766E43230FCE585D8B51CC8AC4 /* TIFFByteReader.h */,
+				36F0817AF4997B368F84EA394E5B59F4 /* TIFFByteReader.m */,
+				36DA41E05512839A6DD70F328F40D0AC /* TIFFByteWriter.h */,
+				63EA5F2709DB94CE4CF342AC6311070C /* TIFFByteWriter.m */,
+				25FED3DBFADE06969C386DA4D59E60B8 /* TIFFCompressionDecoder.h */,
+				C545C38A867BC5326217E06DE42BF09D /* TIFFCompressionEncoder.h */,
+				B9FC0261B04B40693B8C3380475B6EBD /* TIFFConstants.h */,
+				FEBE1D7B33886C714B24A96C44CBEA61 /* TIFFConstants.m */,
+				1FD65D9C7D34AEFE844CE9557809F795 /* TIFFDeflateCompression.h */,
+				75667F08C6A7C25057806FB4B6217AB2 /* TIFFDeflateCompression.m */,
+				948756BB8A47C835EB3A48DFDC96ECD1 /* TIFFFieldTagTypes.h */,
+				53C0D3439BF2A520CE0D18FA98A6E647 /* TIFFFieldTagTypes.m */,
+				2FCA2032C86D386F0009400CF5A19850 /* TIFFFieldTypes.h */,
+				A871B98A593B18040121FD2474C34981 /* TIFFFieldTypes.m */,
+				149F22BBAC3785B53F98475ABB56AE01 /* TIFFFileDirectory.h */,
+				0B4F05F02FA77BF7DE0B9656A4B8816D /* TIFFFileDirectory.m */,
+				654C857024B56D9B21C3DFC24647B2BC /* TIFFFileDirectoryEntry.h */,
+				3287E49461AFD8EF04C0B7F0760C3332 /* TIFFFileDirectoryEntry.m */,
+				F3808D9AA86990B64D1FEA67BE1ADC50 /* TIFFImage.h */,
+				115D39F4B3194E2ECFDCD859A6DB8F1D /* TIFFImage.m */,
+				C6424DC2D3585E237FE7A1EF37428EAC /* TIFFImageWindow.h */,
+				8C241E2BA5A3C01AFD8B47646A668CD4 /* TIFFImageWindow.m */,
+				F2A8C01C798C591B54A3AC0332454AB0 /* TIFFIOUtils.h */,
+				386FE36C6C539B29435839CB0A7A1A82 /* TIFFIOUtils.m */,
+				2DFD97918330C5EE3261EF852E3E6316 /* TIFFLZWCompression.h */,
+				44392F5C0C6EEED55BBDE80EEB2FB4B2 /* TIFFLZWCompression.m */,
+				79DEEBC3CDD634134B51217010F30B8D /* TIFFPackbitsCompression.h */,
+				912FDC912D8B5D54E61E4F45E256ED34 /* TIFFPackbitsCompression.m */,
+				435AB48B46D1F777A22194F4C70D3C85 /* TIFFPredictor.h */,
+				8F0CE567DF83A263C4153AE6EBBF6654 /* TIFFPredictor.m */,
+				C5329A5E1F25324E2A0A9089CDCCDFBD /* TIFFRasters.h */,
+				5D5E395D7CB5D89474535FD0CEAB8E3A /* TIFFRasters.m */,
+				E49EF8A04A33394C0BE19750A0594DDB /* TIFFRawCompression.h */,
+				5E8A08658CFCE0F2DDE58F4808D12958 /* TIFFRawCompression.m */,
+				C581A93F2A2885CBF1E51EE657EDFBA1 /* TIFFReader.h */,
+				2665BCB50E7149FB867FA76B8395C70D /* TIFFReader.m */,
+				E8561F967BCE652BFACB1A1C36235EE6 /* TIFFUnsupportedCompression.h */,
+				52A4919161F527F16CFEA86F95657B31 /* TIFFUnsupportedCompression.m */,
+				62A03D9C67FF2FB672B3B83E127E7350 /* TIFFWriter.h */,
+				E229C49CF7B0C5DC76377802E9E363BE /* TIFFWriter.m */,
+				3EACA7447960D419658A37EA19930B74 /* Support Files */,
+			);
+			name = "tiff-ios";
+			path = "tiff-ios";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3959B3CE54AFD05D8AF4902E8CBF2907 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA8605217080848434455418EDFDDB9F /* Pods-OpenAthenaIOS-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E5C459FBCBC286333D4B05AADEAB6A3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AB45672E1B9BF48632144D30410BEE8 /* grid-ios-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D18AF8FE1F54C23181291078980585B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				689B2DF51EECBC692E7C2507180E7696 /* CLRColor.h in Headers */,
+				4FAEF057D06A2FE9452EC6402A646935 /* CLRColorConstants.h in Headers */,
+				9A1CF5F77CBB50B95AB79D27214BF2FC /* CLRColorUtils.h in Headers */,
+				EF7FB19EC749C2AF91625156E43FDED4 /* color-ios-Bridging-Header.h in Headers */,
+				EF1C288D10C68E69DA5FCF9BFAB6F854 /* color-ios-umbrella.h in Headers */,
+				FBA0B6116F184AEE48111DCA56484F4F /* color_ios.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		94A7A5147D910B593A760AFE3C2F63A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19F88EAE85E295DCD82C93E32D3AB43C /* tiff-ios-Bridging-Header.h in Headers */,
+				CA6074303ACD8EB44C364EEBB53F6259 /* tiff-ios-umbrella.h in Headers */,
+				86534A5DA37AB53A2E591F19BCD6A99E /* tiff_ios.h in Headers */,
+				A69006FCFAAF7FFDF0B248C6AE7DADA3 /* TIFFByteReader.h in Headers */,
+				029CDDE208EC0E645BEC4172DBAC3ADC /* TIFFByteWriter.h in Headers */,
+				EF5617B6EA018C9735071AFD28F53A61 /* TIFFCompressionDecoder.h in Headers */,
+				C384C7BBDC6738761E5E4283B403866E /* TIFFCompressionEncoder.h in Headers */,
+				353FD5B9040B17A872BC4D84F48EB895 /* TIFFConstants.h in Headers */,
+				BD91B3EB0B78F7A15C9D6C9F4BB42D45 /* TIFFDeflateCompression.h in Headers */,
+				D6B186A7D42AD382DCEC0325D9455B58 /* TIFFFieldTagTypes.h in Headers */,
+				2434B0932B6387B4D38C7C2A4F3C8E52 /* TIFFFieldTypes.h in Headers */,
+				FF19505D11C33812FC5ED6E54BBEF44F /* TIFFFileDirectory.h in Headers */,
+				C6320635F844040303AB9BC1ADBAF2D5 /* TIFFFileDirectoryEntry.h in Headers */,
+				007C6F3D3D1A1984B9AECCC2FE232B5E /* TIFFImage.h in Headers */,
+				7EF8EC16FEE885449ECBAF1C96B2CF72 /* TIFFImageWindow.h in Headers */,
+				4B92ADE95854EA972CA7CB9DEFE604C4 /* TIFFIOUtils.h in Headers */,
+				8F9B48CAFB8EF8FA660E34FFA0BD8358 /* TIFFLZWCompression.h in Headers */,
+				D4955B2DF791E5B9B607DB44D88AA5EF /* TIFFPackbitsCompression.h in Headers */,
+				1E171B9B76F9C0769D43798A9C578904 /* TIFFPredictor.h in Headers */,
+				A65B818C2E801CBF3F4DC3438CCE0145 /* TIFFRasters.h in Headers */,
+				0B820F87F9E00AC2DC2C51C3C9087702 /* TIFFRawCompression.h in Headers */,
+				FAC870BD65884F77514BBBFAE7FF2425 /* TIFFReader.h in Headers */,
+				76A2667AC3D5A9289F4096B5D4522068 /* TIFFUnsupportedCompression.h in Headers */,
+				CA2FB94CA557D030DE4F32CD717D0002 /* TIFFWriter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB97EA8FA8A8BDA0F7CFF2CDC3BABE92 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1A99C38DE8AD8351521E2822380350D /* mgrs-ios-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBC944EF26A3EF432A87654225D4D0B1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A242384E0435218C082BF7DE3E2A1BE /* sf-ios-Bridging-Header.h in Headers */,
+				C6A5D8E4DD188C1E843BF5E5FDE5F7F5 /* sf-ios-umbrella.h in Headers */,
+				BB3C1E32F4CB3C431A70A0DFD66C88AB /* sf_ios.h in Headers */,
+				4EC70B12BFD48F48745F1F420497ABAC /* SFByteReader.h in Headers */,
+				E3840E747531FB038D2B561451D6346F /* SFByteWriter.h in Headers */,
+				D65623E8247D82A67F1E4F65042F136A /* SFCentroidCurve.h in Headers */,
+				D6986F69154B9E96DC3F6C7DFD30234A /* SFCentroidPoint.h in Headers */,
+				3C16A039197901FF9C409D50AE1291EE /* SFCentroidSurface.h in Headers */,
+				A008C186686E9F69378C2FD0FAB920BB /* SFCircularString.h in Headers */,
+				CCD08223144FE4D740965F323BB0DB2E /* SFCompoundCurve.h in Headers */,
+				A0204486528D2F0CEE49A0B20D43CBEA /* SFCurve.h in Headers */,
+				AD7B6AE0CEFA03582E353909AFCF5D77 /* SFCurvePolygon.h in Headers */,
+				739F45F0898D7C29EAD7730C7B1393BD /* SFDegreesCentroid.h in Headers */,
+				B4F4C32DFCFB3C65A42B52D5F553732F /* SFEvent.h in Headers */,
+				4537F41D4957086FC5C6244B1F553A36 /* SFEventQueue.h in Headers */,
+				A16558F768F8CAC9D15FA3D6931A8178 /* SFEventTypes.h in Headers */,
+				974340009C77D3550097791AE500DB3A /* SFExtendedGeometryCollection.h in Headers */,
+				694526B97D1C8D1CF17B34CC6A3F7EAC /* SFFiniteFilterTypes.h in Headers */,
+				E886FC5E230ABC08FFEC928161635560 /* SFGeometry.h in Headers */,
+				46FE39A1EC9526B863075403E33BF3C2 /* SFGeometryCollection.h in Headers */,
+				93794322C09441ACD0DA0F750777A311 /* SFGeometryConstants.h in Headers */,
+				FCA27CA88F2C0AC93FFDCD9ABA73CBFC /* SFGeometryEnvelope.h in Headers */,
+				AB3DC4FD687915524BA91E2B632B405E /* SFGeometryEnvelopeBuilder.h in Headers */,
+				9395E5C643977B45E13CADFFCE0F1267 /* SFGeometryFilter.h in Headers */,
+				30FAF8693C2A7F235B5C2B7DC5C2E8CD /* SFGeometryPrinter.h in Headers */,
+				7A6DE2368E75FC0B63C8D1B2713D8141 /* SFGeometryTypes.h in Headers */,
+				B24B8FFE803B311FEDBFFE062E43F64F /* SFGeometryUtils.h in Headers */,
+				82A7854787F2A2497D8B263DB4D2018D /* SFLine.h in Headers */,
+				2707E54E5687678334F2D3EFED3BC7B1 /* SFLinearRing.h in Headers */,
+				1285DC1E6013E405D8B1E0C286B8A5B1 /* SFLineString.h in Headers */,
+				675A720CFEA8E9E9FAEDDD680F5A6415 /* SFMultiCurve.h in Headers */,
+				3FB14D2026CA40BEDF2F6ED9DB75B5C5 /* SFMultiLineString.h in Headers */,
+				28DAE7F5ABD699F6FC054E085261A064 /* SFMultiPoint.h in Headers */,
+				E40A6196FD02E25130F9B64A3A209A82 /* SFMultiPolygon.h in Headers */,
+				BBC03A1AA1179E92E3E417002CC16623 /* SFMultiSurface.h in Headers */,
+				49FBE9B941636B9B5853193295FDEA4A /* SFPoint.h in Headers */,
+				8835AA54DB54211C2DF9E367D2CBB7CF /* SFPointFiniteFilter.h in Headers */,
+				15E1D56261B931CC40CC621DDC48A4BD /* SFPolygon.h in Headers */,
+				8A9C922ED4DF00776894D04B686EE707 /* SFPolyhedralSurface.h in Headers */,
+				AA2D10115A1F20F13F50BEE91B8E1DA3 /* SFSegment.h in Headers */,
+				A00B035E8FA8D0A678F760D43E08D392 /* SFShamosHoey.h in Headers */,
+				008AB830C55BF84FA05BF2826262C4EF /* SFSurface.h in Headers */,
+				DFF609F96F5349B37F75183BAEE2912E /* SFSweepLine.h in Headers */,
+				506DEA0E161329D6D6444A0C5413EF67 /* SFTextReader.h in Headers */,
+				50FB8E96576DB20E37E10991BF9EBE5B /* SFTIN.h in Headers */,
+				FFD470F352CF66AD126A605F77CE70F2 /* SFTriangle.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3D3A419CC7A327DAABA72019D5CE9F57 /* sf-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5B90012CB563E34EB6466A1001FDFCC /* Build configuration list for PBXNativeTarget "sf-ios" */;
+			buildPhases = (
+				EBC944EF26A3EF432A87654225D4D0B1 /* Headers */,
+				F7392CE0D224465E3357C5F67EE3A31B /* Sources */,
+				381A9782F1D9B75C5A96B90151B0A7C5 /* Frameworks */,
+				8C952A441FE238E471EDD92527DFA024 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "sf-ios";
+			productName = sf_ios;
+			productReference = D57C1FAB77A663260850740EEB9C3590 /* sf-ios */;
+			productType = "com.apple.product-type.framework";
+		};
+		577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1232979FF77A122B0C77ECA565F5640A /* Build configuration list for PBXNativeTarget "mgrs-ios-mgrs-ios" */;
+			buildPhases = (
+				4B369B2532AF6422A00DCA389D54C970 /* Sources */,
+				90E77324A8ACAB801EF05724514791D7 /* Frameworks */,
+				886F378BE5FF9F2845A31DC3DD9D0CEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mgrs-ios-mgrs-ios";
+			productName = "mgrs-ios";
+			productReference = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */;
+			productType = "com.apple.product-type.bundle";
+		};
+		5D942CA48BAB353546F6B788AC3EA195 /* color-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00AD696AC94A97E80145F548E01C60F3 /* Build configuration list for PBXNativeTarget "color-ios" */;
+			buildPhases = (
+				6D18AF8FE1F54C23181291078980585B /* Headers */,
+				8279E556FB47230EE33085B83D74CF4C /* Sources */,
+				6308171C03AEF1CDA84E20E11290150A /* Frameworks */,
+				19D8C2971D17447BD731219D87348310 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "color-ios";
+			productName = color_ios;
+			productReference = 6701E1E7881E37B884FEEA9B3F803E0B /* color-ios */;
+			productType = "com.apple.product-type.framework";
+		};
+		AED3CD45D039D7912074525C078AD57E /* tiff-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73F0FDD6751BED9B1FA94FA0B3B6A1F1 /* Build configuration list for PBXNativeTarget "tiff-ios" */;
+			buildPhases = (
+				94A7A5147D910B593A760AFE3C2F63A9 /* Headers */,
+				2685E57F7A52F28076337EA597D98FEC /* Sources */,
+				03ABBDA1A0A90F8A8212CA140C7A692D /* Frameworks */,
+				74EA98375F98BE502AFFC82C3CD69018 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tiff-ios";
+			productName = tiff_ios;
+			productReference = 5A65557CDA568E775E84D5CE7C04B40A /* tiff-ios */;
+			productType = "com.apple.product-type.framework";
+		};
+		F7872CE1AF59586B83F29A969432F396 /* Pods-OpenAthenaIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3012BBC8449F81493B4A3FF6F5E5BDC0 /* Build configuration list for PBXNativeTarget "Pods-OpenAthenaIOS" */;
+			buildPhases = (
+				3959B3CE54AFD05D8AF4902E8CBF2907 /* Headers */,
+				4E1563E3F053888BB0BD2269DE9E6E3E /* Sources */,
+				AA9BABFCA67B682ADB3266375EB612ED /* Frameworks */,
+				CC790D3A77D7DFA958D269685461AF10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFDEF7E6ADCF9381A88912123055B5BF /* PBXTargetDependency */,
+				0DFB0F421F20956F3EE0586EB829F633 /* PBXTargetDependency */,
+				C4FABCBA308261F16B0B455630CABAAF /* PBXTargetDependency */,
+				EC76DE5D5F6865C874126EF13BC1DFA2 /* PBXTargetDependency */,
+				ECBE4483FED856A5B272F4FCAC03785D /* PBXTargetDependency */,
+			);
+			name = "Pods-OpenAthenaIOS";
+			productName = Pods_OpenAthenaIOS;
+			productReference = 0A2A93A5EBF7AE2F14E2A7BCEA2D12F3 /* Pods-OpenAthenaIOS */;
+			productType = "com.apple.product-type.framework";
+		};
+		F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B192E4F93DD72EAC4E2B74CB53EF40A /* Build configuration list for PBXNativeTarget "grid-ios" */;
+			buildPhases = (
+				5E5C459FBCBC286333D4B05AADEAB6A3 /* Headers */,
+				D4E6192BB99B53535D25211AF03EDDA2 /* Sources */,
+				C097081D1FF513514B88F3881164333E /* Frameworks */,
+				95EE0D2B1261DD86C3C4BAC9ABA9EDDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				624DF70793E43A81A651611F7EB49E90 /* PBXTargetDependency */,
+				30FCFDEB3000D3DFD67792C46BD91319 /* PBXTargetDependency */,
+			);
+			name = "grid-ios";
+			productName = grid_ios;
+			productReference = 7EE66363A245AC8A4B45D95E5CEC6B09 /* grid-ios */;
+			productType = "com.apple.product-type.framework";
+		};
+		FA341BB40DB010A6FF2E54DFC3D1E5D8 /* mgrs-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50DCE2A6FA367D7E9B546A0504461FF5 /* Build configuration list for PBXNativeTarget "mgrs-ios" */;
+			buildPhases = (
+				CB97EA8FA8A8BDA0F7CFF2CDC3BABE92 /* Headers */,
+				30756DA618037CC18AD1198A4C438016 /* Sources */,
+				D8B41C70B6573A19AA0DF5D423643549 /* Frameworks */,
+				5A43A87703E2F6D02B2F59253A9FDCAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D33F954D58201C4A0A4B718C504A28E /* PBXTargetDependency */,
+				6CD1204793F1546A85DA40F4F9197565 /* PBXTargetDependency */,
+			);
+			name = "mgrs-ios";
+			productName = mgrs_ios;
+			productReference = C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs-ios */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 3109604551382F41BB253B528695A02C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5D942CA48BAB353546F6B788AC3EA195 /* color-ios */,
+				F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */,
+				FA341BB40DB010A6FF2E54DFC3D1E5D8 /* mgrs-ios */,
+				577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */,
+				F7872CE1AF59586B83F29A969432F396 /* Pods-OpenAthenaIOS */,
+				3D3A419CC7A327DAABA72019D5CE9F57 /* sf-ios */,
+				AED3CD45D039D7912074525C078AD57E /* tiff-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		19D8C2971D17447BD731219D87348310 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A43A87703E2F6D02B2F59253A9FDCAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios-mgrs-ios in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74EA98375F98BE502AFFC82C3CD69018 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		886F378BE5FF9F2845A31DC3DD9D0CEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E42C82FAA1C009DF82BD7811FCF6DA7 /* mgrs.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C952A441FE238E471EDD92527DFA024 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95EE0D2B1261DD86C3C4BAC9ABA9EDDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC790D3A77D7DFA958D269685461AF10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2685E57F7A52F28076337EA597D98FEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				818C427C745CD422865AC833155F8000 /* tiff-ios-dummy.m in Sources */,
+				5BA776B1FB8E1F07188956160CF8C179 /* TIFFByteReader.m in Sources */,
+				416A8B5F8C0A21F0560F7D603364CAFB /* TIFFByteWriter.m in Sources */,
+				14BD570D1E847A9DA6E21301F81DE062 /* TIFFConstants.m in Sources */,
+				000B67CE0BD537ABC6AFC30B71C6B5FE /* TIFFDeflateCompression.m in Sources */,
+				539BCE18921C024AD4CC18118A24FFEA /* TIFFFieldTagTypes.m in Sources */,
+				78E31C26D1AFD99A1C59E7BC23C8D3F1 /* TIFFFieldTypes.m in Sources */,
+				CC7199929D23E0E61A664FFDA34C9A64 /* TIFFFileDirectory.m in Sources */,
+				D44DE821DFFDF9E4D6EFB1E9E76EE024 /* TIFFFileDirectoryEntry.m in Sources */,
+				442F51285B69CDC948D567A74D8FF7E9 /* TIFFImage.m in Sources */,
+				0E5315654CEB0D3CDCB1D867EC2A2926 /* TIFFImageWindow.m in Sources */,
+				2BF2359BDCBD9036C81B19D20C19EB42 /* TIFFIOUtils.m in Sources */,
+				8996617A71D0C4DCD14B2C10EFEC0365 /* TIFFLZWCompression.m in Sources */,
+				08C54D7201D9695F9F189A3929D553FA /* TIFFPackbitsCompression.m in Sources */,
+				85AAF0A3AC4CD3338C2A13D9725DBE20 /* TIFFPredictor.m in Sources */,
+				2C74199EF0596BFFBE63F87083B1B421 /* TIFFRasters.m in Sources */,
+				749E2FD2C71359FE66149C6051EA19C3 /* TIFFRawCompression.m in Sources */,
+				9038A6A51BF3D454D04072F2C4D24EE8 /* TIFFReader.m in Sources */,
+				160CBE7D8FA327133E533D273B7EBB67 /* TIFFUnsupportedCompression.m in Sources */,
+				B4AA3CFD0A84A50024FCEAA4086910CF /* TIFFWriter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30756DA618037CC18AD1198A4C438016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF828B06B69B612AF17AE40C3149481C /* BandLetterRange.swift in Sources */,
+				0D16C71CF738F3BBA2C63FEC24CBAE3F /* Grid.swift in Sources */,
+				5F16E3EF1FAABDF6C5C1DDB451948919 /* GridLabel.swift in Sources */,
+				4E9DB3A55799AD6A7BB6CABC2792DA9D /* GridLabeler.swift in Sources */,
+				92AD7B6978B043A6D87647E147EE2763 /* GridRange.swift in Sources */,
+				12C72C459546562A4C7A8D046B5BE963 /* Grids.swift in Sources */,
+				504452CAC12585B620DE82B41AE2F0EF /* GridType.swift in Sources */,
+				85033FED5CBFB7D24E7CAB85F76D7DED /* GridZone.swift in Sources */,
+				B9CE441CDCD318CB9A977B27705DE792 /* GridZones.swift in Sources */,
+				5DEEDED84D1B4B01781E6DABA90EDF98 /* GZDLabeler.swift in Sources */,
+				99D63002859B00ED49BE5D481965B751 /* LatitudeBand.swift in Sources */,
+				071F303DFF627313B76DE65A777F15C1 /* LongitudinalStrip.swift in Sources */,
+				8447B58BA06145AA077143850FFDDFD6 /* MGRS.swift in Sources */,
+				7FA49CA3EDC298CA7C55C460F06B0DC2 /* mgrs-ios-dummy.m in Sources */,
+				45FAE0AE275B0268A3A0AFF513BD46D1 /* MGRSConstants.swift in Sources */,
+				C58C3CBDFADC280064A3E6AC33A1BE85 /* MGRSLabeler.swift in Sources */,
+				B3D24A91D499AE8FA8686B61B67C8DE5 /* MGRSLine.swift in Sources */,
+				DDED62BD2C447F6C5E7297D20D697A1A /* MGRSProperties.swift in Sources */,
+				58090A8C68FE54524677FD5B059D279B /* MGRSTileOverlay.swift in Sources */,
+				F74B1D2D126E49BB9B0FF8DA9CC05E63 /* MGRSUtils.swift in Sources */,
+				F84FCFCAC9BCAB72DD72486E6B8E7A68 /* UTM.swift in Sources */,
+				067C7ED7510521BE277F755220E822C5 /* ZoneNumberRange.swift in Sources */,
+				E4FCEA16DE75F4A694D3726150FB3E93 /* ZoomGrids.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B369B2532AF6422A00DCA389D54C970 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E1563E3F053888BB0BD2269DE9E6E3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F2CC67743B9B656450B490F68A3345C /* Pods-OpenAthenaIOS-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8279E556FB47230EE33085B83D74CF4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9199F3D813C5616AB348DC0D123B0A9A /* CLRColor.m in Sources */,
+				DF9D7D1FCFA243E6EFE52B9ADBAFF56D /* CLRColorConstants.m in Sources */,
+				AE7434CD15CBEFF4168F1B9A071887E2 /* CLRColorUtils.m in Sources */,
+				0E48F269B264AC4DF3B3DC9E834251FC /* color-ios-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E6192BB99B53535D25211AF03EDDA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7531B4F97700F1C84513A7A8B43C75FE /* BaseGrid.swift in Sources */,
+				35A0D6930B1375D439168D1746877049 /* BaseGrids.swift in Sources */,
+				04B3A6327E57113297E147F45AB86AC2 /* BaseZoomGrids.swift in Sources */,
+				5E8C298257FC8FA288AB6E017CF94ADF /* Bounds.swift in Sources */,
+				D4A82FE97D097418A6D469327D543E5B /* grid-ios-dummy.m in Sources */,
+				D9A1DF495BF9773DD784205359712CC5 /* GridConstants.swift in Sources */,
+				08A82D98A2958761B0C37502C499ECCC /* GridPoint.swift in Sources */,
+				CD58FCD440C3CB39746FC62196361E7C /* GridProperties.swift in Sources */,
+				655B618AA7337F91593380D603986548 /* GridStyle.swift in Sources */,
+				B1BFDB9E4706D492A8052A8DCB2FBB3F /* GridTile.swift in Sources */,
+				391601FB8693640EBE5D411023C746A9 /* GridUtils.swift in Sources */,
+				06D18D87D8504AC2715A0863CCDAED96 /* Hemisphere.swift in Sources */,
+				F5DA2BD5458F7EA65CD2E599D35CC4F8 /* Label.swift in Sources */,
+				CA931BED8FFF97222F2E4C1DD002C117 /* Labeler.swift in Sources */,
+				EE12BDF6B07146DCE7D71A1FD9BB5C58 /* Line.swift in Sources */,
+				5F657D10EC9C1F621FE145E6961CDBDA /* Pixel.swift in Sources */,
+				4857891EB4E50C0313B47AAE82257B91 /* PixelRange.swift in Sources */,
+				0A42D4949996376A528CC9DE5933FFED /* PropertyConstants.swift in Sources */,
+				66AAA766D7293D6DE733D3C0DFD53472 /* TileDraw.swift in Sources */,
+				DE0812E35F28B6F0E1647226542ACC11 /* TileUtils.swift in Sources */,
+				3CD803A89F48503EDFB120BF71FBE80E /* Unit.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7392CE0D224465E3357C5F67EE3A31B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C46ECE6E7913A71EA37024AD214F35 /* sf-ios-dummy.m in Sources */,
+				38984FB7E1C139144C41CF065ECC98F3 /* SFByteReader.m in Sources */,
+				87B4F35CFC3D22EBECC7FE51C7F3DFE2 /* SFByteWriter.m in Sources */,
+				BB96D30A65951B91E4B552F04F39E1BF /* SFCentroidCurve.m in Sources */,
+				F42D64979E8D9107B25EF4EA55FB9A79 /* SFCentroidPoint.m in Sources */,
+				51B187B78752011457F906F6CA73374C /* SFCentroidSurface.m in Sources */,
+				15D104DFC69293F17D328C97880DC435 /* SFCircularString.m in Sources */,
+				F1474DF0C8F4B7B190EE02BB8FE93E88 /* SFCompoundCurve.m in Sources */,
+				A75578DA2FC40EE8F8B7A0194BA055B5 /* SFCurve.m in Sources */,
+				2BC88CE7E6445E80829E17F94F5371DB /* SFCurvePolygon.m in Sources */,
+				BA9B017F981681D723B04E09B2CE99A4 /* SFDegreesCentroid.m in Sources */,
+				DD7E4A195D7CBF4D39D53E252D671230 /* SFEvent.m in Sources */,
+				2CE5C67A345FBFEA853C263802C74F7F /* SFEventQueue.m in Sources */,
+				F34A8D038911871CCE6E9379DE6E17CB /* SFEventTypes.m in Sources */,
+				91F63124C58284E9C8B2F0953B0C1965 /* SFExtendedGeometryCollection.m in Sources */,
+				3EB6DB0F8EF92B9260A877ABACFFA3E8 /* SFFiniteFilterTypes.m in Sources */,
+				32B7BFFB5BE1F64B88F4D896789CD0D4 /* SFGeometry.m in Sources */,
+				D9CCB32CE212BD1C0627530D6DD996E1 /* SFGeometryCollection.m in Sources */,
+				777A50EBD16803D587BBD81C04498066 /* SFGeometryConstants.m in Sources */,
+				D4DAC4C6FD67F3DC48CEFCE364AB28EC /* SFGeometryEnvelope.m in Sources */,
+				A2048BFA7B8EC6E4D2B53B0C5F835B53 /* SFGeometryEnvelopeBuilder.m in Sources */,
+				3C7D68F8E5EDDE42F17C854084421F44 /* SFGeometryPrinter.m in Sources */,
+				AE270B033A858FA5658B73007E950499 /* SFGeometryTypes.m in Sources */,
+				8F154488591D092AEE00509C27CC70C2 /* SFGeometryUtils.m in Sources */,
+				59AFBCF13B9B5A836A14B3AC19C2B25A /* SFLine.m in Sources */,
+				52FDD3007BA9563472388232521F60BF /* SFLinearRing.m in Sources */,
+				8B6D28D7EA24274D3A74883423A076E0 /* SFLineString.m in Sources */,
+				9E7FCA2E85062ADDBA2806FE3B6263E2 /* SFMultiCurve.m in Sources */,
+				CC84DD78ED5D0A7A5BFE03608F6740EF /* SFMultiLineString.m in Sources */,
+				E64263964B8DE8C1B86DEEDB979C33C9 /* SFMultiPoint.m in Sources */,
+				80D88E572323F730914E160F15C51A13 /* SFMultiPolygon.m in Sources */,
+				0E85400F6FA0583D4B037EBE40C486B3 /* SFMultiSurface.m in Sources */,
+				1540D66739ACAFD92B486E0B815A9E9B /* SFPoint.m in Sources */,
+				CBE4B0DD5EB99846D944A9B844CC89DC /* SFPointFiniteFilter.m in Sources */,
+				B6B7F078A9E25D6FDD9BE0E250D01133 /* SFPolygon.m in Sources */,
+				5C76257CC3B514C567B1D216B6197533 /* SFPolyhedralSurface.m in Sources */,
+				35B827D0FD3EBAEF016A7B5AA66012BB /* SFSegment.m in Sources */,
+				3FF79CF793921C983AB163AB4420E322 /* SFShamosHoey.m in Sources */,
+				57F672F1B087A58D633C3DAE47DF3E52 /* SFSurface.m in Sources */,
+				E64839B7C4FE208D30D8FF2ACFD1E585 /* SFSweepLine.m in Sources */,
+				D369506EE964E4709F4E08B54CE47FDD /* SFTextReader.m in Sources */,
+				99E4E19507B477F15411DFCE4AE588E7 /* SFTIN.m in Sources */,
+				8227F5CAB10EA54913B76407F4F7D5E5 /* SFTriangle.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0DFB0F421F20956F3EE0586EB829F633 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "grid-ios";
+			target = F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */;
+			targetProxy = 4B3FC5566DE31F126532E04E9A15AADA /* PBXContainerItemProxy */;
+		};
+		30FCFDEB3000D3DFD67792C46BD91319 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "sf-ios";
+			target = 3D3A419CC7A327DAABA72019D5CE9F57 /* sf-ios */;
+			targetProxy = FC033C19302E35FFA0890A3A20C61E2E /* PBXContainerItemProxy */;
+		};
+		624DF70793E43A81A651611F7EB49E90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "color-ios";
+			target = 5D942CA48BAB353546F6B788AC3EA195 /* color-ios */;
+			targetProxy = 4433045883FD105543BC22C16D628FC1 /* PBXContainerItemProxy */;
+		};
+		6CD1204793F1546A85DA40F4F9197565 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "mgrs-ios-mgrs-ios";
+			target = 577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */;
+			targetProxy = 270AEB3A32D8FE093BB988317630792D /* PBXContainerItemProxy */;
+		};
+		6D33F954D58201C4A0A4B718C504A28E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "grid-ios";
+			target = F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */;
+			targetProxy = 7299785E670E431451987A7442AE69B7 /* PBXContainerItemProxy */;
+		};
+		BFDEF7E6ADCF9381A88912123055B5BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "color-ios";
+			target = 5D942CA48BAB353546F6B788AC3EA195 /* color-ios */;
+			targetProxy = 33E4CB068C261AEC07D59C92E0D103CF /* PBXContainerItemProxy */;
+		};
+		C4FABCBA308261F16B0B455630CABAAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "mgrs-ios";
+			target = FA341BB40DB010A6FF2E54DFC3D1E5D8 /* mgrs-ios */;
+			targetProxy = D37F17BA788CDE8C06491755E65CFDD1 /* PBXContainerItemProxy */;
+		};
+		EC76DE5D5F6865C874126EF13BC1DFA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "sf-ios";
+			target = 3D3A419CC7A327DAABA72019D5CE9F57 /* sf-ios */;
+			targetProxy = 3956673C8256951581D56C7DF0D2BE96 /* PBXContainerItemProxy */;
+		};
+		ECBE4483FED856A5B272F4FCAC03785D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "tiff-ios";
+			target = AED3CD45D039D7912074525C078AD57E /* tiff-ios */;
+			targetProxy = 6606872D29BE610AC76057BBA12D89D6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0120F858CEAE8597D70EDA7DAE1ABFAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29D89BE41281ACE27788B3BF860F55E7 /* Pods-OpenAthenaIOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		07D3A460AEADBDD3FB639946FBF64422 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8245BADE952EDA92D26604308AE7C7ED /* mgrs-ios.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/mgrs-ios/mgrs-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/mgrs-ios/mgrs-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/mgrs-ios/mgrs-ios.modulemap";
+				PRODUCT_MODULE_NAME = mgrs_ios;
+				PRODUCT_NAME = mgrs_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		121C10237A3BA5B60D86A56BB5B4DE4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B04836534E6E2FDD5EA76AAF264EE0FD /* mgrs-ios.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/mgrs-ios/mgrs-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/mgrs-ios/mgrs-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/mgrs-ios/mgrs-ios.modulemap";
+				PRODUCT_MODULE_NAME = mgrs_ios;
+				PRODUCT_NAME = mgrs_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		210CE6725433C524E08A5BB93036A5B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B04836534E6E2FDD5EA76AAF264EE0FD /* mgrs-ios.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
+				IBSC_MODULE = mgrs_ios;
+				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = "mgrs-ios";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		3643C5C6BCEF6C9ED3C6445EAFE47EE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8245BADE952EDA92D26604308AE7C7ED /* mgrs-ios.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
+				IBSC_MODULE = mgrs_ios;
+				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = "mgrs-ios";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		4BC7450F9457737EE3E637BA155B56F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		5EFA27A9042B99F3BBFF25BAEF9E025E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE4FC1CCC008F09BFDA535170CEC5541 /* tiff-ios.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/tiff-ios/tiff-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/tiff-ios/tiff-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/tiff-ios/tiff-ios.modulemap";
+				PRODUCT_MODULE_NAME = tiff_ios;
+				PRODUCT_NAME = tiff_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		65933154FBBDD054A17F14FCBB87703E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F170244622796EDC2C5B0144F77AB0DA /* color-ios.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/color-ios/color-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/color-ios/color-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/color-ios/color-ios.modulemap";
+				PRODUCT_MODULE_NAME = color_ios;
+				PRODUCT_NAME = color_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		AB801EB3D7B3F1C843153A4808FDAA38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DC2BD7887537AC73F24C85FF748EB7C /* color-ios.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/color-ios/color-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/color-ios/color-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/color-ios/color-ios.modulemap";
+				PRODUCT_MODULE_NAME = color_ios;
+				PRODUCT_NAME = color_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		ACE6BEC3136B62CACB1DA94317A87646 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1932E5C471EFF016C8DF73740AA4178 /* sf-ios.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/sf-ios/sf-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/sf-ios/sf-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/sf-ios/sf-ios.modulemap";
+				PRODUCT_MODULE_NAME = sf_ios;
+				PRODUCT_NAME = sf_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B96F89FD9B49F4A9FECD637C773FF88A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5E3DBC3FAD63A3D57BFF382B1C12C26 /* grid-ios.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/grid-ios/grid-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/grid-ios/grid-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/grid-ios/grid-ios.modulemap";
+				PRODUCT_MODULE_NAME = grid_ios;
+				PRODUCT_NAME = grid_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BED0DFD6B0B27004988071B7B398F902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20B2A9C3C05B51B6DB93833E31040317 /* grid-ios.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/grid-ios/grid-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/grid-ios/grid-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/grid-ios/grid-ios.modulemap";
+				PRODUCT_MODULE_NAME = grid_ios;
+				PRODUCT_NAME = grid_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C6B2376F27F3A407C2B0313F5AFFCA33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B45F5C16D33F27B23DEAD2235C84ACA /* sf-ios.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/sf-ios/sf-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/sf-ios/sf-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/sf-ios/sf-ios.modulemap";
+				PRODUCT_MODULE_NAME = sf_ios;
+				PRODUCT_NAME = sf_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D9CE4A1E13AAAF7DFF2D6D4DF14EAC79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 539BC24B0AD0AB20E3FEAE83DF803322 /* tiff-ios.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/tiff-ios/tiff-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/tiff-ios/tiff-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/tiff-ios/tiff-ios.modulemap";
+				PRODUCT_MODULE_NAME = tiff_ios;
+				PRODUCT_NAME = tiff_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F559FA9E8DFE2AEAFBA764AF65F5C031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C43ACDA76CFB912A70DA6B9909FB8C2 /* Pods-OpenAthenaIOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00AD696AC94A97E80145F548E01C60F3 /* Build configuration list for PBXNativeTarget "color-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65933154FBBDD054A17F14FCBB87703E /* Debug */,
+				AB801EB3D7B3F1C843153A4808FDAA38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1232979FF77A122B0C77ECA565F5640A /* Build configuration list for PBXNativeTarget "mgrs-ios-mgrs-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210CE6725433C524E08A5BB93036A5B0 /* Debug */,
+				3643C5C6BCEF6C9ED3C6445EAFE47EE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3012BBC8449F81493B4A3FF6F5E5BDC0 /* Build configuration list for PBXNativeTarget "Pods-OpenAthenaIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0120F858CEAE8597D70EDA7DAE1ABFAD /* Debug */,
+				F559FA9E8DFE2AEAFBA764AF65F5C031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BC7450F9457737EE3E637BA155B56F7 /* Debug */,
+				8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50DCE2A6FA367D7E9B546A0504461FF5 /* Build configuration list for PBXNativeTarget "mgrs-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				121C10237A3BA5B60D86A56BB5B4DE4D /* Debug */,
+				07D3A460AEADBDD3FB639946FBF64422 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73F0FDD6751BED9B1FA94FA0B3B6A1F1 /* Build configuration list for PBXNativeTarget "tiff-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EFA27A9042B99F3BBFF25BAEF9E025E /* Debug */,
+				D9CE4A1E13AAAF7DFF2D6D4DF14EAC79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B192E4F93DD72EAC4E2B74CB53EF40A /* Build configuration list for PBXNativeTarget "grid-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B96F89FD9B49F4A9FECD637C773FF88A /* Debug */,
+				BED0DFD6B0B27004988071B7B398F902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5B90012CB563E34EB6466A1001FDFCC /* Build configuration list for PBXNativeTarget "sf-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6B2376F27F3A407C2B0313F5AFFCA33 /* Debug */,
+				ACE6BEC3136B62CACB1DA94317A87646 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
