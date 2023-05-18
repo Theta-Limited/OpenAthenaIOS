@@ -11,6 +11,7 @@
 		5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */; };
 		5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */; };
 		5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */; };
+		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
 		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
 		59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */; };
 		59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0929844B6D00F0C6B1 /* ViewController.swift */; };
@@ -26,8 +27,20 @@
 		59B62B3F298DAE7300F0C6B1 /* DigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */; };
 		59B62B42298DE4C900F0C6B1 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */; };
 		59B62B46298F3D5200F0C6B1 /* DroneImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B45298F3D5200F0C6B1 /* DroneImage.swift */; };
+		59CC79532A15B40C00B07782 /* OpenAthenaIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */; };
+		59CC795A2A15B4B800B07782 /* TestDroneImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC79592A15B4B800B07782 /* TestDroneImage.swift */; };
 		90C0D64DD6EBFC3B16422909 /* Pods_OpenAthenaIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		59CC79542A15B40C00B07782 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59B62AFA29844B6D00F0C6B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59B62B0129844B6D00F0C6B1;
+			remoteInfo = OpenAthenaIOS;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		59B62B37298C514300F0C6B1 /* Embed Frameworks */ = {
@@ -48,6 +61,7 @@
 		5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42Geodetic.swift; sourceTree = "<group>"; };
 		5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42GaussKruger.swift; sourceTree = "<group>"; };
 		5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSGeodetic.swift; sourceTree = "<group>"; };
+		5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDigitalElevationModel.swift; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthenaIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthenaIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +79,9 @@
 		59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalElevationModel.swift; sourceTree = "<group>"; };
 		59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		59B62B45298F3D5200F0C6B1 /* DroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneImage.swift; sourceTree = "<group>"; };
+		59CC79502A15B40C00B07782 /* OpenAthenaIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenAthenaIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAthenaIOSTests.swift; sourceTree = "<group>"; };
+		59CC79592A15B4B800B07782 /* TestDroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDroneImage.swift; sourceTree = "<group>"; };
 		6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenAthenaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +92,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				90C0D64DD6EBFC3B16422909 /* Pods_OpenAthenaIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59CC794D2A15B40C00B07782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				59B62B0429844B6D00F0C6B1 /* OpenAthenaIOS */,
+				59CC79512A15B40C00B07782 /* OpenAthenaIOSTests */,
 				59B62B0329844B6D00F0C6B1 /* Products */,
 				4A7C963E998C236042872AA1 /* Pods */,
 				7F64EC53C1FAEA0A4381BF79 /* Frameworks */,
@@ -104,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				59B62B0229844B6D00F0C6B1 /* OpenAthenaIOS.app */,
+				59CC79502A15B40C00B07782 /* OpenAthenaIOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +159,16 @@
 				59B62B1329844B6F00F0C6B1 /* Info.plist */,
 			);
 			path = OpenAthenaIOS;
+			sourceTree = "<group>";
+		};
+		59CC79512A15B40C00B07782 /* OpenAthenaIOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */,
+				59CC79592A15B4B800B07782 /* TestDroneImage.swift */,
+				5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */,
+			);
+			path = OpenAthenaIOSTests;
 			sourceTree = "<group>";
 		};
 		7F64EC53C1FAEA0A4381BF79 /* Frameworks */ = {
@@ -166,6 +202,24 @@
 			productReference = 59B62B0229844B6D00F0C6B1 /* OpenAthenaIOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		59CC794F2A15B40C00B07782 /* OpenAthenaIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59CC79582A15B40C00B07782 /* Build configuration list for PBXNativeTarget "OpenAthenaIOSTests" */;
+			buildPhases = (
+				59CC794C2A15B40C00B07782 /* Sources */,
+				59CC794D2A15B40C00B07782 /* Frameworks */,
+				59CC794E2A15B40C00B07782 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59CC79552A15B40C00B07782 /* PBXTargetDependency */,
+			);
+			name = OpenAthenaIOSTests;
+			productName = OpenAthenaIOSTests;
+			productReference = 59CC79502A15B40C00B07782 /* OpenAthenaIOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -173,11 +227,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					59B62B0129844B6D00F0C6B1 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					59CC794F2A15B40C00B07782 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 59B62B0129844B6D00F0C6B1;
 					};
 				};
 			};
@@ -195,6 +253,7 @@
 			projectRoot = "";
 			targets = (
 				59B62B0129844B6D00F0C6B1 /* OpenAthenaIOS */,
+				59CC794F2A15B40C00B07782 /* OpenAthenaIOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -208,6 +267,13 @@
 				59B62B0F29844B6F00F0C6B1 /* Assets.xcassets in Resources */,
 				59B62B0D29844B6D00F0C6B1 /* Main.storyboard in Resources */,
 				592CABB52A0ACF61006E28AF /* examples in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59CC794E2A15B40C00B07782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +344,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		59CC794C2A15B40C00B07782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59CC795A2A15B4B800B07782 /* TestDroneImage.swift in Sources */,
+				5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */,
+				59CC79532A15B40C00B07782 /* OpenAthenaIOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		59CC79552A15B40C00B07782 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59B62B0129844B6D00F0C6B1 /* OpenAthenaIOS */;
+			targetProxy = 59CC79542A15B40C00B07782 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		59B62B0B29844B6D00F0C6B1 /* Main.storyboard */ = {
@@ -422,7 +506,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -454,7 +538,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -480,6 +564,44 @@
 			};
 			name = Release;
 		};
+		59CC79562A15B40C00B07782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9737SV7NZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenAthenaIOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenAthenaIOS";
+			};
+			name = Debug;
+		};
+		59CC79572A15B40C00B07782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9737SV7NZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenAthenaIOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenAthenaIOS";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -497,6 +619,15 @@
 			buildConfigurations = (
 				59B62B1729844B6F00F0C6B1 /* Debug */,
 				59B62B1829844B6F00F0C6B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59CC79582A15B40C00B07782 /* Build configuration list for PBXNativeTarget "OpenAthenaIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59CC79562A15B40C00B07782 /* Debug */,
+				59CC79572A15B40C00B07782 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

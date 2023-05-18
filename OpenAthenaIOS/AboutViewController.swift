@@ -87,20 +87,20 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     
     private func getAbout()
     {
-        let messageString = "<!DOCTYPE html><html><body><h2>OpenAthena for iOS version \(vc!.getAppVersion())</h2>"
+        let messageString = "<!DOCTYPE html><html><body><h2>OpenAthena version \(vc!.getAppVersion())</h2>"
         + "Matthew Krupczak, Bobby Krupczak, et al.<br>"
         + "GPL-3.0, some rights reserved "
         + "<a href=\"https://openathena.com/\">OpenAthena.com</a><br>"
-        + "<br>Open Athena for iOS is a project which allows consumer and professional drones to spot precise geodetic locations.<br>"
+        + "<br>Open Athena is a project which allows consumer and professional drones to spot precise geodetic locations.<br>"
         + "<br><a href=\"https://github.com/mkrupczak3/OpenAthena\">View the project on GitHub</a>"
         + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br><p>"
         
         // XXX add libraries here
         + "Software libraries used:"
         + "<ul>"
-        + "<li><a href='https://github.com/ngageoint/tiff-ios'>National Geospatial-Intelligence Agency TIFF-iOS library</a></li>"
+        + "<li><a href='https://github.com/ngageoint'>National Geospatial-Intelligence Agency TIFF library</a></li>"
         + "<li><a href='https://github.com/Dimowner/WGS84_TO_SK42/'>WGS84 to CK42 library</a></li>"
-        + "<li><a href='https://github.com/ngageoint/mgrs-ios'>National Geospatial-Intelligence Agency MGRS conversion library</a></li>"
+        + "<li><a href='https://github.com/ngageoint/'>National Geospatial-Intelligence Agency MGRS conversion library</a></li>"
         + "</ul>"
         
         // privacy policy
