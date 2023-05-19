@@ -28,6 +28,7 @@ final class TestDroneImage: XCTestCase {
         var image = UIImage(data: data)
         droneImage = DroneImage()
         droneImage.rawData = data
+        droneImage.theImage = image
         droneImage.updateMetaData()
     }
     
