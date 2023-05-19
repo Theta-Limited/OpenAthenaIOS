@@ -11,6 +11,8 @@
 		5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */; };
 		5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */; };
 		5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */; };
+		597CDED02A16D590000EF1CC /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
+		597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597CDED52A16FC1D000EF1CC /* TestSettings.swift */; };
 		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
 		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
 		59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */; };
@@ -61,6 +63,7 @@
 		5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42Geodetic.swift; sourceTree = "<group>"; };
 		5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42GaussKruger.swift; sourceTree = "<group>"; };
 		5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSGeodetic.swift; sourceTree = "<group>"; };
+		597CDED52A16FC1D000EF1CC /* TestSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettings.swift; sourceTree = "<group>"; };
 		5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDigitalElevationModel.swift; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthenaIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthenaIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 				59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */,
 				59CC79592A15B4B800B07782 /* TestDroneImage.swift */,
 				5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */,
+				597CDED52A16FC1D000EF1CC /* TestSettings.swift */,
 			);
 			path = OpenAthenaIOSTests;
 			sourceTree = "<group>";
@@ -274,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				597CDED02A16D590000EF1CC /* examples in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +355,7 @@
 			files = (
 				59CC795A2A15B4B800B07782 /* TestDroneImage.swift in Sources */,
 				5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */,
+				597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */,
 				59CC79532A15B40C00B07782 /* OpenAthenaIOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +444,21 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = (
+					"$(inherited)",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"color_ios\"",
+					"-framework",
+					"\"grid_ios\"",
+					"-framework",
+					"\"mgrs_ios\"",
+					"-framework",
+					"\"sf_ios\"",
+					"-framework",
+					"\"tiff_ios\"",
+				);
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -492,6 +513,21 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
+				"OTHER_LDFLAGS[arch=*]" = (
+					"$(inherited)",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"color_ios\"",
+					"-framework",
+					"\"grid_ios\"",
+					"-framework",
+					"\"mgrs_ios\"",
+					"-framework",
+					"\"sf_ios\"",
+					"-framework",
+					"\"tiff_ios\"",
+				);
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

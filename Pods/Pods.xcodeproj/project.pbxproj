@@ -62,7 +62,7 @@
 		46FE39A1EC9526B863075403E33BF3C2 /* SFGeometryCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FCD88095FE31C99875CBE3BBDF4CE46 /* SFGeometryCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4857891EB4E50C0313B47AAE82257B91 /* PixelRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12B0FF15257F96F8090D50E92CDFD3F /* PixelRange.swift */; };
 		49FBE9B941636B9B5853193295FDEA4A /* SFPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A11D7CE2DCA91B2F4A04714A532AEF0 /* SFPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios-mgrs-ios in Resources */ = {isa = PBXBuildFile; fileRef = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */; };
+		4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */; };
 		4B92ADE95854EA972CA7CB9DEFE604C4 /* TIFFIOUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F2A8C01C798C591B54A3AC0332454AB0 /* TIFFIOUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E42C82FAA1C009DF82BD7811FCF6DA7 /* mgrs.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0EE2D6149A8215A527EE8B1F6F6DF9 /* mgrs.plist */; };
 		4E9DB3A55799AD6A7BB6CABC2792DA9D /* GridLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05313B35A0CCA8A66122CF1AF17AB82 /* GridLabeler.swift */; };
@@ -368,7 +368,7 @@
 		55825358EFCE805C29059C1162D36241 /* GridStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridStyle.swift; path = "grid-ios/GridStyle.swift"; sourceTree = "<group>"; };
 		578FFD062974492FA8297D1ABD2CCB3F /* BaseGrids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseGrids.swift; path = "grid-ios/BaseGrids.swift"; sourceTree = "<group>"; };
 		5A56E130DB49BA0DDD41345A63C30305 /* SFTIN.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFTIN.h; path = "sf-ios/SFTIN.h"; sourceTree = "<group>"; };
-		5A65557CDA568E775E84D5CE7C04B40A /* tiff-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "tiff-ios"; path = tiff_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A65557CDA568E775E84D5CE7C04B40A /* tiff_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tiff_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B260DFEB8DBC53207000EDFF503C37C /* tiff-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "tiff-ios.modulemap"; sourceTree = "<group>"; };
 		5B45F5C16D33F27B23DEAD2235C84ACA /* sf-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "sf-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		5D5E395D7CB5D89474535FD0CEAB8E3A /* TIFFRasters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFRasters.m; path = "tiff-ios/TIFFRasters.m"; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 		63EA5F2709DB94CE4CF342AC6311070C /* TIFFByteWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFByteWriter.m; path = "tiff-ios/io/TIFFByteWriter.m"; sourceTree = "<group>"; };
 		64F6493B7DB6D109D3A9EE0BA64B18AD /* SFLine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFLine.m; path = "sf-ios/SFLine.m"; sourceTree = "<group>"; };
 		654C857024B56D9B21C3DFC24647B2BC /* TIFFFileDirectoryEntry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFileDirectoryEntry.h; path = "tiff-ios/TIFFFileDirectoryEntry.h"; sourceTree = "<group>"; };
-		6701E1E7881E37B884FEEA9B3F803E0B /* color-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "color-ios"; path = color_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6701E1E7881E37B884FEEA9B3F803E0B /* color_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = color_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67890A3557E6641D03FF9D31F82AF5D1 /* SFByteWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFByteWriter.h; path = "sf-ios/util/SFByteWriter.h"; sourceTree = "<group>"; };
 		69E2F204A7777C86E036D5D424419444 /* Grids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Grids.swift; path = "mgrs-ios/grid/Grids.swift"; sourceTree = "<group>"; };
 		6A061146D4A13114AD42354D323094B0 /* sf-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "sf-ios-Info.plist"; sourceTree = "<group>"; };
@@ -423,7 +423,7 @@
 		9823F604DDFFC08F4AABE8D2F1EB1422 /* GridConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridConstants.swift; path = "grid-ios/GridConstants.swift"; sourceTree = "<group>"; };
 		999F9DCCCEE0CEFE10E9052FA24AD02B /* CLRColorConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLRColorConstants.m; path = "color-ios/CLRColorConstants.m"; sourceTree = "<group>"; };
 		9AB2EC7219F62D9515ACCEFF8BE06CD8 /* SFCircularString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCircularString.h; path = "sf-ios/SFCircularString.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DC2BD7887537AC73F24C85FF748EB7C /* color-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "color-ios.release.xcconfig"; sourceTree = "<group>"; };
 		9EB0BD91BAACEE66D99833866984EDCF /* color-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "color-ios.modulemap"; sourceTree = "<group>"; };
 		9FB0D172C932A4107DD6391F6F0755D3 /* CLRColorUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLRColorUtils.h; path = "color-ios/CLRColorUtils.h"; sourceTree = "<group>"; };
@@ -456,7 +456,7 @@
 		C07B59C64AB67B3F8A59241810417720 /* SFTextReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFTextReader.m; path = "sf-ios/util/SFTextReader.m"; sourceTree = "<group>"; };
 		C0BC15852AAC2D3A5D933CC19F99A9B9 /* SFTriangle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFTriangle.h; path = "sf-ios/SFTriangle.h"; sourceTree = "<group>"; };
 		C16F35989FD3EE7E3E5C1A7C20D58D38 /* SFPointFiniteFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPointFiniteFilter.m; path = "sf-ios/util/filter/SFPointFiniteFilter.m"; sourceTree = "<group>"; };
-		C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "mgrs-ios"; path = mgrs_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mgrs_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30FFC4404A6F6AB66CC9319FEC21537 /* GridUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridUtils.swift; path = "grid-ios/GridUtils.swift"; sourceTree = "<group>"; };
 		C5329A5E1F25324E2A0A9089CDCCDFBD /* TIFFRasters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFRasters.h; path = "tiff-ios/TIFFRasters.h"; sourceTree = "<group>"; };
 		C545C38A867BC5326217E06DE42BF09D /* TIFFCompressionEncoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFCompressionEncoder.h; path = "tiff-ios/compression/TIFFCompressionEncoder.h"; sourceTree = "<group>"; };
@@ -471,7 +471,7 @@
 		CCF0067F26720164A7FA13E68CA795B8 /* SFMultiCurve.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFMultiCurve.m; path = "sf-ios/SFMultiCurve.m"; sourceTree = "<group>"; };
 		D0CB75BDDFE34B13144D13E67D0716E2 /* SFGeometryFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryFilter.h; path = "sf-ios/util/filter/SFGeometryFilter.h"; sourceTree = "<group>"; };
 		D39A4298ACF9FCF75630D022AB9230D9 /* MGRSLine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSLine.swift; path = "mgrs-ios/features/MGRSLine.swift"; sourceTree = "<group>"; };
-		D57C1FAB77A663260850740EEB9C3590 /* sf-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "sf-ios"; path = sf_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D57C1FAB77A663260850740EEB9C3590 /* sf_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sf_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A88DA226AA1BDD52F0E58984D2DEEC /* MGRSUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSUtils.swift; path = "mgrs-ios/MGRSUtils.swift"; sourceTree = "<group>"; };
 		D60A195E3F7BFF939B95379D421E3BC1 /* SFPolyhedralSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPolyhedralSurface.m; path = "sf-ios/SFPolyhedralSurface.m"; sourceTree = "<group>"; };
 		D74E820C15FDB9F2508222F888D85899 /* SFSweepLine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFSweepLine.m; path = "sf-ios/util/sweep/SFSweepLine.m"; sourceTree = "<group>"; };
@@ -498,7 +498,7 @@
 		F243BE73B88C95614D9B6BE5522AA536 /* SFPolyhedralSurface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFPolyhedralSurface.h; path = "sf-ios/SFPolyhedralSurface.h"; sourceTree = "<group>"; };
 		F2A8C01C798C591B54A3AC0332454AB0 /* TIFFIOUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFIOUtils.h; path = "tiff-ios/io/TIFFIOUtils.h"; sourceTree = "<group>"; };
 		F3808D9AA86990B64D1FEA67BE1ADC50 /* TIFFImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFImage.h; path = "tiff-ios/TIFFImage.h"; sourceTree = "<group>"; };
-		F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "mgrs-ios-mgrs-ios"; path = "mgrs-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mgrs-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F52142769A10A085700FDE9C87E1E741 /* color-ios-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "color-ios-Bridging-Header.h"; path = "color-ios/color-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		F569B2124B436C8AB26ED2DAA507CADF /* grid-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "grid-ios-dummy.m"; sourceTree = "<group>"; };
 		F5C600B3AA22667B016BA891E02CECFB /* SFGeometry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometry.m; path = "sf-ios/SFGeometry.m"; sourceTree = "<group>"; };
@@ -605,13 +605,13 @@
 		3109604551382F41BB253B528695A02C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6701E1E7881E37B884FEEA9B3F803E0B /* color-ios */,
+				6701E1E7881E37B884FEEA9B3F803E0B /* color_ios.framework */,
 				7EE66363A245AC8A4B45D95E5CEC6B09 /* grid-ios */,
-				C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs-ios */,
-				F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */,
+				C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs_ios.framework */,
+				F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */,
 				0A2A93A5EBF7AE2F14E2A7BCEA2D12F3 /* Pods-OpenAthenaIOS */,
-				D57C1FAB77A663260850740EEB9C3590 /* sf-ios */,
-				5A65557CDA568E775E84D5CE7C04B40A /* tiff-ios */,
+				D57C1FAB77A663260850740EEB9C3590 /* sf_ios.framework */,
+				5A65557CDA568E775E84D5CE7C04B40A /* tiff_ios.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -746,7 +746,6 @@
 				1C3FC89473D967D2396625E180E607B2 /* SFTriangle.m */,
 				0B4A31EF0517F3BDCE4561A00526E1F4 /* Support Files */,
 			);
-			name = "sf-ios";
 			path = "sf-ios";
 			sourceTree = "<group>";
 		};
@@ -783,7 +782,6 @@
 				49C39AB1EA4B75DDFA04920C6E8A1E3D /* Unit.swift */,
 				4062FA01D4A5AFB19161388B0111CD8B /* Support Files */,
 			);
-			name = "grid-ios";
 			path = "grid-ios";
 			sourceTree = "<group>";
 		};
@@ -838,7 +836,6 @@
 				7DF05A485F04A3588774824D98001DF1 /* Resources */,
 				C12FDB249D5A2E8E0880BD3CEFC5CC50 /* Support Files */,
 			);
-			name = "mgrs-ios";
 			path = "mgrs-ios";
 			sourceTree = "<group>";
 		};
@@ -867,7 +864,6 @@
 				3C0D4FE9238C79B44AAAC95A098464AA /* color_ios.h */,
 				6AF0D020BC8B04451E028F045CEF52BE /* Support Files */,
 			);
-			name = "color-ios";
 			path = "color-ios";
 			sourceTree = "<group>";
 		};
@@ -953,7 +949,6 @@
 				E229C49CF7B0C5DC76377802E9E363BE /* TIFFWriter.m */,
 				3EACA7447960D419658A37EA19930B74 /* Support Files */,
 			);
-			name = "tiff-ios";
 			path = "tiff-ios";
 			sourceTree = "<group>";
 		};
@@ -1099,7 +1094,7 @@
 			);
 			name = "sf-ios";
 			productName = sf_ios;
-			productReference = D57C1FAB77A663260850740EEB9C3590 /* sf-ios */;
+			productReference = D57C1FAB77A663260850740EEB9C3590 /* sf_ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */ = {
@@ -1116,7 +1111,7 @@
 			);
 			name = "mgrs-ios-mgrs-ios";
 			productName = "mgrs-ios";
-			productReference = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */;
+			productReference = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		5D942CA48BAB353546F6B788AC3EA195 /* color-ios */ = {
@@ -1134,7 +1129,7 @@
 			);
 			name = "color-ios";
 			productName = color_ios;
-			productReference = 6701E1E7881E37B884FEEA9B3F803E0B /* color-ios */;
+			productReference = 6701E1E7881E37B884FEEA9B3F803E0B /* color_ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		AED3CD45D039D7912074525C078AD57E /* tiff-ios */ = {
@@ -1152,7 +1147,7 @@
 			);
 			name = "tiff-ios";
 			productName = tiff_ios;
-			productReference = 5A65557CDA568E775E84D5CE7C04B40A /* tiff-ios */;
+			productReference = 5A65557CDA568E775E84D5CE7C04B40A /* tiff_ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		F7872CE1AF59586B83F29A969432F396 /* Pods-OpenAthenaIOS */ = {
@@ -1215,7 +1210,7 @@
 			);
 			name = "mgrs-ios";
 			productName = mgrs_ios;
-			productReference = C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs-ios */;
+			productReference = C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs_ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1263,7 +1258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios-mgrs-ios in Resources */,
+				4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,7 +1575,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/mgrs-ios/mgrs-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/mgrs-ios/mgrs-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1616,7 +1611,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/mgrs-ios/mgrs-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/mgrs-ios/mgrs-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1643,7 +1638,7 @@
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
 				IBSC_MODULE = mgrs_ios;
 				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_NAME = "mgrs-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1660,7 +1655,7 @@
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
 				IBSC_MODULE = mgrs_ios;
 				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_NAME = "mgrs-ios";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1751,7 +1746,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/tiff-ios/tiff-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/tiff-ios/tiff-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1786,7 +1781,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/color-ios/color-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/color-ios/color-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1883,7 +1878,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/color-ios/color-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/color-ios/color-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1919,7 +1914,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/sf-ios/sf-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/sf-ios/sf-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2026,7 +2021,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/sf-ios/sf-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/sf-ios/sf-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2061,7 +2056,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/tiff-ios/tiff-ios-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/tiff-ios/tiff-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
