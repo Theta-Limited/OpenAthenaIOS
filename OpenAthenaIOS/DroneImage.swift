@@ -45,6 +45,8 @@ public class DroneImage {
     var rawData: Data?
     var xmpDataRead: Bool = false
     var xmlString: String?
+    var targetXprop: CGFloat = 0.5
+    var targetYprop: CGFloat = 0.5
     
     //init(fromImage image: UIImage, withMetaData data: [AnyHashable:Any]) {
     init(suggestedName aName: String, fromImage image: UIImage,
@@ -422,6 +424,38 @@ public class DroneImage {
         }
     }
     
+    // camera model
+    public func getCameraModel() throws -> String
+    {
+        var dict: NSDictionary
+        
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        // first look for {TIFF}
+        dict = metaData!["{TIFF}"] as! NSDictionary
+        if dict["Model"] != nil {
+            return dict["Model"] as! String
+        }
+        
+        if metaData!["tiff:Model"] != nil {
+            return metaData!["tiff:Model"] as! String
+        }
+        if metaData!["drone-parrot:ModelID"] != nil {
+            return metaData!["drone-parrot:ModelID"] as! String
+        }
+        if metaData!["Camera:ModelType"] != nil {
+            return metaData!["Camera:ModelType"] as! String
+        }
+        
+        return "unknown"
+    }
+    
     // lookup tiff:Make
     public func getCameraMake() throws -> String {
         
@@ -449,6 +483,21 @@ public class DroneImage {
         }
         
         return dict["Make"] as! String
+    }
+    
+    // return meta data value, if present, as string
+    public func getMetaDataValue(key: String) throws -> String
+    {
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        if metaData![key] != nil {
+            return metaData![key] as! String
+        }
+        throw DroneImageError.MetaDataKeyNotFound
     }
     
     // Given an angle in radians, return angle 0 <= angle < 2*pi
@@ -574,6 +623,8 @@ public class DroneImage {
     // 2 last longitude value along raycast
     // 3 last altitude along raycast
     // 4 terrain altitude of datapoint nearest last raycast position
+    
+    // add drone ccd info, if available, so we can locate target not at center XXX
     
     public func resolveTarget(dem: DigitalElevationModel) throws -> [Double]
     {
@@ -807,6 +858,11 @@ public class DroneImage {
         func parser(_ parser: XMLParser, didEndElement elementName: String,
                     namespaceURI: String?, qualifiedName qName: String?) {
             
+            if elementName.contains("tiff:") {
+                metaData![elementName] = currentValue
+                currentValue = nil
+            }
+                
             // parrot puts metadata in element
             // rather than attribute
             if elementName.contains("drone-parrot:") {
@@ -853,6 +909,10 @@ public class DroneImage {
             
             print("Element name \(elementName)")
             
+            // look for tiff: elements
+            if elementName.contains("tiff:") {
+                currentValue = String()
+            }
             // parrot drone data is in element value
             if elementName.contains("drone-parrot:") {
                 currentValue = String()

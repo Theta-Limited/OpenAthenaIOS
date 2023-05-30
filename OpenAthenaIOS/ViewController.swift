@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var dem: DigitalElevationModel?
     var theDroneImage: DroneImage?
     var htmlString: String = ""
+    var droneParams: DroneParams?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,8 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         //navigationController?.navigationBar.tintColor = .systemPink
         configureMenuItems()
+        
+        droneParams = DroneParams()
         
         textView.isEditable = false
         textView.isSelectable = true

@@ -54,6 +54,9 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             imageView.image = vc.theDroneImage?.theImage
         }
         imageView.contentMode = .scaleAspectFit
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(didTapImage))
+        imageView.addGestureRecognizer(singleTap)
+        imageView.isUserInteractionEnabled = true
         
         // configure textview
         textView.isSelectable = true
@@ -96,6 +99,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         stackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
             
+        markImagePixel(x_prop: vc.theDroneImage!.targetXprop, y_prop: vc.theDroneImage!.targetYprop)
         doCalculations()
         
     } // viewDidLoad
@@ -110,6 +114,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         
     } // viewWillAppear
     
+    // resolveTarget needs to be updated for arbitrary point selection XXX
     private func doCalculations()
     {
         htmlString = "<b>OpenAthena</b><br>"
@@ -117,6 +122,17 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
         
         getImageData()
+        
+        // try to get CCD info for drone make/model
+        do {
+            let droneCCDInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
+                                                               model: vc.theDroneImage!.getCameraModel())
+            htmlString += "Found CCD info for drone make/model<br>"
+        }
+        catch {
+            print("No CCD info for drone image")
+            htmlString += "No CCD info for drone make/model<br>"
+        }
         
         // run the calculations
         do {
@@ -257,9 +273,12 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     private func getImageData()
     {
         var lat, lon: Double
+        let targetX = vc.theDroneImage!.targetXprop * vc.theDroneImage!.theImage!.size.width
+        let targetY = vc.theDroneImage!.targetYprop * vc.theDroneImage!.theImage!.size.height
         
         do {
-            try self.htmlString += "Camera make is: \(self.vc.theDroneImage!.getCameraMake())<br>"
+            try self.htmlString += "Make is: \(self.vc.theDroneImage!.getCameraMake())<br>"
+            try self.htmlString += "Model is \(self.vc.theDroneImage!.getCameraModel())<br>"
         }
         catch {
             self.htmlString += "Camera make is: \(error)<br>"
@@ -272,6 +291,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             try lon = self.vc.theDroneImage!.getLongitude()
             self.htmlString += "Drone Latitude: \(lat)<br>"
             self.htmlString += "Drone Longitude: \(lon)<br>"
+            self.htmlString += "Taget pixel coordinates (\(preciseRound(targetX, precision: .tenthousandths)),\(preciseRound(targetY,precision: .tenthousandths)))<br>"
             // build a maps URL for clicking on
             //let urlStr = "https://maps.google.com/maps/@?api=1&map_action=map&center=\(lat),\(lon)"
             //let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
@@ -332,6 +352,18 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Debug") as! DebugViewController
                 vc.vc = self.vc
                 self.navigationController?.pushViewController(vc, animated: true)
+            },
+            UIAction(title:"Reset pointer", image: UIImage(systemName:"arrow.clockwise")) {
+                action in
+                print("Reset pointer")
+                // reset pointer back to 50% 50%
+                self.unMarkImagePixel()
+                self.vc.theDroneImage!.targetXprop =  0.50
+                self.vc.theDroneImage!.targetYprop = 0.50
+                self.markImagePixel(x_prop: self.vc.theDroneImage!.targetXprop, y_prop: self.vc.theDroneImage!.targetYprop)
+                
+                // recalculate new target location
+                self.doCalculations()
             }
         ])
         
@@ -347,6 +379,156 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         navigationItem.rightBarButtonItem = aButton
         
     } // configure menu items
+        
+    @IBAction func didTapImage(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        guard let image = imageView.image else {
+            return
+        }
+        
+        unMarkImagePixel()
+
+        var touchPoint: CGPoint = tapGestureRecognizer.location(in: imageView)
+        let imageRect: CGRect = aspectFitRect(aspectRatio: image.size, insideRect: imageView.bounds)
+        
+        if imageRect.contains(touchPoint) == false {
+            print("Touch point outside of image")
+            return
+        }
+        
+        // touch point relative to imageView then translate to the image coordinates
+        touchPoint.x -= imageRect.origin.x
+        touchPoint.y -= imageRect.origin.y
+            
+        let wScale: CGFloat = image.size.width / imageRect.size.width
+        let hScale: CGFloat = image.size.height / imageRect.size.height
+        
+        let newX = touchPoint.x * wScale
+        let newY = touchPoint.y * hScale
+               
+        vc.theDroneImage!.targetXprop =  newX / image.size.width
+        vc.theDroneImage!.targetYprop = newY / image.size.height
+        markImagePixel(x_prop: vc.theDroneImage!.targetXprop, y_prop: vc.theDroneImage!.targetYprop)
+        
+        // recalculate new target location
+        doCalculations()
+   
+    } // didTapImage
     
+    func unMarkImagePixel()
+    {
+        imageView.image = vc.theDroneImage?.theImage
+        
+    }
+    
+    // from hackingwithswift.com
+    // does this handle pinch/zoom ?
+    // also from stackoverflow.com/questions/76316417/
+    // pass in image size and then the bounds of imageView containing image
+    // also can be done via AVFoundation: AVMakeRect()
+    // result in points within view, not pixels
+    
+    func aspectFitRect(aspectRatio: CGSize, insideRect: CGRect) -> CGRect
+    {
+        var fitWidth: CGFloat = insideRect.width
+        var fitHeight: CGFloat = insideRect.height
+        let maxW: CGFloat = fitWidth / aspectRatio.width
+        let maxH: CGFloat = fitHeight / aspectRatio.height
+        
+        if maxH < maxW {
+            fitWidth = fitHeight / aspectRatio.height * aspectRatio.width
+        }
+        else if maxW < maxH {
+            fitHeight = fitWidth / aspectRatio.width * aspectRatio.height
+        }
+        
+        return CGRect(x: (insideRect.width - fitWidth) * 0.5,
+                      y: (insideRect.height - fitHeight) * 0.5,
+                      width: fitWidth,
+                      height: fitHeight)
+    } // aspectFitRect
+    func markImagePixel(x_prop: CGFloat, y_prop: CGFloat)
+    {
+        guard let image = imageView.image else {
+            return
+        }
+        let imageSize = image.size
+        let scale: CGFloat = 0
+        let length: CGFloat = max(imageSize.width/48, imageSize.height/48)
+        let gap: CGFloat = length / 1.5
+        let width: CGFloat = 12
+        let actualX = imageSize.width * x_prop
+        let actualY = imageSize.height * y_prop
+                
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+        
+        imageView.image!.draw(at: CGPoint.zero)
+        var uiColor = hexToUIColor(rgbVal: 0xFE00DD)
+        uiColor.setFill()
+
+        // horizontal lines in target
+        var rectangle = CGRect(x: actualX - length - gap, y: actualY-width/2,
+                               width: length, height: width)
+        UIRectFill(rectangle)
+        
+        rectangle = CGRect(x: actualX + gap, y: actualY-width/2,
+                           width: length, height: width)
+        UIRectFill(rectangle)
+        
+        // vertical lines in target
+        rectangle = CGRect(x: actualX-width/2, y: actualY - length - gap,
+                           width: width, height: length)
+        UIRectFill(rectangle)
+        
+        rectangle = CGRect(x: actualX-width/2, y: actualY + gap,
+                           width: width, height: length)
+        UIRectFill(rectangle)
+        
+        // for testing, draw a white rectangle 20x20 centered at actual x,y
+        //uiColor = hexToUIColor(rgbVal: 0xFFFFFF)
+        //uiColor.setFill()
+        //rectangle = CGRect(x: actualX-10, y: actualY-10, width: 20, height: 20)
+        //UIRectFill(rectangle)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        imageView.image = newImage
+        
+    }
+    // create UIColor from hex RGB value
+    // https://stackoverflow.com/questions/24074257/how-can-i-use-uicolorfromrgb-in-swift
+    func hexToUIColor(rgbVal: Int) -> UIColor {
+        return UIColor (
+            red: CGFloat((rgbVal & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbVal & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbVal & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    // borrowed from https://www.advancedswift.com/rounding-floats-and-doubles-in-swift/
+    public enum RoundingPrecision {
+        case ones
+        case tenths
+        case hundredths
+        case thousandths
+        case tenthousandths
+    }
+    
+    public func preciseRound(_ value: Double, precision: RoundingPrecision = .ones) -> CGFloat {
+        switch precision {
+        case .ones:
+            return round(value)
+        case .tenths:
+            return round(value*10.0) / 10.0
+        case .hundredths:
+            return round(value*100.0) / 100.0
+        case .thousandths:
+            return round(value*1000.0) / 1000.0
+        case .tenthousandths:
+            return round(value*10000.0) / 10000.0
+        }
+    }
     
 } // CalculateViewController

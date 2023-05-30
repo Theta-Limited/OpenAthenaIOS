@@ -1,7 +1,7 @@
 //
 //  AthenaSettings.swift
 //  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
+//  https://github.com/Theta-Limited/OpenAthenaIOS
 //  https://openathena.com//
 //  Created by Bobby Krupczak on 1/30/23.
 

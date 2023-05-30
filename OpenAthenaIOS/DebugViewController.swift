@@ -88,6 +88,8 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     {
         self.htmlString = "<b>OpenAthena Debug Info \(vc.getAppVersion())</b><br>"
         self.htmlString += "Coordinate system \(app.settings.outputMode)<br>"
+        self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate)<br>"
+        self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         
         if vc.dem != nil {
             self.htmlString += "<br><b>DEM:</b> \((vc.dem!.tiffURL!.lastPathComponent))<br>"
@@ -118,11 +120,16 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 self.htmlString += "Longitude: \(lon)<br>"
                 let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
                 self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
+                try self.htmlString += "Make: \(vc.theDroneImage!.getCameraMake())<br>"
+                try self.htmlString += "Model: \(vc.theDroneImage!.getCameraModel())<br>"
+                try self.htmlString += "Software version: \(vc.theDroneImage!.getMetaDataValue(key: "drone-parrot:SoftwareVersion"))<br>"
+                
             }
             catch {
-                self.htmlString += "Lat/Lon: error \(error)<br>"
+                self.htmlString += "Some meta data missing \(error)<br>"
             }
             self.htmlString += "<br>aux:Lens \(vc.theDroneImage!.metaData!["aux:Lens"])<br>"
+            
             self.htmlString += "<br>MetaData: \(vc.theDroneImage!.metaData!)<br>"
             self.htmlString += "<br>RawMetaData: \(vc.theDroneImage!.rawMetaData!)<br>"
             self.htmlString += "<br>Xmp/Xml: \(vc.theDroneImage!.xmlString)<br>"
