@@ -24,27 +24,36 @@ public class AthenaSettings {
     
     enum OutputModes: Int, CaseIterable {
         case WGS84 = 0               // standard lat, long format
-        case MGRS1m = 1              // NATO Military grid ref 1m square
-        case MGRS10m = 2             // NATO Military grid ref 10m square
-        case MGRS100m = 3            // NATO Military grid ref 100m square
+        
+        //case MGRS1m = 1              // NATO Military grid ref 1m square
+        //case MGRS10m = 2             // NATO Military grid ref 10m square
+        //case MGRS100m = 3            // NATO Military grid ref 100m square
         
         // Alternate geodisc system using Krasovsky 1940 ellipsoid.  Commonly used
         // in former Warsaw pact countries
-        case CK42Geodetic = 4
+        case CK42Geodetic = 1
         
         // Alternate geodisc system using Krasovsky 1940 ellipsoid.
         // A longitudinal ZONE in 6-degree increments, possible values 1-60 inclusive, northing
         // defined by X value, and East defined by Y value describe exact position on Earth
-        case CK42GaussKruger = 5
+        case CK42GaussKruger = 2
+        
+        // UTM universal transverse mercator coordinate system
+        case UTM = 3
+        
+        // all MGRS
+        case MGRS = 4
         
         var description: String {
             switch self {
             case .WGS84: return "WGS84"
-            case .MGRS1m: return "MGRS1m"
-            case .MGRS10m: return "MGRS10m"
-            case .MGRS100m: return "MGRS100m"
+            //case .MGRS1m: return "MGRS1m"
+            //case .MGRS10m: return "MGRS10"
+            //case .MGRS100m: return "MGRS100m"
             case .CK42Geodetic: return "CK42Geodetic"
             case .CK42GaussKruger: return "CK42GaussKruger"
+            case .UTM: return "UTM"
+            case .MGRS: return "MGRS"
             }
         }
     } // enum outputmodes
@@ -52,22 +61,41 @@ public class AthenaSettings {
     // initial/default defaults
     static let OutputMode: OutputModes = .WGS84
     static let LookupMode: DEMLookupModes = .DEMStatic
+    static let UseCCDInfo: Bool = true
+    static let FontSize: Int = 14
     
-    // saved defaults
+    // saved defaults first set to defaults before loading
     var outputMode = OutputMode
     var lookupMode = LookupMode
+    var useCCDInfo = UseCCDInfo
+    var fontSize = FontSize
     
     public func loadDefaults()
     {
         let defaults = UserDefaults.standard
         
-        if let outputModeRaw = defaults.object(forKey: "outputMode") as? Int {
+        if var outputModeRaw = defaults.object(forKey: "outputMode") as? Int {
+            print("loadSettings: read outputModeRaw \(outputModeRaw)")
+            if outputModeRaw < 0 || outputModeRaw > 4 {
+                outputModeRaw = 0
+            }
             outputMode = OutputModes(rawValue: outputModeRaw)!
+            print("loadSettings: outputMode to \(outputMode)")
+            print("loadSettings: outputMode.rawValue \(outputMode.rawValue)")
         }
         if let lookupModeRaw = defaults.object(forKey: "lookupMode") as? Int {
             lookupMode = DEMLookupModes(rawValue: lookupModeRaw)!
         }
+        if let useCCDInfoNew = defaults.object(forKey: "useCCDInfo") as? Bool {
+            useCCDInfo = useCCDInfoNew
+        }
+        if let fontSizeNew = defaults.object(forKey: "fontSize") as? Int {
+            if fontSizeNew > 0 && fontSizeNew < 48 {
+                fontSize = fontSizeNew
+            }
+        }
         
+        print("loadDefaults: returning, outputMode is \(outputMode), \(outputMode.rawValue)")
     }
     
     public func writeDefaults()
@@ -75,6 +103,12 @@ public class AthenaSettings {
         let defaults = UserDefaults.standard
         defaults.set(outputMode.rawValue, forKey: "outputMode")
         defaults.set(lookupMode.rawValue, forKey: "lookupMode")
+        defaults.set(useCCDInfo, forKey: "useCCDInfo")
+        defaults.set(fontSize, forKey: "fontSize")
         
+        print("writeDefault: outputMode is \(outputMode) \(outputMode.rawValue)")
+            
     }
-}
+    
+} // AthenaSettings
+

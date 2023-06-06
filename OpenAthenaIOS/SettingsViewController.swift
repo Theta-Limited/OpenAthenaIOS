@@ -23,6 +23,8 @@ class SettingsViewController: UIViewController {
         self.title = "OpenAthena Settings"
         view.backgroundColor = .white
         
+        print("SettingsView: outputMode raw value is \(app.settings.outputMode.rawValue)")
+        
         pickerView.dataSource = self
         pickerView.delegate = self
         pickerView.selectRow(app.settings.outputMode.rawValue, inComponent: 0, animated: true)

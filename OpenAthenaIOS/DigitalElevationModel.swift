@@ -31,6 +31,12 @@ struct GeoDataAxisParams {
     var numberOfSteps: Int = 0
 }
 
+struct GeoLocation {
+    var lat: Double
+    var lon: Double
+    var alt: Double
+}
+
 public class DigitalElevationModel {
 
     var tiffURL: URL!
@@ -157,6 +163,23 @@ public class DigitalElevationModel {
         return (centerLat,centerLon)
     }
     
+    // inverse distance weighting interpolation IDW
+    private func idwInterpolation(target: GeoLocation, neighbors: [GeoLocation], power: Double) -> Double {
+        var sumWeights: Double = 0.0
+        var sumWeightedElevations: Double = 0.0
+        
+        for aNeighbor in neighbors {
+            let distance = DroneImage.haversine(lat1: target.lat, lon1: target.lon, lat2: aNeighbor.lat, lon2: aNeighbor.lon, alt: aNeighbor.alt)
+            if distance == 0.0 {
+                return aNeighbor.alt
+            }
+            let weight = 1.0 / pow(distance,power)
+            sumWeights += weight
+            sumWeightedElevations += weight * aNeighbor.alt
+        }
+        return sumWeightedElevations / sumWeights
+    }
+    
     // calculate altitude from lat/long using this digital elevation model
     // lat [-90, 90]
     // lon [-180, 180]
@@ -171,6 +194,8 @@ public class DigitalElevationModel {
             print("No digital elevation mode; returning 0.0")
             throw ElevationModuleError.IllegalArgumentException
         }
+        
+        print("getAltitudeFromLatLong: started")
         
         let x0 = xParams.start
         let x1 = xParams.end
@@ -193,53 +218,89 @@ public class DigitalElevationModel {
         }
         
         // find neighbors in x axis
-        var xL, xR: Int
-        var xIndex: Int = 0
         
+//        var xL, xR: Int
+//
+//        do {
+//            (xL, xR) = try binarySearchNearest(startVal: x0, number: ncols,
+//                                               value: lon, delta: dx)
+//
+//            if abs(lon - (x0 + Double(xL) * dx)) < abs(lon - (x0 + Double(xR) * dx)) {
+//                xIndex = xL
+//            }
+//            else {
+//                xIndex = xR
+//            }
+//        } catch {
+//            print("Error in binarySearchNearest \(error)")
+//            throw error
+//        }
+          // find neighbors in y axis
+//        var yT, yB: Int
+//        var yIndex: Int = 0
+//
+//        do {
+//            (yT, yB) = try binarySearchNearest(startVal: y0, number: nrows,
+//                                               value: lat, delta: dy)
+//
+//            if abs(lat - (y0 + Double(yT) * dy)) < abs(lat - (y0 + Double(yB) * dy)) {
+//                yIndex = yT
+//            }
+//            else {
+//                yIndex = yB
+//            }
+//        } catch {
+//            print("Error in binarySearchNearest \(error)")
+//            throw error
+//        }
+                
+        // find neighbors in x axis IDW
+        var xL, xR: Int
         do {
             (xL, xR) = try binarySearchNearest(startVal: x0, number: ncols,
                                                value: lon, delta: dx)
-
-            if abs(lon - (x0 + Double(xL) * dx)) < abs(lon - (x0 + Double(xR) * dx)) {
-                xIndex = xL
-            }
-            else {
-                xIndex = xR
-            }
-        } catch {
-            print("Error in binarySearchNearest \(error)")
-            throw error
         }
         
-        // find neighbors in y axis
+        // find neighbors in y axis IDW
         var yT, yB: Int
-        var yIndex: Int = 0
-        
         do {
             (yT, yB) = try binarySearchNearest(startVal: y0, number: nrows,
                                                value: lat, delta: dy)
-            
-            if abs(lat - (y0 + Double(yT) * dy)) < abs(lat - (y0 + Double(yB) * dy)) {
-                yIndex = yT
-            }
-            else {
-                yIndex = yB
-            }
-        } catch {
-            print("Error in binarySearchNearest \(error)")
-            throw error
         }
+        
+        var L1 = GeoLocation(lat: y0 + Double(yT) * dy, lon: x0 + Double(xR) * dx,
+                             alt: rasters.pixelAt(x: Int32(xR), andY: Int32(yT))[0].doubleValue)
+        var L2 = GeoLocation(lat: y0 + Double(yT) * dy, lon: x0 + Double(xL) * dx,
+                             alt: rasters.pixelAt(x: Int32(xL), andY: Int32(yT))[0].doubleValue)
+        var L3 = GeoLocation(lat: y0 + Double(yB) * dy, lon: x0 + Double(xL) * dx,
+                             alt: rasters.pixelAt(x: Int32(xL), andY: Int32(yB))[0].doubleValue)
+        var L4 = GeoLocation(lat: y0 + Double(yB) * dy, lon: x0 + Double(xR) * dx,
+                             alt: rasters.pixelAt(x: Int32(xR), andY: Int32(yB))[0].doubleValue)
+        
+        var target = GeoLocation(lat: lat, lon: lon, alt: 0.0)
+        
+        var neighbors: [GeoLocation] = [L1, L2, L3, L4]
+        
+        // power parameter controls degeree influence that the neighboring points have
+        // on the interpolated value.  Higher power will result in higher influence on closer
+        // points and a lower influence on more distance points.
+        var power = 2.0
+
+        // Inverse Distance Weighting interpolation using 4 neighbors
+        // see https://doi.org/10.3846/gac.2023.16591
+        // and https://pro.arcgis.com/en/pro-app/latest/help/analysis/geostatistical-analyst/how-inverse-distance-weighted-interpolation-works.htm
+        
+        print("Going to call idwInterpolation")
+        
+        return idwInterpolation(target: target, neighbors: neighbors, power: power)
         
         // calculate result given rasters
         // see OpenAthenaAndroid for comparision
         // https://gdal.org/java/org/gdal/gdal/Dataset.html#ReadRaster
         // https://gis.stackexchange.com/questions/349760
-        
-        var result: Double
-        
-        result = rasters.pixelAt(x: Int32(xIndex), andY: Int32(yIndex))[0].doubleValue
- 
-        return result
+        // var result: Double
+        // result = rasters.pixelAt(x: Int32(xIndex), andY: Int32(yIndex))[0].doubleValue
+        // return result
         
     } // getAltitudeFromLatLong
     

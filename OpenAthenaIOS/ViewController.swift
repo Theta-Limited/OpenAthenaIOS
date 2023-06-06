@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 1.00
+    var version: Float = 1.10
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -24,6 +24,9 @@ class ViewController: UIViewController {
         
         print("OpenAthena starts!")
         
+        print("viewController: output mode is \(app.settings.outputMode)")
+        print("viewController: output mode rawval is \(app.settings.outputMode.rawValue)")
+        
         self.title = "OpenAthena"
         navigationController?.navigationBar.tintColor = .label
         view.backgroundColor = .white
@@ -35,7 +38,7 @@ class ViewController: UIViewController {
         textView.isEditable = false
         textView.isSelectable = true
         
-        htmlString = "OpenAthena v\(version) starting<br>"
+        htmlString = "OpenAthena alpha v\(version) starting<br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
         //htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
         htmlString += "1: load a Digital Elevation Model (DEM) &#9968;<br>" // GeoTIFF
@@ -43,10 +46,7 @@ class ViewController: UIViewController {
         htmlString += "3: calculate &#129518; <br>"
         htmlString += "<br>Mash the &#127937; button to begin!<br>"
         
-        let attribString = try? NSMutableAttributedString(data: Data(htmlString.utf8),
-                                                          options: [.documentType: NSAttributedString.DocumentType.html],
-                                                     documentAttributes: nil)
-        textView.attributedText = attribString
+        setTextViewText(htmlStr: htmlString)
         
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named:"athena")
@@ -118,5 +118,21 @@ class ViewController: UIViewController {
     
     func getAppVersion() -> String { return "\(version)" }
 
-}
+    // take htmlString and encode it and set
+    // it to our textView
+    private func setTextViewText(htmlStr hString: String)
+    {
+        let data = Data(hString.utf8)
+        let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
+        
+        if let attribString = try? NSMutableAttributedString(data: data,
+                                                           options: [.documentType: NSAttributedString.DocumentType.html],
+                                                           documentAttributes: nil) {
+            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
+                                                                                               length: attribString.length))
+            self.textView.attributedText = attribString
+        }
+    }
+    
+} // ViewController
 

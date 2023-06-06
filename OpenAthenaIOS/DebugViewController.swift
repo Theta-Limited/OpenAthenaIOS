@@ -86,10 +86,11 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     
     private func debug()
     {
-        self.htmlString = "<b>OpenAthena Debug Info \(vc.getAppVersion())</b><br>"
+        self.htmlString = "<b>OpenAthena Debug Info alpha \(vc.getAppVersion())</b><br>"
         self.htmlString += "Coordinate system \(app.settings.outputMode)<br>"
         self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate)<br>"
         self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
+        self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
         
         if vc.dem != nil {
             self.htmlString += "<br><b>DEM:</b> \((vc.dem!.tiffURL!.lastPathComponent))<br>"
@@ -139,17 +140,20 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         setTextViewText(htmlStr: self.htmlString)
         
     }
-    
+        
     // take htmlString and encode it and set
     // it to our textView
     private func setTextViewText(htmlStr hString: String)
     {
         let data = Data(hString.utf8)
-        if let attribString = try? NSAttributedString(data: data,
+        let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
+        
+        if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
+            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
+                                                                                               length: attribString.length))
             self.textView.attributedText = attribString
         }
     }
-    
 } // DebugViewController

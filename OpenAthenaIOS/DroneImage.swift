@@ -19,6 +19,7 @@ enum DroneImageError: String, Error {
     case NoRawData = "No raw data"
     case NoXmpMetaData = "No XMP meta data"
     case MissingMetaDataKey = "Missing meta data key"
+    case MissingCCDInfo = "Missing CCD info for this image"
 }
 
 extension Data {
@@ -47,6 +48,7 @@ public class DroneImage {
     var xmlString: String?
     var targetXprop: CGFloat = 0.5
     var targetYprop: CGFloat = 0.5
+    var ccdInfo: DroneCCDInfo?
     
     //init(fromImage image: UIImage, withMetaData data: [AnyHashable:Any]) {
     init(suggestedName aName: String, fromImage image: UIImage,
@@ -107,7 +109,7 @@ public class DroneImage {
     // parses for us
     
     // digital zoom, optical zoom, etc
-    public func getZoom() throws -> Double {
+    public func getZoom() -> Double {
         var zoom = 1.00
         var dict: NSDictionary
         
@@ -147,6 +149,39 @@ public class DroneImage {
             zoom = 1.0
         }
         return zoom
+    }
+    
+    public func getRoll() throws -> Double
+    {
+        // drone-skydio:CameraOrientationNED:Roll
+        // dji-drone:GimballRollDegree
+        // drone:GimbalRollDegree
+        // Camera:Roll
+        
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        
+        // check for drone specific latitude meta data
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        if (metaData!["drone-skydio:CameraOrientationNED:Roll"] != nil)  {
+            return (metaData!["drone-skydio:CameraOrientationNED:Roll"] as! NSString).doubleValue
+        }
+        if (metaData!["drone-dji:GimbalRollDegree"] != nil)  {
+            return (metaData!["drone-dji:GimbalRollDegree"] as! NSString).doubleValue
+        }
+        if (metaData!["drone:GimbalRollDegree"] != nil)  {
+            return (metaData!["drone:GimbalRollDegree"] as! NSString).doubleValue
+        }
+        if (metaData!["Camera:Roll"] != nil)  {
+            return (metaData!["Camera:Roll"] as! NSString).doubleValue
+        }
+        
+        print("getRoll: missing metadata key")
+        throw DroneImageError.MissingMetaDataKey
     }
     
     public func getLatitude() throws -> Double {
@@ -232,7 +267,6 @@ public class DroneImage {
             lon = (metaData!["drone:GpsLongitude"] as! NSString).doubleValue
             return lon
         }
-        
         
         // fall back to exif gps data and check for direction
         if metaData!["{GPS}"] == nil {
@@ -410,18 +444,82 @@ public class DroneImage {
             return false
         }
         
-        switch make {
-        case "DJI":
+        switch make.lowercased() {
+        case "dji":
             return true
-        case "Parrot":
+        case "parrot":
             return true
-        case "Autel Robotics":
+        case "autel robotics":
             return true
-        case "Skydio":
+        case "skydio":
             return true
         default:
             return false
         }
+    }
+    
+    public func getFocalLength() throws -> Double
+    {
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        if metaData!["Exif:FocalLength"] != nil {
+            return metaData!["Exif:FocalLength"] as! Double
+        }
+        
+        if metaData!["{Exif}"] != nil {
+            var dict = metaData!["{Exif}"] as! NSDictionary
+            if dict["FocalLength"] != nil {
+                return dict["FocalLength"] as! Double
+            }
+        }
+
+        print("getFocalLength: metadata key not found")
+        throw DroneImageError.MetaDataKeyNotFound
+    }
+    
+    public func getFocalLengthIn35mm() throws -> Double
+    {
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        if metaData!["Exif:FocalLenIn35mmFilm"] != nil {
+            return metaData!["Exif:FocalLenUb35mmFilm"] as! Double
+        }
+        if metaData!["{Exif}"] != nil {
+            var dict = metaData!["{Exif}"] as! NSDictionary
+            if dict["FocalLenIn35mmFilm"] != nil {
+                return dict["FocalLenIn35mmFilm"] as! Double
+            }
+        }
+        if metaData!["Exif:FocalLengthIn35mmFilm"] != nil {
+            return metaData!["Exif:FocalLenUb35mmFilm"] as! Double
+        }
+        if metaData!["{Exif}"] != nil {
+            var dict = metaData!["{Exif}"] as! NSDictionary
+            if dict["FocalLengthIn35mmFilm"] != nil {
+                return dict["FocalLengthIn35mmFilm"] as! Double
+            }
+        }
+        if metaData!["Exif:FocalLengthIn35mmFormat"] != nil {
+            return metaData!["Exif:FocalLenUb35mmFormat"] as! Double
+        }
+        if metaData!["{Exif}"] != nil {
+            var dict = metaData!["{Exif}"] as! NSDictionary
+            if dict["FocalLengthIn35mmFormat"] != nil {
+                return dict["FocalLengthIn35mmFormat"] as! Double
+            }
+        }
+        
+        print("getFocalLengthIn354mm metadata key not found")
+        
+        throw DroneImageError.MetaDataKeyNotFound
     }
     
     // camera model
@@ -485,6 +583,173 @@ public class DroneImage {
         return dict["Make"] as! String
     }
     
+    // if we have drone CCD info and user has touched somewhere inside image
+    // for new target, calculate new angles
+    // first get the intrinsic matrix
+    
+    private func getIntrinsicMatrix() throws -> [Double] {
+        
+        // if ccd info not known
+        if ccdInfo != nil {
+            print("getIntrinsicMatrix: known CCD")
+            return try getIntrinsicMatrixFromKnownCCD()
+        }
+        return try getIntrinsicMatrixFromExif35mm()
+    }
+    
+    // get instrinsic matrix estimate from exif data
+    private func getIntrinsicMatrixFromExif35mm() throws -> [Double]
+    {
+        var matrix = [Double](repeating: 0.0, count: 9)
+        
+        var focalLength35mmEquiv = try getFocalLengthIn35mm()
+        var zoomRatio = getZoom()
+        var imageWidth = theImage!.size.width
+        var imageHeight = theImage!.size.height
+        
+        // aspect ratio of CCD, not the image; assuming 4:3 here
+        // this will be wrong if sensor is not 4:3
+        var ccdAspectRatio: Double = 4.0/3.0
+        
+        // focal length in pixels
+        var alphaX = (imageWidth * zoomRatio) * focalLength35mmEquiv / 36.0
+        var alphaY = alphaX / ccdAspectRatio
+        matrix[0] = alphaX // focal length in X direction in pixels
+        matrix[1] = 0.0 // gamma, the skew coefficient between x, y axis; often 0
+        matrix[4] = alphaY // focal length in Y direction in pixels
+
+        matrix[2] = imageWidth / 2.0  // cx
+        matrix[3] = 0.0
+        matrix[5] = imageHeight / 2.0 // cy
+        matrix[6] = 0.0
+        matrix[7] = 0.0
+        matrix[8] = 1.0
+        
+        print("getIntrinsicMatrixFromExif35mm: returning")
+        
+        return matrix
+    }
+    
+    private func getIntrinsicMatrixFromKnownCCD() throws -> [Double]
+    {
+        var matrix = [Double](repeating: 0.0, count: 9)
+        var f: Double
+        
+        if ccdInfo == nil {
+            throw DroneImageError.MissingCCDInfo
+        }
+        
+        do {
+            f = try getFocalLength()
+        }
+        catch {
+            // need to test this
+            return try getIntrinsicMatrixFromExif35mm()
+        }
+        
+        var zoomRatio = getZoom()
+        var imageWidth = theImage!.size.width
+        var imageHeight = theImage!.size.height
+        var pixelAspectRatio = ccdInfo!.ccdWidthMMPerPixel / ccdInfo!.ccdHeightMMPerPixel
+        
+        var scaleRatio = imageWidth * zoomRatio / ccdInfo!.widthPixels // ratio current size : original size on x axis
+        var alphaX = f / ccdInfo!.ccdWidthMMPerPixel // focal length in x direction in pixels
+        alphaX = alphaX * scaleRatio
+        var alphaY = alphaX / pixelAspectRatio // focal length in y direction in pixels
+        alphaY = alphaY * scaleRatio
+        
+        matrix[0] = alphaX
+        matrix[1] = 0.0 // gamma, skew coefficient between x and y axis, often 0
+        matrix[2] = imageWidth / 2.0 // cx
+        matrix[3] = 0.0
+        matrix[4] = alphaY
+        matrix[5] = imageHeight / 2.0 // cy
+        matrix[6] = 0.0
+        matrix[7] = 0.0
+        matrix[8] = 1.0
+        
+        return matrix
+    }
+    
+    // get ray angles in degrees offset from principal point (0.5,0.5)
+    private func getRayAnglesFromImagePixel(x: Double, y: Double) throws -> (Double,Double)
+    {
+        print("getRayAnglesFromImagePixel: starting")
+        
+        var matrix = try getIntrinsicMatrix()
+        
+        print("getRayAnglesFromImagePixel: got intrinsic matrix")
+        
+        let fx = matrix[0]
+        let fy = matrix[4]
+        let cx = matrix[2]
+        let cy = matrix[5]
+        
+        let pixelX = x - cx
+        let pixelY = y - cy
+                
+        var azimuth: Double = atan2(pixelX,fx)
+        var elevation: Double = atan2(pixelY, fy)
+        azimuth = azimuth.degrees
+        elevation = elevation.degrees
+        
+        let roll = try getRoll()
+        
+        print("getRayAnglesFromImagePixel: roll is \(roll)")
+        
+        (azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+        
+        print("getRayAnglesFromImagePixel: returning corrected az and elevation")
+        
+        return (azimuth,elevation)
+    }
+    
+    // for an image taken where camera lateral axis is not parallel to ground (e.g. roll), express ray angle
+    // in terms of a frame of reference which is parallel to ground
+    // while most drones try to keep the camera gimball lateral axis parallel to ground, this cannot be assumed.
+    // therefore, this function rotates the 3d angle by the same amount and direction as the roll of the camera
+    
+    private func correctRayAnglesForRoll(psi: Double, theta: Double, roll: Double) -> (Double,Double)
+    {
+        var thetaRad  = -1.0 * theta // convert from OA notation to Tait-Bryan aircraft notation down is negative
+        thetaRad = thetaRad.radians
+        var psiRad = psi.radians
+        var rollRad = roll.radians
+        
+        // convert tait-bryan angles to unit vector
+        // +x is forward
+        // +y is rightward
+        // +z is downward
+        
+        let x = cos(thetaRad) * cos(psiRad)
+        let y = cos(thetaRad) * sin(psiRad)
+        let z = sin(thetaRad)
+        
+        let rotationMatrix = [
+            [ 1.0, 0.0, 0.0 ],
+            [ 0.0, cos(rollRad), -1.0*sin(rollRad)],
+            [ 0.0, sin(rollRad), cos(rollRad)]
+        ]
+        
+        // rotate the unix vector back to correct for observer's roll
+        let rotatedVector = [
+            rotationMatrix[0][0] * x + rotationMatrix[0][1] * y + rotationMatrix[0][2] * z,
+            rotationMatrix[1][0] * x + rotationMatrix[1][1] * y + rotationMatrix[1][2] * z,
+            rotationMatrix[2][0] * x + rotationMatrix[2][1] * y + rotationMatrix[2][2] * z
+        ]
+        
+        var correctedPsiRad = atan2(rotatedVector[1], rotatedVector[0])
+        var correctedThetaRad = atan2(rotatedVector[2], sqrt(rotatedVector[0]*rotatedVector[0] + rotatedVector[1]*rotatedVector[1] ))
+        
+        var correctedPsi = correctedPsiRad.degrees
+        var correctedTheta = correctedThetaRad.degrees
+        
+        // convert from tait-bryan notation back to OA notation (down is positive)
+        correctedTheta = -1.0 * correctedTheta
+        
+        return (correctedPsi,correctedTheta)
+    }
+    
     // return meta data value, if present, as string
     public func getMetaDataValue(key: String) throws -> String
     {
@@ -501,7 +766,7 @@ public class DroneImage {
     }
     
     // Given an angle in radians, return angle 0 <= angle < 2*pi
-    private func normalizeRadians(inAngle: Double ) -> Double
+    public static func normalizeRadians(inAngle: Double ) -> Double
     {
         var outAngle = inAngle
         
@@ -515,7 +780,7 @@ public class DroneImage {
     }
     
     // given angle in degrees, return angle 0 <= angle < 360
-    public func normalizeDegrees(inAngle: Double) -> Double {
+    public static func normalizeDegrees(inAngle: Double) -> Double {
         var inAngle = inAngle
         while inAngle >= 360.0 {
             inAngle -= 360.0
@@ -530,7 +795,7 @@ public class DroneImage {
     // return same angle on mathematical unit circle starting at East
     // and increasing counter-clockwise
     
-    private func azimuthToUnitCircleRad(inAngle: Double) -> Double
+    public static func azimuthToUnitCircleRad(inAngle: Double) -> Double
     {
         var radDirection: Double = -1.0 * inAngle
         radDirection += 0.5 * Double.pi
@@ -542,7 +807,7 @@ public class DroneImage {
     // to the surface; lon not used for this calculation
     // return radius of the WGS84 reference ellipsoid at given latitude in meters
     
-    private func radius_at_lat_lon(inLat: Double, inLon: Double) -> Double
+    public static func radius_at_lat_lon(inLat: Double, inLon: Double) -> Double
     {
         var lat = inLat
         lat = lat.radians
@@ -565,7 +830,7 @@ public class DroneImage {
     // alt altitude above surface of WGS84 reference ellipsoid in meters
     // return double lat/lon pair representing point at end of great circle in d meters away
     
-    private func inverse_haversine(lat1: Double, lon1: Double, d: Double, radAzimuth: Double, alt: Double) -> (Double,Double)
+    public static func inverse_haversine(lat1: Double, lon1: Double, d: Double, radAzimuth: Double, alt: Double) -> (Double,Double)
     {
         var lat1 = lat1
         var lon1 = lon1
@@ -592,7 +857,7 @@ public class DroneImage {
     // used to determine radius of great circle
     // return distance in meters along great circle path between two points
     
-    private func haversine(lat1: Double, lon1: Double, lat2: Double, lon2: Double, alt: Double) -> Double
+    public static func haversine(lat1: Double, lon1: Double, lat2: Double, lon2: Double, alt: Double) -> Double
     {
         var lat1 = lat1
         var lat2 = lat2
@@ -633,29 +898,38 @@ public class DroneImage {
         var radTheta: Double
         var lat,lon, alt: Double
         let INCREMENT: Double = 1.0
+        var degAzimuth, degTheta: Double
+        var azimuthOffset, thetaOffset: Double
         
         // azimuth is direction of aircraft's camera 0 is north, increase clockwise
         // which is reported as Yaw degree
         // theta is angle of depression (pitch) of aircraft's camera; positive value
         // representing degrees downward from horizon; reported as pitch degree
-        
+        // targetXprop,targetYprop are where in image we're examining
+
         do {
-            try radAzimuth = getGimbalYawDegree()
-            try radTheta = getGimbalPitchDegree()
+            try degAzimuth = getGimbalYawDegree()
+            try degTheta = getGimbalPitchDegree()
+                        
+            (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixel(x: theImage!.size.width * targetXprop,
+                                                                         y: theImage!.size.height * targetYprop)
+            degAzimuth += azimuthOffset
+            degTheta += thetaOffset
             
             // convert to radians
-            radAzimuth = radAzimuth.radians
-            radAzimuth = normalizeRadians(inAngle: radAzimuth)
-            radTheta = radTheta.radians
+            radAzimuth = degAzimuth.radians
+            radAzimuth = DroneImage.normalizeRadians(inAngle: radAzimuth)
+            radTheta = degTheta.radians
             try lat = getLatitude()
             try lon = getLongitude()
             try alt = getAltitude()
-            
         }
         catch {
             print("resolveTarget: missing metadata at the start")
             throw error
         }
+        
+        
         
         // check if target is directly below us; special case
         // 0.005 is ~0.29 degrees
@@ -681,12 +955,12 @@ public class DroneImage {
         // during manual data entry, please avoid abs values > 90 deg
         // fix for radTheta comparison 4/14/2023
         if radTheta > (Double.pi / 2.0) {
-            radAzimuth = normalizeRadians(inAngle: (radAzimuth + Double.pi))
+            radAzimuth = DroneImage.normalizeRadians(inAngle: (radAzimuth + Double.pi))
             radTheta = Double.pi - radTheta
         }
         
         // convert azimuth to unit circle (just like math class)
-        var radDirection: Double = azimuthToUnitCircleRad(inAngle: radAzimuth)
+        var radDirection: Double = DroneImage.azimuthToUnitCircleRad(inAngle: radAzimuth)
         
         // from direction, determine rate of x and y change per unit travel
         // level with horizon for now
@@ -705,7 +979,7 @@ public class DroneImage {
         // somewhat arbitrary; SRTM has horizontal resolution of 30m
         // but vertical accuracy is more precise
         
-        var post_spacing_meters: Double = haversine(lat1: lat, lon1: 0, lat2: lat, lon2: dem.getXResolution(), alt: alt)
+        var post_spacing_meters: Double = DroneImage.haversine(lat1: lat, lon1: 0, lat2: lat, lon2: dem.getXResolution(), alt: alt)
         
         // meters of acceptable distance between constructed line and datapoint.  somewhat arbitrary
         var THRESHOLD: Double = post_spacing_meters / 16.0
@@ -742,7 +1016,7 @@ public class DroneImage {
             curAlt += deltaZ
             avgAlt = (avgAlt + curAlt) / 2.0
             
-            (curLat,curLon) = inverse_haversine(lat1: curLat, lon1: curLon, d: horizScalar*INCREMENT, radAzimuth: radAzimuth, alt: avgAlt)
+            (curLat,curLon) = DroneImage.inverse_haversine(lat1: curLat, lon1: curLon, d: horizScalar*INCREMENT, radAzimuth: radAzimuth, alt: avgAlt)
             
         } // while altDiff > threshold
         
@@ -752,7 +1026,7 @@ public class DroneImage {
         // curvature of the earth over long distances
         // could use refinement XXX
         
-        var finalHorizDist: Double = fabs(haversine(lat1: lat, lon1: lon, lat2: curLat, lon2: curLon, alt: alt))
+        var finalHorizDist: Double = fabs(DroneImage.haversine(lat1: lat, lon1: lon, lat2: curLat, lon2: curLon, alt: alt))
         var finalVertDist: Double = fabs(alt-curAlt)
         // simple pythagorean thereom
         // may be inaccurate for very long horizontal distances
@@ -898,6 +1172,11 @@ public class DroneImage {
                 metaData!["drone-skydio:CameraOrientationNED:Yaw"] = currentValue
                 currentValue = nil
             }
+            if elementName.contains("drone-skydio:Roll") && skydioCameraOrientationNED {
+                metaData!["drone-skydio:CameraOrientationNED:Roll"] = currentValue
+                currentValue = nil
+            }
+            
         } // didEndElement
 
         func parser(_ parser: XMLParser, foundCharacters string: String) {

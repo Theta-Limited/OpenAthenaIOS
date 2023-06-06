@@ -271,9 +271,13 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
     private func setTextViewText(htmlStr hString: String)
     {
         let data = Data(hString.utf8)
-        if let attribString = try? NSAttributedString(data: data,
+        let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
+        
+        if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
+            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
+                                                                                               length: attribString.length))
             self.textView.attributedText = attribString
         }
     }

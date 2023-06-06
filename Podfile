@@ -10,5 +10,6 @@ target 'OpenAthenaIOS' do
   # pod 'sf-ios', '4.1.2'
   pod 'tiff-ios', '4.0.1'
   # pod 'grid-ios', '1.0.5'
+  pod 'UTMConversion', '~> 1.3'
 
 end

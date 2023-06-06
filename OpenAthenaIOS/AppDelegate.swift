@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // load defaults
         settings.loadDefaults()
         
+        print("application: outputMode is \(settings.outputMode), \(settings.outputMode.rawValue)")
+        
         return true
     }
 

@@ -251,18 +251,6 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
        dismiss(animated: true, completion: nil)
     }
     
-    // take htmlString and encode it and set
-    // it to our textView
-    private func setTextViewText(htmlStr hString: String)
-    {
-        let data = Data(hString.utf8)
-        if let attribString = try? NSAttributedString(data: data,
-                                                           options: [.documentType: NSAttributedString.DocumentType.html],
-                                                           documentAttributes: nil) {
-            self.textView.attributedText = attribString
-        }
-    }
-    
     // get meta data from image and output to textView
     private func getImageData()
     {
@@ -329,6 +317,22 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         //print("viewForZooming returning imageView")
         return contentView
+    }
+    
+    // take htmlString and encode it and set
+    // it to our textView
+    private func setTextViewText(htmlStr hString: String)
+    {
+        let data = Data(hString.utf8)
+        let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
+        
+        if let attribString = try? NSMutableAttributedString(data: data,
+                                                           options: [.documentType: NSAttributedString.DocumentType.html],
+                                                           documentAttributes: nil) {
+            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
+                                                                                               length: attribString.length))
+            self.textView.attributedText = attribString
+        }
     }
     
 } // ImageViewController

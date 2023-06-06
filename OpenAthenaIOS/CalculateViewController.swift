@@ -10,6 +10,8 @@
 // for user knows what we are locating XXX
 
 import UIKit
+import CoreLocation
+import UTMConversion
 
 // add scrollview around imageview for pinch/zoom ?
 
@@ -65,7 +67,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         textView.font = .systemFont(ofSize: 16)
         textView.heightAnchor.constraint(equalToConstant: 0.66*view.frame.size.height).isActive = true
         textView.widthAnchor.constraint(equalToConstant: view.frame.size.width).isActive = true
-        textView.isScrollEnabled = false
+        textView.isScrollEnabled = true // ?? was false but that sometimes chops text
         
         // stackview setup
         stackView.frame = view.bounds
@@ -117,6 +119,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     // resolveTarget needs to be updated for arbitrary point selection XXX
     private func doCalculations()
     {
+        var ccdInfo: DroneCCDInfo?
         htmlString = "<b>OpenAthena</b><br>"
         htmlString += "Elevation model: \(vc.dem?.tiffURL?.lastPathComponent)<br>"
         htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
@@ -125,13 +128,15 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         
         // try to get CCD info for drone make/model
         do {
-            let droneCCDInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
-                                                               model: vc.theDroneImage!.getCameraModel())
+            ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
+                                                      model: vc.theDroneImage!.getCameraModel())
+            vc!.theDroneImage!.ccdInfo = ccdInfo
             htmlString += "Found CCD info for drone make/model<br>"
         }
         catch {
-            print("No CCD info for drone image")
-            htmlString += "No CCD info for drone make/model<br>"
+            print("No CCD info for drone image, using estimates")
+            htmlString += "No CCD info for drone make/model, estimate using exif 35mm equivalent<br>"
+            vc!.theDroneImage!.ccdInfo = nil
         }
         
         // run the calculations
@@ -184,23 +189,30 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             setTextViewText(htmlStr: htmlString)
             return
         }
-                
+        
+        let latStr = roundDigitsToString(val: target[1], precision: 6)
+        let lonStr = roundDigitsToString(val: target[2], precision: 6)
+        let distanceStr = roundDigitsToString(val: target[0], precision: 6)
+        let altStr = roundDigitsToString(val: target[3], precision: 6)
+        let nearestAltStr = roundDigitsToString(val: target[4], precision: 6)
+        
         print("resolveTarget returned \(target)")
-        htmlString += "Distance to target \(target[0]) meters<br>"
-        htmlString += "Target altitude \(target[3]) meters<br>"
-        htmlString += "Nearest terrain alt \(target[4]) meters<br>"
-        htmlString += "Lat: \(target[1])<br>"
-        htmlString += "Lon: \(target[2])<br>"
-        htmlString += "Resolve target: \(target)<br>"
+        htmlString += "Distance to target \(distanceStr) meters<br>"
+        htmlString += "Nearest terrain alt \(nearestAltStr) meters<br>"
+        
+        htmlString += "Target Lat,Lon: \(latStr),\(lonStr)<br>"
+        htmlString += "Target Alt: \(altStr) meters<br>"
+
+        //htmlString += "Resolve target: \(target)<br>"
         //let urlStr = "https://maps.../maps/@?api=1&map_action=map&center=\(target[1]),\(target[2])"
-        let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(target[1]),\(target[2])"
+        let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(latStr),\(lonStr)"
         htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
         
         // would love a URL that we could have two pins on -- one for where drone is
         // and one for where target is; don't think we can do that w/o an Maps API key
         // and that would cost us
         
-        // reported WGS84 altitude is target[3]
+        // reported WGS84 altitude is target[3] or altStr
         
         // check the settings for output mode and see if we need to do any conversions
         // by default, everything internally is in WGS84 format
@@ -208,44 +220,58 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             var ck42lat, ck42lon, ck42alt: Double
             (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: target[1], Ld: target[2], H: target[3])
             
-            htmlString += "CK42Lat: \(ck42lat)<br>"
-            htmlString += "CK42Lon: \(ck42lon)<br>"
-            htmlString += "CK42Alt: \(ck42alt)<br>"
+            let ck42latStr = roundDigitsToString(val: ck42lat, precision: 6)
+            let ck42lonStr = roundDigitsToString(val: ck42lon, precision: 6)
+            let ck42altStr = roundDigitsToString(val: ck42alt, precision: 6)
+            htmlString += "CK42 Lat,Lon: \(ck42latStr),\(ck42lonStr)<br>"
+            htmlString += "CK42 Alt: \(ck42altStr)<br>"
         }
         
         if app.settings.outputMode == AthenaSettings.OutputModes.CK42GaussKruger {
             var ck42lat, ck42lon, ck42alt: Double
             (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: target[1], Ld: target[2], H: target[3])
-            
-            htmlString += "CK42Lat: \(ck42lat)<br>"
-            htmlString += "CK42Lon: \(ck42lon)<br>"
-            htmlString += "CK42Alt: \(ck42alt)<br>"
+            let ck42latStr = roundDigitsToString(val: ck42lat, precision: 6)
+            let ck42lonStr = roundDigitsToString(val: ck42lon, precision: 6)
+            let ck42altStr = roundDigitsToString(val: ck42alt, precision: 6)
+            htmlString += "CK42 Lat,Lon: \(ck42latStr),\(ck42lonStr)<br>"
+            htmlString += "CK42 Alt: \(ck42altStr)<br>"
             
             var ck42GKlat, ck42GKlon: Int64
             
             (ck42GKlat,ck42GKlon) = CK42GaussKruger.CK42_to_GaussKruger(CK42_LatDegrees: ck42lat, CK42_LonDegrees: ck42lon)
             
-            htmlString += "CK42 GK Northing: \(ck42GKlat)<br>"
-            htmlString += "CK42 GK Easting: \(ck42GKlon)<br>"
+            htmlString += "CK42 GK Northing, Easting: \(ck42GKlat),\(ck42GKlon)<br>"
         }
         
-        if app.settings.outputMode == AthenaSettings.OutputModes.MGRS1m {
-            var mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: target[1],Lon: target[2],Alt: target[3])
+        // all MGRS 1m, 10m, 100m
+        if app.settings.outputMode == AthenaSettings.OutputModes.MGRS {
+            
+            let mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: target[1],Lon: target[2],Alt: target[3])
             htmlString += "MGRS1m: \(mgrsStr)<br>"
-            htmlString += "Alt: \(target[3])<br>"
+            htmlString += "Alt: \(altStr)<br>"
+            let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(mgrsStr)"
+            htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
+                        
+            let mgrs10Str = MGRSGeodetic.WGS84_MGRS10m(Lat: target[1], Lon: target[2],Alt: target[3])
+            htmlString += "MGRS10m: \(mgrs10Str)<br>"
+                        
+            let mgrs100Str = MGRSGeodetic.WGS84_MGRS100m(Lat: target[1], Lon: target[2],Alt: target[3])
+            htmlString += "MGRS100m: \(mgrs100Str)<br>"
         }
 
-        if app.settings.outputMode == AthenaSettings.OutputModes.MGRS10m {
-            var mgrsStr = MGRSGeodetic.WGS84_MGRS10m(Lat: target[1],Lon: target[2],Alt: target[3])
-            htmlString += "MGRS10m: \(mgrsStr)<br>"
-            htmlString += "Alt: \(target[3])<br>"
-        }
-        
-        if app.settings.outputMode == AthenaSettings.OutputModes.MGRS100m {
-            var mgrsStr = MGRSGeodetic.WGS84_MGRS100m(Lat: target[1],Lon: target[2],Alt: target[3])
-            htmlString += "MGRS100m: \(mgrsStr)<br>"
-            htmlString += "Alt: \(target[3])<br>"
-        }
+        // UTM
+        if app.settings.outputMode == AthenaSettings.OutputModes.UTM {
+            let coordinate = CLLocationCoordinate2D(latitude: target[1], longitude: target[2])
+            let utmCoordinate = coordinate.utmCoordinate()
+            let nStr = roundDigitsToString(val: utmCoordinate.northing, precision: 6)
+            let eStr = roundDigitsToString(val: utmCoordinate.easting, precision: 6)
+            if (utmCoordinate.hemisphere == .northern) {
+                htmlString += "UTM: N, \(utmCoordinate.zone) \(eStr) E, \(nStr) N<br>"
+            }
+            else {
+                htmlString += "UTM: S, \(utmCoordinate.zone) \(eStr) E, \(eStr) N<br>"
+            }
+        } // UTM
                 
         setTextViewText(htmlStr: htmlString)
                 
@@ -257,18 +283,6 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         return contentView
     }
     
-    // take htmlString and encode it and set
-    // it to our textView
-    private func setTextViewText(htmlStr hString: String)
-    {
-        let data = Data(hString.utf8)
-        if let attribString = try? NSMutableAttributedString(data: data,
-                                                           options: [.documentType: NSAttributedString.DocumentType.html],
-                                                           documentAttributes: nil) {
-            self.textView.attributedText = attribString
-        }
-    }
-    
     // keep in sync with ImageViewController:getImageData()
     private func getImageData()
     {
@@ -277,11 +291,12 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         let targetY = vc.theDroneImage!.targetYprop * vc.theDroneImage!.theImage!.size.height
         
         do {
-            try self.htmlString += "Make is: \(self.vc.theDroneImage!.getCameraMake())<br>"
-            try self.htmlString += "Model is \(self.vc.theDroneImage!.getCameraModel())<br>"
+            let makeStr = try self.vc.theDroneImage!.getCameraMake()
+            let modelStr = try self.vc.theDroneImage!.getCameraModel()
+            self.htmlString += "Make/model: \(makeStr),\(modelStr)<br>"
         }
         catch {
-            self.htmlString += "Camera make is: \(error)<br>"
+            self.htmlString += "Camera make/model  is: \(error)<br>"
         }
         
         do {
@@ -289,8 +304,9 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             // will have both or have neither
             try lat = self.vc.theDroneImage!.getLatitude()
             try lon = self.vc.theDroneImage!.getLongitude()
-            self.htmlString += "Drone Latitude: \(lat)<br>"
-            self.htmlString += "Drone Longitude: \(lon)<br>"
+            let latStr = roundDigitsToString(val: lat, precision: 6)
+            let lonStr = roundDigitsToString(val: lon, precision: 6)
+            self.htmlString += "Drone Lat,Lon: \(latStr),\(lonStr)<br>"
             self.htmlString += "Taget pixel coordinates (\(preciseRound(targetX, precision: .tenthousandths)),\(preciseRound(targetY,precision: .tenthousandths)))<br>"
             // build a maps URL for clicking on
             //let urlStr = "https://maps.google.com/maps/@?api=1&map_action=map&center=\(lat),\(lon)"
@@ -298,14 +314,16 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             //self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
         }
         catch {
-            self.htmlString += "Lat/lon: \(error)<br>"
+            self.htmlString += "Lat/Lon: \(error)<br>"
         }
         
         do {
-            try self.htmlString += "Altitude: \(self.vc.theDroneImage!.getAltitude())<br>"
+            let droneAlt = try self.vc.theDroneImage!.getAltitude()
+            let droneAltStr = roundDigitsToString(val: droneAlt, precision: 6)
+            self.htmlString += "Drone Altitude: \(droneAltStr)<br>"
         }
         catch {
-            self.htmlString += "Altitude: \(error)<br>"
+            self.htmlString += "DroneAltitude: \(error)<br>"
         }
         
         do {
@@ -456,7 +474,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         let scale: CGFloat = 0
         let length: CGFloat = max(imageSize.width/48, imageSize.height/48)
         let gap: CGFloat = length / 1.5
-        let width: CGFloat = 12
+        let width: CGFloat = gap / 1.5
         let actualX = imageSize.width * x_prop
         let actualY = imageSize.height * y_prop
                 
@@ -514,6 +532,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         case hundredths
         case thousandths
         case tenthousandths
+        case hundredthousandths
     }
     
     public func preciseRound(_ value: Double, precision: RoundingPrecision = .ones) -> CGFloat {
@@ -528,6 +547,31 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             return round(value*1000.0) / 1000.0
         case .tenthousandths:
             return round(value*10000.0) / 10000.0
+        case .hundredthousandths:
+            return round(value*100000.0) / 100000.0
+        }
+    }
+    
+    // take a double (e.g. lat, lon, elevation, etc. and round to 6 digits of precision and
+    // return string
+    public func roundDigitsToString(val: Double, precision: Double) -> String {
+        let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
+        return String(num)
+    }
+    
+    // take htmlString and encode it and set
+    // it to our textView
+    private func setTextViewText(htmlStr hString: String)
+    {
+        let data = Data(hString.utf8)
+        let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
+        
+        if let attribString = try? NSMutableAttributedString(data: data,
+                                                           options: [.documentType: NSAttributedString.DocumentType.html],
+                                                           documentAttributes: nil) {
+            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
+                                                                                               length: attribString.length))
+            self.textView.attributedText = attribString
         }
     }
     

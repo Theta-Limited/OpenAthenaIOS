@@ -16,7 +16,7 @@
 
 import Foundation
 
-struct DroneCCDInfo {
+public struct DroneCCDInfo {
     let makeModel: String  // also the dictionary key
     let ccdWidthMMPerPixel: Double
     let ccdHeightMMPerPixel: Double
@@ -25,7 +25,7 @@ struct DroneCCDInfo {
     let comment: String
 }
 
-enum DroneParamsError: String, Error {
+public enum DroneParamsError: String, Error {
     case droneNotFound = "No CCD info for drone"
     case fileReadError = "Error reading drone data file"
     case droneDataError = "Drone data error"

@@ -87,11 +87,11 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     
     private func getAbout()
     {
-        let messageString = "<!DOCTYPE html><html><body><h2>OpenAthena version \(vc!.getAppVersion())</h2>"
+        let htmlString = "<!DOCTYPE html><html><body><h2>OpenAthena alpha version \(vc!.getAppVersion())</h2>"
         + "Matthew Krupczak, Bobby Krupczak, et al.<br>"
         + "GPL-3.0, some rights reserved "
         + "<a href=\"https://openathena.com/\">OpenAthena.com</a><br>"
-        + "<br>Open Athena is a project which allows consumer and professional drones to spot precise geodetic locations.<br>"
+        + "<br>Open Athena allows common drones to spot precise geodetic locations.<br>"
         + "<br><a href=\"https://github.com/mkrupczak3/OpenAthena\">View the project on GitHub</a>"
         + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br><p>"
         
@@ -101,18 +101,15 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         + "<li><a href='https://github.com/ngageoint'>National Geospatial-Intelligence Agency TIFF library</a></li>"
         + "<li><a href='https://github.com/Dimowner/WGS84_TO_SK42/'>WGS84 to CK42 library</a></li>"
         + "<li><a href='https://github.com/ngageoint/'>National Geospatial-Intelligence Agency MGRS conversion library</a></li>"
+        + "<li><a href='https://github.com/wtw-software/UTMConversion'>UTMConversion</a></li>"
         + "</ul>"
         
         // privacy policy
         + "<br>See <a href='https://openathena.com/privacy'>this page</a> for the OpenAthena privacy policy"
-                
-        let htmlData = NSString(string: messageString).data(using: String.Encoding.utf8.rawValue)
-        let options = [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html]
-        let attributedString = try! NSAttributedString(data: htmlData!, options: options,
-                                                       documentAttributes: nil)
-        textView.attributedText = attributedString
+           
+        setTextViewText(htmlStr: htmlString)
         
-    }
+    } // getAbout()
     
     // pinch/zoom the entire stack view, not just image!
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -124,5 +121,21 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     {
         
     }
-
+    
+    // take htmlString and encode it and set
+    // it to our textView
+    private func setTextViewText(htmlStr hString: String)
+    {
+        let data = Data(hString.utf8)
+        let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
+        
+        if let attribString = try? NSMutableAttributedString(data: data,
+                                                           options: [.documentType: NSAttributedString.DocumentType.html],
+                                                           documentAttributes: nil) {
+            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
+                                                                                               length: attribString.length))
+            self.textView.attributedText = attribString
+        }
+    }
+    
 } // AboutViewController

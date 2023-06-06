@@ -14,6 +14,7 @@ final class TestMakeModel: XCTestCase {
     var parrotImage: DroneImage!
     var autellImage: DroneImage!
     var skydioImage: DroneImage!
+    var droneParams: DroneParams!
     
     override func setUpWithError() throws {
         
@@ -61,17 +62,28 @@ final class TestMakeModel: XCTestCase {
         autellImage.theImage = image
         autellImage.updateMetaData()
         
+        droneParams = DroneParams()
+        
     } // setup with errors
     
     func testDJIMakeModel() throws
     {
-        try XCTAssertEqual(djiImage.getCameraMake(),"DJI")
-        try XCTAssertEqual(djiImage.getCameraModel(),"FC2204")
+        let cStr = try djiImage.getCameraMake()
+        let mStr = try djiImage.getCameraModel()
+        
+        XCTAssertEqual(cStr,"DJI")
+        XCTAssertEqual(mStr,"FC2204")
+        
+        let dinfo = try droneParams.lookupDrone(make: cStr,model: mStr)
+        XCTAssertEqual(dinfo.widthPixels,4000.0)
+        XCTAssertEqual(dinfo.heightPixels,3000.0)
+        XCTAssertEqual(dinfo.ccdWidthMMPerPixel,6.17/4000.0)
+        XCTAssertEqual(dinfo.ccdHeightMMPerPixel,4.55/3000.0)
     }
     
     func testAutellMakeModel() throws
     {
-        try XCTAssertEqual(autellImage.getCameraMake(),"Autel Robotic")
+        try XCTAssertEqual(autellImage.getCameraMake(),"Autel Robotics")
         try XCTAssertEqual(autellImage.getCameraModel(),"XT701")
     }
     
@@ -86,4 +98,7 @@ final class TestMakeModel: XCTestCase {
     {
         try XCTAssertEqual(parrotImage.getCameraMake(),"PARROT")
         try XCTAssertEqual(parrotImage.getCameraModel(),"Disco")
-    }}
+    }
+    
+    
+} // TestMakeModel
