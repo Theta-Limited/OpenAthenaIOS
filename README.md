@@ -1,9 +1,11 @@
 # OpenAthena™ for iOS
 OpenAthena for iOS
 
+(This software is currently in alpha.)
+
 An iOS port of the [OpenAthena project](http://OpenAthena.com)
 
-OpenAthena™ allows consumer and professional drones to spot precise geodetic locations.
+OpenAthena™ allows common drones to spot precise geodetic locations.
 
 🖼️👨‍💻 + 🧮⛰️ = 🎯📍
 
