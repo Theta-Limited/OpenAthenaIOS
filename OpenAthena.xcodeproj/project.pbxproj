@@ -258,7 +258,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 59B62AFD29844B6D00F0C6B1 /* Build configuration list for PBXProject "OpenAthenaIOS" */;
+			buildConfigurationList = 59B62AFD29844B6D00F0C6B1 /* Build configuration list for PBXProject "OpenAthena" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -479,6 +479,8 @@
 					"-framework",
 					"\"tiff_ios\"",
 				);
+				PRODUCT_MODULE_NAME = OpenAthena;
+				PRODUCT_NAME = OpenAthena;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -548,6 +550,7 @@
 					"-framework",
 					"\"tiff_ios\"",
 				);
+				PRODUCT_NAME = OpenAthena;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -661,7 +664,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		59B62AFD29844B6D00F0C6B1 /* Build configuration list for PBXProject "OpenAthenaIOS" */ = {
+		59B62AFD29844B6D00F0C6B1 /* Build configuration list for PBXProject "OpenAthena" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				59B62B1429844B6F00F0C6B1 /* Debug */,
