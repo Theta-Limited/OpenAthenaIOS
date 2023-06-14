@@ -5,12 +5,14 @@ PODS:
     - sf-ios (~> 4.1.2)
   - mgrs-ios (1.1.4):
     - grid-ios (~> 1.0.5)
+  - NSExceptionSwift (1.0.1)
   - sf-ios (4.1.2)
   - tiff-ios (4.0.1)
   - UTMConversion (1.3.0)
 
 DEPENDENCIES:
   - mgrs-ios (= 1.1.4)
+  - NSExceptionSwift (~> 1.0.1)
   - tiff-ios (= 4.0.1)
   - UTMConversion (~> 1.3)
 
@@ -19,6 +21,7 @@ SPEC REPOS:
     - color-ios
     - grid-ios
     - mgrs-ios
+    - NSExceptionSwift
     - sf-ios
     - tiff-ios
     - UTMConversion
@@ -27,10 +30,11 @@ SPEC CHECKSUMS:
   color-ios: ab7521e896b4e061905d292aa7ff675d7e7f801d
   grid-ios: 29d32ac8d78771b1d7a91ebeba85c5d49785c4bd
   mgrs-ios: d96be2123562dbd99194bcdc75d54d8ac13afa3a
+  NSExceptionSwift: 45a4bb432e017f692745988137b8e9ed2da0267d
   sf-ios: 16cfda9dd8971cb0216ac911840bb72727bf2397
   tiff-ios: 6f74cf7fefc371e2523807ea38cd808fd594f86b
   UTMConversion: 981207aedec96e604294711ba95da661156790cf
 
-PODFILE CHECKSUM: e688f183062a2767587050097df1ac7c97929382
+PODFILE CHECKSUM: 4e6a4e4d99a9ab6d813100969cf0c79b6ab2163e
 
 COCOAPODS: 1.12.1

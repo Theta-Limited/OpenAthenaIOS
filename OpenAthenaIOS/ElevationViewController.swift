@@ -227,6 +227,7 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
         guard let tiffURL = urls.first else {
             print("error picking document")
             self.htmlString += "Error picking document; try again<br>"
+            setTextViewText(htmlStr: htmlString)
             return
         }
         
@@ -236,7 +237,7 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
         // read/create a DEM from the GeoTIFF
         guard let dem = DigitalElevationModel(fromURL: tiffURL) else {
             self.htmlString += "Unable to create digital elevation model from \(tiffURL.lastPathComponent)<br>"
-            
+            setTextViewText(htmlStr: htmlString)
             return
         }
         vc.dem = dem

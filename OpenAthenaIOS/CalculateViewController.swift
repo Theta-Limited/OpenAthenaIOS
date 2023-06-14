@@ -124,6 +124,13 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         htmlString += "Elevation model: \(vc.dem?.tiffURL?.lastPathComponent)<br>"
         htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
         
+        // if no DEM, throw error
+        if vc.dem == nil {
+            htmlString += "Can't perform calculations without a digital elevation module (DEM)<br>"
+            setTextViewText(htmlStr: htmlString)
+            return
+        }
+        
         getImageData()
         
         // try to get CCD info for drone make/model

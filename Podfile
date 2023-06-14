@@ -12,4 +12,6 @@ target 'OpenAthenaIOS' do
   # pod 'grid-ios', '1.0.5'
   pod 'UTMConversion', '~> 1.3'
 
+  pod 'NSExceptionSwift', '~> 1.0.1'
+
 end

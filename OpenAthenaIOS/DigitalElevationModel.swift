@@ -16,6 +16,7 @@ import Foundation
 import UniformTypeIdentifiers
 import MobileCoreServices
 import tiff_ios
+import NSExceptionSwift
 
 enum ElevationModuleError: String, Error {
     case RequestedValueOOBError = "DEM: requested value out of bounds"
@@ -46,6 +47,9 @@ public class DigitalElevationModel {
     var xParams = GeoDataAxisParams()
     var yParams = GeoDataAxisParams()
 
+    // ? means its a failable initializer; return nil on error
+    // catch NSExceptions via NSExceptionSwift cocopod and return nil
+    
     init?(fromURL url: URL)
     {
         tiffURL = url
@@ -77,13 +81,23 @@ public class DigitalElevationModel {
         
         // cobb.tiff can't read rasters
         // 'Not Implemented', reason: 'Deflate decoder is not yet implemented'
-        // XXX
         // challenge is that the exception occurs in objective-c library
         // which doesnt propagate back to swift caller
         // there are various hacks out there to bridge the exception
         // revist after iOS port is complete
+        // use NSExceptionSwift cocoapod to catch them now
         
-        rasters = directory!.readRasters()
+        do {
+            try NSExceptionSwift.handlingNSException(
+                {
+                    rasters = directory!.readRasters()
+                }
+            )
+        }
+        catch {
+            print("Caught exception from Tiff reader")
+            return nil
+        }
         
         print("Read the directory rasters!!")
         

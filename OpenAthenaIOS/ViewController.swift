@@ -5,13 +5,14 @@
 //  https://openathena.com
 //  Created by Bobby Krupczak on 1/27/23.
 //
+//  App main view controller
 
 import UIKit
 
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 1.10
+    var version: Float = 1.15
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
