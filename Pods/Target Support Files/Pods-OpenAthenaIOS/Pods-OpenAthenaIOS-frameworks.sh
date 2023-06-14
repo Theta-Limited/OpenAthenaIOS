@@ -176,6 +176,7 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/NSExceptionSwift/NSExceptionSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UTMConversion/UTMConversion.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/color-ios/color_ios.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/grid-ios/grid_ios.framework"
@@ -184,6 +185,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/tiff-ios/tiff_ios.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/NSExceptionSwift/NSExceptionSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UTMConversion/UTMConversion.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/color-ios/color_ios.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/grid-ios/grid_ios.framework"

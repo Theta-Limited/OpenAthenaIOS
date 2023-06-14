@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import OpenAthenaIOS
+@testable import OpenAthena
 
 final class TestDigitalElevationModel: XCTestCase {
 

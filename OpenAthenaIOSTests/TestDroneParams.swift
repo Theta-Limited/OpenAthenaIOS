@@ -7,7 +7,7 @@
 //  and validate one entry
 
 import XCTest
-@testable import OpenAthenaIOS
+@testable import OpenAthena
 
 final class TestDroneParams: XCTestCase {
 
