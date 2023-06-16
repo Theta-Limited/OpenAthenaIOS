@@ -282,14 +282,25 @@ public class DigitalElevationModel {
                                                value: lat, delta: dy)
         }
         
-        var L1 = GeoLocation(lat: y0 + Double(yT) * dy, lon: x0 + Double(xR) * dx,
-                             alt: rasters.pixelAt(x: Int32(xR), andY: Int32(yT))[0].doubleValue)
-        var L2 = GeoLocation(lat: y0 + Double(yT) * dy, lon: x0 + Double(xL) * dx,
-                             alt: rasters.pixelAt(x: Int32(xL), andY: Int32(yT))[0].doubleValue)
-        var L3 = GeoLocation(lat: y0 + Double(yB) * dy, lon: x0 + Double(xL) * dx,
-                             alt: rasters.pixelAt(x: Int32(xL), andY: Int32(yB))[0].doubleValue)
-        var L4 = GeoLocation(lat: y0 + Double(yB) * dy, lon: x0 + Double(xR) * dx,
-                             alt: rasters.pixelAt(x: Int32(xR), andY: Int32(yB))[0].doubleValue)
+        var L1,L2,L3,L4: GeoLocation!
+        
+        do {
+            
+            try NSExceptionSwift.handlingNSException( {
+                 L1 = GeoLocation(lat: y0 + Double(yT) * dy, lon: x0 + Double(xR) * dx,
+                                     alt: rasters.pixelAt(x: Int32(xR), andY: Int32(yT))[0].doubleValue)
+                 L2 = GeoLocation(lat: y0 + Double(yT) * dy, lon: x0 + Double(xL) * dx,
+                                     alt: rasters.pixelAt(x: Int32(xL), andY: Int32(yT))[0].doubleValue)
+                 L3 = GeoLocation(lat: y0 + Double(yB) * dy, lon: x0 + Double(xL) * dx,
+                                     alt: rasters.pixelAt(x: Int32(xL), andY: Int32(yB))[0].doubleValue)
+                 L4 = GeoLocation(lat: y0 + Double(yB) * dy, lon: x0 + Double(xR) * dx,
+                                     alt: rasters.pixelAt(x: Int32(xR), andY: Int32(yB))[0].doubleValue)
+            })
+        }
+        catch {
+            print("GeoLocation call with rasters.pixelAt caused exception")
+            throw error
+        }
         
         var target = GeoLocation(lat: lat, lon: lon, alt: 0.0)
         
