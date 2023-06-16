@@ -5,6 +5,10 @@ OpenAthena for iOS
 
 An iOS port of the [OpenAthena project](http://OpenAthena.com)
 
+Find it the [App Store](https://apps.apple.com/us/app/openathena/id6448763554)
+
+<a href='https://apps.apple.com/us/app/id6448763554'><img width="216" alt='Get it on App Store' src="./OpenAthenaIOS/examples/get-on-app-store.png"></a>
+
 OpenAthena™ allows common drones to spot precise geodetic locations.
 
 🖼️👨‍💻 + 🧮⛰️ = 🎯📍
