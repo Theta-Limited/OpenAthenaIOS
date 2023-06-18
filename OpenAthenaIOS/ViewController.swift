@@ -39,6 +39,21 @@ class ViewController: UIViewController {
         textView.isEditable = false
         textView.isSelectable = true
         
+      
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named:"athena")
+        
+        // let pinchGesture = UIPanGestureRecognizer(target: self,
+        //                                         action: #selector(didPinch(_:)))
+        //
+        // textView.addGestureRecognizer(pinchGesture)
+        
+        doMain()
+        
+    } // viewDidLoad
+    
+    private func doMain()
+    {
         htmlString = "OpenAthena alpha v\(version) starting<br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
         //htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
@@ -49,15 +64,15 @@ class ViewController: UIViewController {
         
         setTextViewText(htmlStr: htmlString)
         
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named:"athena")
-        
-        // let pinchGesture = UIPanGestureRecognizer(target: self,
-        //                                         action: #selector(didPinch(_:)))
-        //
-        // textView.addGestureRecognizer(pinchGesture)
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("ViewController viewWillAppear invoked")
+        doMain()
+                
+    } // viewWillAppear
     
     @objc private func didPinch(_ gesture: UIPinchGestureRecognizer) {
         print("didPinch invoked")

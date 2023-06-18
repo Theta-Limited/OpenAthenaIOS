@@ -85,6 +85,8 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         
     } // viewDidLoad
     
+    
+    
     private func getAbout()
     {
         let htmlString = "<!DOCTYPE html><html><body><h2>OpenAthena alpha version \(vc!.getAppVersion())</h2>"
