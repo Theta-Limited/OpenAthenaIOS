@@ -47,10 +47,9 @@ from the above web link.  Method one makes use of [Open Topography
 SRTM elevation
 data](https://portal.opentopography.org/raster?opentopoID=OTSRTM.082015.4326.1)
 
-If you try to load an elevation model containing TIFF compression, the
-application will crash.  Currently, its not possible to intercept this
-crash (in Swift parlance, catch the exception) because the app is
-written in Swift and the library is written in Objective-C.
+If you try to load or use an elevation model containing TIFF
+compression, the application will catch the NSException and not
+compute the altitude for the target location.
 
 ## Load a GeoTIFF Digital Elevation Model  ⛰:
 

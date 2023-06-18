@@ -1,122 +1,123 @@
 {
-    "lastUpdate": "Tue May 30 09:59:30 AM EDT 2023",
+    "lastUpdate": "Fri Jun 16 04:39:00 PM EDT 2023",
 
     "droneCCDParams": [
 	{
-        "makeModel": "djiFC220",
-	    "ccdWidthMMPerPixel" : "6.17/4000.0",
-	    "ccdHeightMMPerPixel" :  "4.55/3000.0",
+            "makeModel": "djiFC220",
+	    "ccdWidthMMPerPixel" : "6.32692/4000.0",
+	    "ccdHeightMMPerPixel" :  "4.7452/3000.0",
 	    "widthPixels": 4000.0,
 	    "heightPixels": 3000.0,
-        "comment": "DJI Mavic Pro / Mavic Pro Platinum"
+            "comment": "DJI Mavic Pro / Mavic Pro Platinum"
         },
 	
 	{
-        "makeModel": "djiFC230",
+            "makeModel": "djiFC230",
 	    "ccdWidthMMPerPixel": "6.17/4056.0",
 	    "ccdHeightMMPerPixel": "4.55/3040.0", 
 	    "widthPixels": 4048.0, 
 	    "heightPixels": 3032.0,
-        "comment": "DJI Mavic Air"
+            "comment": "DJI Mavic Air"
         },
 
 	{
-        "makeModel": "djiFC330",
-	    "ccdWidthMMPerPixel": "6.2372/4024.0", 
-	    "ccdHeightMMPerPixel": "4.7058/3036.0", 
+            "makeModel": "djiFC330",
+	    "ccdWidthMMPerPixel": "6.3174/4024.0", 
+	    "ccdHeightMMPerPixel": "4.73812/3036.0", 
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0, 
-        "comment": "DJI Phantom 4, appears to be a Sony IMX377 CMOS https://forum.dji.com/thread-47292-1-1.html"
+            "comment": "DJI Phantom 4, appears to be a Sony IMX377 CMOS https://forum.dji.com/thread-47292-1-1.html"
         },
 
 	{
         "makeModel": "djiFC6310",
-	    "ccdWidthMMPerPixel": "13.2/5472.0", 
-	    "ccdHeightMMPerPixel": "8.8/3648.0", 
+	    "ccdWidthMMPerPixel": "12.83332/5472.0", 
+	    "ccdHeightMMPerPixel": "8.55554/3648.0", 
 	    "widthPixels": 5472.0, 
 	    "heightPixels": 3648.0,
-        "comment": "DJI Phantom 4 Pro, DJI Phantom 4 Advanced"
+            "comment": "DJI Phantom 4 Pro, DJI Phantom 4 Advanced"
         },
 
 	{
-        "makeModel": "djiFC6310S",
-	    "ccdWidthMMPerPixel": "13.2/5472.0", 
-	    "ccdHeightMMPerPixel": "8.8/3648.0", 
+            "makeModel": "djiFC6310S",
+	    "ccdWidthMMPerPixel": "12.83332/5472.0", 
+	    "ccdHeightMMPerPixel": "8.55554/3648.0", 
 	    "widthPixels": 5472.0, 
 	    "heightPixels": 3648.0,
-        "comment": "DJI Phantom 4 Pro, DJI Phantom 4 Advanced"
+            "comment": "DJI Phantom 4 Pro, DJI Phantom 4 Advanced"
         },
         
 	{
-        "makeModel": "djiFC6360",
-	    "ccdWidthMMPerPixel": "4.96/1600.0", 
-	    "ccdHeightMMPerPixel": "3.72/1300.0", 
+            "makeModel": "djiFC6360",
+	    "ccdWidthMMPerPixel": "4.902986/1600.0", 
+	    "ccdHeightMMPerPixel": "4.014978/1300.0", 
 	    "widthPixels": 1600.0, 
 	    "heightPixels": 1300.0, 
-        "comment": "DJI Phantom 4 Multispectral, 1/2.9in CMOS sensor"
+            "comment": "DJI Phantom 4 Multispectral, 1/2.9in CMOS sensor"
         },
 
 	{
-        "makeModel": "djiFC300C",
-	    "ccdWidthMMPerPixel": "6.17/4000.0",
-	    "ccdHeightMMPerPixel": "4.55/3000.0",
+            "makeModel": "djiFC300C",
+	    "ccdWidthMMPerPixel": "6.3175/4000.0",
+	    "ccdHeightMMPerPixel": "4.73812/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
-        "comment": "DJI Phantom 3 SE"
+            "comment": "DJI Phantom 3 SE"
         },
 
 	{
-        "makeModel": "djiFC300S",
-	    "ccdWidthMMPerPixel": "6.17/4000.0",
-	    "ccdHeightMMPerPixel": "4.55/3000.0",
+            "makeModel": "djiFC300S",
+
+	    "ccdWidthMMPerPixel": "6.3175/4000.0",
+	    "ccdHeightMMPerPixel": "4.73812/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
-        "comment": "DJI Phantom 3 SE"
+            "comment": "DJI Phantom 3 SE"
         },
 
 	{
-        "makeModel": "djiFC300X",
-	    "ccdWidthMMPerPixel": "6.17/4000.0",
-	    "ccdHeightMMPerPixel": "4.55/3000.0",
+            "makeModel": "djiFC300X",
+	    "ccdWidthMMPerPixel": "6.3175/4000.0",
+	    "ccdHeightMMPerPixel": "4.73812/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
-        "comment": "DJI Phantom 3 SE"
+            "comment": "DJI Phantom 3 SE"
         },
 	
 	{
-        "makeModel": "djiFC300XW",
-	    "ccdWidthMMPerPixel": "6.17/4000.0",
-	    "ccdHeightMMPerPixel": "4.55/3000.0",
+            "makeModel": "djiFC300XW",
+	    "ccdWidthMMPerPixel": "6.3175/4000.0",
+	    "ccdHeightMMPerPixel": "4.73812/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
-        "comment": "DJI Phantom 3 SE"
+            "comment": "DJI Phantom 3 SE"
         },
 
 	{
         "makeModel": "djiFC200",
 	    "ccdWidthMMPerPixel": "6.17/4384.0",
-	    "ccdHeightMMPerPixel": "4.55/3288.0",
+	    "ccdHeightMMPerPixel": "4.6275/3288.0",
 	    "widthPixels": 4384.0, 
 	    "heightPixels": 4384.0,
-        "comment": "DJI Phantom 2 Vision"
+            "comment": "DJI Phantom 2 Vision"
         },
 
 	{
         "makeModel": "djiPHANTOM VISION FC200",
 	    "ccdWidthMMPerPixel": "6.17/4384.0",
-	    "ccdHeightMMPerPixel": "4.55/3288.0",
+	    "ccdHeightMMPerPixel": "4.6275/3288.0",
 	    "widthPixels": 4384.0, 
 	    "heightPixels": 4384.0,
-        "comment": "DJI Phantom 2 Vision"
+            "comment": "DJI Phantom 2 Vision"
         },
 
 	{
         "makeModel": "djiFC7203",
-	    "ccdWidthMMPerPixel": "6.17/4000.0",
-	    "ccdHeightMMPerPixel": "4.55/3000.0",
+	    "ccdWidthMMPerPixel": "6.577876/4000.0",
+	    "ccdHeightMMPerPixel": "4.91094/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
-        "comment": "DJI Mini"
+            "comment": "DJI Mini"
         },
 
 	{
@@ -125,7 +126,7 @@
 	    "ccdHeightMMPerPixel": "4.55/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
-        "comment": "DJI Mini 2"
+            "comment": "DJI Mini 2"
         },
 	
 	{
@@ -134,13 +135,13 @@
 	    "ccdHeightMMPerPixel": "7.3/6048.0",
 	    "widthPixels": 8064.0, 
 	    "heightPixels": 6048.0,
-            "comment": "DJI Mini 3 Pro // METADATA NOT COMPATIBLE WITH OPENATHENA"
+            "comment": "DJI Mini 3 Pro TODO improve these values, not compat with OA?"
         },
         
 	{
         "makeModel": "djiFC2200",
-	    "ccdWidthMMPerPixel": "6.17/4000.0",
-	    "ccdHeightMMPerPixel": "4.55/3000.0",
+	    "ccdWidthMMPerPixel": "6.3175/4000.0",
+	    "ccdHeightMMPerPixel": "4.73812/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
             "comment": "DJI Mavic 2 Zoom"
@@ -148,8 +149,8 @@
 
 	{
         "makeModel": "djiFC2204",
-	    "ccdWidthMMPerPixel": "6.17/4000.0",
-	    "ccdHeightMMPerPixel": "4.55/3000.0",
+	    "ccdWidthMMPerPixel": "6.3175/4000.0",
+	    "ccdHeightMMPerPixel": "4.73812/3000.0",
 	    "widthPixels": 4000.0, 
 	    "heightPixels": 3000.0,
             "comment": "Mavic 2 Enterprise Zoom"
@@ -157,8 +158,8 @@
 
 	{
             "makeModel": "djiL1D-20C",
-	    "ccdWidthMMPerPixel": "13.2/5472.0",
-	    "ccdHeightMMPerPixel": "8.8/3648.0",
+	    "ccdWidthMMPerPixel": "12.825/5472.0",
+	    "ccdHeightMMPerPixel": "8.55/3648.0",
 	    "widthPixels": 5472.0, 
 	    "heightPixels": 3648.0,
             "comment": "DJI Mavic 2 Pro, hasselblad"
@@ -166,8 +167,8 @@
 
 	{
             "makeModel": "djiL2D-20C",
-	    "ccdWidthMMPerPixel": "17.3/5280.0",
-	    "ccdHeightMMPerPixel": "13.0/3956.0",
+	    "ccdWidthMMPerPixel": "17.902472/5280.0",
+	    "ccdHeightMMPerPixel": "13.357522/3956.0",
 	    "widthPixels": 5280.0, 
 	    "heightPixels": 3956.0,
             "comment": "DJI Mavic 3 Main Hasselblad Camera"
@@ -184,8 +185,8 @@
 
 	{
             "makeModel": "djiM3E",
-	    "ccdWidthMMPerPixel": "17.3/5280.0",
-	    "ccdHeightMMPerPixel": "13.0/3956.0",
+	    "ccdWidthMMPerPixel": "17.456274/5280.0",
+	    "ccdHeightMMPerPixel": "12.988404/3956.0",
 	    "widthPixels": 5280.0, 
 	    "heightPixels": 3956.0,
             "comment": "DJI Mavic 3 Enterprise Main Hasselblad Camera"
@@ -193,8 +194,8 @@
 
 	{
             "makeModel": "djiM3T",
-	    "ccdWidthMMPerPixel": "6.4/8000.0",
-	    "ccdHeightMMPerPixel": "4.8/6000.0",
+	    "ccdWidthMMPerPixel": "6.430908/8000.0",
+	    "ccdHeightMMPerPixel": "4.838406/6000.0",
 	    "widthPixels": 8000.0, 
 	    "heightPixels": 6000.0,
             "comment": "DJI Mavic 3 Thermal (color camera)"
@@ -202,8 +203,8 @@
 
 	{
             "makeModel": "djiFC2103",
-	    "ccdWidthMMPerPixel": "6.17/4056.0",
-	    "ccdHeightMMPerPixel": "4.55/3040.0",
+	    "ccdWidthMMPerPixel": "6.097268/4056.0",
+	    "ccdHeightMMPerPixel": "4.337884/3040.0",
 	    "widthPixels": 4048.0, 
 	    "heightPixels": 3032.0,
             "comment": "DJI Mavic 2 Enterprise Dual"
@@ -211,17 +212,17 @@
 
 	{
             "makeModel": "djiFC2403",
-	    "ccdWidthMMPerPixel": "1.92/640.0",
-	    "ccdHeightMMPerPixel": "1.44/480.0",
-	    "widthPixels": 640.0, 
-	    "heightPixels": 480.0,
+	    "ccdWidthMMPerPixel": "6.49952/4056.0",
+	    "ccdHeightMMPerPixel": "4.944222/3040.0",
+	    "widthPixels": 4056.0, 
+	    "heightPixels": 3040.0,
             "comment": "DJI Mavic 2 Enterprise Dual thermal sensor, Teledyne FLIR Lepton 3.5 sensor, 160x120 px sensor, upscaled by software to 640x480 px"
         },
 
 	{
             "makeModel": "djiFC3170",
-	    "ccdWidthMMPerPixel": "6.4/8000.0",
-	    "ccdHeightMMPerPixel": "4.8/6000.0",
+	    "ccdWidthMMPerPixel": "6.623518/8000.0",
+	    "ccdHeightMMPerPixel": "4.854492/6000.0",
 	    "widthPixels": 8000.0, 
 	    "heightPixels": 6000.0,
             "comment": "DJI Mavic Air 2, possibly DJI Mavic 2 Enterprise Advanced? // UNKNOWN COMPATIBILITY"
@@ -229,8 +230,8 @@
 	
 	{
             "makeModel": "djiFC3411",
-	    "ccdWidthMMPerPixel": "13.2/5472.0",
-	    "ccdHeightMMPerPixel": "8.8/3648.0",
+	    "ccdWidthMMPerPixel": "13.192066/5472.0",
+	    "ccdHeightMMPerPixel": "9.002534/3648.0",
 	    "widthPixels": 5472.0, 
 	    "heightPixels": 3648.0,
             "comment": "DJI Mavic Air 2S // METADATA NOT COMPATIBLE WITH OPENATHENA"
@@ -238,8 +239,8 @@
 	
 	{
             "makeModel": "djiFC6510",
-	    "ccdWidthMMPerPixel": "13.1/5472.0",
-	    "ccdHeightMMPerPixel": "8.76/3648.0",
+	    "ccdWidthMMPerPixel": "12.80942/5472.0",
+	    "ccdHeightMMPerPixel": "8.58222/3648.0",
 	    "widthPixels": 5472.0, 
 	    "heightPixels": 3648.0,
             "comment": "DJI Zenmuse X4S (Inspire 2)"
@@ -247,8 +248,8 @@
 	
 	{
             "makeModel": "djiFC550",
-	    "ccdWidthMMPerPixel": "17.3/4608.0",
-	    "ccdHeightMMPerPixel": "13.0/3456.0",
+	    "ccdWidthMMPerPixel": "17.5/4608.0",
+	    "ccdHeightMMPerPixel": "13.125/3456.0",
 	    "widthPixels": 4608.0, 
 	    "heightPixels": 3456.0,
             "comment": "DJI Zenmuse X5 (Inspire 1)"
@@ -256,8 +257,8 @@
 
 	{
             "makeModel": "djiFC550RAW",
-	    "ccdWidthMMPerPixel": "17.3/4608.0",
-	    "ccdHeightMMPerPixel": "13.0/3456.0",
+	    "ccdWidthMMPerPixel": "17.5/4608.0",
+	    "ccdHeightMMPerPixel": "13.125/3456.0",
 	    "widthPixels": 4608.0, 
 	    "heightPixels": 3456.0,
             "comment": "DJI Zenmuse X5 (Inspire 1)"
@@ -265,8 +266,8 @@
 
 	{
             "makeModel": "djiFC550R",
-	    "ccdWidthMMPerPixel": "17.3/4608.0",
-	    "ccdHeightMMPerPixel": "13.0/3456.0",
+	    "ccdWidthMMPerPixel": "17.5/4608.0",
+	    "ccdHeightMMPerPixel": "13.125/3456.0",
 	    "widthPixels": 4608.0, 
 	    "heightPixels": 3456.0,
             "comment": "DJI Zenmuse X5 (Inspire 1)"
@@ -274,8 +275,8 @@
 
 	{
             "makeModel": "djiFC6520",
-	    "ccdWidthMMPerPixel": "18.0/5280.0",
-	    "ccdHeightMMPerPixel": "13.5/3956.0",
+	    "ccdWidthMMPerPixel": "17.8855/5280.0",
+	    "ccdHeightMMPerPixel": "12.66604/3956.0",
 	    "widthPixels": 5280.0, 
 	    "heightPixels": 3956.0,
             "comment": "DJI Zenmuse X5S (Inspire 2)"
@@ -283,8 +284,8 @@
 
 	{
             "makeModel": "djiFC6540",
-	    "ccdWidthMMPerPixel": "23.5/6016.0",
-	    "ccdHeightMMPerPixel": "15.7/4008.0",
+	    "ccdWidthMMPerPixel": "23.321566/6016.0",
+	    "ccdHeightMMPerPixel": "15.771348/4008.0",
 	    "widthPixels": 6016.0, 
 	    "heightPixels": 4008.0,
             "comment": "DJI Zenmuse X7 (Inspire 2)"
@@ -310,19 +311,19 @@
 
 	{
             "makeModel": "djiZENMUSEH20T",
-	    "ccdWidthMMPerPixel": "7.68/640.0",
-	    "ccdHeightMMPerPixel": "6.144/512.0",
-	    "widthPixels": 640.0, 
-	    "heightPixels": 512.0,
+	    "ccdWidthMMPerPixel": "6.576918/4056.0",
+	    "ccdHeightMMPerPixel": "4.96953/3040.0",
+	    "widthPixels": 4056.0, 
+	    "heightPixels": 3040.0,
             "comment": ""
         },
 
 	{
             "makeModel": "djiZH20T",
-	    "ccdWidthMMPerPixel": "7.68/640.0",
-	    "ccdHeightMMPerPixel": "6.144/512.0",
-	    "widthPixels": 640.0, 
-	    "heightPixels": 512.0,
+	    "ccdWidthMMPerPixel": "6.576918/4056.0",
+	    "ccdHeightMMPerPixel": "4.96953/3040.0",
+	    "widthPixels": 4056.0, 
+	    "heightPixels": 3040.0,
             "comment": ""
         },
 
@@ -364,26 +365,35 @@
         
 	{
             "makeModel": "djiMAVIC2-ENTERPRISE-ADVANCED",
-	    "ccdWidthMMPerPixel": "7.68/640.0",
-	    "ccdHeightMMPerPixel": "6.144/512.0",
-	    "widthPixels": 640.0, 
-	    "heightPixels": 512.0,
+	    "ccdWidthMMPerPixel": "6.407596/8000.0",
+	    "ccdHeightMMPerPixel": "4.867836/6000.0",
+	    "widthPixels": 8000.0, 
+	    "heightPixels": 6000.0,
             "comment": "DJI Mavic 2 Enterprise Advanced (M2EA) thermal camera"
         },
 
 	{
+            "makeModel": "djiM2EA",
+	    "ccdWidthMMPerPixel": "6.407596/8000.0",
+	    "ccdHeightMMPerPixel": "4.867836/6000.0",
+	    "widthPixels": 8000.0, 
+	    "heightPixels": 6000.0,
+            "comment": "DJI Mavic 2 Enterprise Advanced (M2EA) thermal camera"
+        },
+	
+	{
             "makeModel": "ZENMUSEP1",
-	    "ccdWidthMMPerPixel": "35.9/8192.0",
-	    "ccdHeightMMPerPixel": "24.0/5460.0",
+	    "ccdWidthMMPerPixel": "34.824566/8192.0",
+	    "ccdHeightMMPerPixel": "23.474776/5460.0",
 	    "widthPixels": 8192.0, 
 	    "heightPixels": 5460.0,
             "comment": "DJI Zenmuse P1 (Matrice 300 series payload) has a full frame, 45 MP camera!"
         },
 
 	{
+	    "ccdWidthMMPerPixel": "34.824566/8192.0",
+	    "ccdHeightMMPerPixel": "23.474776/5460.0",
             "makeModel": "djiZP1",
-	    "ccdWidthMMPerPixel": "35.9/8192.0",
-	    "ccdHeightMMPerPixel": "24.0/5460.0",
 	    "widthPixels": 8192.0, 
 	    "heightPixels": 5460.0,
             "comment": "DJI Zenmuse P1 (Matrice 300 series payload) has a full frame, 45 MP camera!"
@@ -391,8 +401,8 @@
 
 	{
             "makeModel": "djiZENMUSEXT2",
-	    "ccdWidthMMPerPixel": "7.53/4056.0",
-	    "ccdHeightMMPerPixel": "5.64/3040.0",
+	    "ccdWidthMMPerPixel": "7.5036/4056.0",
+	    "ccdHeightMMPerPixel": "5.624/3040.0",
 	    "widthPixels": 4056.0, 
 	    "heightPixels": 3040.0,
             "comment": "DJI Zenmuse XT and XT2 color camera (discontinued Matrice 300 series payload)"
@@ -445,8 +455,8 @@
 	
 	{
             "makeModel": "djiFC1102",
-	    "ccdWidthMMPerPixel": "6.17/3968.0",
-	    "ccdHeightMMPerPixel": "4.55/2976.0",
+	    "ccdWidthMMPerPixel": "6.260924/3968.0",
+	    "ccdHeightMMPerPixel": "4.670134/2976.0",
 	    "widthPixels": 3968.0,
 	    "heightPixels": 2976.0,
             "comment": "DJI Spark"
@@ -508,8 +518,8 @@
 	
 	{
             "makeModel": "Autel RoboticsXT701" ,
-	    "ccdWidthMMPerPixel": "6.40/8000.0",
-	    "ccdHeightMMPerPixel": "4.80/6000.0",
+	    "ccdWidthMMPerPixel": "6.433608/7680",
+	    "ccdHeightMMPerPixel": "5.014122/6000.0",
 	    "widthPixels": 8000.0, 
 	    "heightPixels": 6000.0,
             "comment": "Autel EVO II camera"
@@ -517,8 +527,8 @@
         
 	{
             "makeModel": "Autel RoboticsXT705",
-	    "ccdWidthMMPerPixel": "13.2/5472.0",
-	    "ccdHeightMMPerPixel": "8.8/3648.0",
+	    "ccdWidthMMPerPixel": "12.75016/5472.0",
+	    "ccdHeightMMPerPixel": "8.690014/3648.0",
 	    "widthPixels": 5472.0,
 	    "heightPixels": 3648.0,
             "comment": "Autel EVO II Pro camera, Sony IMX383 CMOS sensor, https://commonlands.com/blogs/technical/cmos-sensor-size, https://www.sony-semicon.com/files/62/pdf/p-13_IMX383-AAQK_Flyer.pdf"
@@ -535,17 +545,44 @@
 	
 	{
             "makeModel": "parrotANAFI",
-	    "ccdWidthMMPerPixel": "6.40/8000.0",
-	    "ccdHeightMMPerPixel": "4.80/6000.0",
+	    "ccdWidthMMPerPixel": "5.963396/5344.0",
+	    "ccdHeightMMPerPixel": "4.428166/4016.0",
 	    "widthPixels": 8000.0, 
 	    "heightPixels": 6000.0,
-            "comment": "1/2in 42 MP unnamed sensor"
+            "comment": "Sony IMX230 CMOS sensor"
+        },
+
+	{
+            "makeModel": "parrotANAFIUSA",
+	    "ccdWidthMMPerPixel": "5.963396/5344.0",
+	    "ccdHeightMMPerPixel": "4.428166/4016.0",
+	    "widthPixels": 8000.0, 
+	    "heightPixels": 6000.0,
+            "comment": "Sony IMX230 CMOS sensor"
+        },
+	
+	{
+            "makeModel": "parrotANAFIUA",
+	    "ccdWidthMMPerPixel": "5.963396/5344.0",
+	    "ccdHeightMMPerPixel": "4.428166/4016.0",
+	    "widthPixels": 8000.0, 
+	    "heightPixels": 6000.0,
+            "comment": "Sony IMX230 CMOS sensor"
+        },
+
+	{
+            "makeModel": "parrotANAFIAI",
+	    "ccdWidthMMPerPixel": "6.636112/8000.0",
+	    "ccdHeightMMPerPixel": "4.941216/6000.0",
+	    "widthPixels": 8000.0, 
+	    "heightPixels": 6000.0,
+            "comment": "1/2in unnamed sensor"
         },
 	
 	{
             "makeModel": "parrotBEBOP 2",
-	    "ccdWidthMMPerPixel": "6.16/4096.0",
-	    "ccdHeightMMPerPixel": "4.62/3072.0",
+	    "ccdWidthMMPerPixel": "5.7344/4096.0",
+	    "ccdHeightMMPerPixel": "4.648/3072.0",
 	    "widthPixels": 4096.0, 
 	    "heightPixels": 3072.0,
             "comment": "1/2.3in 14 MP unnamed sensor"

@@ -20,6 +20,8 @@ final class TestDroneParams: XCTestCase {
         try super.setUpWithError()
         
         droneParams = DroneParams()
+        
+        print("Drone params json file dated \(droneParams!.droneParamsLastUpdate)")
     }
 
     func testDroneParamsLoad()

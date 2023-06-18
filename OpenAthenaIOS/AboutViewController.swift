@@ -102,6 +102,7 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         + "<li><a href='https://github.com/Dimowner/WGS84_TO_SK42/'>WGS84 to CK42 library</a></li>"
         + "<li><a href='https://github.com/ngageoint/'>National Geospatial-Intelligence Agency MGRS conversion library</a></li>"
         + "<li><a href='https://github.com/wtw-software/UTMConversion'>UTMConversion</a></li>"
+        + "<li><a href='https://github.com/ky1vstar/NSExceptionSwift'>NSExceptionSwift</a></li>"
         + "</ul>"
         
         // privacy policy
