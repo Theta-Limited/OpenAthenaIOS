@@ -50,7 +50,23 @@ class EGM96Geoid {
         // EGM96complete.bin is gzip'd data file
         if let filePath = Bundle.main.path(forResource: "EGM96complete", ofType: "bin") {
             do {
-                let fileData = try Data(contentsOf: URL(fileURLWithPath: filePath))
+                var fileData = try Data(contentsOf: URL(fileURLWithPath: filePath))
+ 
+                print("initEGM96Geoid: read data of size \(fileData.count) bytes")
+
+                // eat the first two bytes 0x78, 0x9c as a test as that might
+                // be screwing up the zlib decompression
+                
+                // eat the first two bytes 0x78, 0x9c as a test
+                // zlib on iOS may not like these two bytes? XXX
+                
+                fileData.removeFirst(2)
+                
+                // remove last 4 bytes which is a checksum
+                fileData.removeLast(4)
+
+                print("initEGM96Geoid: calling readEGM96GeoidOffsets with \(fileData.count) bytes")
+
                 s_model_ok = readEGM96GeoidOffsets(data: fileData)
             } catch {
                 s_model_ok = false
@@ -253,16 +269,28 @@ class EGM96Geoid {
     // handle reading with dos \r\n In this version, the lines are
     // split based on the DOS carriage return (\r) character, and each
     // line is trimmed of any leading or trailing newlines.
+    
+    
     private static func readEGM96GeoidOffsets(data: Data) -> Bool {
         assignMissingOffsets()
 
-        let decompressedData: Data
+        var decompressedData: Data
         do {
-            decompressedData = try data.gunzipped()
+            print("Uncompressing \(data.count) bytes")
+            print("First few bytes \(data.bytes[0..<10])")
+            
+            
+            
+            decompressedData = try (data as NSData).decompressed(using: .zlib) as Data
+            print("Decompression returned \(decompressedData.count) bytes")
+            
         } catch {
             print("Failed to decompress data: \(error)")
             return false
         }
+        
+        // print first few bytes of decompressed data
+        print("First few uncompressed bytes \(decompressedData.bytes[0..<10])")
 
         let lines = decompressedData.split(separator: 13) // 13 is the ASCII code for carriage return (\r)
 
@@ -270,6 +298,7 @@ class EGM96Geoid {
             let lineString = String(data: line, encoding: .utf8)?.trimmingCharacters(in: .newlines) ?? ""
 
             if lineIsOk(line: lineString) {
+
                 let tokens = lineString.split(separator: " ")
                 if tokens.count != 3 {
                     print("Error: Found \(tokens.count) tokens on line: \(lineString)")
@@ -306,15 +335,15 @@ class EGM96Geoid {
 
         return !hasMissingOffsets()
     }
-
-
     
     private static func readEGM96GeoidOffsetsUNIX(data: Data) -> Bool {
         assignMissingOffsets()
 
         let decompressedData: Data
         do {
-            decompressedData = try data.gunzipped()
+            
+            decompressedData = try (data as NSData).decompressed(using: .zlib) as Data
+            
         } catch {
             print("Failed to decompress data: \(error)")
             return false
@@ -369,6 +398,11 @@ class EGM96Geoid {
         }
 
         if line.hasSuffix(INVALID_OFFSET) {
+            return false
+        }
+        
+        // eat blank links or lines with space at beginning -- rdk
+        if line.isEmpty {
             return false
         }
 
@@ -477,36 +511,3 @@ class EGM96Geoid {
     }
 
 } // EGM96Geoid
-
-enum CompressionError: Error {
-    case compressionFailed
-}
-
-extension Data {
-    func gunzipped() throws -> Data {
-        return try self.withUnsafeBytes { (sourceBytes: UnsafeRawBufferPointer) -> Data in
-            let sourcePtr = sourceBytes.bindMemory(to: UInt8.self).baseAddress!
-            let sourceSize = self.count
-
-            let destinationSize = sourceSize * 2 // Initial guess at the maximum size of the output buffer
-            var destinationBuffer = [UInt8](repeating: 0, count: destinationSize)
-            var actualDestinationSize = destinationSize
-
-            let status = compression_decode_buffer(&destinationBuffer, actualDestinationSize, sourcePtr, sourceSize, nil, COMPRESSION_ZLIB)
-            guard status > 0 else {
-                throw CompressionError.compressionFailed
-            }
-
-            // actualDestinationSize may not be updated in call to compression_decode_buffer XXX because
-            // its not an inout parameter
-            
-            // according to documentation, status returned from compression_decode_buffer is the actual
-            // number of buytes written to buffer after decompressiong the input
-            
-            actualDestinationSize = status
-            
-            let decompressedData = Data(bytes: destinationBuffer, count: actualDestinationSize)
-            return decompressedData
-        }
-    }
-}
