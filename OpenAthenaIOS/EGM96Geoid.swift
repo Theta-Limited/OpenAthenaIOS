@@ -9,6 +9,7 @@
 // mods and tweaks by Matthew Krupczak, Bobby Krupczak
 
 import Foundation
+import Compression
 
 class EGM96Geoid {
 
@@ -146,7 +147,7 @@ class EGM96Geoid {
         let u = (target.latitude - u1 + LATITUDE_STEP) / (4 * LATITUDE_STEP)
         let v = (target.longitude - v1 + LONGITUDE_STEP) / (4 * LONGITUDE_STEP)
 
-        let c = Cubic(type: .BEZIER, points: G)
+        let c = Cubic( matrix2D: Cubic.BEZIER, G: G)
 
         return c.eval(u: u, v: v)
     }
@@ -167,7 +168,7 @@ class EGM96Geoid {
             lat += LATITUDE_STEP
         }
 
-        return EGM96Location(latitude: lat, longitude: lng)
+        return EGM96Location(lat: lat, lng: lng)
     }
 
     static func getLowerLocation(location: EGM96Location) -> EGM96Location {
@@ -186,7 +187,7 @@ class EGM96Geoid {
             lat -= LATITUDE_STEP
         }
 
-        return EGM96Location(latitude: lat, longitude: lng)
+        return EGM96Location(lat: lat, lng: lng)
     }
 
     static func getLeftLocation(location: EGM96Location) -> EGM96Location {
@@ -195,7 +196,7 @@ class EGM96Geoid {
 
         lng -= LONGITUDE_STEP
 
-        return EGM96Location(latitude: lat, longitude: lng)
+        return EGM96Location(lat: lat, lng: lng)
     }
 
     static func getRightLocation(location: EGM96Location) -> EGM96Location {
@@ -204,11 +205,11 @@ class EGM96Geoid {
 
         lng += LONGITUDE_STEP
 
-        return EGM96Location(latitude: lat, longitude: lng)
+        return EGM96Location(lat: lat, lng: lng)
     }
 
     static func getGridFloorLocation(lat: Double, lng: Double) -> EGM96Location {
-        let floor = EGM96Location(latitude: lat, longitude: lng).floor(step: LATITUDE_STEP)
+        let floor = EGM96Location(lat: lat, lng: lng).floorLocation(step: LATITUDE_STEP)
         var latFloor = floor.latitude
 
         if lat >= LATITUDE_MAX_GRID && lat < LATITUDE_MAX {
@@ -219,7 +220,7 @@ class EGM96Geoid {
             latFloor = LATITUDE_MIN_GRID
         }
 
-        return EGM96Location(latitude: latFloor, longitude: floor.longitude)
+        return EGM96Location(lat: latFloor, lng: floor.longitude)
     }
 
     static func getGridOffset(location: EGM96Location) -> Double {
@@ -275,7 +276,7 @@ class EGM96Geoid {
                 }
 
                 if let lat = Double(tokens[0]), let lng = Double(tokens[1]), let off = Double(tokens[2]) {
-                    if latLongOk(lat: lat, lng: lng, line: lineString) {
+                    if latLongOk(lat: lat, lng: lng) {
                         var i_lat = 0
                         var j_lng = 0
 
@@ -331,7 +332,7 @@ class EGM96Geoid {
                 }
 
                 if let lat = Double(tokens[0]), let lng = Double(tokens[1]), let off = Double(tokens[2]) {
-                    if latLongOk(lat: lat, lng: lng, line: lineString) {
+                    if latLongOk(lat: lat, lng: lng) {
                         var i_lat = 0
                         var j_lng = 0
 
@@ -400,6 +401,20 @@ class EGM96Geoid {
         return false
     }
 
+    // ChatGPT forgot to include this function!
+    // ChatGPT botched line arg so we dropped it; only used for error printing
+    
+    private static func latLongOk(lat: Double, lng: Double) -> Bool
+    {
+        if latOk(lat: lat) == false {
+            return false
+        }
+        if lngOkGrid(lng: lng) == false {
+            return false
+        }
+        return true
+    }
+    
     private static func latOk(lat: Double) -> Bool {
         let lat_in_bounds = lat >= LATITUDE_MIN && lat <= LATITUDE_MAX
         return lat_in_bounds
@@ -463,3 +478,35 @@ class EGM96Geoid {
 
 } // EGM96Geoid
 
+enum CompressionError: Error {
+    case compressionFailed
+}
+
+extension Data {
+    func gunzipped() throws -> Data {
+        return try self.withUnsafeBytes { (sourceBytes: UnsafeRawBufferPointer) -> Data in
+            let sourcePtr = sourceBytes.bindMemory(to: UInt8.self).baseAddress!
+            let sourceSize = self.count
+
+            let destinationSize = sourceSize * 2 // Initial guess at the maximum size of the output buffer
+            var destinationBuffer = [UInt8](repeating: 0, count: destinationSize)
+            var actualDestinationSize = destinationSize
+
+            let status = compression_decode_buffer(&destinationBuffer, actualDestinationSize, sourcePtr, sourceSize, nil, COMPRESSION_ZLIB)
+            guard status > 0 else {
+                throw CompressionError.compressionFailed
+            }
+
+            // actualDestinationSize may not be updated in call to compression_decode_buffer XXX because
+            // its not an inout parameter
+            
+            // according to documentation, status returned from compression_decode_buffer is the actual
+            // number of buytes written to buffer after decompressiong the input
+            
+            actualDestinationSize = status
+            
+            let decompressedData = Data(bytes: destinationBuffer, count: actualDestinationSize)
+            return decompressedData
+        }
+    }
+}

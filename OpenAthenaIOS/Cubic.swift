@@ -6,25 +6,25 @@
 // Ken Perlin
 
 class Cubic {
-    let BEZIER: [[Double]] = [      // Bezier basis matrix
+    static let BEZIER: [[Double]] = [      // Bezier basis matrix
         [-1  ,  3  , -3  , 1  ],
         [ 3  , -6  ,  3  , 0  ],
         [-3  ,  3  ,  0  , 0  ],
         [ 1  ,  0  ,  0  , 0  ]
     ]
-    let BSPLINE: [[Double]] = [     // BSpline basis matrix
+    static let BSPLINE: [[Double]] = [     // BSpline basis matrix
         [-1.0/6,  3.0/6, -3.0/6, 1.0/6],
         [ 3.0/6, -6.0/6,  3.0/6, 0.0   ],
         [-3.0/6,  0.0   ,  3.0/6, 0.0   ],
         [ 1.0/6,  4.0/6,  1.0/6, 0.0   ]
     ]
-    let CATMULL_ROM: [[Double]] = [ // Catmull-Rom basis matrix
+    static let CATMULL_ROM: [[Double]] = [ // Catmull-Rom basis matrix
         [-0.5,  1.5, -1.5,  0.5],
         [ 1.0, -2.5,  2.0, -0.5],
         [-0.5,  0.0,  0.5,  0.0],
         [ 0.0,  1.0,  0.0,  0.0]
     ]
-    let HERMITE: [[Double]] = [     // Hermite basis matrix
+    static let HERMITE: [[Double]] = [     // Hermite basis matrix
         [ 2  , -2  ,  1  ,  1  ],
         [-3  ,  3  , -2  , -1  ],
         [ 0  ,  0  ,  1  ,  0  ],
@@ -54,6 +54,13 @@ class Cubic {
     var T = [[Double]](repeating: [Double](repeating: 0, count: 4), count: 4)    // scratch matrix
 
     init(matrix2D M: [[Double]], G: [[Double]]) {
+        // set a,b,c,d = 0.0 to get rid of compiler warning
+        // not sure they are ever initialized
+        a = 0.0
+        b = 0.0
+        c = 0.0
+        d = 0.0
+        
         for i in 0..<4 {
             for j in 0..<4 {
                 for k in 0..<4 {

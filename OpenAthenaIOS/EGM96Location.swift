@@ -4,6 +4,7 @@
 // ported to swift by ChatGPT-3.5
 
 import Foundation
+import Darwin
 
 public struct EGM96Location {
     // TODO verify if this is meaningful (eg. if this is sufficient for cm accuracy on earth)
@@ -15,8 +16,8 @@ public struct EGM96Location {
     public static let LONGITUDE_MIN_STRICT: Double = 0.0
     public static let LONGITUDE_MAX_STRICT: Double = 360.0
     
-    private var lat: Double
-    private var lng: Double
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
     
     public init() {
         self.init_model(lat: 0.0, lng: 0.0, lenient: true)
@@ -30,7 +31,8 @@ public struct EGM96Location {
         self.init_model( lat: lat, lng: lng, lenient: lenient)
     }
     
-    private mutating func init_model( lat: Double, lng: Double, lenient: Bool) {
+    private mutating func init_model( lat: Double, lng: Double, lenient: Bool)
+    {
         if lenient {
             self.lat = normalizeLat(latitude)
             self.lng = normalizeLong(longitude)
@@ -90,13 +92,13 @@ public struct EGM96Location {
         return abs(lhs.latitude - rhs.latitude) <= EPSILON && abs(lhs.longitude - rhs.longitude) <= EPSILON
     }
     
-    public func floor(step: Double) -> EGM96Location {
+    public func floorLocation(step: Double) -> EGM96Location {
         guard step > 0.0 && step <= 1.0 else {
             fatalError("precision out of bounds (0,1]")
         }
         
-        let latFloor = Double.floor(latitude / step) * step
-        let lngFloor = Double.floor(longitude / step) * step
+        let latFloor = floor(latitude / step) * step
+        let lngFloor = floor(longitude / step) * step
         
         return EGM96Location(lat: latFloor, lng: lngFloor)
     }
