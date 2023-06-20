@@ -62,6 +62,10 @@ class ViewController: UIViewController {
         htmlString += "3: calculate &#129518; <br>"
         htmlString += "<br>Mash the &#127937; button to begin!<br>"
         
+        //let aLocation = EGM96Location(lat: 33.753746, lng: -84.386330)
+        //let offset = EGM96Geoid.getOffset(location: aLocation)
+        //htmlString += "<br>Offset at \(aLocation) is \(offset)m<br>"
+        
         setTextViewText(htmlStr: htmlString)
         
     }

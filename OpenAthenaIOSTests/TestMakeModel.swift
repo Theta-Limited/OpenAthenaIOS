@@ -77,8 +77,8 @@ final class TestMakeModel: XCTestCase {
         let dinfo = try droneParams.lookupDrone(make: cStr,model: mStr)
         XCTAssertEqual(dinfo.widthPixels,4000.0)
         XCTAssertEqual(dinfo.heightPixels,3000.0)
-        XCTAssertEqual(dinfo.ccdWidthMMPerPixel,6.17/4000.0)
-        XCTAssertEqual(dinfo.ccdHeightMMPerPixel,4.55/3000.0)
+        XCTAssertEqual(dinfo.ccdWidthMMPerPixel,6.3175/4000.0)
+        XCTAssertEqual(dinfo.ccdHeightMMPerPixel,4.73812/3000.0)
     }
     
     func testAutellMakeModel() throws

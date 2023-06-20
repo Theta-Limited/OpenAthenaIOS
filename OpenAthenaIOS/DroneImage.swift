@@ -49,6 +49,7 @@ public class DroneImage {
     var targetXprop: CGFloat = 0.5
     var targetYprop: CGFloat = 0.5
     var ccdInfo: DroneCCDInfo?
+    var xmlStringCopy: String?
     
     //init(fromImage image: UIImage, withMetaData data: [AnyHashable:Any]) {
     init(suggestedName aName: String, fromImage image: UIImage,
@@ -307,48 +308,112 @@ public class DroneImage {
         }
         if metaData!["drone-dji:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-dji:AbsoluteAltitude"] as! NSString).doubleValue
-            return alt
+            //return alt
         }
         if metaData!["drone:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone:AbsoluteAltitude"] as! NSString).doubleValue
-            return alt
+            //return alt
         }
         if metaData!["drone-skydio:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-skydio:AbsoluteAltitude"] as! NSString).doubleValue
-            return alt
+            //return alt
         }
         
         // fallback to regular exif gps altitude data
-        if metaData!["{GPS}"] == nil {
-            throw DroneImageError.NoMetaGPSData
-        }
-        gpsInfo = metaData!["{GPS}"] as! NSDictionary
-        if gpsInfo["Altitude"] == nil {
-            throw DroneImageError.MissingMetaDataKey
-        }
+        
         
         // metadata that is parsed by CGImage functions is
         // already in NSCFNumber so it can be typecast to Double
         // directly
         
-        alt = gpsInfo["Altitude"] as! Double
-        
-        // re autel drones, check altitude ref for 1 meaning below sea level XXX
-        if gpsInfo["GPSAltitudeRef"] != nil {
-            let ref = gpsInfo["GPSAltitudeRef"] as! Int
-            //print("GPSAltitude ref is \(ref)")
-            if ref == 1 {
-                alt = -1.0 * alt
+        // if alt is still 0.0, grab here
+        var altFromExif = false
+        if alt == 0.0 {
+            if metaData!["{GPS}"] == nil {
+               throw DroneImageError.NoMetaGPSData
+            }
+            gpsInfo = metaData!["{GPS}"] as! NSDictionary
+            if gpsInfo["Altitude"] == nil {
+                throw DroneImageError.MissingMetaDataKey
+            }
+            alt = gpsInfo["Altitude"] as! Double
+            altFromExif = true
+            
+            // re autel drones, check altitude ref for 1 meaning below sea level XXX
+            if gpsInfo["GPSAltitudeRef"] != nil {
+                let ref = gpsInfo["GPSAltitudeRef"] as! Int
+                //print("GPSAltitude ref is \(ref)")
+                if ref == 1 {
+                    alt = -1.0 * alt
+                }
+            }
+            if metaData!["exif:GPSAltitudeRef"] != nil {
+                let ref = (metaData!["exif:GPSAltitudeRef"] as! NSString).intValue
+                //print("GPS exif:GPSAltitudeRef is \(ref)")
+                if ref == 1 {
+                    alt = -1.0 * alt
+                }
             }
         }
-        if metaData!["exif:GPSAltitudeRef"] != nil {
-            let ref = (metaData!["exif:GPSAltitudeRef"] as! NSString).intValue
-            //print("GPS exif:GPSAltitudeRef is \(ref)")
-            if ref == 1 {
-                alt = -1.0 * alt
-            }
+        
+        if alt == 0.0 {
+            throw DroneImageError.NoMetaGPSData
         }
         
+        // look for metadata drone:RtkFlag
+        var rtkFlag: Bool = false
+        if metaData!["drone:RtkFlag"] != nil {
+            rtkFlag = true
+        }
+        if metaData!["drone-dji:RtkFlag"] != nil {
+            rtkFlag = true
+        }
+        if xmlStringCopy?.lowercased().contains("rtkflag") == true {
+            rtkFlag = true
+        }
+        
+        // now, depending on drone type/make, convert from EGM96 to WGS84 if necessary
+        var offset:Double = 0.0
+        do {
+            
+            offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
+            // make, model, tag
+            let make = try getCameraMake()
+            let model = try getCameraModel()
+            // DJI, skydio are EGM96
+            // autel assuming EGM96 unless old autel firm
+            // DJI, autel if tag rtkflag then its already in WGS84
+            
+            if rtkFlag == true {
+                return alt // already in WGS84
+            }
+            
+            if altFromExif == true {
+                return alt // already in WGS84
+            }
+            
+            // if parrot anafiai is in WGS84
+            if model.lowercased().contains("anafiai") == true {
+                
+                // Location altitude of where the photo was taken in meters expressed
+                // as a fraction (e.g. “4971569/65536”) On ANAFI 4K/Thermal/USA, this
+                // is the drone location with reference to the EGM96 geoid (AMSL); on
+                // ANAFI Ai with firmware < 7.4, this is the drone location with with
+                // reference to the WGS84 ellipsoid; on ANAFI Ai with firmware >= 7.4,
+                // this is the front camera location with reference to the WGS84
+                // ellipsoid https://developer.parrot.com/docs/groundsdk-tools/photo-metadata.html
+                
+                return alt // already in WGS84
+            }
+            
+        }
+        catch {
+            throw error
+        }
+        
+        // if we get here, its EGM96; convert to WGS84
+        
+        alt = alt - offset
         return alt
     }
     
@@ -1094,7 +1159,7 @@ public class DroneImage {
         //print("XML String to parse is \(xmlString!)")
         
         // xmlString gets consumed by parser; we should parse a copy of it
-        // XXX
+        xmlStringCopy = xmlString
         
         let xmlParser = XMLParser(data: Data(xmlString!.utf8))
         let mpd = MyParserDelegate()

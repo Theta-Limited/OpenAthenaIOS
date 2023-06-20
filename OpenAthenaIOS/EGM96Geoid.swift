@@ -80,6 +80,13 @@ class EGM96Geoid {
         return s_model_ok
     }
 
+    // return offset for lat/lng w/o caller creating EGM96Location object
+    // too many location classes already :(
+    
+    static func getOffset(lat: Double, lng: Double) -> Double {
+        return getOffset(location: EGM96Location(lat: lat, lng: lng))
+    }
+    
     static func getOffset(location: EGM96Location) -> Double {
         let lat = location.latitude
         let lng = location.longitude

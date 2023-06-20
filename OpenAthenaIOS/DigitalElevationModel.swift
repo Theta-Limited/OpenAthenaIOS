@@ -201,6 +201,8 @@ public class DigitalElevationModel {
     // WGS84 reference ellipsoid
     // right now, we are assuming offline model
     // add support for web api online lookup XXX
+    // altitude in our DEM is in EGM96 format
+    // we want to convert back to WG84 format for internal
     
     public func getAltitudeFromLatLong(targetLat lat: Double,
                                        targetLong lon: Double) throws -> Double {
@@ -317,7 +319,13 @@ public class DigitalElevationModel {
         
         print("Going to call idwInterpolation")
         
-        return idwInterpolation(target: target, neighbors: neighbors, power: power)
+        var altEGM96 = idwInterpolation(target: target, neighbors: neighbors, power: power)
+        let offset = EGM96Geoid.getOffset(lat: lat, lng: lon)
+        let altWGS84 = altEGM96 - offset
+        
+        print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
+        
+        return altWGS84
         
         // calculate result given rasters
         // see OpenAthenaAndroid for comparision
@@ -391,6 +399,9 @@ public class DigitalElevationModel {
         var R: Int = lastIndex
         var m: Int
         
+        // Todo: should this be L < R ? XXX
+        // might fix edge case for DEM lookup
+        // try out and test
         while  L <= R {
             let f: Double = floor( Double(L + R) / 2.0)
             m = Int(f)
