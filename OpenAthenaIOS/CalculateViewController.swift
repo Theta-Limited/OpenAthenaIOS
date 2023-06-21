@@ -188,7 +188,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         // 0 distance to target
         // 1 last latitude value along raycast
         // 2 last longitude value along raycast
-        // 3 last altitude along raycast
+        // 3 last altitude along raycast is WGS84 
         // 4 terrain altitude of datapoint nearest last raycast position
         
         // check for [ 0,0,0,0 ]
@@ -197,15 +197,18 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             return
         }
         
+        // get EGM96 offset from WGS84
+        let offset = EGM96Geoid.getOffset(lat: target[1], lng: target[2])
+        
         let latStr = roundDigitsToString(val: target[1], precision: 6)
         let lonStr = roundDigitsToString(val: target[2], precision: 6)
         let distanceStr = roundDigitsToString(val: target[0], precision: 6)
-        let altStr = roundDigitsToString(val: target[3], precision: 6)
-        let nearestAltStr = roundDigitsToString(val: target[4], precision: 6)
+        let altStr = roundDigitsToString(val: target[3] + offset, precision: 6)
+        //let nearestAltStr = roundDigitsToString(val: target[4] + offset, precision: 6)
         
         print("resolveTarget returned \(target)")
         htmlString += "Distance to target \(distanceStr) meters<br>"
-        htmlString += "Nearest terrain alt \(nearestAltStr) meters<br>"
+        //htmlString += "Nearest terrain alt \(nearestAltStr) meters<br>"
         
         htmlString += "Target Lat,Lon: \(latStr),\(lonStr)<br>"
         htmlString += "Target Alt: \(altStr) meters<br>"

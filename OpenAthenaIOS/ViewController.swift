@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 1.15
+    var version: Float = 1.18
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         // textView.addGestureRecognizer(pinchGesture)
         
         doMain()
+        testEGM96Offsets()
         
     } // viewDidLoad
     
@@ -62,10 +63,29 @@ class ViewController: UIViewController {
         htmlString += "3: calculate &#129518; <br>"
         htmlString += "<br>Mash the &#127937; button to begin!<br>"
         
+        //let aLocation = EGM96Location(lat: 33.753746, lng: -84.386330)
+        //let offset = EGM96Geoid.getOffset(location: aLocation)
+        //htmlString += "<br>Offset at \(aLocation) is \(offset)m<br>"
+        
         setTextViewText(htmlStr: htmlString)
         
     }
     
+    private func testEGM96Offsets() {
+        
+        var offset: Double = 0.0
+        var lat: Double = 0.0
+        var lng: Double = 0.0
+        
+        // atlanta
+        // lat, lng +33.7490, -84.3880
+        lat = 33.7490
+        lng = -84.3880
+        offset = EGM96Geoid.getOffset(lat: lat, lng: lng)
+        print("Atlanta (\(lat),\(lng)) offset \(offset)")
+        
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

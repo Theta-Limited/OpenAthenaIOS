@@ -57,17 +57,17 @@ final class TestCalculations: XCTestCase {
         
         // altitude
         // XCTAssertEqual(target[3], 276.5093247021014)
-        XCTAssertEqual(target[3],275.92153944980896)
+        XCTAssertEqual(target[3],306.5846816880375)
 
         // distance to target
         // XCTAssertEqual(target[0],239.16353221862235)
-        XCTAssertEqual(target[0],240.1642236791355)
+        XCTAssertEqual(target[0],240.164222893169)
 
         // target lat, lon
         // XCTAssertEqual(target[1],33.835465932500185)
         // XCTAssertEqual(target[2],-84.53849326691132)
-        XCTAssertEqual(target[1],33.83545872167802)
-        XCTAssertEqual(target[2],-84.53849210861283)
+        XCTAssertEqual(target[1],33.835458730005925)
+        XCTAssertEqual(target[2],-84.53849210995045)
         
     } // testResolveTarget
 
@@ -88,14 +88,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],294.22483449139065)
+        XCTAssertEqual(target[3],324.8879767296192)
 
         // distance to target
-        XCTAssertEqual(target[0],354.32509079433487)
+        XCTAssertEqual(target[0],354.32508924079326)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],33.83455699334952)
-        XCTAssertEqual(target[2],-84.53707401236993)
+        XCTAssertEqual(target[1],33.834557006016766)
+        XCTAssertEqual(target[2],-84.53707402053148)
         
     } // testResolveTarget
 } // TestCalculations

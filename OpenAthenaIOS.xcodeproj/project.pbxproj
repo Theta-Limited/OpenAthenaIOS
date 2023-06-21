@@ -16,6 +16,11 @@
 		5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */; };
 		5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */; };
 		5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */; };
+		597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089DA2A3FD35600B5E1BF /* Cubic.swift */; };
+		597089DF2A3FD35600B5E1BF /* EGM96complete.bin in Resources */ = {isa = PBXBuildFile; fileRef = 597089DB2A3FD35600B5E1BF /* EGM96complete.bin */; };
+		597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */; };
+		597089E12A3FD35600B5E1BF /* EGM96Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089DD2A3FD35600B5E1BF /* EGM96Location.swift */; };
+		597089E32A4126DD00B5E1BF /* TestEGM96.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089E22A4126DD00B5E1BF /* TestEGM96.swift */; };
 		597CDED02A16D590000EF1CC /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
 		597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597CDED52A16FC1D000EF1CC /* TestSettings.swift */; };
 		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
@@ -73,6 +78,11 @@
 		5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42Geodetic.swift; sourceTree = "<group>"; };
 		5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42GaussKruger.swift; sourceTree = "<group>"; };
 		5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSGeodetic.swift; sourceTree = "<group>"; };
+		597089DA2A3FD35600B5E1BF /* Cubic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cubic.swift; sourceTree = "<group>"; };
+		597089DB2A3FD35600B5E1BF /* EGM96complete.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = EGM96complete.bin; sourceTree = "<group>"; };
+		597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGM96Geoid.swift; sourceTree = "<group>"; };
+		597089DD2A3FD35600B5E1BF /* EGM96Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGM96Location.swift; sourceTree = "<group>"; };
+		597089E22A4126DD00B5E1BF /* TestEGM96.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEGM96.swift; sourceTree = "<group>"; };
 		597CDED52A16FC1D000EF1CC /* TestSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettings.swift; sourceTree = "<group>"; };
 		5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDigitalElevationModel.swift; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthena.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +160,10 @@
 		59B62B0429844B6D00F0C6B1 /* OpenAthenaIOS */ = {
 			isa = PBXGroup;
 			children = (
+				597089DA2A3FD35600B5E1BF /* Cubic.swift */,
+				597089DB2A3FD35600B5E1BF /* EGM96complete.bin */,
+				597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */,
+				597089DD2A3FD35600B5E1BF /* EGM96Location.swift */,
 				592CABB42A0ACF61006E28AF /* examples */,
 				59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */,
 				593A2A412A214ECA0098EAF1 /* DroneParams.swift */,
@@ -186,6 +200,7 @@
 				597CDED52A16FC1D000EF1CC /* TestSettings.swift */,
 				593A29C82A17B3170098EAF1 /* TestCalculations.swift */,
 				593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */,
+				597089E22A4126DD00B5E1BF /* TestEGM96.swift */,
 			);
 			path = OpenAthenaIOSTests;
 			sourceTree = "<group>";
@@ -287,6 +302,7 @@
 				593A2A442A25600F0098EAF1 /* droneModels.json in Resources */,
 				59B62B0D29844B6D00F0C6B1 /* Main.storyboard in Resources */,
 				592CABB52A0ACF61006E28AF /* examples in Resources */,
+				597089DF2A3FD35600B5E1BF /* EGM96complete.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,9 +368,12 @@
 				59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */,
 				59B62B242988133000F0C6B1 /* AthenaSettings.swift in Sources */,
 				59B62B3F298DAE7300F0C6B1 /* DigitalElevationModel.swift in Sources */,
+				597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */,
+				597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */,
 				59B62B42298DE4C900F0C6B1 /* DebugViewController.swift in Sources */,
 				59B62B2029860BF400F0C6B1 /* ImageViewController.swift in Sources */,
 				59B62B1E2984564300F0C6B1 /* AboutViewController.swift in Sources */,
+				597089E12A3FD35600B5E1BF /* EGM96Location.swift in Sources */,
 				593A2A422A214ECA0098EAF1 /* DroneParams.swift in Sources */,
 				5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */,
 				5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */,
@@ -372,6 +391,7 @@
 			files = (
 				593A2A462A2642400098EAF1 /* TestDroneParams.swift in Sources */,
 				593A29C92A17B3170098EAF1 /* TestCalculations.swift in Sources */,
+				597089E32A4126DD00B5E1BF /* TestEGM96.swift in Sources */,
 				593A2A402A20FCF30098EAF1 /* TestMakeModel.swift in Sources */,
 				59CC795A2A15B4B800B07782 /* TestDroneImage.swift in Sources */,
 				5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */,

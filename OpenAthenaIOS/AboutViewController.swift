@@ -85,19 +85,22 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         
     } // viewDidLoad
     
-    
-    
     private func getAbout()
     {
         let htmlString = "<!DOCTYPE html><html><body><h2>OpenAthena alpha version \(vc!.getAppVersion())</h2>"
-        + "Matthew Krupczak, Bobby Krupczak, et al.<br>"
+        + "Matthew Krupczak, Bobby Krupczak, Seth Canada, et al.<br>"
         + "GPL-3.0, some rights reserved "
         + "<a href=\"https://openathena.com/\">OpenAthena.com</a><br>"
         + "<br>Open Athena allows common drones to spot precise geodetic locations.<br>"
         + "<br><a href=\"https://github.com/mkrupczak3/OpenAthena\">View the project on GitHub</a>"
-        + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br><p>"
+        + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br>"
         
-        // XXX add libraries here
+        + "<br><a href='https://github.com/Theta-Limited/OpenAthena/blob/main/EIO_fetch_geotiff_example.md'>Obtain a Digital Elevation Model Here</a><br>"
+        
+        + "<br>NATA/MGRS, WGS84, & UTM output vertical datum is EMG96 meters above mean sea level.  "
+        + "CK-42 output vertical datum is meters height above the Krassowsky 1940 elippsoid.<p>"
+        
+        // add libraries, that we use, here
         + "Software libraries used:"
         + "<ul>"
         + "<li><a href='https://github.com/ngageoint'>National Geospatial-Intelligence Agency TIFF library</a></li>"
@@ -105,6 +108,7 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         + "<li><a href='https://github.com/ngageoint/'>National Geospatial-Intelligence Agency MGRS conversion library</a></li>"
         + "<li><a href='https://github.com/wtw-software/UTMConversion'>UTMConversion</a></li>"
         + "<li><a href='https://github.com/ky1vstar/NSExceptionSwift'>NSExceptionSwift</a></li>"
+        + "<li><a href='https://github.com/matthiaszimmermann/EGM96'>EGM96 offset</a></li>"
         + "</ul>"
         
         // privacy policy

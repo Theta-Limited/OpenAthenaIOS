@@ -22,6 +22,22 @@ public class AthenaSettings {
         }
     } // DEM lookup modes
     
+    enum VerticalDatumTypes: Int, CaseIterable {
+        case WGS84 = 0
+        case EGM96 = 1
+        case NAVD88 = 2
+        case UNKNOWN_OTHER = 3
+        
+        var description: String {
+            switch self {
+            case .WGS84: return "WGS84"    // HAE, GPS, or WGS84 ref ellipsoid
+            case .EGM96: return "EGM96"    // MSL or orthometric
+            case .NAVD88: return "NAVD88"
+            case .UNKNOWN_OTHER: return "Unknown/other"
+            }
+        }
+    }
+    
     enum OutputModes: Int, CaseIterable {
         case WGS84 = 0               // standard lat, long format
         
