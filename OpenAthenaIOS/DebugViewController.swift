@@ -91,6 +91,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate)<br>"
         self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
+        self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"
         
         if vc.dem != nil {
             self.htmlString += "<br><b>DEM:</b> \((vc.dem!.tiffURL!.lastPathComponent))<br>"

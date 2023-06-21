@@ -40,7 +40,7 @@ class EGM96Geoid {
     private static var offset = [[Double]]()
     private static var offset_north_pole = 0.0
     private static var offset_south_pole = 0.0
-    private static var s_model_ok = false
+    public static var s_model_ok = false
 
     // call this function to set up the model and load it into RAM
     static func initEGM96Geoid() -> Bool {
