@@ -211,7 +211,7 @@ public class DigitalElevationModel {
             throw ElevationModuleError.IllegalArgumentException
         }
         
-        print("getAltitudeFromLatLong: started")
+        //print("getAltitudeFromLatLong: started")
         
         let x0 = xParams.start
         let x1 = xParams.end
@@ -317,13 +317,13 @@ public class DigitalElevationModel {
         // see https://doi.org/10.3846/gac.2023.16591
         // and https://pro.arcgis.com/en/pro-app/latest/help/analysis/geostatistical-analyst/how-inverse-distance-weighted-interpolation-works.htm
         
-        print("Going to call idwInterpolation")
+        //print("Going to call idwInterpolation")
         
         var altEGM96 = idwInterpolation(target: target, neighbors: neighbors, power: power)
         let offset = EGM96Geoid.getOffset(lat: lat, lng: lon)
         let altWGS84 = altEGM96 - offset
         
-        print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
+        //print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
         
         return altWGS84
         

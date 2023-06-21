@@ -291,6 +291,7 @@ public class DroneImage {
     // GPS->Altitude or drone specific AbsoluteAltitude
     // For older Autel drones, check if GPSAltitudeRef exists and is 1
     // If so, its below sea level and we should negate the value
+    // return altitude in WGS84
     
     public func getAltitude() throws -> Double {
         
@@ -375,7 +376,6 @@ public class DroneImage {
         // now, depending on drone type/make, convert from EGM96 to WGS84 if necessary
         var offset:Double = 0.0
         do {
-            
             
             // make, model, tag
             let make = try getCameraMake()

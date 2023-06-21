@@ -81,7 +81,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(djiImage.getLatitude(),33.8371893)
             try XCTAssertEqual(djiImage.getLongitude(),-84.5387701)
-            try XCTAssertEqual(djiImage.getAltitude(),416.99)
+            try XCTAssertEqual(djiImage.getAltitude(),447.65314223822855)
             
             // check drone maker
             try XCTAssertTrue(djiImage.getCameraMake() == "DJI")
@@ -110,7 +110,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(skydioImage.getLatitude(),32.518935)
             try XCTAssertEqual(skydioImage.getLongitude(),-110.924547)
-            try XCTAssertEqual(skydioImage.getAltitude(),1034.44191)
+            try XCTAssertEqual(skydioImage.getAltitude(),1064.0255019203844)
             
             // check drone maker
             try XCTAssertTrue(skydioImage.getCameraMake() == "Skydio")
