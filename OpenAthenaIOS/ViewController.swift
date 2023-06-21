@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         // textView.addGestureRecognizer(pinchGesture)
         
         doMain()
+        testEGM96Offsets()
         
     } // viewDidLoad
     
@@ -70,6 +71,21 @@ class ViewController: UIViewController {
         
     }
     
+    private func testEGM96Offsets() {
+        
+        var offset: Double = 0.0
+        var lat: Double = 0.0
+        var lng: Double = 0.0
+        
+        // atlanta
+        // lat, lng +33.7490, -84.3880
+        lat = 33.7490
+        lng = -84.3880
+        offset = EGM96Geoid.getOffset(lat: lat, lng: lng)
+        print("Atlanta (\(lat),\(lng)) offset \(offset)")
+        
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

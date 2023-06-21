@@ -6,7 +6,7 @@
 import Foundation
 import Darwin
 
-public struct EGM96Location {
+public class EGM96Location {
     // TODO verify if this is meaningful (eg. if this is sufficient for cm accuracy on earth)
     public static let EPSILON: Double = 0.00000001
     
@@ -16,26 +16,26 @@ public struct EGM96Location {
     public static let LONGITUDE_MIN_STRICT: Double = 0.0
     public static let LONGITUDE_MAX_STRICT: Double = 360.0
     
-    private var lat: Double = 0.0
-    private var lng: Double = 0.0
+    public var m_lat: Double = 0.0
+    public var m_lng: Double = 0.0
     
-    public init() {
-        self.init_model(lat: 0.0, lng: 0.0, lenient: true)
+    convenience init() {
+        self.init(lat: 0.0, lng: 0.0, lenient: true)
     }
     
-    public init(lat: Double, lng: Double) {
-        self.init_model( lat: lat, lng: lng, lenient: true)
+    convenience init(lat: Double, lng: Double) {
+        self.init( lat: lat, lng: lng, lenient: true)
     }
     
-    public init(lat: Double, lng: Double, lenient: Bool) {
-        self.init_model( lat: lat, lng: lng, lenient: lenient)
-    }
+    //convenience init(lat: Double, lng: Double, lenient: Bool) {
+    //    self.init_model( lat: lat, lng: lng, lenient: lenient)
+    //}
     
-    private mutating func init_model( lat: Double, lng: Double, lenient: Bool)
-    {
+    init(lat: Double, lng: Double, lenient: Bool)
+    {        
         if lenient {
-            self.lat = normalizeLat(latitude)
-            self.lng = normalizeLong(longitude)
+            self.m_lat = normalizeLat(lat)
+            self.m_lng = normalizeLong(lng)
         } else {
             if lat < EGM96Location.LATITUDE_MIN_STRICT || lat > EGM96Location.LATITUDE_MAX_STRICT {
                 fatalError("latitude out of bounds [\(EGM96Location.LATITUDE_MIN_STRICT),\(EGM96Location.LATITUDE_MAX_STRICT)]")
@@ -45,17 +45,17 @@ public struct EGM96Location {
                 fatalError("longitude out of bounds [\(EGM96Location.LONGITUDE_MIN_STRICT),\(EGM96Location.LONGITUDE_MAX_STRICT))")
             }
             
-            self.lat = lat
-            self.lng = lng
+            self.m_lat = lat
+            self.m_lng = lng
         }
+
     }
     
     public var latitude: Double {
-        return lat
+        return m_lat
     }
-    
     public var longitude: Double {
-        return lng
+        return m_lng
     }
     
     private func normalizeLat(_ lat: Double) -> Double {

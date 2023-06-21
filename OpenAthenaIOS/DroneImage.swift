@@ -265,7 +265,7 @@ public class DroneImage {
         }
         // typo in autel drone gps metadata
         if metaData!["drone:GpsLongtitude"] != nil {
-            lon = (metaData!["drone:GpsLongitude"] as! NSString).doubleValue
+            lon = (metaData!["drone:GpsLongtitude"] as! NSString).doubleValue
             return lon
         }
         
@@ -376,7 +376,7 @@ public class DroneImage {
         var offset:Double = 0.0
         do {
             
-            offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
+            
             // make, model, tag
             let make = try getCameraMake()
             let model = try getCameraModel()
@@ -406,6 +406,14 @@ public class DroneImage {
                 return alt // already in WGS84
             }
             
+            // all autel drones return altitude in WGS84
+            if make.lowercased().contains("autel") == true {
+                return alt // already in WGS84
+            }
+            
+            // determine EGM96 offset now that we've eliminated any WGS84 altitudes
+            
+            offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
         }
         catch {
             throw error

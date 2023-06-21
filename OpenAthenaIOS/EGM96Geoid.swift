@@ -36,7 +36,8 @@ class EGM96Geoid {
     static let INVALID_OFFSET = "-9999.99"
     static let COMMENT_PREFIX = "//"
 
-    private static var offset = Array(repeating: Array(repeating: 0.0, count: COLS), count: ROWS)
+    //private static var offset = Array(repeating: Array(repeating: 0.0, count: COLS), count: ROWS)
+    private static var offset = [[Double]]()
     private static var offset_north_pole = 0.0
     private static var offset_south_pole = 0.0
     private static var s_model_ok = false
@@ -46,13 +47,23 @@ class EGM96Geoid {
         if s_model_ok {
             return true
         }
+        
+        // instead of declaring using repeating, try this and see if it changes
+        // results XXX
+        for _ in 0..<ROWS {
+            var row = [Double]()
+            for _ in 0..<COLS {
+                row.append(0.0)
+            }
+            offset.append(row)
+        }
 
         // EGM96complete.bin is gzip'd data file
         if let filePath = Bundle.main.path(forResource: "EGM96complete", ofType: "bin") {
             do {
                 var fileData = try Data(contentsOf: URL(fileURLWithPath: filePath))
  
-                print("initEGM96Geoid: read data of size \(fileData.count) bytes")
+                //print("initEGM96Geoid: read data of size \(fileData.count) bytes")
 
                 // eat the first two bytes 0x78, 0x9c as a test as that might
                 // be screwing up the zlib decompression
@@ -65,7 +76,7 @@ class EGM96Geoid {
                 // remove last 4 bytes which is a checksum
                 fileData.removeLast(4)
 
-                print("initEGM96Geoid: calling readEGM96GeoidOffsets with \(fileData.count) bytes")
+                //print("initEGM96Geoid: calling readEGM96GeoidOffsets with \(fileData.count) bytes")
 
                 s_model_ok = readEGM96GeoidOffsets(data: fileData)
             } catch {
@@ -84,13 +95,15 @@ class EGM96Geoid {
     // too many location classes already :(
     
     static func getOffset(lat: Double, lng: Double) -> Double {
-        return getOffset(location: EGM96Location(lat: lat, lng: lng))
+        
+        let l = EGM96Location(lat: lat, lng: lng)
+        return getOffset(location: l)
     }
     
     static func getOffset(location: EGM96Location) -> Double {
         let lat = location.latitude
         let lng = location.longitude
-
+        
         if latIsGridPoint(lat: lat) && lngIsGridPoint(lng: lng) {
             return getGridOffset(lat: lat, lng: lng)
         }
@@ -277,19 +290,21 @@ class EGM96Geoid {
     // split based on the DOS carriage return (\r) character, and each
     // line is trimmed of any leading or trailing newlines.
     
-    
     private static func readEGM96GeoidOffsets(data: Data) -> Bool {
+        
+        var numLines = 0
+        var numLinesLatLongOK = 0
+        var numLinesOK = 0
+        
         assignMissingOffsets()
 
         var decompressedData: Data
         do {
-            print("Uncompressing \(data.count) bytes")
-            print("First few bytes \(data.bytes[0..<10])")
-            
-            
+            //print("Uncompressing \(data.count) bytes")
+            //print("First few bytes \(data.bytes[0..<10])")
             
             decompressedData = try (data as NSData).decompressed(using: .zlib) as Data
-            print("Decompression returned \(decompressedData.count) bytes")
+            //print("Decompression returned \(decompressedData.count) bytes")
             
         } catch {
             print("Failed to decompress data: \(error)")
@@ -297,22 +312,29 @@ class EGM96Geoid {
         }
         
         // print first few bytes of decompressed data
-        print("First few uncompressed bytes \(decompressedData.bytes[0..<10])")
+        // print("First few uncompressed bytes \(decompressedData.bytes[0..<10])")
 
         let lines = decompressedData.split(separator: 13) // 13 is the ASCII code for carriage return (\r)
 
         for line in lines {
             let lineString = String(data: line, encoding: .utf8)?.trimmingCharacters(in: .newlines) ?? ""
 
+            numLines += 1
+            
             if lineIsOk(line: lineString) {
 
+                numLinesOK += 1
+                
                 let tokens = lineString.split(separator: " ")
                 if tokens.count != 3 {
                     print("Error: Found \(tokens.count) tokens on line: \(lineString)")
                 }
 
                 if let lat = Double(tokens[0]), let lng = Double(tokens[1]), let off = Double(tokens[2]) {
+                    
                     if latLongOk(lat: lat, lng: lng) {
+                        numLinesLatLongOK += 1
+                        
                         var i_lat = 0
                         var j_lng = 0
 
@@ -340,6 +362,8 @@ class EGM96Geoid {
             }
         }
 
+        print("EGM96Geod: parsed \(numLines) lines \(numLinesOK) valid lines \(numLinesLatLongOK) valid lat/lng lines")
+        
         return !hasMissingOffsets()
     }
     
@@ -410,6 +434,7 @@ class EGM96Geoid {
         
         // eat blank links or lines with space at beginning -- rdk
         if line.isEmpty {
+            print("EGM96Geoid: Skipping parsing empty line")
             return false
         }
 

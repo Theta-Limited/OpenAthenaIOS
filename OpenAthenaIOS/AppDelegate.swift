@@ -25,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var aBool = EGM96Geoid.initEGM96Geoid()
         if aBool == false {
             print("Failed to properly init EGM96Geoid")
-        }
-        
+        }        
         
         print("application: outputMode is \(settings.outputMode), \(settings.outputMode.rawValue)")
         
