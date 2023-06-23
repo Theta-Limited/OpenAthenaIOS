@@ -93,7 +93,7 @@ src="./OpenAthenaIOS/examples/oa-calculate.png">
 
 ## Arbitrary Point Selection
 
-OpenAthena allows users to tap any point in the image to locate it. Tapping on any point in the image will move the marker and calculate the new location. A new Cursor-on-Target message will not be sent to ATAK until the "🧮" button is pressed:
+OpenAthena allows users to tap any point in the image to locate it. Tapping on any point in the image will move the marker and calculate the new location.
 
 <img width="586" alt="OpenAthena for iOS demo of arbitrary point selection for raycast calculation" src="./OpenAthenaIOS/examples/oa-calculate-point.png">
 
