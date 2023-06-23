@@ -19,14 +19,6 @@ src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept
 
 <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main.png">
 
-<img width="586" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-load-dem.png">
-
-<img width="586" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-select-drone-image.png">
-
-<img width="586" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-calculate.png">
-
-Get it in the Apple App Store (coming soon)
-
 # Operation Guide
 
 ## Obtain a GeoTIFF Digital Elevation Model:
@@ -99,6 +91,12 @@ blue hyperlink:
 cobb.tiff and DJI_0419.JPG, output mode WGS84"
 src="./OpenAthenaIOS/examples/oa-calculate.png">
 
+## Arbitrary Point Selection
+
+OpenAthena allows users to tap any point in the image to locate it. Tapping on any point in the image will move the marker and calculate the new location. A new Cursor-on-Target message will not be sent to ATAK until the "🧮" button is pressed:
+
+<img width="586" alt="OpenAthena for iOS demo of arbitrary point selection for raycast calculation" src="./OpenAthenaIOS/examples/oa-calcualte-point.png">
+
 # Application Settings (optional) ⚙:
 
 OpenAthena for iOS supports multiple output modes for target calculation, including:
@@ -107,9 +105,10 @@ OpenAthena for iOS supports multiple output modes for target calculation, includ
 * [Nato Military Grid Reference System](https://en.wikipedia.org/wiki/Military_Grid_Reference_System) (MGRS) 1m, 10m, and 100m
 * [CK-42 Система координат](https://en.wikipedia.org/wiki/SK-42_reference_system) Latitude Longitude (an alternative geodetic system commonly used in slavic countries)
 * [CK-42 Система координат](https://en.wikipedia.org/wiki/SK-42_reference_system) [Gauss-Krüger](https://desktop.arcgis.com/en/arcmap/latest/map/projections/gauss-kruger.htm) Grid: Northing, Easting (an alternative military grid reference system used by former Warsaw pact countries)
+* [Universal Transverse Mercator (UTM)](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system)
 
-To change the ouptut mode of OpenAthena for iOS, tap the kebab menu
-icon (three dots) at the top-right corner of the main screen and
+To change the ouptut mode of OpenAthena for iOS, tap the hamburger
+menu icon (three lines) at the top-right corner of the main screen and
 select "Settings":
 
 Select your desired output mode by pressing its button in the list and
