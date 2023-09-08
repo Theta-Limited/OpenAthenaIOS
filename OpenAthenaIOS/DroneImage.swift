@@ -301,12 +301,13 @@ public class DroneImage {
         if metaData == nil {
             throw DroneImageError.NoMetaData
         }
-        
+                
         // check for drone specific altitude data XXX
         // which altitude?  absolute or relative
         if xmpDataRead == false {
             parseXmpMetaDataNoError()
         }
+        
         if metaData!["drone-dji:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-dji:AbsoluteAltitude"] as! NSString).doubleValue
             //return alt
@@ -321,7 +322,6 @@ public class DroneImage {
         }
         
         // fallback to regular exif gps altitude data
-        
         
         // metadata that is parsed by CGImage functions is
         // already in NSCFNumber so it can be typecast to Double
@@ -406,10 +406,14 @@ public class DroneImage {
                 return alt // already in WGS84
             }
             
-            // all autel drones return altitude in WGS84
-            if make.lowercased().contains("autel") == true {
-                return alt // already in WGS84
-            }
+            // for older autel drones, undocumented bug, height is
+            // MSL/EGM96 instead of ellipsoidal/WGS84 as reported
+            // look at rdf:about xml tag and if it says "Autel Robotics Meta Data",
+            // then its using the old meta data and altitude is in EGM96/MSL
+            // and we need to convert it to WGS84
+            
+            // we don't need to special case because we are going to convert
+            // below
             
             // determine EGM96 offset now that we've eliminated any WGS84 altitudes
             
@@ -543,6 +547,11 @@ public class DroneImage {
             return metaData!["Exif:FocalLength"] as! Double
         }
         
+        // XXX not sure this is accurate
+        if metaData!["drone-skydio:CalibratedFocalLength"] != nil {
+            return metaData!["drone-skydio:CalibratedFocalLength"] as! Double
+        }
+
         if metaData!["{Exif}"] != nil {
             var dict = metaData!["{Exif}"] as! NSDictionary
             if dict["FocalLength"] != nil {

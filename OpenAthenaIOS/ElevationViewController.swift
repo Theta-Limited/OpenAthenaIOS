@@ -75,7 +75,6 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
         textView.font = .systemFont(ofSize: 16)
         textView.isScrollEnabled = false
         htmlString = "Load a digital elevation model (in GeoTIFF format)<br>"
-        setTextViewText(htmlStr: htmlString)
         
         // button setup
         selectButton.setTitle("Select DEM Image File \u{26F0}", for: .normal)
@@ -105,6 +104,22 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
             imageView.image = UIImage(named: "gnome-mime-image-tiff")
         }
         
+        // if we don't have a DEM loaded, but its set in defaults,
+        // try to load it now
+        if vc.dem == nil && app.settings.demURL != nil {
+            print("Going to load DEM from defaults")
+            let aDem = DigitalElevationModel(fromURL: app.settings.demURL!)
+            if aDem != nil {
+                vc.dem = aDem
+                htmlString += "Re-loaded DEM from \(app.settings.demURL!.lastPathComponent)<br>"
+                imageView.image = UIImage(named:"gnome-mime-image-tiff.png")
+                
+            }
+            else {
+                htmlString += "Unable to create digital elevation model from saved URL  \(app.settings.demURL!.lastPathComponent)<br>"
+            }
+        }
+        
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         view.addSubview(scrollView)
@@ -129,6 +144,8 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
         stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
+        setTextViewText(htmlStr: htmlString)
         
     } // viewDidLoad
     
@@ -257,6 +274,10 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
             
         let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(centerLat),\(centerLon)"
         self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
+        
+        // save the URL for app restart
+        app.settings.demURL = tiffURL
+        app.settings.writeDefaults()
         
         setTextViewText(htmlStr: htmlString)
         

@@ -86,6 +86,10 @@ public class AthenaSettings {
     var useCCDInfo = UseCCDInfo
     var fontSize = FontSize
     
+    // file URLs
+    var demURL: URL?
+    var droneParamsURL: URL?
+    
     public func loadDefaults()
     {
         let defaults = UserDefaults.standard
@@ -111,6 +115,16 @@ public class AthenaSettings {
             }
         }
         
+        if let aStr = defaults.object(forKey: "DigitalElevationModuleURL") as? String {
+            print("Read \(aStr) for DEM URL")
+            demURL = URL(string: aStr)
+        }
+        
+        if let aStr = defaults.object(forKey: "DroneParamsURL") as? String {
+            print("Read \(aStr) for DroneParams URL")
+            droneParamsURL = URL(string: aStr)
+        }
+        
         print("loadDefaults: returning, outputMode is \(outputMode), \(outputMode.rawValue)")
     }
     
@@ -122,7 +136,16 @@ public class AthenaSettings {
         defaults.set(useCCDInfo, forKey: "useCCDInfo")
         defaults.set(fontSize, forKey: "fontSize")
         
-        print("writeDefault: outputMode is \(outputMode) \(outputMode.rawValue)")
+        if droneParamsURL != nil {
+            defaults.set(droneParamsURL!.absoluteString, forKey: "DroneParamsURL")
+            print("Set \(droneParamsURL!) for DroneParams URL")
+        }
+        if demURL != nil {
+            defaults.set(demURL!.absoluteString, forKey: "DigitalElevationModuleURL")
+            print("Set \(demURL!) for DEM URL")
+        }
+        
+        //print("writeDefault: outputMode is \(outputMode) \(outputMode.rawValue)")
             
     }
     
