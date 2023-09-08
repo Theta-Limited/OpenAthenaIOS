@@ -35,11 +35,15 @@ class ViewController: UIViewController {
         configureMenuItems()
         
         droneParams = DroneParams()
+        if app.settings.droneParamsURL != nil {
+            print("Going to load drone params from user supplied file")
+            droneParams = DroneParams(jsonURL: app.settings.droneParamsURL!)
+            print("Drone params date \(droneParams?.droneParamsLastUpdate)")
+        }
         
         textView.isEditable = false
         textView.isSelectable = true
-        
-      
+          
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named:"athena")
         
@@ -123,17 +127,24 @@ class ViewController: UIViewController {
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },
-            UIAction(title:"About", image: UIImage(systemName:"info.circle")) {
-                action in
-                print("About")
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "About") as! AboutViewController
-                vc.vc = self
-                self.navigationController?.pushViewController(vc, animated: true)
-            },
             UIAction(title:"Debug", image: UIImage(systemName:"binoculars.fill")) {
                 action in
                 print("Debug")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Debug") as! DebugViewController
+                vc.vc = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            },
+            UIAction(title:"Load Drone Info", image: UIImage(named:"drone")) {
+                action in
+                print("Load Drone Models")
+                let vc = DroneViewController()
+                vc.vc = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            },
+            UIAction(title:"About", image: UIImage(systemName:"info.circle")) {
+                action in
+                print("About")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "About") as! AboutViewController
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             }

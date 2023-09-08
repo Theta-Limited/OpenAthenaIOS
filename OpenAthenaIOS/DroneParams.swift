@@ -54,8 +54,8 @@ public class DroneParams
     var droneCCDParams = [
         // mavic pro
         DroneCCDInfo(makeModel: "djiFC220", ccdWidthMMPerPixel: 6.17/4000.0,
-                                 ccdHeightMMPerPixel: 4.55/3000.0, widthPixels: 4000.0,
-                                 heightPixels: 3000.0, comment: "",
+                     ccdHeightMMPerPixel: 4.55/3000.0, widthPixels: 4000.0,
+                     heightPixels: 3000.0, comment: "",
                      isThermal: false,
                      lensType: "persective",
                      radialR1: 0.032984,
@@ -74,26 +74,23 @@ public class DroneParams
                      poly4: 0)
     ]
     
-    // init with baked in hardcoded values loaded from
-    // droneModels.json
-    // file that is located in bundled and convert to dictionary
-    init()
+    // load drone params from the target url
+    init(jsonURL theURL: URL)
     {
         do {
-            // adapted from ChatGPT code plus mods
-            let filePath = Bundle.main.path(forResource: "droneModels", ofType: "json")
-            let data = try Data(contentsOf: URL(fileURLWithPath: filePath!))
+            
+            let data = try Data(contentsOf: theURL)
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
             //print("Json obj is: \(jsonObject)")
             if let dictionary = jsonObject as? [String: Any] {
                 print("Drone models dictionary created!")
                 //let dateFormatter = DateFormatter()
                 //let fileDate = convertUnixDateOutputToDate(unixDateOutput: dictionary["lastUpdate"] as! String)
-                
+            
                 let fileDate = dictionary["lastUpdate"] as! String
-                
+            
                 let anArray = convertNSArray(array: dictionary["droneCCDParams"] as! NSArray)
-                
+            
                 if !anArray.isEmpty {
                     print("Setting drone ccd params array \(fileDate)")
                     droneParamsDate = fileDate
@@ -111,6 +108,19 @@ public class DroneParams
         catch {
             print("Error reading json file \(error)")
         }
+        
+    } // init(theURL)
+    
+    // init with baked in hardcoded values loaded from
+    // droneModels.json
+    // file that is located in bundled and convert to dictionary
+    convenience init()
+    {
+        
+        // adapted from ChatGPT code plus mods
+        let filePath = Bundle.main.path(forResource: "droneModels", ofType: "json")
+            
+        self.init(jsonURL: URL(fileURLWithPath: filePath!))
     }
     
     // init with local data file

@@ -547,6 +547,11 @@ public class DroneImage {
             return metaData!["Exif:FocalLength"] as! Double
         }
         
+        // XXX not sure this is accurate
+        if metaData!["drone-skydio:CalibratedFocalLength"] != nil {
+            return metaData!["drone-skydio:CalibratedFocalLength"] as! Double
+        }
+
         if metaData!["{Exif}"] != nil {
             var dict = metaData!["{Exif}"] as! NSDictionary
             if dict["FocalLength"] != nil {

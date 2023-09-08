@@ -17,6 +17,8 @@
 		5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */; };
 		596E92792AA7B090003E35CD /* droneModels.json in Resources */ = {isa = PBXBuildFile; fileRef = 596E92782AA7B090003E35CD /* droneModels.json */; };
 		596E927A2AA7B090003E35CD /* droneModels.json in Resources */ = {isa = PBXBuildFile; fileRef = 596E92782AA7B090003E35CD /* droneModels.json */; };
+		596E927C2AAA0AC2003E35CD /* DroneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596E927B2AAA0AC2003E35CD /* DroneViewController.swift */; };
+		596E927D2AAA0AC2003E35CD /* DroneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596E927B2AAA0AC2003E35CD /* DroneViewController.swift */; };
 		597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089DA2A3FD35600B5E1BF /* Cubic.swift */; };
 		597089DF2A3FD35600B5E1BF /* EGM96complete.bin in Resources */ = {isa = PBXBuildFile; fileRef = 597089DB2A3FD35600B5E1BF /* EGM96complete.bin */; };
 		597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */; };
@@ -79,6 +81,7 @@
 		5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42GaussKruger.swift; sourceTree = "<group>"; };
 		5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSGeodetic.swift; sourceTree = "<group>"; };
 		596E92782AA7B090003E35CD /* droneModels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = droneModels.json; path = DroneModels/droneModels.json; sourceTree = SOURCE_ROOT; };
+		596E927B2AAA0AC2003E35CD /* DroneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneViewController.swift; sourceTree = "<group>"; };
 		597089DA2A3FD35600B5E1BF /* Cubic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cubic.swift; sourceTree = "<group>"; };
 		597089DB2A3FD35600B5E1BF /* EGM96complete.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = EGM96complete.bin; sourceTree = "<group>"; };
 		597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGM96Geoid.swift; sourceTree = "<group>"; };
@@ -175,6 +178,7 @@
 				5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */,
 				5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */,
 				59B62B252989B97900F0C6B1 /* ElevationViewController.swift */,
+				596E927B2AAA0AC2003E35CD /* DroneViewController.swift */,
 				5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */,
 				59B62B0929844B6D00F0C6B1 /* ViewController.swift */,
 				59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */,
@@ -380,6 +384,7 @@
 				5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */,
 				5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */,
 				59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */,
+				596E927C2AAA0AC2003E35CD /* DroneViewController.swift in Sources */,
 				59B62B46298F3D5200F0C6B1 /* DroneImage.swift in Sources */,
 				59B62B262989B97900F0C6B1 /* ElevationViewController.swift in Sources */,
 				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
@@ -391,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				596E927D2AAA0AC2003E35CD /* DroneViewController.swift in Sources */,
 				593A2A462A2642400098EAF1 /* TestDroneParams.swift in Sources */,
 				593A29C92A17B3170098EAF1 /* TestCalculations.swift in Sources */,
 				597089E32A4126DD00B5E1BF /* TestEGM96.swift in Sources */,
