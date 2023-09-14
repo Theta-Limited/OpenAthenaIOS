@@ -85,6 +85,8 @@ public class AthenaSettings {
     var lookupMode = LookupMode
     var useCCDInfo = UseCCDInfo
     var fontSize = FontSize
+    var takMulticastPort: UInt16 = 6969
+    var takMulticastIP = "239.2.3.1"
     
     // file URLs
     var demURL: URL?
@@ -125,6 +127,14 @@ public class AthenaSettings {
             droneParamsURL = URL(string: aStr)
         }
         
+        if let aStr = defaults.object(forKey: "TAKMulticastIP") as? String {
+            takMulticastIP = aStr
+        }
+        
+        if let takMulticastPortNew = defaults.object(forKey: "TAKMulticastPort") as? UInt16 {
+            takMulticastPort = takMulticastPortNew
+        }
+        
         print("loadDefaults: returning, outputMode is \(outputMode), \(outputMode.rawValue)")
     }
     
@@ -135,6 +145,8 @@ public class AthenaSettings {
         defaults.set(lookupMode.rawValue, forKey: "lookupMode")
         defaults.set(useCCDInfo, forKey: "useCCDInfo")
         defaults.set(fontSize, forKey: "fontSize")
+        defaults.set(takMulticastPort, forKey: "TAKMulticastPort")
+        defaults.set(takMulticastIP, forKey: "TAKMulticastIP")
         
         if droneParamsURL != nil {
             defaults.set(droneParamsURL!.absoluteString, forKey: "DroneParamsURL")

@@ -257,6 +257,7 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         var lat, lon: Double
         
         do {
+            self.htmlString += "Image date: \(self.vc.theDroneImage!.getDateTimeUTC())<br>"
             try self.htmlString += "Camera make is: \(self.vc.theDroneImage!.getCameraMake())<br>"
         }
         catch {

@@ -20,6 +20,7 @@ enum DroneImageError: String, Error {
     case NoXmpMetaData = "No XMP meta data"
     case MissingMetaDataKey = "Missing meta data key"
     case MissingCCDInfo = "Missing CCD info for this image"
+    case NoExifData = "No exif data"
 }
 
 extension Data {
@@ -604,6 +605,49 @@ public class DroneImage {
         throw DroneImageError.MetaDataKeyNotFound
     }
     
+    // exif image datetime
+    public func getExifDateTime() throws -> String
+    {
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        if metaData!["{Exif}"] != nil {
+            var dict = metaData!["{Exif}"] as! NSDictionary
+            if dict["DateTimeOriginal"] != nil {
+                return dict["DateTimeOriginal"] as! String
+            }
+            if dict["DateTimeDigitized"] != nil {
+                return dict["DateTimeDigitized"] as! String
+            }
+            
+            throw DroneImageError.MissingMetaDataKey
+        }
+        throw DroneImageError.NoExifData
+    }
+    
+    // get the exif date time and convert to UTC
+    // and return in iso8601 format
+    // assuming that we're in the same time zone as the image/drone
+    // ChatGPT wrote some of this code
+    public func getDateTimeUTC() -> String
+    {
+        do {
+            let dateTimeStr = try getExifDateTime()
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy:MM:dd HH:mm:ss"
+            dateFormatter.timeZone = TimeZone(identifier: "UTC")
+            if let date = dateFormatter.date(from: dateTimeStr) {
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                return dateFormatter.string(from: date)
+            }
+            return "unknown"
+        }
+        catch {
+            return "Unknown"
+        }
+    }
+    
     // camera model
     public func getCameraModel() throws -> String
     {
@@ -970,6 +1014,8 @@ public class DroneImage {
     // 2 last longitude value along raycast
     // 3 last altitude along raycast
     // 4 terrain altitude of datapoint nearest last raycast position
+    // 5 is the gimbal pitch or theta in degrees
+    // 6 is set to zero for now for extra storage for target[3] + offset
     
     // add drone ccd info, if available, so we can locate target not at center XXX
     
@@ -1011,8 +1057,6 @@ public class DroneImage {
             throw error
         }
         
-        
-        
         // check if target is directly below us; special case
         // 0.005 is ~0.29 degrees
         // use DEM to get altitude of ground
@@ -1024,7 +1068,7 @@ public class DroneImage {
                 tarLon = lon
                 tarAlt = terrainAlt
                 finalDist = fabs(alt - terrainAlt)
-                return [ finalDist, tarLat, tarLon, tarAlt, terrainAlt ]
+                return [ finalDist, tarLat, tarLon, tarAlt, terrainAlt, degTheta, 0.0 ]
             }
         }
         catch {
@@ -1115,7 +1159,7 @@ public class DroneImage {
         finalDist = sqrt(finalHorizDist*finalHorizDist + finalVertDist*finalVertDist)
         terrainAlt = groundAlt
         
-        return [finalDist, curLat, curLon, curAlt, terrainAlt ]
+        return [finalDist, curLat, curLon, curAlt, terrainAlt, degTheta, 0.0 ]
         
     } // resolveTarget()
     

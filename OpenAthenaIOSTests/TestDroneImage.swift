@@ -96,6 +96,8 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(djiImage.getFocalLength(),4.386)
             try XCTAssertEqual(djiImage.getFocalLengthIn35mm(),24.0)
             try XCTAssertEqual(djiImage.getRoll(),0.0)
+            
+            try XCTAssert(djiImage.getExifDateTime() != "")
         }
         catch {
             XCTAssert(false)
@@ -125,6 +127,8 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(skydioImage.getFocalLength(),4.7)
             try XCTAssertEqual(skydioImage.getFocalLengthIn35mm(),21.0)
             try XCTAssertEqual(skydioImage.getRoll(),0.186841)
+            
+            try XCTAssert(skydioImage.getExifDateTime() != "")
         }
         catch {
             XCTAssert(false)
@@ -155,6 +159,8 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(autelImage.getFocalLength(),4.74)
             try XCTAssertEqual(autelImage.getFocalLengthIn35mm(),26.0)
             try XCTAssertEqual(autelImage.getRoll(),0.0)
+            
+            try XCTAssert(autelImage.getExifDateTime() != "")
         }
         catch {
             XCTAssert(false)
@@ -185,10 +191,13 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(parrotImage.getFocalLength(),1.8300001180412324)
             try XCTAssertEqual(parrotImage.getFocalLengthIn35mm(),6.0)
             try XCTAssertEqual(parrotImage.getRoll(),-2.391976595)
+            
+            try XCTAssert(parrotImage.getExifDateTime() != "")
         }
         catch {
             XCTAssert(false)
         }
         
     } // autel waterloo
+    
 } // TestDroneImage

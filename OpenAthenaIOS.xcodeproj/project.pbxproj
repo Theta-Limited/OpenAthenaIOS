@@ -27,6 +27,7 @@
 		597CDED02A16D590000EF1CC /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
 		597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597CDED52A16FC1D000EF1CC /* TestSettings.swift */; };
 		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
+		59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */; };
 		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
 		59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */; };
 		59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0929844B6D00F0C6B1 /* ViewController.swift */; };
@@ -89,6 +90,7 @@
 		597089E22A4126DD00B5E1BF /* TestEGM96.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEGM96.swift; sourceTree = "<group>"; };
 		597CDED52A16FC1D000EF1CC /* TestSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettings.swift; sourceTree = "<group>"; };
 		5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDigitalElevationModel.swift; sourceTree = "<group>"; };
+		59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnTargetSender.swift; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				597089DD2A3FD35600B5E1BF /* EGM96Location.swift */,
 				592CABB42A0ACF61006E28AF /* examples */,
 				59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */,
+				59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */,
 				593A2A412A214ECA0098EAF1 /* DroneParams.swift */,
 				59B62B232988133000F0C6B1 /* AthenaSettings.swift */,
 				59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */,
@@ -389,6 +392,7 @@
 				59B62B262989B97900F0C6B1 /* ElevationViewController.swift in Sources */,
 				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
 				59B62B2229876E6A00F0C6B1 /* SettingsViewController.swift in Sources */,
+				59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

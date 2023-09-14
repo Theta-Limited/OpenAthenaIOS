@@ -25,7 +25,9 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView = UIScrollView()
     var contentView: UIView = UIView()
     var htmlString: String = ""
-    var target: [Double] = [0,0,0,0,0]
+    var target: [Double] = [0,0,0,0,0,0,0]
+    var adjustedAlt: Double = 0.0
+    var cotSender: CursorOnTargetSender?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +106,9 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         markImagePixel(x_prop: vc.theDroneImage!.targetXprop, y_prop: vc.theDroneImage!.targetYprop)
         doCalculations()
         
+        // create a cursor on target sender and pass Athena settings
+        cotSender = CursorOnTargetSender(params: app.settings)
+        
     } // viewDidLoad
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,8 +126,9 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     {
         var ccdInfo: DroneCCDInfo?
         htmlString = "<b>OpenAthena</b><br>"
-        htmlString += "Elevation model: \(vc.dem?.tiffURL?.lastPathComponent)<br>"
+        htmlString += "Elevation model: \(String(describing: vc.dem?.tiffURL?.lastPathComponent))<br>"
         htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
+        htmlString += "Image date: \(vc.theDroneImage!.getDateTimeUTC())<br>"
         
         // if no DEM, throw error
         if vc.dem == nil {
@@ -190,9 +196,11 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         // 2 last longitude value along raycast
         // 3 last altitude along raycast is WGS84 
         // 4 terrain altitude of datapoint nearest last raycast position
+        // 5 is the gimbalPitchDegree or theta
+        // 6 is adjusted alt target[3] + offset which we calculate and set
         
-        // check for [ 0,0,0,0 ]
-        if target == [ 0.0, 0.0, 0.0, 0.0, 0.0] {
+        // check for [ 0,0,0,0,0,0,0 ]
+        if target == [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] {
             setTextViewText(htmlStr: htmlString)
             return
         }
@@ -204,6 +212,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         let lonStr = roundDigitsToString(val: target[2], precision: 6)
         let distanceStr = roundDigitsToString(val: target[0], precision: 6)
         let altStr = roundDigitsToString(val: target[3] + offset, precision: 6)
+        target[6] = target[3] + offset
         //let nearestAltStr = roundDigitsToString(val: target[4] + offset, precision: 6)
         
         print("resolveTarget returned \(target)")
@@ -392,6 +401,29 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                 
                 // recalculate new target location
                 self.doCalculations()
+            },
+            UIAction(title:"Send CoT", image: UIImage(systemName: "target")) {
+                action in
+                print("Send CoT")
+                // grab target info out of target[] array
+                // get image date/time in iso8601/UTC format
+                let imageISO = self.vc.theDroneImage!.getDateTimeUTC()
+                                
+                let ret = self.cotSender?.sendCoT(targetLat: self.target[1], targetLon: self.target[2],
+                                                  // adjusted alt of target
+                                                  // Hae: self.target[6],
+                                                  Hae: self.target[3], 
+                                                  Theta: self.target[5],
+                                                  exifDateTimeISO: imageISO)
+                
+                // if CoT sent, give some sorta notification XXX
+                if ret == false {
+                    
+                }
+                else {
+                    
+                }
+                
             }
         ])
         
