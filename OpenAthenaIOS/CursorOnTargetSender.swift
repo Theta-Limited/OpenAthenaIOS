@@ -38,22 +38,30 @@ public class CursorOnTargetSender
             return
         }
         group = NWConnectionGroup(with: multicast, using: .udp)
-        group!.stateUpdateHandler = { (newState) in
+        group?.stateUpdateHandler = { (newState) in
             print("Group entered state \(String(describing: newState))")
         }
         
         // even though we are not intending to receive messages, we need to
         // set a receiver lest we will not be able to send; why?  No idea
-        group!.setReceiveHandler(maximumMessageSize: 16384, rejectOversizedMessages: true) { (message,content,isComplete) in
+        group?.setReceiveHandler(maximumMessageSize: 16384, rejectOversizedMessages: true) { (message,content,isComplete) in
             print("Received message")
         }
-        group!.start(queue: .main)
+        group?.start(queue: .main)
     }
     
     deinit
     {
         print("CursorOnTargetSender: deinit")
         group?.cancel()
+    }
+    
+    // return my status; true if group initialized and available to send
+    // or false if not
+    
+    public func status() -> Bool {
+        if group != nil { return true }
+        return false
     }
     
     // send a CoT message given the selection parameters/location

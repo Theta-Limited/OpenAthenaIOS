@@ -418,12 +418,13 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                 
                 // if CoT sent, give some sorta notification XXX
                 if ret == false {
-                    
+                    self.htmlString += "CoT send failed \(self.getCurrentLocalTime())<br>"
                 }
                 else {
-                    
+                    self.htmlString += "CoT sent \(self.getCurrentLocalTime())<br>"
                 }
-                
+                self.setTextViewText(htmlStr: self.htmlString)
+
             }
         ])
         
@@ -615,6 +616,17 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                                                                                                length: attribString.length))
             self.textView.attributedText = attribString
         }
+    }
+    
+    private func getCurrentLocalTime() -> String
+    {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime]
+        let currentDateTime = Date()
+        return dateFormatter.string(from: currentDateTime)
+        
+        // return Date().description(with: .current)
+        
     }
     
 } // CalculateViewController
