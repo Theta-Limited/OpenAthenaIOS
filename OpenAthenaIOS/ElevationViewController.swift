@@ -201,9 +201,14 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
         
         let types = [UTType.tiff]
         
+        // dont keep re-creating documentPickerController; that way, it'll pick
+        // up where we left off with the last directory/folder we loaded from
         if documentPickerController  == nil {
             documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: types)
             documentPickerController!.delegate = self
+            if app.settings.demDirectoryURL != nil {
+                documentPickerController!.directoryURL = app.settings.demDirectoryURL
+            }
         }
         
         self.present(documentPickerController!, animated: true, completion: nil)
@@ -261,6 +266,12 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
         
         imageView.image = UIImage(named:"gnome-mime-image-tiff.png")
         
+        // save the directory of where we got this file
+        var aDir = tiffURL.deletingLastPathComponent()
+        print("Setting demDirectoryURL to \(aDir.absoluteString)")
+        app.settings.demDirectoryURL = aDir
+        app.settings.writeDefaults()
+
         self.htmlString += "Digital elevation model (\(vc.dem!.getDemWidth()) X  \(vc.dem!.getDemHeight())) successfully read<br>"
         self.htmlString += "Width: \(vc.dem!.getDemWidth()) Height:\(vc.dem!.getDemHeight())<br>"
         self.htmlString += "Bounding box:<br>"

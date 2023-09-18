@@ -85,10 +85,14 @@ public class AthenaSettings {
     var lookupMode = LookupMode
     var useCCDInfo = UseCCDInfo
     var fontSize = FontSize
+    var takMulticastPort: UInt16 = 6969
+    var takMulticastIP = "239.2.3.1"
     
-    // file URLs
+    // file/dir URLs
     var demURL: URL?
     var droneParamsURL: URL?
+    var demDirectoryURL: URL?
+    var imageDirectoryURL: URL?
     
     public func loadDefaults()
     {
@@ -125,6 +129,23 @@ public class AthenaSettings {
             droneParamsURL = URL(string: aStr)
         }
         
+        if let aStr = defaults.object(forKey: "DEMDirectoryURL") as? String {
+            print("Read \(aStr) for DEMDirectoryURL")
+            demDirectoryURL = URL(string: aStr)
+        }
+        if let aStr = defaults.object(forKey: "ImageDirectoryURL") as? String {
+            print("Read \(aStr) for ImageDirectoryURL")
+            imageDirectoryURL = URL(string: aStr)
+        }
+        
+        if let aStr = defaults.object(forKey: "TAKMulticastIP") as? String {
+            takMulticastIP = aStr
+        }
+        
+        if let takMulticastPortNew = defaults.object(forKey: "TAKMulticastPort") as? UInt16 {
+            takMulticastPort = takMulticastPortNew
+        }
+        
         print("loadDefaults: returning, outputMode is \(outputMode), \(outputMode.rawValue)")
     }
     
@@ -135,6 +156,8 @@ public class AthenaSettings {
         defaults.set(lookupMode.rawValue, forKey: "lookupMode")
         defaults.set(useCCDInfo, forKey: "useCCDInfo")
         defaults.set(fontSize, forKey: "fontSize")
+        defaults.set(takMulticastPort, forKey: "TAKMulticastPort")
+        defaults.set(takMulticastIP, forKey: "TAKMulticastIP")
         
         if droneParamsURL != nil {
             defaults.set(droneParamsURL!.absoluteString, forKey: "DroneParamsURL")
@@ -143,6 +166,14 @@ public class AthenaSettings {
         if demURL != nil {
             defaults.set(demURL!.absoluteString, forKey: "DigitalElevationModuleURL")
             print("Set \(demURL!) for DEM URL")
+        }
+        if demDirectoryURL != nil {
+            print("Saving DEMDirectoryURL \(demDirectoryURL!.absoluteString)")
+            defaults.set(demDirectoryURL!.absoluteString, forKey: "DEMDirectoryURL")
+        }
+        if imageDirectoryURL != nil {
+            print("Saving ImageDirectoryURL \(imageDirectoryURL!.absoluteString)")
+            defaults.set(imageDirectoryURL!.absoluteString, forKey: "ImageDirectoryURL")
         }
         
         //print("writeDefault: outputMode is \(outputMode) \(outputMode.rawValue)")

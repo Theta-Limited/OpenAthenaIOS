@@ -128,7 +128,11 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 try self.htmlString += "Focal Length: \(vc.theDroneImage!.getFocalLength())<br>"
                 try self.htmlString += "Focal Length in 35mm: \(vc.theDroneImage!.getFocalLengthIn35mm())<br>"
                 
-                try self.htmlString += "Software version: \(vc.theDroneImage!.getMetaDataValue(key: "drone-parrot:SoftwareVersion"))<br>"            }
+                self.htmlString += "Date/Time UTC: \(vc.theDroneImage!.getDateTimeUTC())<br>"
+                
+                try self.htmlString += "Software version: \(vc.theDroneImage!.getMetaDataValue(key: "drone-parrot:SoftwareVersion"))<br>"
+                
+            }
             catch {
                 self.htmlString += "Some meta data missing \(error)<br>"
             }

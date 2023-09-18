@@ -27,6 +27,7 @@
 		597CDED02A16D590000EF1CC /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
 		597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597CDED52A16FC1D000EF1CC /* TestSettings.swift */; };
 		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
+		59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */; };
 		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
 		59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */; };
 		59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0929844B6D00F0C6B1 /* ViewController.swift */; };
@@ -89,6 +90,8 @@
 		597089E22A4126DD00B5E1BF /* TestEGM96.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEGM96.swift; sourceTree = "<group>"; };
 		597CDED52A16FC1D000EF1CC /* TestSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettings.swift; sourceTree = "<group>"; };
 		5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDigitalElevationModel.swift; sourceTree = "<group>"; };
+		59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnTargetSender.swift; sourceTree = "<group>"; };
+		59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenAthenaIOS.entitlements; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 		59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalElevationModel.swift; sourceTree = "<group>"; };
 		59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		59B62B45298F3D5200F0C6B1 /* DroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneImage.swift; sourceTree = "<group>"; };
+		59BEF5E92AB61C3700D5A56D /* OpenAthenaIOSRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenAthenaIOSRelease.entitlements; sourceTree = "<group>"; };
 		59CC79502A15B40C00B07782 /* OpenAthenaIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenAthenaIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAthenaIOSTests.swift; sourceTree = "<group>"; };
 		59CC79592A15B4B800B07782 /* TestDroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDroneImage.swift; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 		59B62B0429844B6D00F0C6B1 /* OpenAthenaIOS */ = {
 			isa = PBXGroup;
 			children = (
+				59BEF5E92AB61C3700D5A56D /* OpenAthenaIOSRelease.entitlements */,
+				59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */,
 				596E92782AA7B090003E35CD /* droneModels.json */,
 				597089DA2A3FD35600B5E1BF /* Cubic.swift */,
 				597089DB2A3FD35600B5E1BF /* EGM96complete.bin */,
@@ -171,6 +177,7 @@
 				597089DD2A3FD35600B5E1BF /* EGM96Location.swift */,
 				592CABB42A0ACF61006E28AF /* examples */,
 				59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */,
+				59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */,
 				593A2A412A214ECA0098EAF1 /* DroneParams.swift */,
 				59B62B232988133000F0C6B1 /* AthenaSettings.swift */,
 				59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */,
@@ -389,6 +396,7 @@
 				59B62B262989B97900F0C6B1 /* ElevationViewController.swift in Sources */,
 				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
 				59B62B2229876E6A00F0C6B1 /* SettingsViewController.swift in Sources */,
+				59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
@@ -621,6 +630,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
