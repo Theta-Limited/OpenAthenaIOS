@@ -142,6 +142,9 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         if documentPickerController == nil {
             documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: types)
             documentPickerController!.delegate = self
+            if app.settings.imageDirectoryURL != nil {
+                documentPickerController!.directoryURL = app.settings.imageDirectoryURL
+            }
         }
         
         self.present(documentPickerController!, animated: true, completion: nil)
@@ -222,6 +225,11 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
             self.vc.theDroneImage!.name = imageURL.lastPathComponent
             
             imageView.image = image
+            
+            // save the directory of where we got this file
+            var aDir = imageURL.deletingLastPathComponent()
+            app.settings.imageDirectoryURL = aDir
+            app.settings.writeDefaults()
             
             // move metadata refreshing to droneimage class
             //let src = CGImageSourceCreateWithData(data as CFData,nil)!

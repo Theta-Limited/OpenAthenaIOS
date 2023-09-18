@@ -1,10 +1,19 @@
 //
 //  CursorOnTargetSender.swift
 //  OpenAthenaIOS
+//
 //  Send TAK Cursor on Target messages via IP multicast
+//
 //  Requested com.apple.developer.networking.multicast.entitlement
 //  via Apple developer website.
 //  Multicast will work in the simulators in the interim
+//  Once entitlement is granted, see
+//  https://developer.apple.com/forums/thread/663271?answerId=639455022#639455022
+//  To add entitlement to developer profile and app based on app ID
+//  Then, in Xcode, go into project capabilities and add there.  You may need to
+//  create .entitlements files for targets; I also needed to exit Xcode,
+//  delete DerivedData, and then start Xcode for the entitlement to take effect
+//  Verify entitlement is in app via codesign utility; see URL above for invocation
 //
 //  Created by Bobby Krupczak on 9/13/23.
 //
@@ -37,7 +46,11 @@ public class CursorOnTargetSender
             print("Failed to initialize multicast group")
             return
         }
-        group = NWConnectionGroup(with: multicast, using: .udp)
+
+        let parameters = NWParameters.udp
+        parameters.allowLocalEndpointReuse = true
+        //group = NWConnectionGroup(with: multicast, using: .udp)
+        group = NWConnectionGroup(with: multicast, using: parameters)
         group?.stateUpdateHandler = { (newState) in
             print("Group entered state \(String(describing: newState))")
         }
