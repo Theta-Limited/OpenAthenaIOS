@@ -18,7 +18,6 @@
 		596E92792AA7B090003E35CD /* droneModels.json in Resources */ = {isa = PBXBuildFile; fileRef = 596E92782AA7B090003E35CD /* droneModels.json */; };
 		596E927A2AA7B090003E35CD /* droneModels.json in Resources */ = {isa = PBXBuildFile; fileRef = 596E92782AA7B090003E35CD /* droneModels.json */; };
 		596E927C2AAA0AC2003E35CD /* DroneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596E927B2AAA0AC2003E35CD /* DroneViewController.swift */; };
-		596E927D2AAA0AC2003E35CD /* DroneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596E927B2AAA0AC2003E35CD /* DroneViewController.swift */; };
 		597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089DA2A3FD35600B5E1BF /* Cubic.swift */; };
 		597089DF2A3FD35600B5E1BF /* EGM96complete.bin in Resources */ = {isa = PBXBuildFile; fileRef = 597089DB2A3FD35600B5E1BF /* EGM96complete.bin */; };
 		597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */; };
@@ -46,6 +45,7 @@
 		59CC79532A15B40C00B07782 /* OpenAthenaIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */; };
 		59CC795A2A15B4B800B07782 /* TestDroneImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC79592A15B4B800B07782 /* TestDroneImage.swift */; };
 		90C0D64DD6EBFC3B16422909 /* Pods_OpenAthenaIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */; };
+		9A006EEF1FB8F575C4D93B1D /* Pods_OpenAthenaIOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB76E5F10A821FA838AF7851 /* Pods_OpenAthenaIOSTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		15B6AE10F93BC82815BD1AD0 /* Pods-OpenAthenaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.debug.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		286D9AC72C55961D1BB26B41 /* Pods-OpenAthenaIOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOSTests.debug.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		592CABB42A0ACF61006E28AF /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = examples; sourceTree = "<group>"; };
 		593A29C82A17B3170098EAF1 /* TestCalculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCalculations.swift; sourceTree = "<group>"; };
 		593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMakeModel.swift; sourceTree = "<group>"; };
@@ -114,7 +115,9 @@
 		59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAthenaIOSTests.swift; sourceTree = "<group>"; };
 		59CC79592A15B4B800B07782 /* TestDroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDroneImage.swift; sourceTree = "<group>"; };
 		6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenAthenaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7809D03F2E40D3EB329B208B /* Pods-OpenAthenaIOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOSTests.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
+		EB76E5F10A821FA838AF7851 /* Pods_OpenAthenaIOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenAthenaIOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A006EEF1FB8F575C4D93B1D /* Pods_OpenAthenaIOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +145,8 @@
 			children = (
 				15B6AE10F93BC82815BD1AD0 /* Pods-OpenAthenaIOS.debug.xcconfig */,
 				7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */,
+				286D9AC72C55961D1BB26B41 /* Pods-OpenAthenaIOSTests.debug.xcconfig */,
+				7809D03F2E40D3EB329B208B /* Pods-OpenAthenaIOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -221,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */,
+				EB76E5F10A821FA838AF7851 /* Pods_OpenAthenaIOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -237,7 +244,7 @@
 				59B62AFF29844B6D00F0C6B1 /* Frameworks */,
 				59B62B0029844B6D00F0C6B1 /* Resources */,
 				59B62B37298C514300F0C6B1 /* Embed Frameworks */,
-				C41B499726B89A88170F2AA2 /* [CP] Embed Pods Frameworks */,
+				5D58D8430C3AF35092F16D8E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,9 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 59CC79582A15B40C00B07782 /* Build configuration list for PBXNativeTarget "OpenAthenaIOSTests" */;
 			buildPhases = (
+				CD5FFCE7432DF2F23565BB36 /* [CP] Check Pods Manifest.lock */,
 				59CC794C2A15B40C00B07782 /* Sources */,
 				59CC794D2A15B40C00B07782 /* Frameworks */,
 				59CC794E2A15B40C00B07782 /* Resources */,
+				F4394FA2C6B308F4FF29C524 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -352,21 +361,60 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C41B499726B89A88170F2AA2 /* [CP] Embed Pods Frameworks */ = {
+		5D58D8430C3AF35092F16D8E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD5FFCE7432DF2F23565BB36 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OpenAthenaIOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4394FA2C6B308F4FF29C524 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -404,7 +452,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				596E927D2AAA0AC2003E35CD /* DroneViewController.swift in Sources */,
 				593A2A462A2642400098EAF1 /* TestDroneParams.swift in Sources */,
 				593A29C92A17B3170098EAF1 /* TestCalculations.swift in Sources */,
 				597089E32A4126DD00B5E1BF /* TestEGM96.swift in Sources */,
@@ -603,10 +650,13 @@
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to access drone photos for analysis";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -614,13 +664,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.26;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -636,10 +687,13 @@
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to access drone photos for analysis";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -647,7 +701,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.26;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -655,11 +709,13 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		59CC79562A15B40C00B07782 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 286D9AC72C55961D1BB26B41 /* Pods-OpenAthenaIOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -679,6 +735,7 @@
 		};
 		59CC79572A15B40C00B07782 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7809D03F2E40D3EB329B208B /* Pods-OpenAthenaIOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

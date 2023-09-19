@@ -121,6 +121,9 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
             return
         }
         
+        self.htmlString += "Going to load new drone models json file<br>"
+        self.setTextViewText(htmlStr: htmlString)
+        
         let newDroneParams = DroneParams(jsonURL: newURL)
         
         // if empty or array count is one, we failed to load a valid file; let

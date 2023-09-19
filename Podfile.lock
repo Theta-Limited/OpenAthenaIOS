@@ -13,6 +13,7 @@ PODS:
 DEPENDENCIES:
   - mgrs-ios (= 1.1.4)
   - NSExceptionSwift (~> 1.0.1)
+  - sf-ios (= 4.1.2)
   - tiff-ios (= 4.0.1)
   - UTMConversion (~> 1.3)
 
@@ -35,6 +36,6 @@ SPEC CHECKSUMS:
   tiff-ios: 6f74cf7fefc371e2523807ea38cd808fd594f86b
   UTMConversion: 981207aedec96e604294711ba95da661156790cf
 
-PODFILE CHECKSUM: 4e6a4e4d99a9ab6d813100969cf0c79b6ab2163e
+PODFILE CHECKSUM: dc6502d50189dea0159853c5d1940135ead9a811
 
 COCOAPODS: 1.12.1

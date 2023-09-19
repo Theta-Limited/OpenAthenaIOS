@@ -8,9 +8,13 @@
 import XCTest
 @testable import OpenAthena
 
-final class OpenAthenaIOSTests: XCTestCase {
+final class OpenAthenaIOSTests: XCTestCase
+{
 
-    
+    func testStart()
+    {
+        print("Testing started")
+    }
     
     
 

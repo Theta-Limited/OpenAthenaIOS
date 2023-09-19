@@ -15,6 +15,7 @@
 // makeModel is concatenation of make and model (e.g. DJIFC220)
 
 import Foundation
+import UIKit
 
 public struct DroneCCDInfo {
     let makeModel: String  // also the dictionary key

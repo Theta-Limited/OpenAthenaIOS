@@ -58,7 +58,21 @@ final class TestDroneParams: XCTestCase {
         XCTAssert(ccdInfo1!.f == 0)
         XCTAssert(ccdInfo1!.tangentialT1 == 0.0)
         XCTAssert(ccdInfo1!.tangentialT2 == 0.0)
-
+    }
+    
+    func testMatchingDroneParams()
+    {
+        let drones = try? droneParams!.getMatchingDrones(makeModel: "djiFC2403")
+        XCTAssert(drones != nil)
+        XCTAssert(drones!.first!.makeModel == "djiFC2403")
+    }
+    
+    func testMatchingDroneByWidth()
+    {
+        var drone = try? droneParams!.getMatchingDrone(makeModel: "djiFC2403", targetWidth: 640)
+        XCTAssert(drone != nil)
+        drone = try? droneParams!.getMatchingDrone(makeModel: "djiFC2403", targetWidth: 4056)
+        XCTAssert(drone != nil)
     }
 
 } // TestDroneParams

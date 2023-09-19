@@ -14,34 +14,35 @@
 		03213DB424E0AA645718A285B2CA28CE /* SFGeometryPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6AE664524BECFEA2FF7D3C128B5DD /* SFGeometryPrinter.m */; };
 		04B3A6327E57113297E147F45AB86AC2 /* BaseZoomGrids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9372F4DB618BA5865E86E0623B23B5 /* BaseZoomGrids.swift */; };
 		05994468CF0F7FF1E6134C7620C7FFB3 /* SFGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = B76DE757AA6FC904D045879638232C06 /* SFGeometry.m */; };
-		067C7ED7510521BE277F755220E822C5 /* ZoneNumberRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548E0D71B9B2DD73059C0002C8084121 /* ZoneNumberRange.swift */; };
 		06BE0324309A96C44F4715FED424B949 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		06D18D87D8504AC2715A0863CCDAED96 /* Hemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916D8DCE00DDA6459AD9FA90EECF1F66 /* Hemisphere.swift */; };
-		071F303DFF627313B76DE65A777F15C1 /* LongitudinalStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7A7C28CA84CC21323BE56F7754ADD8 /* LongitudinalStrip.swift */; };
 		08A82D98A2958761B0C37502C499ECCC /* GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77040ABF1AFB6798C04EDF9EB9564C59 /* GridPoint.swift */; };
 		08C54D7201D9695F9F189A3929D553FA /* TIFFPackbitsCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DC4445FCB09B7C3EDAF2B227C7FEEA /* TIFFPackbitsCompression.m */; };
+		0926B4971376F4E00843A1D0DBFCFC2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		09772914D583C2D8ABEA7D1781D2716E /* SFPointFiniteFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B95058045D18FAB5B85EAD021B171B1 /* SFPointFiniteFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		09A55B5B12C8F97AD7A9F4A5E4DC98C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		0A016C377E287FB2CE2BD853F3D2DF0E /* SFLinearRing.h in Headers */ = {isa = PBXBuildFile; fileRef = 4244C108CDB3B39B685ADF6916DE9C54 /* SFLinearRing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A3D8C129610AC59102C6A4C02499342 /* UTMConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = B184CE1F3A9645D402DD4A0F7796B1F8 /* UTMConversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A42D4949996376A528CC9DE5933FFED /* PropertyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBD071AF13D7E6F169E849757CE87F4 /* PropertyConstants.swift */; };
 		0B820F87F9E00AC2DC2C51C3C9087702 /* TIFFRawCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CAC56549BABFF2F837C936B8854FD3 /* TIFFRawCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C6D6633364E610F3FCBEDC16F370480 /* SFGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = B18E93C3A9607912DB290ACEC8CD7E10 /* SFGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0D16C71CF738F3BBA2C63FEC24CBAE3F /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B23D94239AC317A2ED03ACD544B670 /* Grid.swift */; };
 		0E48F269B264AC4DF3B3DC9E834251FC /* color-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4FBD1AB046253A91B8804A38C204 /* color-ios-dummy.m */; };
 		0E5315654CEB0D3CDCB1D867EC2A2926 /* TIFFImageWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0AEE2C5395715652759FC3255A7D3C /* TIFFImageWindow.m */; };
 		0EA8525B08A56C9266513EFDDA7E7592 /* SFPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F3ECF51436CAA4C51668FDE74C39B /* SFPolygon.m */; };
 		1147BEE9E28C6E8F9BD46B517A36D76B /* NSExceptionSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7EC259C1FA720949B20F0B600814A0D /* NSExceptionSwift-dummy.m */; };
-		12C72C459546562A4C7A8D046B5BE963 /* Grids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE3DFADE2AE36D0ED581886F02A246 /* Grids.swift */; };
 		131E2AE26C04095E298C4D8109C9CEC0 /* sf-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 03AD383E8FFBC9342AECEF6D2A3015E8 /* sf-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		139938F7320186DF7FF69662B6E71E23 /* MGRSTileOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2443AF405390AE00ACF14903C0E71 /* MGRSTileOverlay.swift */; };
 		14BD570D1E847A9DA6E21301F81DE062 /* TIFFConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D9FAA04E5A49A3E6D3E152B1FB8AB5 /* TIFFConstants.m */; };
 		15128AAFD3A8116D32D4B61BE8F00DE7 /* SFGeometryCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 24494B7AA82630D09B6BAB6398F03D2A /* SFGeometryCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		160CBE7D8FA327133E533D273B7EBB67 /* TIFFUnsupportedCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 8725F7EAA490173ADB7E3B7F464946A8 /* TIFFUnsupportedCompression.m */; };
 		19F88EAE85E295DCD82C93E32D3AB43C /* tiff-ios-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A04A66D064D26FFA90002F138F979A9 /* tiff-ios-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C016BB08B0765E8BC6AF31A2BD04F5D /* mgrs-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2CA43440CF7C5921B38F4837E3745 /* mgrs-ios-dummy.m */; };
 		1E171B9B76F9C0769D43798A9C578904 /* TIFFPredictor.h in Headers */ = {isa = PBXBuildFile; fileRef = C72266D26547082A7C89AEB364430B68 /* TIFFPredictor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		20B0E8D200A8681D75075F31D0A8C6F6 /* SFShamosHoey.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA1ECD094F114CA5CD698C9026B88FF /* SFShamosHoey.m */; };
 		20FC76D3E232D626867EE00A0524A414 /* SFMultiPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79009854D7235FDE9B0E8C388F2F2A53 /* SFMultiPoint.m */; };
 		2434B0932B6387B4D38C7C2A4F3C8E52 /* TIFFFieldTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = FC60B66202603382B9F6F06C63199691 /* TIFFFieldTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		269606EBA35D927D785BD50E401C065E /* Pods-OpenAthenaIOSTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A643F2E9C7164D0BC08B643ED892E57 /* Pods-OpenAthenaIOSTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		273F4125325DF27AE9BE2D5B287976BE /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B23D94239AC317A2ED03ACD544B670 /* Grid.swift */; };
+		2AEEDF993AAA77BD01F33AA917843691 /* GridZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD56BEC7926BE965E3C04D01EF3BA4 /* GridZones.swift */; };
 		2BF2359BDCBD9036C81B19D20C19EB42 /* TIFFIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F49A0906216337D1CF87343D513BA1 /* TIFFIOUtils.m */; };
 		2C74199EF0596BFFBE63F87083B1B421 /* TIFFRasters.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B25B2E147032795F41055DB43B02CE /* TIFFRasters.m */; };
 		353FD5B9040B17A872BC4D84F48EB895 /* TIFFConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0004B6F21014C197D1240C37B2278DBD /* TIFFConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -57,47 +58,47 @@
 		416A8B5F8C0A21F0560F7D603364CAFB /* TIFFByteWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9023F78712E1557AB2C0B9AB3E0B93F5 /* TIFFByteWriter.m */; };
 		42DF086C51E56FA9AE2A04DA54B4F82C /* SFFiniteFilterTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C71331CE4D1AA5A149BF29F66B21E49 /* SFFiniteFilterTypes.m */; };
 		442F51285B69CDC948D567A74D8FF7E9 /* TIFFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C6268070401F9E6D6D87C01BFB14BA /* TIFFImage.m */; };
-		443130DF9A92BB1B26ACE0F7AEB4D29B /* Pods-OpenAthenaIOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 775B14CA9383F28568275FB3444F7BC7 /* Pods-OpenAthenaIOS-dummy.m */; };
-		45FAE0AE275B0268A3A0AFF513BD46D1 /* MGRSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F81C91BDD951100F6D15353E6AA2F /* MGRSConstants.swift */; };
+		443130DF9A92BB1B26ACE0F7AEB4D29B /* Pods-OpenAthenaIOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 54E8FAFC2526C6F2D0028064D28BAEA6 /* Pods-OpenAthenaIOS-dummy.m */; };
 		467A6290F34B846E5D570B34FE9F68B6 /* SFExtendedGeometryCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 88E5E82ED9A6B65CEE4014A3AE34EBD6 /* SFExtendedGeometryCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4857891EB4E50C0313B47AAE82257B91 /* PixelRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BA8BFEE7DC512A9BA999EEECF5D7C7 /* PixelRange.swift */; };
-		4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */; };
 		4B92ADE95854EA972CA7CB9DEFE604C4 /* TIFFIOUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BEFA841521EBB69D745105C85B0451 /* TIFFIOUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D98541D60A9E8F6C7A2D42EE5213741 /* SFTIN.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F6EF485804E1B3DFDD776798AF4C1B /* SFTIN.m */; };
-		4E9DB3A55799AD6A7BB6CABC2792DA9D /* GridLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FA821A7FBD3B520F45B13E3AE3288 /* GridLabeler.swift */; };
 		4FAEF057D06A2FE9452EC6402A646935 /* CLRColorConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 446FD120E0C4DCEE4F41B0DAE766B22C /* CLRColorConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		504452CAC12585B620DE82B41AE2F0EF /* GridType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6C8B7F9EB8A1DE33F4BFDB2EE49345 /* GridType.swift */; };
 		5071BE16E4BE0E692853697EADF125F3 /* SFLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5799116103A3F0B059CE641BE9896EAD /* SFLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		52E5D781E852027506E3CCAB9F7DAF8F /* Pods-OpenAthenaIOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0138D5B2805451FFDCF21F3E15030F9B /* Pods-OpenAthenaIOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52E5D781E852027506E3CCAB9F7DAF8F /* Pods-OpenAthenaIOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 14B63AB3D139A3C8A1BDFFA1D81A6ED9 /* Pods-OpenAthenaIOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		539BCE18921C024AD4CC18118A24FFEA /* TIFFFieldTagTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F7126F8D0B3495C3903FAF01654E82 /* TIFFFieldTagTypes.m */; };
 		545B36415A7F5FC3D46237B605D35490 /* SFMultiCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EB3216A7AD3D6E70EBDEC7F6A4F26A /* SFMultiCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		56306A285A0BAE156B6EE6F1E8B28EC7 /* SFGeometryPrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = B26CAFFA9E3ED0015E7572B699181743 /* SFGeometryPrinter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57B556F91EE3F8CCEE4625A9AC24FC45 /* SFMultiLineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C84C52964B18D19C5DB1E7012EE221 /* SFMultiLineString.m */; };
-		58090A8C68FE54524677FD5B059D279B /* MGRSTileOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2443AF405390AE00ACF14903C0E71 /* MGRSTileOverlay.swift */; };
 		594CA37FEC68E66FCD0859AD25DE0092 /* SFMultiCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = C56D751C55CB73A8E7AF79CD8D71F0C0 /* SFMultiCurve.m */; };
 		599A861C3D9D8D869382A3075FE628D4 /* SFEventTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = A3608414A24D47A4B2816F35146A1495 /* SFEventTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5BA776B1FB8E1F07188956160CF8C179 /* TIFFByteReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D953B9947E2DF92AF1907CC4C16342C /* TIFFByteReader.m */; };
 		5C7E8A968D552835F40610ECDC0DD852 /* SFPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AFD5CED1199784314D80F2E9C8A998 /* SFPoint.m */; };
-		5DEEDED84D1B4B01781E6DABA90EDF98 /* GZDLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C8D65C33102469C6CEAB1FD52FBEC3 /* GZDLabeler.swift */; };
+		5E41240EBEF6816629591D765727B69A /* MGRSLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD29935AE89FCCF89A35BD18F8E64F53 /* MGRSLabeler.swift */; };
 		5E8C298257FC8FA288AB6E017CF94ADF /* Bounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F92DF54D0248E83A12291073D250C5 /* Bounds.swift */; };
-		5F16E3EF1FAABDF6C5C1DDB451948919 /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07A33C0280BEE830E8E1E03FCBAC7F0 /* GridLabel.swift */; };
 		5F657D10EC9C1F621FE145E6961CDBDA /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D260475E66EE327660655A939ECFC /* Pixel.swift */; };
+		618392F3F3AE9C465487B8051231AA0B /* ZoneNumberRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548E0D71B9B2DD73059C0002C8084121 /* ZoneNumberRange.swift */; };
 		61DB81C112FBA7FF1BE232E28580B4B4 /* SFGeometryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CDE56A0992FC844D2523E2A298E73 /* SFGeometryConstants.m */; };
 		645F48417FF93BCE1E38A99AFEC88936 /* NSExceptionSwift.m in Sources */ = {isa = PBXBuildFile; fileRef = 801A5640ED75033FFC33ECFBF03D470D /* NSExceptionSwift.m */; };
 		64BBE480837CDC78A847E651BD4A56C9 /* SFTriangle.h in Headers */ = {isa = PBXBuildFile; fileRef = 107217FC810336C7856CB17811051DA4 /* SFTriangle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		655B618AA7337F91593380D603986548 /* GridStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D3C43825DB6B9ACCCB7BBA1EED2A3B /* GridStyle.swift */; };
 		66AAA766D7293D6DE733D3C0DFD53472 /* TileDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722DE760EF01DD8C03752E1F7467D67C /* TileDraw.swift */; };
 		67FD96DEAC93009EBE0B83C6AADADC60 /* SFMultiPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0450B5179D97976539CF4FEC50010497 /* SFMultiPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68791665256A47E5D48BF759FCB6BC6C /* BandLetterRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDF588990F74AA2B76675CEE95476F6 /* BandLetterRange.swift */; };
 		689B2DF51EECBC692E7C2507180E7696 /* CLRColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 455BD43AFEBAA1F0F7131AE1E9DEE1AC /* CLRColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A08BB073E6277F70C8E63DC78DB2508 /* SFMultiSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = F33D20C51DF0402A3660F62DD61E822F /* SFMultiSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A4468BF7DFE4B34C2EC74358883FA7B /* SFPointFiniteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 772104D96A1CA2A05576D8BF0E456290 /* SFPointFiniteFilter.m */; };
+		6BB32B456E379F7F4343D2158A98EEE2 /* GridType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6C8B7F9EB8A1DE33F4BFDB2EE49345 /* GridType.swift */; };
 		6CE96A41EB94289E8350733039411828 /* SFCentroidPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DCC1FB3BB9AEA3C27B4DF3F34EE28E6 /* SFCentroidPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D41428A83906C87FEB3FAC60E58D1BC /* LongitudinalStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7A7C28CA84CC21323BE56F7754ADD8 /* LongitudinalStrip.swift */; };
 		6EE947A9629D6DABB59F08537E408015 /* sf-ios-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = C9C161AE763490284C347D738A0AC956 /* sf-ios-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		74220F1D5FFC390923C7E55F3FB2FC28 /* SFLine.m in Sources */ = {isa = PBXBuildFile; fileRef = CA77F36A369B3BB7FAC6CBC9E66C7DB9 /* SFLine.m */; };
 		744E5566A8B928754D44E37EA5127401 /* SFPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EFE86650E0825DA9C92093078F76E71 /* SFPolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		749E2FD2C71359FE66149C6051EA19C3 /* TIFFRawCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CD98F4400BFCE9FE91929FE092012E /* TIFFRawCompression.m */; };
 		7531B4F97700F1C84513A7A8B43C75FE /* BaseGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B095752EC7E278AF1F457C7C989A8 /* BaseGrid.swift */; };
 		76A2667AC3D5A9289F4096B5D4522068 /* TIFFUnsupportedCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 29D11E97B7FC1F07F130F6D9CC9180CC /* TIFFUnsupportedCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7806B0225B0A168BFFD7D6683833FBCF /* GridZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C023D7B16D05F9CA95EB09BBF42EEF7 /* GridZone.swift */; };
+		781CD252BB5783DC303022D7792C152C /* mgrs.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDA147D83A39036A8F90CB31184C4638 /* mgrs.plist */; };
 		78C83F5683BC37B10BA00E4CB5BEA715 /* SFEventQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 17E2FE3DC33CE90C6F478E80FF46FF2F /* SFEventQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78E31C26D1AFD99A1C59E7BC23C8D3F1 /* TIFFFieldTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 542D388A08E86A84C238D87A7CFC90D7 /* TIFFFieldTypes.m */; };
 		7990EB653D45E5C509778C545C198A08 /* SFMultiPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = BA0CE31E69FCEEA23D0EBEAA24A617A2 /* SFMultiPolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -105,21 +106,21 @@
 		7AB45672E1B9BF48632144D30410BEE8 /* grid-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CB42819AE3DC79A48311BAD228C5ADAF /* grid-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7CE2030F089971E29B7A3F601F6B1EA2 /* UTMConversion-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F7251D21EEFC3D8604812EA732A3C702 /* UTMConversion-dummy.m */; };
 		7EF8EC16FEE885449ECBAF1C96B2CF72 /* TIFFImageWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = B87109E45DCC1B98990A725EAA79CFFE /* TIFFImageWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7FA49CA3EDC298CA7C55C460F06B0DC2 /* mgrs-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2CA43440CF7C5921B38F4837E3745 /* mgrs-ios-dummy.m */; };
 		807994197AEEB80BDDB6028EED4812BD /* SFCentroidPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A418D82632BFED30E7C0CD31B40E2 /* SFCentroidPoint.m */; };
 		818C427C745CD422865AC833155F8000 /* tiff-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C948BF69E2EF011EFC8114F84773C07 /* tiff-ios-dummy.m */; };
+		82406A08C83A05F445BACD195F09FDBC /* Grids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE3DFADE2AE36D0ED581886F02A246 /* Grids.swift */; };
 		8267D258D4C82BF813C9AD0982BAFF59 /* SFFiniteFilterTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 322E65F38BD69DD7D124808D956684FE /* SFFiniteFilterTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		828DDD26F49E1A2C047E2DA0B79A9DE1 /* SFShamosHoey.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAACC7CD9AD229333640EA066C43772 /* SFShamosHoey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8447B58BA06145AA077143850FFDDFD6 /* MGRS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F13A0E9DF525E9C1A3A52DA412D2DE0 /* MGRS.swift */; };
-		85033FED5CBFB7D24E7CAB85F76D7DED /* GridZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C023D7B16D05F9CA95EB09BBF42EEF7 /* GridZone.swift */; };
 		85AAF0A3AC4CD3338C2A13D9725DBE20 /* TIFFPredictor.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FF09356A354A8DF7A951EA6CE09915 /* TIFFPredictor.m */; };
 		862022CF8BA137B52A3B46E40BA95925 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		86534A5DA37AB53A2E591F19BCD6A99E /* tiff_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 837B53631006A227E8687F12F3783AFD /* tiff_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		866A60043BD0E813D85BFA517291B3FA /* MGRSLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603A3AEBE5F0D451B6B7C95C079EF98C /* MGRSLine.swift */; };
 		87B90586A42BA8C63B47543CA640FDD0 /* SFDegreesCentroid.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4FDE32B3B037C990BFD68F16C7B7C8 /* SFDegreesCentroid.m */; };
 		883569A5B4BAAFFED45594245FA98FCE /* SFCircularString.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDC51C96144D20B51F1AF74E76CF69 /* SFCircularString.m */; };
 		8996617A71D0C4DCD14B2C10EFEC0365 /* TIFFLZWCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 51AF4D6B3B4D71DA34CFCF2EFF6AE976 /* TIFFLZWCompression.m */; };
 		8D2D1E017539C9010B0B604F7B65E787 /* SFCentroidSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = A922F7E40FD062DB7BFE1B60C524D1F6 /* SFCentroidSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D5E95505D62F21642B02BC1971D73A8 /* sf-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A597945852886AD7CFABCC2EE64B9 /* sf-ios-dummy.m */; };
+		8D930DFF2256DA7BF2AF59E4F52B05D3 /* LatitudeBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0C3CCDD03862D92932717CD73B8AA /* LatitudeBand.swift */; };
 		8E1D35640D06557EBFB685246DCDC3C8 /* SFPolyhedralSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F3C0AEAD0D9297D05F5A3DD49746A61 /* SFPolyhedralSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EE20942AAC67BA46793296704540B74 /* CLLocationCoordinate2D+UTMCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994B5F037B0843AD1EB634CD79DAB158 /* CLLocationCoordinate2D+UTMCoordinate.swift */; };
 		8F7F53BF81C46874080858C2B72DD742 /* SFMultiPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5FD0ABBF77E96D8FF3F48811B98263 /* SFMultiPolygon.m */; };
@@ -127,10 +128,9 @@
 		9038A6A51BF3D454D04072F2C4D24EE8 /* TIFFReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 77892F040E13D101F63F9385A7CF6124 /* TIFFReader.m */; };
 		91415F2099C0F7B7E56AD62D77E4AFF9 /* SFSurface.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC9BF8E4F01BDB46888FCEAD7DE9C9E /* SFSurface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9199F3D813C5616AB348DC0D123B0A9A /* CLRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F53F67C784B9CCEC25BA0ACBE735BF8E /* CLRColor.m */; };
-		92AD7B6978B043A6D87647E147EE2763 /* GridRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC9B50D9C72DED2AA06A64A7E14073A /* GridRange.swift */; };
 		95B2D0F02927600AAF989556BB4DA134 /* SFEventQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3049699F9107C917149686F5D435AE /* SFEventQueue.m */; };
 		95F563CF79B1B1A36B6745E2C26E3A0D /* SFGeometryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 313EC51498FA3313FE29BC9AA6249C66 /* SFGeometryUtils.m */; };
-		99D63002859B00ED49BE5D481965B751 /* LatitudeBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0C3CCDD03862D92932717CD73B8AA /* LatitudeBand.swift */; };
+		963DEF44BEBC303C14B24D8F7F0FD165 /* Pods-OpenAthenaIOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A757D55E5AC631E4A94328E98803EC /* Pods-OpenAthenaIOSTests-dummy.m */; };
 		9A1CF5F77CBB50B95AB79D27214BF2FC /* CLRColorUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 813C51BFFB89262E9FC0C2C9CF31DD72 /* CLRColorUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A770ECF3C9BE731E5AFB62EFE905A1A /* SFCentroidSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C9E34693A4992EB19E4D0DB3DAD6C /* SFCentroidSurface.m */; };
 		9A776F1902C14C9C58551E67D5A3F2FB /* TMCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB326D93B177A4558B057C46AE709261 /* TMCoordinate.swift */; };
@@ -143,25 +143,23 @@
 		A69006FCFAAF7FFDF0B248C6AE7DADA3 /* TIFFByteReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 73976956CAB17F81EDA90AB0D3AC480D /* TIFFByteReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A8115B39B7A696CC41E0003237FA4493 /* SFTIN.h in Headers */ = {isa = PBXBuildFile; fileRef = 74ECD554F94575093331DD844D13CF21 /* SFTIN.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9BBB5A1705F082F911840552F47E50F /* SFMultiSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F1C6981E8CAE4C4E905428B7A81426 /* SFMultiSurface.m */; };
+		ABC4DCA5495D72B4E682758A0874D31B /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07A33C0280BEE830E8E1E03FCBAC7F0 /* GridLabel.swift */; };
 		ACB2FEDF17CA8C064254C4E72045CA41 /* SFGeometryEnvelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 873F8273C8B4E5EA65BED3B8AC9133BB /* SFGeometryEnvelope.m */; };
 		AE7434CD15CBEFF4168F1B9A071887E2 /* CLRColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A21001CA9A4B747BCD58CA7A111C009 /* CLRColorUtils.m */; };
 		AEB0261D7FAD4C15A2B4A3F78FE0F0BC /* SFGeometryConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0327B4F7C806683552C98CEAE806EA59 /* SFGeometryConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEC9972857EEDC39B3E8E779E600DCF0 /* MGRSProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739A17C64FB464BDD64B2DA7369A45D /* MGRSProperties.swift */; };
 		B11A8C3707BEFE80D7DA17E7A56DE5D5 /* SFLineString.h in Headers */ = {isa = PBXBuildFile; fileRef = A4195F64105D746C4863AC3C27EF389F /* SFLineString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B1BFDB9E4706D492A8052A8DCB2FBB3F /* GridTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC534FDB89862E4842E53D108D2536 /* GridTile.swift */; };
 		B385CFE995511E0CE589936018EA3477 /* SFEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 52049A8C834C1975832C4BC18F047AA0 /* SFEvent.m */; };
-		B3D24A91D499AE8FA8686B61B67C8DE5 /* MGRSLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603A3AEBE5F0D451B6B7C95C079EF98C /* MGRSLine.swift */; };
 		B4AA3CFD0A84A50024FCEAA4086910CF /* TIFFWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 566A4C8E25966D107D313245F44E2EC6 /* TIFFWriter.m */; };
-		B9CE441CDCD318CB9A977B27705DE792 /* GridZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDD56BEC7926BE965E3C04D01EF3BA4 /* GridZones.swift */; };
 		BB0A0C829BBF7437902DDEDFC0BA5285 /* SFMultiLineString.h in Headers */ = {isa = PBXBuildFile; fileRef = 73A422F7D32ED3ED790916A97B115E95 /* SFMultiLineString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCDFE6D3C51A7C342C37AC06DE7AD3CE /* SFCircularString.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AF5FF77F5F7B35CEE998F0024F626DC /* SFCircularString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD91B3EB0B78F7A15C9D6C9F4BB42D45 /* TIFFDeflateCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = D45BE01C87A60A8464210E281849A004 /* TIFFDeflateCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BEC4C226A58E287B17058BA4976BD7B7 /* SFCompoundCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = FD49A76775CC30D59E48D7695DBE3338 /* SFCompoundCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0C9D7C96A54D4A48F1753DDE4F0FDEB /* SFGeometryEnvelopeBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 80EBCA1FA18CD627F54EAD56197FDB5D /* SFGeometryEnvelopeBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C12FCC808805656DCCADDE1FB733AA7F /* SFByteWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = F885D906D1650C57B9F8F50416153FB2 /* SFByteWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C1A99C38DE8AD8351521E2822380350D /* mgrs-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 683FB594CBC005AF42F56D4450FB882F /* mgrs-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C384C7BBDC6738761E5E4283B403866E /* TIFFCompressionEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0DCD4E0354BC6C448F0535757CD3D2 /* TIFFCompressionEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C56A8BD8B54524F9DDFF9D02FE453489 /* SFSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FE9DC6DFFDE163F46935F223F9CE2C /* SFSurface.m */; };
-		C58C3CBDFADC280064A3E6AC33A1BE85 /* MGRSLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD29935AE89FCCF89A35BD18F8E64F53 /* MGRSLabeler.swift */; };
 		C6320635F844040303AB9BC1ADBAF2D5 /* TIFFFileDirectoryEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = F3F0631B0BB8C32803257CFF6D95780A /* TIFFFileDirectoryEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C8CF0C0C9E97B03CC81AEECB6330E6DE /* SFByteWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 765ACD9EE565D196BD55383A3D23CB2C /* SFByteWriter.m */; };
 		C9B9163FC38440536BC683D5D34E50D4 /* SFCentroidCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B68B28CF56CEDC5C417D1B186AB9EA /* SFCentroidCurve.m */; };
@@ -173,29 +171,34 @@
 		CC7199929D23E0E61A664FFDA34C9A64 /* TIFFFileDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B01EF883AD4EAC4E7AD3B5D9962225 /* TIFFFileDirectory.m */; };
 		CD58FCD440C3CB39746FC62196361E7C /* GridProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18C00AB5BFAEF24EB3B6E430AAC1BEB /* GridProperties.swift */; };
 		CD7C88F27F98E1D9D6FE102DA5EABB69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		CD7FA7FE4517C4797803B530FD163E0F /* mgrs.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDA147D83A39036A8F90CB31184C4638 /* mgrs.plist */; };
+		CDC70914064AA34989AFBA484C443857 /* GridRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC9B50D9C72DED2AA06A64A7E14073A /* GridRange.swift */; };
+		CF72341E2D3E140DA0838BD3FBD9047C /* GZDLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C8D65C33102469C6CEAB1FD52FBEC3 /* GZDLabeler.swift */; };
 		CF7F918A023F262D7994A694AAC66BEE /* SFGeometryFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 750B938C6CDEEF5CBDFE4B51E40D7F0C /* SFGeometryFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CFCEFC5DD283334360DF0C59B42B6AF5 /* MGRSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759A62E243B216AA3E4BCE987A3954C9 /* MGRSUtils.swift */; };
+		D0AD3E43B534B467F096A6D4F58DA7B3 /* ZoomGrids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD39A6499BCE66A541BFEBE763813F1 /* ZoomGrids.swift */; };
 		D2D94B728A3A410015F4486039C30849 /* SFPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = BA499533AE512B90BB6535C50BF44A12 /* SFPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D40D059896095EF112C34552DC1CC6AF /* SFTextReader.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE17172DFD9A1463616D5273B9B1321 /* SFTextReader.m */; };
 		D44DE821DFFDF9E4D6EFB1E9E76EE024 /* TIFFFileDirectoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E1EE27FE7D162FE140A2378EF309A0 /* TIFFFileDirectoryEntry.m */; };
 		D4955B2DF791E5B9B607DB44D88AA5EF /* TIFFPackbitsCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AAA242A5D35CA16DE71257B6196949F /* TIFFPackbitsCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4A82FE97D097418A6D469327D543E5B /* grid-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 481B4AC7F596EC21FEF368C9B208FDC5 /* grid-ios-dummy.m */; };
 		D51A878D84334D1CB3981DE079FCEC91 /* SFCompoundCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F5438E27028D07054A99EDE90FAD1A /* SFCompoundCurve.m */; };
+		D5305643BFB8239A15D174717FA94179 /* MGRSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121F81C91BDD951100F6D15353E6AA2F /* MGRSConstants.swift */; };
 		D644C1FE1189C35282159D0B5792AD55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		D6B186A7D42AD382DCEC0325D9455B58 /* TIFFFieldTagTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E5E756BD9F758FB0123DF5F65DF5C62 /* TIFFFieldTagTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D710604B27B5FADDA380C25982708B0A /* MGRS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F13A0E9DF525E9C1A3A52DA412D2DE0 /* MGRS.swift */; };
 		D9A1DF495BF9773DD784205359712CC5 /* GridConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0109067AC754319ADDA00FA4EDB468FB /* GridConstants.swift */; };
 		DA9A01978E0E496D1A07462C29F89DA6 /* SFExtendedGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB06B3F2D79FA5D1E085CEDA8CCAE79 /* SFExtendedGeometryCollection.m */; };
 		DAACF35B4CE412EDFC4818592556408B /* SFEventTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = E78CCC070CD1F2BF9841C20676456E51 /* SFEventTypes.m */; };
 		DACC9C0ECA8BC7B377CD112BA0E4B25C /* SFEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = C6467C4E1F5734B7A1A6967BBFCE0B39 /* SFEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBAFA371482359D59ACA52BA0ADEDC61 /* SFGeometryTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E17C88C4104A8DF671D6A806401FC7D6 /* SFGeometryTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBC5C7E8021814F1B2CF0A79ACA97DF8 /* SFTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = F91F4A754E77444649D79530ABAACEC5 /* SFTriangle.m */; };
-		DDED62BD2C447F6C5E7297D20D697A1A /* MGRSProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739A17C64FB464BDD64B2DA7369A45D /* MGRSProperties.swift */; };
 		DE0812E35F28B6F0E1647226542ACC11 /* TileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB6D79C477A1CEB6F05E8EEBEACD32 /* TileUtils.swift */; };
+		DECB5187CDE253A3CF515133324FB620 /* GridLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FA821A7FBD3B520F45B13E3AE3288 /* GridLabeler.swift */; };
 		DF9D7D1FCFA243E6EFE52B9ADBAFF56D /* CLRColorConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D59C5FB8462FBDD0C1AFA42297CA01 /* CLRColorConstants.m */; };
 		E0EBCAA8A32D9D25AA2421A5CE68E4E5 /* SFGeometryEnvelopeBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FF2C1D20BE3D85C06811F8251A57DE /* SFGeometryEnvelopeBuilder.m */; };
+		E1E495C5B2EB606FF9F8A96D9839E23C /* mgrs-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 683FB594CBC005AF42F56D4450FB882F /* mgrs-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E41E672CAD07F1B22870803CA8FE52E8 /* SFCentroidCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = EA65E25579C336237ABE789D1AE53B21 /* SFCentroidCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E42147ABAB4A56B6DB97BBC2A5C1E926 /* SFPolyhedralSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E601150EAB7E69296A67416BB82053 /* SFPolyhedralSurface.m */; };
-		E4FCEA16DE75F4A694D3726150FB3E93 /* ZoomGrids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD39A6499BCE66A541BFEBE763813F1 /* ZoomGrids.swift */; };
 		E746D93E2DB29AA95ACB6ADAA8FB092E /* SFSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD15FBBCE956ECA50BA03E4FCC783CF /* SFSegment.m */; };
 		E82D0525A20943DA654E003EC2237036 /* UTMConversion-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3BEE1B7F3268274E589AE7BA822ED81 /* UTMConversion-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8F6ED1838D9138E520D109C2F2B31E5 /* SFGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1B89DEDDB903DA822107F74FE74335 /* SFGeometryCollection.m */; };
@@ -207,22 +210,35 @@
 		EF5076A370224DF6596EDCBD8F20A32C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		EF5617B6EA018C9735071AFD28F53A61 /* TIFFCompressionDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = E9C2934006410418D739C786DCF2A9D6 /* TIFFCompressionDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF7FB19EC749C2AF91625156E43FDED4 /* color-ios-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 26BE87A0F3E600CC1D46D9ED87CBB427 /* color-ios-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F45C66FB001F5FAF7636B4B72F978642 /* UTM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DD2800303A5EE3D942426046BB0702 /* UTM.swift */; };
 		F53B1D68B87036F9449F7648C4613867 /* NSExceptionSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7573D70B03D93489BFAD137436D4276 /* NSExceptionSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5DA2BD5458F7EA65CD2E599D35CC4F8 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506B35C49D126081BA76496B5701F9B /* Label.swift */; };
 		F6C066356F3EDD293F358AF704C56D57 /* SFSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = DD3E378DFFDB8245A19BD274BE43F74B /* SFSegment.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F74B1D2D126E49BB9B0FF8DA9CC05E63 /* MGRSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759A62E243B216AA3E4BCE987A3954C9 /* MGRSUtils.swift */; };
-		F84FCFCAC9BCAB72DD72486E6B8E7A68 /* UTM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DD2800303A5EE3D942426046BB0702 /* UTM.swift */; };
 		FA53EFD0B1291168E8738B8C411204B7 /* SFGeometryEnvelope.h in Headers */ = {isa = PBXBuildFile; fileRef = AC7DD39F3561B299CBD42F0D5B73CCF4 /* SFGeometryEnvelope.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAC870BD65884F77514BBBFAE7FF2425 /* TIFFReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 610D473F764F0C5377DD518E4AA68A65 /* TIFFReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FB2485507127ECF4947A6118C4C7AC27 /* SFSweepLine.h in Headers */ = {isa = PBXBuildFile; fileRef = FD13BD0BE75F21E25F80283DC053DAB9 /* SFSweepLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB9ABE33CF211DA4F8733D694B593F7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		FBA0B6116F184AEE48111DCA56484F4F /* color_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 544E341BF5F6BFB7A67CC352EF7525FC /* color_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FE1AD1808371E2062436BFB2C0A20E1B /* NSExceptionSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F904426D0E0086268B2DAE605692A456 /* NSExceptionSwift.swift */; };
 		FF19505D11C33812FC5ED6E54BBEF44F /* TIFFFileDirectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A15B223B587E1C79D573CF41EF15C3E /* TIFFFileDirectory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF4AF3E4B24E22E597A22DEB1AE137DA /* SFTextReader.h in Headers */ = {isa = PBXBuildFile; fileRef = D477388115D4C548F925DA8A0830B2FB /* SFTextReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF828B06B69B612AF17AE40C3149481C /* BandLetterRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDF588990F74AA2B76675CEE95476F6 /* BandLetterRange.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		104975FEC28431756DBBD0EDABEE27A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 577E91B04D12C328F76DD4B7C16DBAEF;
+			remoteInfo = "mgrs-ios-mgrs-ios";
+		};
+		10D528843F5D4CFD11A549833565DAC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0FCE908D58633F946C69A2EAE0850A3;
+			remoteInfo = NSExceptionSwift;
+		};
 		2ACCD0EEA2A8C9EBAC7B3A15B735BAE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -230,12 +246,19 @@
 			remoteGlobalIDString = AED3CD45D039D7912074525C078AD57E;
 			remoteInfo = "tiff-ios";
 		};
-		5DD518E5E57415AE22698AD83AE6BBA8 /* PBXContainerItemProxy */ = {
+		2BBC4EC7DD3D8E3E9DF544943E137CBD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 577E91B04D12C328F76DD4B7C16DBAEF;
-			remoteInfo = "mgrs-ios-mgrs-ios";
+			remoteGlobalIDString = F99C60B9711DB2529FC6C4FC9904B3F9;
+			remoteInfo = "grid-ios";
+		};
+		42593D24AB820E60D205A70FEF52B493 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA341BB40DB010A6FF2E54DFC3D1E5D8;
+			remoteInfo = "mgrs-ios";
 		};
 		5F1CF2914EC21BCBA8945AAC9BA1A15D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -251,12 +274,12 @@
 			remoteGlobalIDString = 3D3A419CC7A327DAABA72019D5CE9F57;
 			remoteInfo = "sf-ios";
 		};
-		80CAB7FDC46A16FE0ADDE6E3937D0DED /* PBXContainerItemProxy */ = {
+		7C6FC57A882F98584CF4F77927821733 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F99C60B9711DB2529FC6C4FC9904B3F9;
-			remoteInfo = "grid-ios";
+			remoteGlobalIDString = 5D942CA48BAB353546F6B788AC3EA195;
+			remoteInfo = "color-ios";
 		};
 		8B4B3CCD9E60C9FEC7A879E622EA9B58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -264,6 +287,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E72B2D255339C323F5149822638C652B;
 			remoteInfo = UTMConversion;
+		};
+		91F84300DAFD403A4227EABF35AFEC4F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F99C60B9711DB2529FC6C4FC9904B3F9;
+			remoteInfo = "grid-ios";
 		};
 		9B6FF721871E04386C6F0FC5579F881B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -293,6 +323,27 @@
 			remoteGlobalIDString = C0FCE908D58633F946C69A2EAE0850A3;
 			remoteInfo = NSExceptionSwift;
 		};
+		D49967E9671A21907BA825ACA49A5DFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D3A419CC7A327DAABA72019D5CE9F57;
+			remoteInfo = "sf-ios";
+		};
+		E7E0F45BB17E1179C64F9524D6EC0CA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E72B2D255339C323F5149822638C652B;
+			remoteInfo = UTMConversion;
+		};
+		ECDAA7B75D2959235BD0CD1D0758E459 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AED3CD45D039D7912074525C078AD57E;
+			remoteInfo = "tiff-ios";
+		};
 		EDEF7E4A874166DEB1585B8A7046D237 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -305,14 +356,13 @@
 /* Begin PBXFileReference section */
 		0004B6F21014C197D1240C37B2278DBD /* TIFFConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFConstants.h; path = "tiff-ios/util/TIFFConstants.h"; sourceTree = "<group>"; };
 		0109067AC754319ADDA00FA4EDB468FB /* GridConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridConstants.swift; path = "grid-ios/GridConstants.swift"; sourceTree = "<group>"; };
-		0138D5B2805451FFDCF21F3E15030F9B /* Pods-OpenAthenaIOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OpenAthenaIOS-umbrella.h"; sourceTree = "<group>"; };
-		01926091B26761FC441FC24EF26BB73A /* Pods-OpenAthenaIOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OpenAthenaIOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0327B4F7C806683552C98CEAE806EA59 /* SFGeometryConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryConstants.h; path = "sf-ios/util/SFGeometryConstants.h"; sourceTree = "<group>"; };
 		035CD3EF5957C0F62685407E856E3B71 /* GridUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridUtils.swift; path = "grid-ios/GridUtils.swift"; sourceTree = "<group>"; };
 		0398F2567A8C6CE54F1F609C3584DBFB /* sf-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "sf-ios.release.xcconfig"; sourceTree = "<group>"; };
 		03AD383E8FFBC9342AECEF6D2A3015E8 /* sf-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sf-ios-umbrella.h"; sourceTree = "<group>"; };
 		0450B5179D97976539CF4FEC50010497 /* SFMultiPoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMultiPoint.h; path = "sf-ios/SFMultiPoint.h"; sourceTree = "<group>"; };
 		07CAC56549BABFF2F837C936B8854FD3 /* TIFFRawCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFRawCompression.h; path = "tiff-ios/compression/TIFFRawCompression.h"; sourceTree = "<group>"; };
+		088F301D48274D3496CB27D48C05B102 /* Pods-OpenAthenaIOSTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-OpenAthenaIOSTests.modulemap"; sourceTree = "<group>"; };
 		0A2A93A5EBF7AE2F14E2A7BCEA2D12F3 /* Pods-OpenAthenaIOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-OpenAthenaIOS"; path = Pods_OpenAthenaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD39A6499BCE66A541BFEBE763813F1 /* ZoomGrids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZoomGrids.swift; path = "mgrs-ios/grid/ZoomGrids.swift"; sourceTree = "<group>"; };
 		0B2CA5B67A0637A28DB8202B5CC9F729 /* SFByteReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFByteReader.h; path = "sf-ios/util/SFByteReader.h"; sourceTree = "<group>"; };
@@ -320,11 +370,11 @@
 		0D53D64A431C5E57D7DDC7646A422807 /* mgrs-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "mgrs-ios-Info.plist"; sourceTree = "<group>"; };
 		0E1B89DEDDB903DA822107F74FE74335 /* SFGeometryCollection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryCollection.m; path = "sf-ios/SFGeometryCollection.m"; sourceTree = "<group>"; };
 		0EFE86650E0825DA9C92093078F76E71 /* SFPolygon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFPolygon.h; path = "sf-ios/SFPolygon.h"; sourceTree = "<group>"; };
-		0F3AF445143C6794317785E47C01A0ED /* Pods-OpenAthenaIOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		106DB743D46992057F731624D6F015DD /* TIFFRasters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFRasters.h; path = "tiff-ios/TIFFRasters.h"; sourceTree = "<group>"; };
 		107217FC810336C7856CB17811051DA4 /* SFTriangle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFTriangle.h; path = "sf-ios/SFTriangle.h"; sourceTree = "<group>"; };
 		121F81C91BDD951100F6D15353E6AA2F /* MGRSConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSConstants.swift; path = "mgrs-ios/MGRSConstants.swift"; sourceTree = "<group>"; };
 		122A2CDEF2B554F82B281104F8500DE9 /* color-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "color-ios.modulemap"; sourceTree = "<group>"; };
+		14B63AB3D139A3C8A1BDFFA1D81A6ED9 /* Pods-OpenAthenaIOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OpenAthenaIOS-umbrella.h"; sourceTree = "<group>"; };
 		17E2FE3DC33CE90C6F478E80FF46FF2F /* SFEventQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFEventQueue.h; path = "sf-ios/util/sweep/SFEventQueue.h"; sourceTree = "<group>"; };
 		1A04A66D064D26FFA90002F138F979A9 /* tiff-ios-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "tiff-ios-Bridging-Header.h"; path = "tiff-ios/tiff-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		1A21001CA9A4B747BCD58CA7A111C009 /* CLRColorUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CLRColorUtils.m; path = "color-ios/CLRColorUtils.m"; sourceTree = "<group>"; };
@@ -347,7 +397,6 @@
 		2739A17C64FB464BDD64B2DA7369A45D /* MGRSProperties.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSProperties.swift; path = "mgrs-ios/property/MGRSProperties.swift"; sourceTree = "<group>"; };
 		27AFD5CED1199784314D80F2E9C8A998 /* SFPoint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPoint.m; path = "sf-ios/SFPoint.m"; sourceTree = "<group>"; };
 		29D11E97B7FC1F07F130F6D9CC9180CC /* TIFFUnsupportedCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFUnsupportedCompression.h; path = "tiff-ios/compression/TIFFUnsupportedCompression.h"; sourceTree = "<group>"; };
-		29D89BE41281ACE27788B3BF860F55E7 /* Pods-OpenAthenaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2C3CE7E86BA6F36EDF124FC5891B1B88 /* TIFFByteWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFByteWriter.h; path = "tiff-ios/io/TIFFByteWriter.h"; sourceTree = "<group>"; };
 		2D7A7896330DAC560DE1CA9C1D710427 /* Line.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Line.swift; path = "grid-ios/features/Line.swift"; sourceTree = "<group>"; };
 		2E6D603DD1A7653C68EE998A547A8B55 /* ResourceBundle-mgrs-ios-mgrs-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-mgrs-ios-mgrs-ios-Info.plist"; sourceTree = "<group>"; };
@@ -364,13 +413,15 @@
 		39FE9DC6DFFDE163F46935F223F9CE2C /* SFSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFSurface.m; path = "sf-ios/SFSurface.m"; sourceTree = "<group>"; };
 		3A158E48E0722CBF6B9F1983E93A0ADA /* NSExceptionSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NSExceptionSwift.debug.xcconfig; sourceTree = "<group>"; };
 		3BA6AE664524BECFEA2FF7D3C128B5DD /* SFGeometryPrinter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryPrinter.m; path = "sf-ios/util/SFGeometryPrinter.m"; sourceTree = "<group>"; };
-		3C43ACDA76CFB912A70DA6B9909FB8C2 /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
+		3BFFC5BA0FD09DDBB05455F29E0D3684 /* Pods-OpenAthenaIOSTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOSTests-Info.plist"; sourceTree = "<group>"; };
+		3C152D21C860D98739120A78E3B15DF7 /* Pods-OpenAthenaIOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		3CE2443AF405390AE00ACF14903C0E71 /* MGRSTileOverlay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MGRSTileOverlay.swift; path = "mgrs-ios/tile/MGRSTileOverlay.swift"; sourceTree = "<group>"; };
 		3F4A597945852886AD7CFABCC2EE64B9 /* sf-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "sf-ios-dummy.m"; sourceTree = "<group>"; };
 		414AB1F5F613CE4E72217789DF047721 /* grid-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "grid-ios.release.xcconfig"; sourceTree = "<group>"; };
 		4244C108CDB3B39B685ADF6916DE9C54 /* SFLinearRing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFLinearRing.h; path = "sf-ios/SFLinearRing.h"; sourceTree = "<group>"; };
 		446FD120E0C4DCEE4F41B0DAE766B22C /* CLRColorConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLRColorConstants.h; path = "color-ios/CLRColorConstants.h"; sourceTree = "<group>"; };
 		455BD43AFEBAA1F0F7131AE1E9DEE1AC /* CLRColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLRColor.h; path = "color-ios/CLRColor.h"; sourceTree = "<group>"; };
+		4630B764A1CFBA6A948ACC2369B085F6 /* Pods-OpenAthenaIOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OpenAthenaIOS-resources.sh"; sourceTree = "<group>"; };
 		481B4AC7F596EC21FEF368C9B208FDC5 /* grid-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "grid-ios-dummy.m"; sourceTree = "<group>"; };
 		4898EB0F713E120B506BC54EEA16F6EF /* tiff-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "tiff-ios.modulemap"; sourceTree = "<group>"; };
 		48FA557B264D5361262E5ACB48C11106 /* SFSweepLine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFSweepLine.m; path = "sf-ios/util/sweep/SFSweepLine.m"; sourceTree = "<group>"; };
@@ -379,18 +430,25 @@
 		4DE34C3B36DA71C413CFDF052D21D387 /* sf-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sf-ios-prefix.pch"; sourceTree = "<group>"; };
 		4E5E756BD9F758FB0123DF5F65DF5C62 /* TIFFFieldTagTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFieldTagTypes.h; path = "tiff-ios/TIFFFieldTagTypes.h"; sourceTree = "<group>"; };
 		4E5F3ECF51436CAA4C51668FDE74C39B /* SFPolygon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPolygon.m; path = "sf-ios/SFPolygon.m"; sourceTree = "<group>"; };
+		4FCEB6B0CB110E95DE442ED0948579C5 /* Pods-OpenAthenaIOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOS-Info.plist"; sourceTree = "<group>"; };
 		51AF4D6B3B4D71DA34CFCF2EFF6AE976 /* TIFFLZWCompression.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFLZWCompression.m; path = "tiff-ios/compression/TIFFLZWCompression.m"; sourceTree = "<group>"; };
 		52049A8C834C1975832C4BC18F047AA0 /* SFEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFEvent.m; path = "sf-ios/util/sweep/SFEvent.m"; sourceTree = "<group>"; };
 		542D388A08E86A84C238D87A7CFC90D7 /* TIFFFieldTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFFieldTypes.m; path = "tiff-ios/TIFFFieldTypes.m"; sourceTree = "<group>"; };
 		544E341BF5F6BFB7A67CC352EF7525FC /* color_ios.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = color_ios.h; path = "color-ios/color_ios.h"; sourceTree = "<group>"; };
 		548E0D71B9B2DD73059C0002C8084121 /* ZoneNumberRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZoneNumberRange.swift; path = "mgrs-ios/gzd/ZoneNumberRange.swift"; sourceTree = "<group>"; };
+		54E8FAFC2526C6F2D0028064D28BAEA6 /* Pods-OpenAthenaIOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OpenAthenaIOS-dummy.m"; sourceTree = "<group>"; };
 		566A4C8E25966D107D313245F44E2EC6 /* TIFFWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFWriter.m; path = "tiff-ios/TIFFWriter.m"; sourceTree = "<group>"; };
 		57180B72A39800812E73E3EA85111D64 /* SFGeometryTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometryTypes.m; path = "sf-ios/SFGeometryTypes.m"; sourceTree = "<group>"; };
 		5799116103A3F0B059CE641BE9896EAD /* SFLine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFLine.h; path = "sf-ios/SFLine.h"; sourceTree = "<group>"; };
 		57F1C6981E8CAE4C4E905428B7A81426 /* SFMultiSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFMultiSurface.m; path = "sf-ios/SFMultiSurface.m"; sourceTree = "<group>"; };
 		583A4FBD1AB046253A91B8804A38C204 /* color-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "color-ios-dummy.m"; sourceTree = "<group>"; };
 		58F49A0906216337D1CF87343D513BA1 /* TIFFIOUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFIOUtils.m; path = "tiff-ios/io/TIFFIOUtils.m"; sourceTree = "<group>"; };
+		593B0BE642CB8B8CE7312A453144767D /* Pods-OpenAthenaIOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		595E939F3C7D7F61E80FFC2B87F7F6AF /* Pods-OpenAthenaIOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		5A111B0E7DDBE0684C15A89D8C8038E3 /* Pods-OpenAthenaIOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OpenAthenaIOSTests-resources.sh"; sourceTree = "<group>"; };
+		5A643F2E9C7164D0BC08B643ED892E57 /* Pods-OpenAthenaIOSTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OpenAthenaIOSTests-umbrella.h"; sourceTree = "<group>"; };
 		5A65557CDA568E775E84D5CE7C04B40A /* tiff_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tiff_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C4B28FA056BC049C3403B7B21866868 /* Pods-OpenAthenaIOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OpenAthenaIOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5CDD56BEC7926BE965E3C04D01EF3BA4 /* GridZones.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridZones.swift; path = "mgrs-ios/gzd/GridZones.swift"; sourceTree = "<group>"; };
 		5E0B56A72A4A3B21E3C1D5986137AF1F /* UTMConversion-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "UTMConversion-Info.plist"; sourceTree = "<group>"; };
 		5E4C9E34693A4992EB19E4D0DB3DAD6C /* SFCentroidSurface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCentroidSurface.m; path = "sf-ios/util/centroid/SFCentroidSurface.m"; sourceTree = "<group>"; };
@@ -425,7 +483,6 @@
 		765ACD9EE565D196BD55383A3D23CB2C /* SFByteWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFByteWriter.m; path = "sf-ios/util/SFByteWriter.m"; sourceTree = "<group>"; };
 		77040ABF1AFB6798C04EDF9EB9564C59 /* GridPoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridPoint.swift; path = "grid-ios/features/GridPoint.swift"; sourceTree = "<group>"; };
 		772104D96A1CA2A05576D8BF0E456290 /* SFPointFiniteFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFPointFiniteFilter.m; path = "sf-ios/util/filter/SFPointFiniteFilter.m"; sourceTree = "<group>"; };
-		775B14CA9383F28568275FB3444F7BC7 /* Pods-OpenAthenaIOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OpenAthenaIOS-dummy.m"; sourceTree = "<group>"; };
 		77892F040E13D101F63F9385A7CF6124 /* TIFFReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFReader.m; path = "tiff-ios/TIFFReader.m"; sourceTree = "<group>"; };
 		77B68B28CF56CEDC5C417D1B186AB9EA /* SFCentroidCurve.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFCentroidCurve.m; path = "sf-ios/util/centroid/SFCentroidCurve.m"; sourceTree = "<group>"; };
 		782FA17D3C9455C8FC73480ADD7C91BF /* UTMConversion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UTMConversion.release.xcconfig; sourceTree = "<group>"; };
@@ -452,6 +509,7 @@
 		8AAA242A5D35CA16DE71257B6196949F /* TIFFPackbitsCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFPackbitsCompression.h; path = "tiff-ios/compression/TIFFPackbitsCompression.h"; sourceTree = "<group>"; };
 		8AF5FF77F5F7B35CEE998F0024F626DC /* SFCircularString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCircularString.h; path = "sf-ios/SFCircularString.h"; sourceTree = "<group>"; };
 		8BECEB279A4E6B54274F227FE4AD7343 /* tiff-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "tiff-ios-prefix.pch"; sourceTree = "<group>"; };
+		8C41071178B3FF78D81F2C84EAC93775 /* Pods-OpenAthenaIOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C948BF69E2EF011EFC8114F84773C07 /* tiff-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "tiff-ios-dummy.m"; sourceTree = "<group>"; };
 		9023F78712E1557AB2C0B9AB3E0B93F5 /* TIFFByteWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFByteWriter.m; path = "tiff-ios/io/TIFFByteWriter.m"; sourceTree = "<group>"; };
 		916D8DCE00DDA6459AD9FA90EECF1F66 /* Hemisphere.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hemisphere.swift; path = "grid-ios/Hemisphere.swift"; sourceTree = "<group>"; };
@@ -478,20 +536,21 @@
 		A4195F64105D746C4863AC3C27EF389F /* SFLineString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFLineString.h; path = "sf-ios/SFLineString.h"; sourceTree = "<group>"; };
 		A5CF9E403957F37B2109136637C75BD6 /* CLLocation+UTMCoordinate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CLLocation+UTMCoordinate.swift"; path = "UTMConversion/CLLocation+UTMCoordinate.swift"; sourceTree = "<group>"; };
 		A71FA821A7FBD3B520F45B13E3AE3288 /* GridLabeler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GridLabeler.swift; path = "mgrs-ios/grid/GridLabeler.swift"; sourceTree = "<group>"; };
+		A7468ECC31A12BEC818AD38AF43D6B01 /* Pods-OpenAthenaIOSTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-OpenAthenaIOSTests"; path = Pods_OpenAthenaIOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A922F7E40FD062DB7BFE1B60C524D1F6 /* SFCentroidSurface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCentroidSurface.h; path = "sf-ios/util/centroid/SFCentroidSurface.h"; sourceTree = "<group>"; };
 		AC1A2174EE88DD90AF74D22FDEC4C39E /* tiff-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "tiff-ios-umbrella.h"; sourceTree = "<group>"; };
 		AC77C67F2FF63A012CDEB3075A7A64C2 /* NSExceptionSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSExceptionSwift-prefix.pch"; sourceTree = "<group>"; };
 		AC7DD39F3561B299CBD42F0D5B73CCF4 /* SFGeometryEnvelope.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryEnvelope.h; path = "sf-ios/SFGeometryEnvelope.h"; sourceTree = "<group>"; };
-		AD3893EF966BF113F1D231B69D76F56C /* Pods-OpenAthenaIOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OpenAthenaIOS-Info.plist"; sourceTree = "<group>"; };
 		AD4FDE32B3B037C990BFD68F16C7B7C8 /* SFDegreesCentroid.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFDegreesCentroid.m; path = "sf-ios/util/centroid/SFDegreesCentroid.m"; sourceTree = "<group>"; };
 		ADD15FBBCE956ECA50BA03E4FCC783CF /* SFSegment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFSegment.m; path = "sf-ios/util/sweep/SFSegment.m"; sourceTree = "<group>"; };
 		ADE17172DFD9A1463616D5273B9B1321 /* SFTextReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFTextReader.m; path = "sf-ios/util/SFTextReader.m"; sourceTree = "<group>"; };
 		AEFD1153F8966B0E726F2395E1046925 /* color-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "color-ios-umbrella.h"; sourceTree = "<group>"; };
+		B0EEE56C328096942D9BB1C9219CA03B /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
 		B184CE1F3A9645D402DD4A0F7796B1F8 /* UTMConversion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UTMConversion.h; path = UTMConversion/UTMConversion.h; sourceTree = "<group>"; };
 		B18E93C3A9607912DB290ACEC8CD7E10 /* SFGeometry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometry.h; path = "sf-ios/SFGeometry.h"; sourceTree = "<group>"; };
 		B26CAFFA9E3ED0015E7572B699181743 /* SFGeometryPrinter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFGeometryPrinter.h; path = "sf-ios/util/SFGeometryPrinter.h"; sourceTree = "<group>"; };
+		B4F57C7356358CD47A63B2D290E5E13E /* Pods-OpenAthenaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OpenAthenaIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B4F92DF54D0248E83A12291073D250C5 /* Bounds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Bounds.swift; path = "grid-ios/features/Bounds.swift"; sourceTree = "<group>"; };
-		B606B87D25A2D69C8551CC9E2DC05E16 /* Pods-OpenAthenaIOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OpenAthenaIOS-frameworks.sh"; sourceTree = "<group>"; };
 		B76DE757AA6FC904D045879638232C06 /* SFGeometry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFGeometry.m; path = "sf-ios/SFGeometry.m"; sourceTree = "<group>"; };
 		B87109E45DCC1B98990A725EAA79CFFE /* TIFFImageWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFImageWindow.h; path = "tiff-ios/TIFFImageWindow.h"; sourceTree = "<group>"; };
 		B8B23D94239AC317A2ED03ACD544B670 /* Grid.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = "mgrs-ios/grid/Grid.swift"; sourceTree = "<group>"; };
@@ -518,6 +577,7 @@
 		D3DCF9D780871EC5D948A09192452836 /* tiff-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "tiff-ios-Info.plist"; sourceTree = "<group>"; };
 		D45BE01C87A60A8464210E281849A004 /* TIFFDeflateCompression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFDeflateCompression.h; path = "tiff-ios/compression/TIFFDeflateCompression.h"; sourceTree = "<group>"; };
 		D477388115D4C548F925DA8A0830B2FB /* SFTextReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFTextReader.h; path = "sf-ios/util/SFTextReader.h"; sourceTree = "<group>"; };
+		D4A757D55E5AC631E4A94328E98803EC /* Pods-OpenAthenaIOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OpenAthenaIOSTests-dummy.m"; sourceTree = "<group>"; };
 		D506B35C49D126081BA76496B5701F9B /* Label.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Label.swift; path = "grid-ios/Label.swift"; sourceTree = "<group>"; };
 		D57C1FAB77A663260850740EEB9C3590 /* sf_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sf_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5C6268070401F9E6D6D87C01BFB14BA /* TIFFImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIFFImage.m; path = "tiff-ios/TIFFImage.m"; sourceTree = "<group>"; };
@@ -539,12 +599,14 @@
 		E78CCC070CD1F2BF9841C20676456E51 /* SFEventTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFEventTypes.m; path = "sf-ios/util/sweep/SFEventTypes.m"; sourceTree = "<group>"; };
 		E795BCF73628278F2A0AC9600849C40F /* Unit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Unit.swift; path = "grid-ios/features/Unit.swift"; sourceTree = "<group>"; };
 		E7EC259C1FA720949B20F0B600814A0D /* NSExceptionSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSExceptionSwift-dummy.m"; sourceTree = "<group>"; };
+		E9AD6489827A492EB276AEA4379C13F7 /* Pods-OpenAthenaIOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OpenAthenaIOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E9C2934006410418D739C786DCF2A9D6 /* TIFFCompressionDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFCompressionDecoder.h; path = "tiff-ios/compression/TIFFCompressionDecoder.h"; sourceTree = "<group>"; };
 		EA65E25579C336237ABE789D1AE53B21 /* SFCentroidCurve.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFCentroidCurve.h; path = "sf-ios/util/centroid/SFCentroidCurve.h"; sourceTree = "<group>"; };
 		EE3049699F9107C917149686F5D435AE /* SFEventQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFEventQueue.m; path = "sf-ios/util/sweep/SFEventQueue.m"; sourceTree = "<group>"; };
 		EE4A9C257411ACB47697FC21746E44E3 /* TIFFWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFWriter.h; path = "tiff-ios/TIFFWriter.h"; sourceTree = "<group>"; };
+		EF7B236DF6D34CD7C0F483204DB7FE02 /* Pods-OpenAthenaIOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-OpenAthenaIOS.modulemap"; sourceTree = "<group>"; };
 		F33D20C51DF0402A3660F62DD61E822F /* SFMultiSurface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFMultiSurface.h; path = "sf-ios/SFMultiSurface.h"; sourceTree = "<group>"; };
-		F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mgrs-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "mgrs-ios-mgrs-ios"; path = "mgrs-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3CC634E354025C27C923201CFA0ECA3 /* BaseGrids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseGrids.swift; path = "grid-ios/BaseGrids.swift"; sourceTree = "<group>"; };
 		F3F0631B0BB8C32803257CFF6D95780A /* TIFFFileDirectoryEntry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFileDirectoryEntry.h; path = "tiff-ios/TIFFFileDirectoryEntry.h"; sourceTree = "<group>"; };
 		F4DD2800303A5EE3D942426046BB0702 /* UTM.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UTM.swift; path = "mgrs-ios/utm/UTM.swift"; sourceTree = "<group>"; };
@@ -554,7 +616,6 @@
 		F904426D0E0086268B2DAE605692A456 /* NSExceptionSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSExceptionSwift.swift; path = Sources/NSExceptionSwift/NSExceptionSwift.swift; sourceTree = "<group>"; };
 		F91F4A754E77444649D79530ABAACEC5 /* SFTriangle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SFTriangle.m; path = "sf-ios/SFTriangle.m"; sourceTree = "<group>"; };
 		FAAACC7CD9AD229333640EA066C43772 /* SFShamosHoey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFShamosHoey.h; path = "sf-ios/util/sweep/SFShamosHoey.h"; sourceTree = "<group>"; };
-		FABC46C4BE4279386954EB91C84282F7 /* Pods-OpenAthenaIOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-OpenAthenaIOS.modulemap"; sourceTree = "<group>"; };
 		FC60B66202603382B9F6F06C63199691 /* TIFFFieldTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIFFFieldTypes.h; path = "tiff-ios/TIFFFieldTypes.h"; sourceTree = "<group>"; };
 		FCFE09BD500C82C0AB914CD6320DDD87 /* sf-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "sf-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		FD13BD0BE75F21E25F80283DC053DAB9 /* SFSweepLine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SFSweepLine.h; path = "sf-ios/util/sweep/SFSweepLine.h"; sourceTree = "<group>"; };
@@ -580,11 +641,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24D0E4E07C367F0CB5552FFBB69DD51E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB9ABE33CF211DA4F8733D694B593F7A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AAD426FE98677391E947544B986A0CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0926B4971376F4E00843A1D0DBFCFC2D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6308171C03AEF1CDA84E20E11290150A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CD7C88F27F98E1D9D6FE102DA5EABB69 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B0F1B8C5057FEBC9CDF7A7E2449A16F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,21 +693,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CADA2601EAA2068C3187325E4781B24E /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6A36C5C2A64D2A0C419CA9A680DABD5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8B41C70B6573A19AA0DF5D423643549 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09A55B5B12C8F97AD7A9F4A5E4DC98C4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,37 +790,21 @@
 			path = "../Target Support Files/NSExceptionSwift";
 			sourceTree = "<group>";
 		};
-		2B875EBBFB052A6F3FD2D69C6EFE90FC /* Products */ = {
+		38DD5B31ADA5C97C2C629DBB308A1B9F /* Pods-OpenAthenaIOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				6701E1E7881E37B884FEEA9B3F803E0B /* color_ios.framework */,
-				7EE66363A245AC8A4B45D95E5CEC6B09 /* grid_ios.framework */,
-				C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs_ios.framework */,
-				F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */,
-				9E902EC17228F7066E9D016F70E1D1C9 /* NSExceptionSwift.framework */,
-				0A2A93A5EBF7AE2F14E2A7BCEA2D12F3 /* Pods-OpenAthenaIOS */,
-				D57C1FAB77A663260850740EEB9C3590 /* sf_ios.framework */,
-				5A65557CDA568E775E84D5CE7C04B40A /* tiff_ios.framework */,
-				E22359600D3C2381E972FC187A03E040 /* UTMConversion.framework */,
+				088F301D48274D3496CB27D48C05B102 /* Pods-OpenAthenaIOSTests.modulemap */,
+				5C4B28FA056BC049C3403B7B21866868 /* Pods-OpenAthenaIOSTests-acknowledgements.markdown */,
+				595E939F3C7D7F61E80FFC2B87F7F6AF /* Pods-OpenAthenaIOSTests-acknowledgements.plist */,
+				D4A757D55E5AC631E4A94328E98803EC /* Pods-OpenAthenaIOSTests-dummy.m */,
+				3BFFC5BA0FD09DDBB05455F29E0D3684 /* Pods-OpenAthenaIOSTests-Info.plist */,
+				5A111B0E7DDBE0684C15A89D8C8038E3 /* Pods-OpenAthenaIOSTests-resources.sh */,
+				5A643F2E9C7164D0BC08B643ED892E57 /* Pods-OpenAthenaIOSTests-umbrella.h */,
+				8C41071178B3FF78D81F2C84EAC93775 /* Pods-OpenAthenaIOSTests.debug.xcconfig */,
+				3C152D21C860D98739120A78E3B15DF7 /* Pods-OpenAthenaIOSTests.release.xcconfig */,
 			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		2ED79B7E0F8CD9DD1992C9C346E20CEA /* Pods-OpenAthenaIOS */ = {
-			isa = PBXGroup;
-			children = (
-				FABC46C4BE4279386954EB91C84282F7 /* Pods-OpenAthenaIOS.modulemap */,
-				01926091B26761FC441FC24EF26BB73A /* Pods-OpenAthenaIOS-acknowledgements.markdown */,
-				0F3AF445143C6794317785E47C01A0ED /* Pods-OpenAthenaIOS-acknowledgements.plist */,
-				775B14CA9383F28568275FB3444F7BC7 /* Pods-OpenAthenaIOS-dummy.m */,
-				B606B87D25A2D69C8551CC9E2DC05E16 /* Pods-OpenAthenaIOS-frameworks.sh */,
-				AD3893EF966BF113F1D231B69D76F56C /* Pods-OpenAthenaIOS-Info.plist */,
-				0138D5B2805451FFDCF21F3E15030F9B /* Pods-OpenAthenaIOS-umbrella.h */,
-				29D89BE41281ACE27788B3BF860F55E7 /* Pods-OpenAthenaIOS.debug.xcconfig */,
-				3C43ACDA76CFB912A70DA6B9909FB8C2 /* Pods-OpenAthenaIOS.release.xcconfig */,
-			);
-			name = "Pods-OpenAthenaIOS";
-			path = "Target Support Files/Pods-OpenAthenaIOS";
+			name = "Pods-OpenAthenaIOSTests";
+			path = "Target Support Files/Pods-OpenAthenaIOSTests";
 			sourceTree = "<group>";
 		};
 		42F26DA888DC16735D56C2009D77A3BB /* tiff-ios */ = {
@@ -802,14 +855,6 @@
 				AD855228F6456C44EF0B452DDADA8DF7 /* Support Files */,
 			);
 			path = "tiff-ios";
-			sourceTree = "<group>";
-		};
-		4F8329E92136C08C08419F77FB1BBE65 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				2ED79B7E0F8CD9DD1992C9C346E20CEA /* Pods-OpenAthenaIOS */,
-			);
-			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		56BC772BCC298D48A8F19B3D096B231B /* Support Files */ = {
@@ -986,6 +1031,15 @@
 			path = "../Target Support Files/color-ios";
 			sourceTree = "<group>";
 		};
+		9766CDBF5116C394765CFF655A933E11 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D16730CEABD8E4B732E985B62BF4975C /* Pods-OpenAthenaIOS */,
+				38DD5B31ADA5C97C2C629DBB308A1B9F /* Pods-OpenAthenaIOSTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		AD855228F6456C44EF0B452DDADA8DF7 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1023,8 +1077,8 @@
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				023EEE70B61903FE7213FB020295FA4C /* Pods */,
-				2B875EBBFB052A6F3FD2D69C6EFE90FC /* Products */,
-				4F8329E92136C08C08419F77FB1BBE65 /* Targets Support Files */,
+				FAEB654152CC792F014E817EC91D2802 /* Products */,
+				9766CDBF5116C394765CFF655A933E11 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1044,6 +1098,23 @@
 			path = "color-ios";
 			sourceTree = "<group>";
 		};
+		D16730CEABD8E4B732E985B62BF4975C /* Pods-OpenAthenaIOS */ = {
+			isa = PBXGroup;
+			children = (
+				EF7B236DF6D34CD7C0F483204DB7FE02 /* Pods-OpenAthenaIOS.modulemap */,
+				E9AD6489827A492EB276AEA4379C13F7 /* Pods-OpenAthenaIOS-acknowledgements.markdown */,
+				593B0BE642CB8B8CE7312A453144767D /* Pods-OpenAthenaIOS-acknowledgements.plist */,
+				54E8FAFC2526C6F2D0028064D28BAEA6 /* Pods-OpenAthenaIOS-dummy.m */,
+				4FCEB6B0CB110E95DE442ED0948579C5 /* Pods-OpenAthenaIOS-Info.plist */,
+				4630B764A1CFBA6A948ACC2369B085F6 /* Pods-OpenAthenaIOS-resources.sh */,
+				14B63AB3D139A3C8A1BDFFA1D81A6ED9 /* Pods-OpenAthenaIOS-umbrella.h */,
+				B4F57C7356358CD47A63B2D290E5E13E /* Pods-OpenAthenaIOS.debug.xcconfig */,
+				B0EEE56C328096942D9BB1C9219CA03B /* Pods-OpenAthenaIOS.release.xcconfig */,
+			);
+			name = "Pods-OpenAthenaIOS";
+			path = "Target Support Files/Pods-OpenAthenaIOS";
+			sourceTree = "<group>";
+		};
 		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,6 +1132,23 @@
 				2038802DF48A591D4F811AFAD78FDBE1 /* Support Files */,
 			);
 			path = NSExceptionSwift;
+			sourceTree = "<group>";
+		};
+		FAEB654152CC792F014E817EC91D2802 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6701E1E7881E37B884FEEA9B3F803E0B /* color_ios.framework */,
+				7EE66363A245AC8A4B45D95E5CEC6B09 /* grid_ios.framework */,
+				C1D37DBF2B7B7BCE0213BC0468DA7AB5 /* mgrs_ios.framework */,
+				F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */,
+				9E902EC17228F7066E9D016F70E1D1C9 /* NSExceptionSwift.framework */,
+				0A2A93A5EBF7AE2F14E2A7BCEA2D12F3 /* Pods-OpenAthenaIOS */,
+				A7468ECC31A12BEC818AD38AF43D6B01 /* Pods-OpenAthenaIOSTests */,
+				D57C1FAB77A663260850740EEB9C3590 /* sf_ios.framework */,
+				5A65557CDA568E775E84D5CE7C04B40A /* tiff_ios.framework */,
+				E22359600D3C2381E972FC187A03E040 /* UTMConversion.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		FC8577A29AFFBB7B807858A8963AC0B3 /* Support Files */ = {
@@ -1086,6 +1174,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB45672E1B9BF48632144D30410BEE8 /* grid-ios-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F24E25DF18C9868F74D94ACB816BB5D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1E495C5B2EB606FF9F8A96D9839E23C /* mgrs-ios-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1195,14 +1291,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CB97EA8FA8A8BDA0F7CFF2CDC3BABE92 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C1A99C38DE8AD8351521E2822380350D /* mgrs-ios-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D21D96F4922F515504854CAD3F0A26CF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1217,6 +1305,14 @@
 			files = (
 				0A3D8C129610AC59102C6A4C02499342 /* UTMConversion.h in Headers */,
 				E82D0525A20943DA654E003EC2237036 /* UTMConversion-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA7D9FB75BA727990B5E131D29E294DE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				269606EBA35D927D785BD50E401C065E /* Pods-OpenAthenaIOSTests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,11 +1339,11 @@
 		};
 		577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E98D392ECBD87EF870B4E820DB3517DD /* Build configuration list for PBXNativeTarget "mgrs-ios-mgrs-ios" */;
+			buildConfigurationList = B8224D00AD01BFC01F67601CF158C700 /* Build configuration list for PBXNativeTarget "mgrs-ios-mgrs-ios" */;
 			buildPhases = (
-				8C9AAF58C5352994A8B4D812F3DE9A71 /* Sources */,
-				D6A36C5C2A64D2A0C419CA9A680DABD5 /* Frameworks */,
-				C5C628E079FFDD2B4DFD1BDDD7057165 /* Resources */,
+				71F1D4D440206EF32E64A4044709C9E5 /* Sources */,
+				8B0F1B8C5057FEBC9CDF7A7E2449A16F /* Frameworks */,
+				EE8A853421C3DCFC0C38D68A80474075 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1255,7 +1351,7 @@
 			);
 			name = "mgrs-ios-mgrs-ios";
 			productName = "mgrs-ios";
-			productReference = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios.bundle */;
+			productReference = F3C55B46709D88246CAD4116FE38617D /* mgrs-ios-mgrs-ios */;
 			productType = "com.apple.product-type.bundle";
 		};
 		5D942CA48BAB353546F6B788AC3EA195 /* color-ios */ = {
@@ -1310,6 +1406,31 @@
 			name = NSExceptionSwift;
 			productName = NSExceptionSwift;
 			productReference = 9E902EC17228F7066E9D016F70E1D1C9 /* NSExceptionSwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C16D67FA0565D244BDE86E46FF8AD5F0 /* Pods-OpenAthenaIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80C66D2513DF834A8E91453AC991E1FB /* Build configuration list for PBXNativeTarget "Pods-OpenAthenaIOSTests" */;
+			buildPhases = (
+				FA7D9FB75BA727990B5E131D29E294DE /* Headers */,
+				6FFEDDA42F8D29E1119AD5D19637F143 /* Sources */,
+				4AAD426FE98677391E947544B986A0CD /* Frameworks */,
+				95F68826F1E0F25E64D92B77D36FA7A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				63BA93D9F3E70248ACF9EE01C62EA0F6 /* PBXTargetDependency */,
+				0D6741B667C3430175A2E42189321FEF /* PBXTargetDependency */,
+				5497089EF154E225881DD175EDE790F8 /* PBXTargetDependency */,
+				BF9C6363E08F70F3CD65FE4E81090C53 /* PBXTargetDependency */,
+				770BC986F0669B0B1B624792E4CB8557 /* PBXTargetDependency */,
+				AE48E8D120E39A904BC53CED99168BC5 /* PBXTargetDependency */,
+				26B15A431A63A5529F917E694E4B5C2A /* PBXTargetDependency */,
+			);
+			name = "Pods-OpenAthenaIOSTests";
+			productName = Pods_OpenAthenaIOSTests;
+			productReference = A7468ECC31A12BEC818AD38AF43D6B01 /* Pods-OpenAthenaIOSTests */;
 			productType = "com.apple.product-type.framework";
 		};
 		E72B2D255339C323F5149822638C652B /* UTMConversion */ = {
@@ -1377,18 +1498,18 @@
 		};
 		FA341BB40DB010A6FF2E54DFC3D1E5D8 /* mgrs-ios */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50DCE2A6FA367D7E9B546A0504461FF5 /* Build configuration list for PBXNativeTarget "mgrs-ios" */;
+			buildConfigurationList = 64537408D186D9B2734F43EA058D339F /* Build configuration list for PBXNativeTarget "mgrs-ios" */;
 			buildPhases = (
-				CB97EA8FA8A8BDA0F7CFF2CDC3BABE92 /* Headers */,
-				30756DA618037CC18AD1198A4C438016 /* Sources */,
-				D8B41C70B6573A19AA0DF5D423643549 /* Frameworks */,
-				5A43A87703E2F6D02B2F59253A9FDCAF /* Resources */,
+				5F24E25DF18C9868F74D94ACB816BB5D /* Headers */,
+				770606D4F08865AA53A468B97817EF9F /* Sources */,
+				24D0E4E07C367F0CB5552FFBB69DD51E /* Frameworks */,
+				EAAC78B9CDB3438EB718A679F780A0C1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				71F98DA111C71AD732E677B767EB075E /* PBXTargetDependency */,
-				AD84ECD254D93A48B8006D264450DFF0 /* PBXTargetDependency */,
+				D4AB0CC77FC7EE538F165AF9C26AE313 /* PBXTargetDependency */,
+				95D7EE226F27BA876D1F23BDCA4CB4D0 /* PBXTargetDependency */,
 			);
 			name = "mgrs-ios";
 			productName = mgrs_ios;
@@ -1413,7 +1534,7 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 2B875EBBFB052A6F3FD2D69C6EFE90FC /* Products */;
+			productRefGroup = FAEB654152CC792F014E817EC91D2802 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1423,6 +1544,7 @@
 				577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */,
 				C0FCE908D58633F946C69A2EAE0850A3 /* NSExceptionSwift */,
 				F7872CE1AF59586B83F29A969432F396 /* Pods-OpenAthenaIOS */,
+				C16D67FA0565D244BDE86E46FF8AD5F0 /* Pods-OpenAthenaIOSTests */,
 				3D3A419CC7A327DAABA72019D5CE9F57 /* sf-ios */,
 				AED3CD45D039D7912074525C078AD57E /* tiff-ios */,
 				E72B2D255339C323F5149822638C652B /* UTMConversion */,
@@ -1442,14 +1564,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A43A87703E2F6D02B2F59253A9FDCAF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4B8A895EECFCB0E14F31C9B854CA7283 /* mgrs-ios.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1474,6 +1588,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95F68826F1E0F25E64D92B77D36FA7A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9806EC51B7086EBE81AC769C6A80E10E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1488,11 +1609,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5C628E079FFDD2B4DFD1BDDD7057165 /* Resources */ = {
+		EAAC78B9CDB3438EB718A679F780A0C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD7FA7FE4517C4797803B530FD163E0F /* mgrs.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE8A853421C3DCFC0C38D68A80474075 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				781CD252BB5783DC303022D7792C152C /* mgrs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1535,36 +1663,6 @@
 				9038A6A51BF3D454D04072F2C4D24EE8 /* TIFFReader.m in Sources */,
 				160CBE7D8FA327133E533D273B7EBB67 /* TIFFUnsupportedCompression.m in Sources */,
 				B4AA3CFD0A84A50024FCEAA4086910CF /* TIFFWriter.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		30756DA618037CC18AD1198A4C438016 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FF828B06B69B612AF17AE40C3149481C /* BandLetterRange.swift in Sources */,
-				0D16C71CF738F3BBA2C63FEC24CBAE3F /* Grid.swift in Sources */,
-				5F16E3EF1FAABDF6C5C1DDB451948919 /* GridLabel.swift in Sources */,
-				4E9DB3A55799AD6A7BB6CABC2792DA9D /* GridLabeler.swift in Sources */,
-				92AD7B6978B043A6D87647E147EE2763 /* GridRange.swift in Sources */,
-				12C72C459546562A4C7A8D046B5BE963 /* Grids.swift in Sources */,
-				504452CAC12585B620DE82B41AE2F0EF /* GridType.swift in Sources */,
-				85033FED5CBFB7D24E7CAB85F76D7DED /* GridZone.swift in Sources */,
-				B9CE441CDCD318CB9A977B27705DE792 /* GridZones.swift in Sources */,
-				5DEEDED84D1B4B01781E6DABA90EDF98 /* GZDLabeler.swift in Sources */,
-				99D63002859B00ED49BE5D481965B751 /* LatitudeBand.swift in Sources */,
-				071F303DFF627313B76DE65A777F15C1 /* LongitudinalStrip.swift in Sources */,
-				8447B58BA06145AA077143850FFDDFD6 /* MGRS.swift in Sources */,
-				7FA49CA3EDC298CA7C55C460F06B0DC2 /* mgrs-ios-dummy.m in Sources */,
-				45FAE0AE275B0268A3A0AFF513BD46D1 /* MGRSConstants.swift in Sources */,
-				C58C3CBDFADC280064A3E6AC33A1BE85 /* MGRSLabeler.swift in Sources */,
-				B3D24A91D499AE8FA8686B61B67C8DE5 /* MGRSLine.swift in Sources */,
-				DDED62BD2C447F6C5E7297D20D697A1A /* MGRSProperties.swift in Sources */,
-				58090A8C68FE54524677FD5B059D279B /* MGRSTileOverlay.swift in Sources */,
-				F74B1D2D126E49BB9B0FF8DA9CC05E63 /* MGRSUtils.swift in Sources */,
-				F84FCFCAC9BCAB72DD72486E6B8E7A68 /* UTM.swift in Sources */,
-				067C7ED7510521BE277F755220E822C5 /* ZoneNumberRange.swift in Sources */,
-				E4FCEA16DE75F4A694D3726150FB3E93 /* ZoomGrids.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1628,6 +1726,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6FFEDDA42F8D29E1119AD5D19637F143 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				963DEF44BEBC303C14B24D8F7F0FD165 /* Pods-OpenAthenaIOSTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71F1D4D440206EF32E64A4044709C9E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		770606D4F08865AA53A468B97817EF9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68791665256A47E5D48BF759FCB6BC6C /* BandLetterRange.swift in Sources */,
+				273F4125325DF27AE9BE2D5B287976BE /* Grid.swift in Sources */,
+				ABC4DCA5495D72B4E682758A0874D31B /* GridLabel.swift in Sources */,
+				DECB5187CDE253A3CF515133324FB620 /* GridLabeler.swift in Sources */,
+				CDC70914064AA34989AFBA484C443857 /* GridRange.swift in Sources */,
+				82406A08C83A05F445BACD195F09FDBC /* Grids.swift in Sources */,
+				6BB32B456E379F7F4343D2158A98EEE2 /* GridType.swift in Sources */,
+				7806B0225B0A168BFFD7D6683833FBCF /* GridZone.swift in Sources */,
+				2AEEDF993AAA77BD01F33AA917843691 /* GridZones.swift in Sources */,
+				CF72341E2D3E140DA0838BD3FBD9047C /* GZDLabeler.swift in Sources */,
+				8D930DFF2256DA7BF2AF59E4F52B05D3 /* LatitudeBand.swift in Sources */,
+				6D41428A83906C87FEB3FAC60E58D1BC /* LongitudinalStrip.swift in Sources */,
+				D710604B27B5FADDA380C25982708B0A /* MGRS.swift in Sources */,
+				1C016BB08B0765E8BC6AF31A2BD04F5D /* mgrs-ios-dummy.m in Sources */,
+				D5305643BFB8239A15D174717FA94179 /* MGRSConstants.swift in Sources */,
+				5E41240EBEF6816629591D765727B69A /* MGRSLabeler.swift in Sources */,
+				866A60043BD0E813D85BFA517291B3FA /* MGRSLine.swift in Sources */,
+				AEC9972857EEDC39B3E8E779E600DCF0 /* MGRSProperties.swift in Sources */,
+				139938F7320186DF7FF69662B6E71E23 /* MGRSTileOverlay.swift in Sources */,
+				CFCEFC5DD283334360DF0C59B42B6AF5 /* MGRSUtils.swift in Sources */,
+				F45C66FB001F5FAF7636B4B72F978642 /* UTM.swift in Sources */,
+				618392F3F3AE9C465487B8051231AA0B /* ZoneNumberRange.swift in Sources */,
+				D0AD3E43B534B467F096A6D4F58DA7B3 /* ZoomGrids.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8279E556FB47230EE33085B83D74CF4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1636,13 +1779,6 @@
 				DF9D7D1FCFA243E6EFE52B9ADBAFF56D /* CLRColorConstants.m in Sources */,
 				AE7434CD15CBEFF4168F1B9A071887E2 /* CLRColorUtils.m in Sources */,
 				0E48F269B264AC4DF3B3DC9E834251FC /* color-ios-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8C9AAF58C5352994A8B4D812F3DE9A71 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1685,6 +1821,18 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0D6741B667C3430175A2E42189321FEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UTMConversion;
+			target = E72B2D255339C323F5149822638C652B /* UTMConversion */;
+			targetProxy = E7E0F45BB17E1179C64F9524D6EC0CA5 /* PBXContainerItemProxy */;
+		};
+		26B15A431A63A5529F917E694E4B5C2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "tiff-ios";
+			target = AED3CD45D039D7912074525C078AD57E /* tiff-ios */;
+			targetProxy = ECDAA7B75D2959235BD0CD1D0758E459 /* PBXContainerItemProxy */;
+		};
 		2FC59A86DBAE2BD708A204673D421C1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "color-ios";
@@ -1703,11 +1851,29 @@
 			target = 3D3A419CC7A327DAABA72019D5CE9F57 /* sf-ios */;
 			targetProxy = 9B6FF721871E04386C6F0FC5579F881B /* PBXContainerItemProxy */;
 		};
-		71F98DA111C71AD732E677B767EB075E /* PBXTargetDependency */ = {
+		5497089EF154E225881DD175EDE790F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "grid-ios";
-			target = F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */;
-			targetProxy = 80CAB7FDC46A16FE0ADDE6E3937D0DED /* PBXContainerItemProxy */;
+			name = "color-ios";
+			target = 5D942CA48BAB353546F6B788AC3EA195 /* color-ios */;
+			targetProxy = 7C6FC57A882F98584CF4F77927821733 /* PBXContainerItemProxy */;
+		};
+		63BA93D9F3E70248ACF9EE01C62EA0F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NSExceptionSwift;
+			target = C0FCE908D58633F946C69A2EAE0850A3 /* NSExceptionSwift */;
+			targetProxy = 10D528843F5D4CFD11A549833565DAC9 /* PBXContainerItemProxy */;
+		};
+		770BC986F0669B0B1B624792E4CB8557 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "mgrs-ios";
+			target = FA341BB40DB010A6FF2E54DFC3D1E5D8 /* mgrs-ios */;
+			targetProxy = 42593D24AB820E60D205A70FEF52B493 /* PBXContainerItemProxy */;
+		};
+		95D7EE226F27BA876D1F23BDCA4CB4D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "mgrs-ios-mgrs-ios";
+			target = 577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */;
+			targetProxy = 104975FEC28431756DBBD0EDABEE27A0 /* PBXContainerItemProxy */;
 		};
 		A9D81EBA9AD6A614E686F5C187667427 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1715,17 +1881,23 @@
 			target = F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */;
 			targetProxy = A6A8BAA909854D9827F162A7FD902EEF /* PBXContainerItemProxy */;
 		};
-		AD84ECD254D93A48B8006D264450DFF0 /* PBXTargetDependency */ = {
+		AE48E8D120E39A904BC53CED99168BC5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "mgrs-ios-mgrs-ios";
-			target = 577E91B04D12C328F76DD4B7C16DBAEF /* mgrs-ios-mgrs-ios */;
-			targetProxy = 5DD518E5E57415AE22698AD83AE6BBA8 /* PBXContainerItemProxy */;
+			name = "sf-ios";
+			target = 3D3A419CC7A327DAABA72019D5CE9F57 /* sf-ios */;
+			targetProxy = D49967E9671A21907BA825ACA49A5DFF /* PBXContainerItemProxy */;
 		};
 		B46CB0266C20F44AE4ED340B003EFF27 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = UTMConversion;
 			target = E72B2D255339C323F5149822638C652B /* UTMConversion */;
 			targetProxy = 8B4B3CCD9E60C9FEC7A879E622EA9B58 /* PBXContainerItemProxy */;
+		};
+		BF9C6363E08F70F3CD65FE4E81090C53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "grid-ios";
+			target = F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */;
+			targetProxy = 91F84300DAFD403A4227EABF35AFEC4F /* PBXContainerItemProxy */;
 		};
 		C96A992D21FAD0F1ED1BC957F84B877D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1738,6 +1910,12 @@
 			name = "mgrs-ios";
 			target = FA341BB40DB010A6FF2E54DFC3D1E5D8 /* mgrs-ios */;
 			targetProxy = 5F1CF2914EC21BCBA8945AAC9BA1A15D /* PBXContainerItemProxy */;
+		};
+		D4AB0CC77FC7EE538F165AF9C26AE313 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "grid-ios";
+			target = F99C60B9711DB2529FC6C4FC9904B3F9 /* grid-ios */;
+			targetProxy = 2BBC4EC7DD3D8E3E9DF544943E137CBD /* PBXContainerItemProxy */;
 		};
 		D8218331EF1D616EB05B33D826CF1128 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1754,9 +1932,9 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		07D3A460AEADBDD3FB639946FBF64422 /* Release */ = {
+		02571678F4AD9F58826D57BF5038A7ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0D00BE61C7833EB6C1E231DA8E329F3 /* mgrs-ios.release.xcconfig */;
+			baseConfigurationReference = 202CBA3991E40ABC9D222B7085EFC387 /* tiff-ios.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1767,8 +1945,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/mgrs-ios/mgrs-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/mgrs-ios/mgrs-ios-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/tiff-ios/tiff-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/tiff-ios/tiff-ios-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1776,9 +1954,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/mgrs-ios/mgrs-ios.modulemap";
-				PRODUCT_MODULE_NAME = mgrs_ios;
-				PRODUCT_NAME = mgrs_ios;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/tiff-ios/tiff-ios.modulemap";
+				PRODUCT_MODULE_NAME = tiff_ios;
+				PRODUCT_NAME = tiff_ios;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -1790,25 +1969,7 @@
 			};
 			name = Release;
 		};
-		09CA0BB18992669647466FDF523F6B65 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30DA6E06240A2ACC7B46D47A77778F75 /* mgrs-ios.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
-				IBSC_MODULE = mgrs_ios;
-				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_NAME = "mgrs-ios";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		121C10237A3BA5B60D86A56BB5B4DE4D /* Debug */ = {
+		039A95B86146666E3189328EC3C31E55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30DA6E06240A2ACC7B46D47A77778F75 /* mgrs-ios.debug.xcconfig */;
 			buildSettings = {
@@ -1830,6 +1991,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/mgrs-ios/mgrs-ios.modulemap";
 				PRODUCT_MODULE_NAME = mgrs_ios;
 				PRODUCT_NAME = mgrs_ios;
@@ -1843,9 +2005,83 @@
 			};
 			name = Debug;
 		};
+		1C07DA9218EA237D3928C5D400BA4EB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 332953BB3E4326F892503EEAED28A770 /* grid-ios.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/grid-ios/grid-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/grid-ios/grid-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/grid-ios/grid-ios.modulemap";
+				PRODUCT_MODULE_NAME = grid_ios;
+				PRODUCT_NAME = grid_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		350BBB0C1EC01F342EDA6BDBCA2417BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C152D21C860D98739120A78E3B15DF7 /* Pods-OpenAthenaIOSTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		37F811E07CB9F04944A955640D8C1A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29D89BE41281ACE27788B3BF860F55E7 /* Pods-OpenAthenaIOS.debug.xcconfig */;
+			baseConfigurationReference = B4F57C7356358CD47A63B2D290E5E13E /* Pods-OpenAthenaIOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1874,6 +2110,41 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3BA4096C48CE084B91E3BBB10A39A17A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8761EA5DCD350DB97CD05C897FC8E6C /* UTMConversion.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/UTMConversion/UTMConversion-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/UTMConversion/UTMConversion-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/UTMConversion/UTMConversion.modulemap";
+				PRODUCT_MODULE_NAME = UTMConversion;
+				PRODUCT_NAME = UTMConversion;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1946,112 +2217,7 @@
 			};
 			name = Debug;
 		};
-		4F2F72EF17A99F96D84404393945A634 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCFE09BD500C82C0AB914CD6320DDD87 /* sf-ios.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/sf-ios/sf-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/sf-ios/sf-ios-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/sf-ios/sf-ios.modulemap";
-				PRODUCT_MODULE_NAME = sf_ios;
-				PRODUCT_NAME = sf_ios;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		552D7B78ADFE658FB1CF897AB176E486 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 782FA17D3C9455C8FC73480ADD7C91BF /* UTMConversion.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/UTMConversion/UTMConversion-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/UTMConversion/UTMConversion-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/UTMConversion/UTMConversion.modulemap";
-				PRODUCT_MODULE_NAME = UTMConversion;
-				PRODUCT_NAME = UTMConversion;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		5EFA27A9042B99F3BBFF25BAEF9E025E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3909F58038781EC553DA6976FC66B721 /* tiff-ios.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/tiff-ios/tiff-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/tiff-ios/tiff-ios-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/tiff-ios/tiff-ios.modulemap";
-				PRODUCT_MODULE_NAME = tiff_ios;
-				PRODUCT_NAME = tiff_ios;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		65933154FBBDD054A17F14FCBB87703E /* Debug */ = {
+		4E07F13660F0C28E5AB36E86F201935E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 91BAEC22DFE3CE446B2064F5F56A3A14 /* color-ios.debug.xcconfig */;
 			buildSettings = {
@@ -2073,6 +2239,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/color-ios/color-ios.modulemap";
 				PRODUCT_MODULE_NAME = color_ios;
 				PRODUCT_NAME = color_ios;
@@ -2083,6 +2250,77 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		512CE067B7B98326C0B4B9C5478C6E1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0D00BE61C7833EB6C1E231DA8E329F3 /* mgrs-ios.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
+				IBSC_MODULE = mgrs_ios;
+				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = "mgrs-ios";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		75A584DD455BE1AFF15346373F91EFA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3202DE4CFDF20FA454E38CF087E492CE /* color-ios.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/color-ios/color-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/color-ios/color-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/color-ios/color-ios.modulemap";
+				PRODUCT_MODULE_NAME = color_ios;
+				PRODUCT_NAME = color_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7ED84E0325BF6E0D26B6945CD0B97882 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30DA6E06240A2ACC7B46D47A77778F75 /* mgrs-ios.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
+				IBSC_MODULE = mgrs_ios;
+				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = "mgrs-ios";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
@@ -2148,9 +2386,46 @@
 			};
 			name = Release;
 		};
-		980DD36CB582E0A3AF104F5F1CF23FB5 /* Debug */ = {
+		9063560CC859D0F3E3D32904A1467804 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8761EA5DCD350DB97CD05C897FC8E6C /* UTMConversion.debug.xcconfig */;
+			baseConfigurationReference = 8C41071178B3FF78D81F2C84EAC93775 /* Pods-OpenAthenaIOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9B0CF95105488623C8A4F1B57C8F55CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 782FA17D3C9455C8FC73480ADD7C91BF /* UTMConversion.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2169,6 +2444,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/UTMConversion/UTMConversion.modulemap";
 				PRODUCT_MODULE_NAME = UTMConversion;
 				PRODUCT_NAME = UTMConversion;
@@ -2177,14 +2453,52 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
+		};
+		9BD24BC6745D286C2C886FF7ACDD10C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 414AB1F5F613CE4E72217789DF047721 /* grid-ios.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/grid-ios/grid-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/grid-ios/grid-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/grid-ios/grid-ios.modulemap";
+				PRODUCT_MODULE_NAME = grid_ios;
+				PRODUCT_NAME = grid_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		9E6DD3BDA12EE8B14CD1D878EAE2676D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C43ACDA76CFB912A70DA6B9909FB8C2 /* Pods-OpenAthenaIOS.release.xcconfig */;
+			baseConfigurationReference = B0EEE56C328096942D9BB1C9219CA03B /* Pods-OpenAthenaIOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -2220,134 +2534,46 @@
 			};
 			name = Release;
 		};
-		AB801EB3D7B3F1C843153A4808FDAA38 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3202DE4CFDF20FA454E38CF087E492CE /* color-ios.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/color-ios/color-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/color-ios/color-ios-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/color-ios/color-ios.modulemap";
-				PRODUCT_MODULE_NAME = color_ios;
-				PRODUCT_NAME = color_ios;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		B96F89FD9B49F4A9FECD637C773FF88A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 332953BB3E4326F892503EEAED28A770 /* grid-ios.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/grid-ios/grid-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/grid-ios/grid-ios-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/grid-ios/grid-ios.modulemap";
-				PRODUCT_MODULE_NAME = grid_ios;
-				PRODUCT_NAME = grid_ios;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		BED0DFD6B0B27004988071B7B398F902 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 414AB1F5F613CE4E72217789DF047721 /* grid-ios.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/grid-ios/grid-ios-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/grid-ios/grid-ios-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/grid-ios/grid-ios.modulemap";
-				PRODUCT_MODULE_NAME = grid_ios;
-				PRODUCT_NAME = grid_ios;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C3E6A83FC49A7F40F4975F71E94B78C0 /* Release */ = {
+		A8E3CAEF04A7EF3BDE9D32990F696566 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A0D00BE61C7833EB6C1E231DA8E329F3 /* mgrs-ios.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/mgrs-ios";
-				IBSC_MODULE = mgrs_ios;
-				INFOPLIST_FILE = "Target Support Files/mgrs-ios/ResourceBundle-mgrs-ios-mgrs-ios-Info.plist";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/mgrs-ios/mgrs-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/mgrs-ios/mgrs-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_NAME = "mgrs-ios";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/mgrs-ios/mgrs-ios.modulemap";
+				PRODUCT_MODULE_NAME = mgrs_ios;
+				PRODUCT_NAME = mgrs_ios;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		D9CE4A1E13AAAF7DFF2D6D4DF14EAC79 /* Release */ = {
+		DBC069EE728EB6A62D3CC49E5B5CCDCC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 202CBA3991E40ABC9D222B7085EFC387 /* tiff-ios.release.xcconfig */;
+			baseConfigurationReference = 3909F58038781EC553DA6976FC66B721 /* tiff-ios.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2367,6 +2593,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/tiff-ios/tiff-ios.modulemap";
 				PRODUCT_MODULE_NAME = tiff_ios;
 				PRODUCT_NAME = tiff_ios;
@@ -2375,13 +2602,48 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		DB7B1E683FC58FCB8AA081B72CC947A7 /* Debug */ = {
+		E580C09CAA20BB56F2A951C682C074F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCFE09BD500C82C0AB914CD6320DDD87 /* sf-ios.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/sf-ios/sf-ios-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/sf-ios/sf-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/sf-ios/sf-ios.modulemap";
+				PRODUCT_MODULE_NAME = sf_ios;
+				PRODUCT_NAME = sf_ios;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E704C4F98E26A1C0DC90F7D45E7B5FB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3A158E48E0722CBF6B9F1983E93A0ADA /* NSExceptionSwift.debug.xcconfig */;
 			buildSettings = {
@@ -2402,6 +2664,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/NSExceptionSwift/NSExceptionSwift.modulemap";
 				PRODUCT_MODULE_NAME = NSExceptionSwift;
 				PRODUCT_NAME = NSExceptionSwift;
@@ -2415,7 +2678,43 @@
 			};
 			name = Debug;
 		};
-		DC3A770F407EE9BAA90C97D3E4012597 /* Release */ = {
+		F5F7D7361ECFF78A6CC38F9D07FE12ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E76FDF53A78E40DE17857FE446776E4A /* NSExceptionSwift.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NSExceptionSwift/NSExceptionSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NSExceptionSwift/NSExceptionSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/NSExceptionSwift/NSExceptionSwift.modulemap";
+				PRODUCT_MODULE_NAME = NSExceptionSwift;
+				PRODUCT_NAME = NSExceptionSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F83F43CB45CBC7720E98749601F554E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0398F2567A8C6CE54F1F609C3584DBFB /* sf-ios.release.xcconfig */;
 			buildSettings = {
@@ -2437,44 +2736,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/sf-ios/sf-ios.modulemap";
 				PRODUCT_MODULE_NAME = sf_ios;
 				PRODUCT_NAME = sf_ios;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F057E0B841DE38D04964F2E8DAC41D69 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E76FDF53A78E40DE17857FE446776E4A /* NSExceptionSwift.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/NSExceptionSwift/NSExceptionSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NSExceptionSwift/NSExceptionSwift-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/NSExceptionSwift/NSExceptionSwift.modulemap";
-				PRODUCT_MODULE_NAME = NSExceptionSwift;
-				PRODUCT_NAME = NSExceptionSwift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -2492,8 +2757,8 @@
 		00AD696AC94A97E80145F548E01C60F3 /* Build configuration list for PBXNativeTarget "color-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65933154FBBDD054A17F14FCBB87703E /* Debug */,
-				AB801EB3D7B3F1C843153A4808FDAA38 /* Release */,
+				4E07F13660F0C28E5AB36E86F201935E /* Debug */,
+				75A584DD455BE1AFF15346373F91EFA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2501,8 +2766,8 @@
 		05BB58BD3E994C09D720CD1E6184C21B /* Build configuration list for PBXNativeTarget "sf-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4F2F72EF17A99F96D84404393945A634 /* Debug */,
-				DC3A770F407EE9BAA90C97D3E4012597 /* Release */,
+				E580C09CAA20BB56F2A951C682C074F3 /* Debug */,
+				F83F43CB45CBC7720E98749601F554E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2516,20 +2781,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50DCE2A6FA367D7E9B546A0504461FF5 /* Build configuration list for PBXNativeTarget "mgrs-ios" */ = {
+		56B03830621157EC9D672B231B36766F /* Build configuration list for PBXNativeTarget "NSExceptionSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				121C10237A3BA5B60D86A56BB5B4DE4D /* Debug */,
-				07D3A460AEADBDD3FB639946FBF64422 /* Release */,
+				E704C4F98E26A1C0DC90F7D45E7B5FB6 /* Debug */,
+				F5F7D7361ECFF78A6CC38F9D07FE12ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		56B03830621157EC9D672B231B36766F /* Build configuration list for PBXNativeTarget "NSExceptionSwift" */ = {
+		64537408D186D9B2734F43EA058D339F /* Build configuration list for PBXNativeTarget "mgrs-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DB7B1E683FC58FCB8AA081B72CC947A7 /* Debug */,
-				F057E0B841DE38D04964F2E8DAC41D69 /* Release */,
+				039A95B86146666E3189328EC3C31E55 /* Debug */,
+				A8E3CAEF04A7EF3BDE9D32990F696566 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2537,8 +2802,8 @@
 		73F0FDD6751BED9B1FA94FA0B3B6A1F1 /* Build configuration list for PBXNativeTarget "tiff-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5EFA27A9042B99F3BBFF25BAEF9E025E /* Debug */,
-				D9CE4A1E13AAAF7DFF2D6D4DF14EAC79 /* Release */,
+				DBC069EE728EB6A62D3CC49E5B5CCDCC /* Debug */,
+				02571678F4AD9F58826D57BF5038A7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2546,8 +2811,17 @@
 		7B192E4F93DD72EAC4E2B74CB53EF40A /* Build configuration list for PBXNativeTarget "grid-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B96F89FD9B49F4A9FECD637C773FF88A /* Debug */,
-				BED0DFD6B0B27004988071B7B398F902 /* Release */,
+				1C07DA9218EA237D3928C5D400BA4EB3 /* Debug */,
+				9BD24BC6745D286C2C886FF7ACDD10C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80C66D2513DF834A8E91453AC991E1FB /* Build configuration list for PBXNativeTarget "Pods-OpenAthenaIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9063560CC859D0F3E3D32904A1467804 /* Debug */,
+				350BBB0C1EC01F342EDA6BDBCA2417BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2555,8 +2829,8 @@
 		A8A6B5A2CAA0860C1E7867E0A1C536F6 /* Build configuration list for PBXNativeTarget "UTMConversion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				980DD36CB582E0A3AF104F5F1CF23FB5 /* Debug */,
-				552D7B78ADFE658FB1CF897AB176E486 /* Release */,
+				3BA4096C48CE084B91E3BBB10A39A17A /* Debug */,
+				9B0CF95105488623C8A4F1B57C8F55CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2570,11 +2844,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E98D392ECBD87EF870B4E820DB3517DD /* Build configuration list for PBXNativeTarget "mgrs-ios-mgrs-ios" */ = {
+		B8224D00AD01BFC01F67601CF158C700 /* Build configuration list for PBXNativeTarget "mgrs-ios-mgrs-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09CA0BB18992669647466FDF523F6B65 /* Debug */,
-				C3E6A83FC49A7F40F4975F71E94B78C0 /* Release */,
+				7ED84E0325BF6E0D26B6945CD0B97882 /* Debug */,
+				512CE067B7B98326C0B4B9C5478C6E1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

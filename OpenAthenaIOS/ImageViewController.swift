@@ -140,6 +140,21 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         // dont constantly re-create the picker controller so that we can
         // pick back up where we left off (last location)
         if documentPickerController == nil {
+            
+              // if we wanted permissions to access photo library, do this
+              // before we create the picker; unfortunately,
+              // you either pick images or you pick documents, but you can't
+              // do both from single picker XXX
+            
+//            PHPhotoLibrary.requestAuthorization { (status) in
+//                if status == .authorized {
+//                    print("Authorized to access photo library")
+//                }
+//                else {
+//                    print("Not authorized to access photo library")
+//                }
+//            }
+            
             documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: types)
             documentPickerController!.delegate = self
             if app.settings.imageDirectoryURL != nil {
