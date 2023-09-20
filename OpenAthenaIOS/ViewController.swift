@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 1.2600
+    var version: Float = 1.30
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     
     private func doMain()
     {
-        htmlString = "OpenAthena alpha v\(version) starting<br>"
+        htmlString = "OpenAthena alpha v\(version) build \(getAppBuildNumber()!) starting<br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
         //htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
         htmlString += "1: load a Digital Elevation Model (DEM) &#9968;<br>" // GeoTIFF
@@ -164,6 +164,9 @@ class ViewController: UIViewController {
     } // configure menu items
     
     func getAppVersion() -> String { return "\(version)" }
+    func getAppBuildNumber() -> String? {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+    }
 
     // take htmlString and encode it and set
     // it to our textView

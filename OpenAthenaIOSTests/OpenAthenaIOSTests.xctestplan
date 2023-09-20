@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "FE6D60D2-8F07-4173-A53B-2C9C35A06FDD",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:OpenAthenaIOS.xcodeproj",
+        "identifier" : "59CC794F2A15B40C00B07782",
+        "name" : "OpenAthenaIOSTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -114,6 +114,7 @@
 		59CC79502A15B40C00B07782 /* OpenAthenaIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenAthenaIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAthenaIOSTests.swift; sourceTree = "<group>"; };
 		59CC79592A15B4B800B07782 /* TestDroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDroneImage.swift; sourceTree = "<group>"; };
+		59DBFEEC2AB9DBFC003C4B33 /* OpenAthenaIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenAthenaIOSTests.xctestplan; sourceTree = "<group>"; };
 		6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenAthenaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7809D03F2E40D3EB329B208B /* Pods-OpenAthenaIOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOSTests.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +220,7 @@
 				593A29C82A17B3170098EAF1 /* TestCalculations.swift */,
 				593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */,
 				597089E22A4126DD00B5E1BF /* TestEGM96.swift */,
+				59DBFEEC2AB9DBFC003C4B33 /* OpenAthenaIOSTests.xctestplan */,
 			);
 			path = OpenAthenaIOSTests;
 			sourceTree = "<group>";
@@ -646,7 +648,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -664,7 +666,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.26;
+				MARKETING_VERSION = 1.30;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -683,7 +685,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -701,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.26;
+				MARKETING_VERSION = 1.30;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -719,7 +721,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -739,7 +741,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

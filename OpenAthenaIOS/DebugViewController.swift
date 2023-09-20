@@ -86,9 +86,10 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     
     private func debug()
     {
-        self.htmlString = "<b>OpenAthena Debug Info alpha \(vc.getAppVersion())</b><br>"
+        self.htmlString = "<b>OpenAthena Debug Info alpha \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
+        
         self.htmlString += "Coordinate system \(app.settings.outputMode)<br>"
-        self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate)<br>"
+        self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate ?? "unknown"))<br>"
         self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
         self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"

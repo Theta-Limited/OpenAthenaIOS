@@ -39,7 +39,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:../OpenAthenaIOSTests.xctestplan"
+            reference = "container:OpenAthenaIOSTests/OpenAthenaIOSTests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -74,6 +74,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "59CC794F2A15B40C00B07782"
+            BuildableName = "OpenAthenaIOSTests.xctest"
+            BlueprintName = "OpenAthenaIOSTests"
+            ReferencedContainer = "container:OpenAthenaIOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

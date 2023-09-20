@@ -71,8 +71,10 @@ final class TestDroneParams: XCTestCase {
     {
         var drone = try? droneParams!.getMatchingDrone(makeModel: "djiFC2403", targetWidth: 640)
         XCTAssert(drone != nil)
+        XCTAssertEqual(drone!.widthPixels,640)
         drone = try? droneParams!.getMatchingDrone(makeModel: "djiFC2403", targetWidth: 4056)
         XCTAssert(drone != nil)
+        XCTAssertEqual(drone!.widthPixels,4056)
     }
 
 } // TestDroneParams

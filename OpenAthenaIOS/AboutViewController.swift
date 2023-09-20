@@ -87,11 +87,12 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     
     private func getAbout()
     {
-        let htmlString = "<!DOCTYPE html><html><body><h2>OpenAthena alpha version \(vc!.getAppVersion())</h2>"
-        + "Matthew Krupczak, Bobby Krupczak, Seth Canada, et al.<br>"
+        let htmlString = "<!DOCTYPE html><html><body>"
+        + "<h2>OpenAthena alpha version \(vc!.getAppVersion()) build \(vc.getAppBuildNumber()!)</h2>"
+        + "Matthew Krupczak, Bobby Krupczak et al.<br>"
         + "GPL-3.0, some rights reserved "
         + "<a href=\"https://openathena.com/\">OpenAthena.com</a><br>"
-        + "<br>Open Athena allows common drones to spot precise geodetic locations.<br>"
+        + "<br>OpenAthena allows common drones to spot precise geodetic locations.<br>"
         + "<br><a href=\"https://github.com/mkrupczak3/OpenAthena\">View the project on GitHub</a>"
         + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br>"
         
