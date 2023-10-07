@@ -238,6 +238,7 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
             self.vc.theDroneImage!.rawData = data
             self.vc.theDroneImage!.theImage = image
             self.vc.theDroneImage!.name = imageURL.lastPathComponent
+            self.vc.theDroneImage!.droneParams = self.vc.droneParams
             
             imageView.image = image
             
