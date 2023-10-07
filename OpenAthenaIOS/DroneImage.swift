@@ -161,7 +161,6 @@ public class DroneImage {
         // drone:GimbalRollDegree
         // Camera:Roll
         
-        print("getRoll starting")
         if metaData == nil {
             throw DroneImageError.NoMetaData
         }
@@ -172,19 +171,15 @@ public class DroneImage {
         }
         
         if (metaData!["drone-skydio:CameraOrientationNED:Roll"] != nil)  {
-            print("skydio:CameraOrientationNED:Roll")
             return (metaData!["drone-skydio:CameraOrientationNED:Roll"] as! NSString).doubleValue
         }
         if (metaData!["drone-dji:GimbalRollDegree"] != nil)  {
-            print("drone-dji:GimbalRollDegree")
             return (metaData!["drone-dji:GimbalRollDegree"] as! NSString).doubleValue
         }
         if (metaData!["drone:GimbalRollDegree"] != nil)  {
-            print("drone:GimbalRollDegree")
             return (metaData!["drone:GimbalRollDegree"] as! NSString).doubleValue
         }
         if (metaData!["Camera:Roll"] != nil)  {
-            print("Camera:Roll")
             return (metaData!["Camera:Roll"] as! NSString).doubleValue
         }
         
@@ -807,8 +802,41 @@ public class DroneImage {
     // fixes for lens distortion; see OpenAthenaAndroid code for more documentation
     
     // broken right now for Skydio images XXX
-    
+    // works for drones where we do not have correction parameters
+        
     private func getRayAnglesFromImagePixel(x: Double, y: Double) throws -> (Double,Double)
+    {
+        print("getRayAnglesFromImagePixel: starting")
+            
+        var matrix = try getIntrinsicMatrix()
+            
+        print("getRayAnglesFromImagePixel: got intrinsic matrix")
+            
+        let fx = matrix[0]
+        let fy = matrix[4]
+        let cx = matrix[2]
+        let cy = matrix[5]
+            
+        let pixelX = x - cx
+        let pixelY = y - cy
+                    
+        var azimuth: Double = atan2(pixelX,fx)
+        var elevation: Double = atan2(pixelY, fy)
+        azimuth = azimuth.degrees
+        elevation = elevation.degrees
+            
+        let roll = try getRoll()
+            
+        print("getRayAnglesFromImagePixel: roll is \(roll)")
+            
+        (azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+            
+        print("getRayAnglesFromImagePixel: returning corrected az and elevation")
+            
+        return (azimuth,elevation)
+    }
+    
+    private func getRayAnglesFromImagePixelCorrected(x: Double, y: Double) throws -> (Double,Double)
     {
         print("getRayAnglesFromImagePixel: starting")
         
@@ -822,7 +850,12 @@ public class DroneImage {
         let cy = matrix[5]
         
         // get distortion parameters for the drone
+        var xDistorted = x - cx
+        var yDistorted = y - cy
         
+        var xUndistorted = xDistorted // initial guess
+        var yUndistorted = yDistorted // initial guess
+
         do {
             let makeModel: String = try getCameraMake() + getCameraModel()
             var aDrone: DroneCCDInfo? = try droneParams?.getMatchingDrone(makeModel: makeModel,
@@ -830,15 +863,12 @@ public class DroneImage {
             
             print("Found drone model info for \(makeModel)")
             
-            var xDistorted = x - cx
-            var yDistorted = y - cy
-            var xNormalized = xDistorted / fx
-            var yNormalized = yDistorted / fy
-            
-            var xUndistorted = xDistorted
-            var yUndistorted = yDistorted
+            var xNormalized = (xDistorted) / fx
+            var yNormalized = (yDistorted) / fy
             
             if aDrone?.lensType.caseInsensitiveCompare("perspective") == .orderedSame {
+                
+                print("Perspective correction")
                 
                 let p2 = aDrone?.tangentialT2
                 let p1 = aDrone?.tangentialT1
@@ -858,6 +888,9 @@ public class DroneImage {
                 }
             }
             else if aDrone?.lensType.caseInsensitiveCompare("fisheye") == .orderedSame {
+                
+                print("Fisheye correction")
+                
                 let p0 = aDrone?.poly0
                 let p1 = aDrone?.poly1
                 let p2 = aDrone?.poly2
@@ -884,25 +917,54 @@ public class DroneImage {
         }
         catch {
             print("No drone model info; use focal length ")
+            throw DroneImageError.MissingCCDInfo
         }
         
-        let pixelX = x - cx
-        let pixelY = y - cy
-            
-        var azimuth: Double = atan2(pixelX,fx)
-        var elevation: Double = atan2(pixelY, fy)
+        // now, calculate ray angles using undistorted coordinates
+        // TODO these calculations may be wrong for fisheye
+
+        //let pixelX = x - cx
+        //let pixelY = y - cy
+        //var azimuth: Double = atan2(pixelX,fx)
+        //var elevation: Double = atan2(pixelY, fy)
+        //azimuth = azimuth.degrees
+        //elevation = elevation.degrees
+        //let roll = try getRoll()
+        //(azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+        //return (azimuth,elevation)
+        
+        var azimuth: Double = atan2(xUndistorted,fx)
+        var elevation: Double = atan2(yUndistorted,fy)
+        
         azimuth = azimuth.degrees
         elevation = elevation.degrees
+        
+        // calculation of what the ray angle would be without distortion correction
+        // for debug use only
+        
+        var azDistorted = atan2(xDistorted,fx)
+        var elDistorted = atan2(yDistorted,fy)
+        azDistorted = azDistorted.degrees
+        elDistorted = elDistorted.degrees
+        
+        // physical roll angle of camera
+        do {
+            var roll: Double = try getRoll()
+            var (TBAngle0,TBAngle1) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+            azimuth = TBAngle0
+            elevation = TBAngle1
             
-        let roll = try getRoll()
+            // for debug use only
+            (TBAngle0,TBAngle1) = correctRayAnglesForRoll(psi: azDistorted, theta: elDistorted, roll: roll)
+            azDistorted = TBAngle0
+            elDistorted = TBAngle1
             
-        print("getRayAnglesFromImagePixel: roll is \(roll)")
-            
-        (azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
-            
-        print("getRayAnglesFromImagePixel: returning corrected az and elevation")
-            
-        return (azimuth,elevation)
+            return (azimuth,elevation)
+        }
+        catch {
+            print("getRayAnglesFromImgPixel: couldnt get camera roll")
+            throw DroneImageError.MetaDataKeyNotFound
+        }
         
     } // getRayAnglesFromImagePixel
     
