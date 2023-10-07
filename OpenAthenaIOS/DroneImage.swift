@@ -300,6 +300,8 @@ public class DroneImage {
         var alt = 0.0
         var gpsInfo: NSDictionary
         
+        print("getAltitude: starting")
+        
         if metaData == nil {
             throw DroneImageError.NoMetaData
         }
@@ -320,8 +322,11 @@ public class DroneImage {
         }
         if metaData!["drone-skydio:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-skydio:AbsoluteAltitude"] as! NSString).doubleValue
+            print("getAltitude: drone-skydio absolute altitude is \(alt)")
             //return alt
         }
+        
+        print("getAltitude: \(alt), now going to make corrections")
         
         // fallback to regular exif gps altitude data
         
@@ -806,12 +811,8 @@ public class DroneImage {
         
     private func getRayAnglesFromImagePixel(x: Double, y: Double) throws -> (Double,Double)
     {
-        print("getRayAnglesFromImagePixel: starting")
-            
         var matrix = try getIntrinsicMatrix()
-            
-        print("getRayAnglesFromImagePixel: got intrinsic matrix")
-            
+                        
         let fx = matrix[0]
         let fy = matrix[4]
         let cx = matrix[2]
@@ -826,24 +827,18 @@ public class DroneImage {
         elevation = elevation.degrees
             
         let roll = try getRoll()
-            
-        print("getRayAnglesFromImagePixel: roll is \(roll)")
-            
+                        
         (azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
-            
-        print("getRayAnglesFromImagePixel: returning corrected az and elevation")
-            
+                        
         return (azimuth,elevation)
     }
     
     private func getRayAnglesFromImagePixelCorrected(x: Double, y: Double) throws -> (Double,Double)
     {
-        print("getRayAnglesFromImagePixel: starting")
+        print("getRayAnglesFromImagePixel: corrected starting")
         
         var matrix = try getIntrinsicMatrix()
-        
-        print("getRayAnglesFromImagePixel: got intrinsic matrix")
-        
+                
         let fx = matrix[0]
         let fy = matrix[4]
         let cx = matrix[2]
@@ -1177,10 +1172,15 @@ public class DroneImage {
             try degAzimuth = getGimbalYawDegree()
             try degTheta = getGimbalPitchDegree()
                                     
-            (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixel(x: theImage!.size.width * targetXprop,
+            // corrected or uncorrected versions of getRayAnglesFromImagePixel
+            
+            (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixelCorrected(x: theImage!.size.width * targetXprop,
                                                                          y: theImage!.size.height * targetYprop)
+            
             degAzimuth += azimuthOffset
             degTheta += thetaOffset
+            
+            print("resolveTarget: degAz \(degAzimuth) degTheta \(degTheta)")
             
             // convert to radians
             radAzimuth = degAzimuth.radians
@@ -1189,6 +1189,8 @@ public class DroneImage {
             try lat = getLatitude()
             try lon = getLongitude()
             try alt = getAltitude()
+            
+            print("resolveTarget: lat: \(lat) lon: \(lon) alt: \(alt)")
         }
         catch {
             print("resolveTarget: missing metadata at the start")
@@ -1201,6 +1203,7 @@ public class DroneImage {
         // fix bug 4/14/2023
         do {
             if fabs(radTheta - Double.pi/2.0)  <= 0.005 {
+                print("resolveTarget: target is below us, adjusting")
                 try terrainAlt = dem.getAltitudeFromLatLong(targetLat: lat,targetLong: lon)
                 tarLat = lat
                 tarLon = lon
@@ -1219,6 +1222,7 @@ public class DroneImage {
         // during manual data entry, please avoid abs values > 90 deg
         // fix for radTheta comparison 4/14/2023
         if radTheta > (Double.pi / 2.0) {
+            print("resolveTarget: normalizing theta")
             radAzimuth = DroneImage.normalizeRadians(inAngle: (radAzimuth + Double.pi))
             radTheta = Double.pi - radTheta
         }
@@ -1254,13 +1258,14 @@ public class DroneImage {
         var groundAlt: Double
         do {
             try groundAlt = dem.getAltitudeFromLatLong(targetLat: curLat, targetLong: curLon)
+            print("resolveTarget: groundAlt is \(groundAlt)")
         }
         catch {
             throw error
         }
 
         if (curAlt < groundAlt) {
-            print("curAlt < groundAlt while resolving target")
+            print("curAlt \(curAlt) < groundAlt \(groundAlt) while resolving target")
             throw ElevationModuleError.RequestedValueOOBError
         }
         
@@ -1443,6 +1448,11 @@ public class DroneImage {
                 print("Found skydio:CameraOrientationNED:Roll in metadata parsing \(currentValue)")
                 currentValue = nil
             }
+            if elementName.contains("drone-skydio:AbsoluteAltitude") {
+                if currentValue != "" || currentValue != nil {
+                    metaData!["drone-skydio:AbsoluteAltitude"] = currentValue
+                }
+            }
             
         } // didEndElement
 
@@ -1453,7 +1463,7 @@ public class DroneImage {
         func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?,
                     qualifiedName qName: String?, attributes attributeDict: [String: String]) {
             
-            print("Element name \(elementName)")
+            //print("Element name \(elementName)")
             
             // look for tiff: elements
             if elementName.contains("tiff:") {
@@ -1473,10 +1483,15 @@ public class DroneImage {
             }
             // some drone-skydio attributes appear in multiple elements
             // our attribute/tag parser handles
-
+            if elementName.contains("drone-skydio:AbsoluteAltitude") {
+                currentValue = String()
+            }
+            
             // dji, skydio data is in attributes
             // skydio often uses duplicate attributes
             // for diff elements
+            // skydio sometimes puts values directly in the element
+            // like AbsoluteValue
             
             // skydio is also including elements under elements
             // e.g. skydio_S1001975.JPG
@@ -1512,6 +1527,7 @@ public class DroneImage {
                     metaData![t] = v
                 }
                 if t.contains("drone-skydio:") {
+                    print("drone-skydio tag \(t)")
                     if elementName.contains("drone-skydio") {
                         var newTag: String
                         let tArray = t.components(separatedBy: ":")
