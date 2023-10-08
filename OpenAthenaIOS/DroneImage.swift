@@ -51,6 +51,7 @@ public class DroneImage {
     var targetYprop: CGFloat = 0.5
     var ccdInfo: DroneCCDInfo?
     var xmlStringCopy: String?
+    var droneParams: DroneParams?
     
     //init(fromImage image: UIImage, withMetaData data: [AnyHashable:Any]) {
     init(suggestedName aName: String, fromImage image: UIImage,
@@ -178,13 +179,19 @@ public class DroneImage {
         if (metaData!["drone:GimbalRollDegree"] != nil)  {
             return (metaData!["drone:GimbalRollDegree"] as! NSString).doubleValue
         }
+        // parrot drones often have both Camera:Roll and drone-parrot:DroneRollDegree
+        // which do we take first? take parrot first
+        
+        if metaData!["drone-parrot:CameraRollDegree"] != nil {
+            return (metaData!["drone-parrot:CameraRollDegree"] as! NSString).doubleValue
+        }
         if (metaData!["Camera:Roll"] != nil)  {
             return (metaData!["Camera:Roll"] as! NSString).doubleValue
         }
-        
         print("getRoll: missing metadata key")
         throw DroneImageError.MissingMetaDataKey
-    }
+        
+    } // getRoll
     
     public func getLatitude() throws -> Double {
         var lat = 0.0
@@ -299,6 +306,8 @@ public class DroneImage {
         var alt = 0.0
         var gpsInfo: NSDictionary
         
+        print("getAltitude: starting")
+        
         if metaData == nil {
             throw DroneImageError.NoMetaData
         }
@@ -319,8 +328,13 @@ public class DroneImage {
         }
         if metaData!["drone-skydio:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-skydio:AbsoluteAltitude"] as! NSString).doubleValue
+            print("getAltitude: drone-skydio absolute altitude is \(alt)")
             //return alt
         }
+        
+        print("getAltitude: \(alt), now going to make corrections")
+        
+        // for parrot, what about Camera:AboveGroundAltitude XXX ?
         
         // fallback to regular exif gps altitude data
         
@@ -458,16 +472,21 @@ public class DroneImage {
             theta = (metaData!["drone:GimbalPitchDegree"] as! NSString).doubleValue
             return fabs(theta)
         }
-        if metaData!["Camera:Pitch"] != nil {
-            theta = (metaData!["Camera:Pitch"] as! NSString).doubleValue
-            return fabs(theta)
-        }
+        // some parrot drones have both Camera:Pitch and drone-parrot:CameraPitchDegree; which
+        // do we take first; take parrot params first
+        
         if metaData!["drone-parrot:CameraPitchDegree"] != nil {
             theta = (metaData!["drone-parrot:CameraPitchDegree"] as! NSString).doubleValue
             return fabs(theta)
         }
+        if metaData!["Camera:Pitch"] != nil {
+            theta = (metaData!["Camera:Pitch"] as! NSString).doubleValue
+            return fabs(theta)
+        }
+       
         throw DroneImageError.MissingMetaDataKey
-    }
+        
+    } // getGimbalPitchDegree
     
     // camera/gimbal yaw degree or azimuth
     public func getGimbalYawDegree() throws -> Double {
@@ -491,10 +510,9 @@ public class DroneImage {
             az = (metaData!["drone:GimbalYawDegree"] as! NSString).doubleValue
             return az.truncatingRemainder(dividingBy: 360.0)
         }
-        if metaData!["Camera:Yaw"] != nil {
-            az = (metaData!["Camera:Yaw"] as! NSString).doubleValue
-            return az.truncatingRemainder(dividingBy: 360.0)
-        }
+        // Some parrot drones have both Camera:Yaw and drone-parrot:CameraYawDegree
+        // which should we take first? take drone-parrot first
+        
         if metaData!["drone-parrot:CameraYawDegree"] != nil {
             az = (metaData!["drone-parrot:CameraYawDegree"] as! NSString).doubleValue
             return az.truncatingRemainder(dividingBy: 360.0)
@@ -503,9 +521,14 @@ public class DroneImage {
             az = (metaData!["drone-skydio:CameraOrientationNED:Yaw"] as! NSString).doubleValue
             return az.truncatingRemainder(dividingBy: 360.0)
         }
+        if metaData!["Camera:Yaw"] != nil {
+            az = (metaData!["Camera:Yaw"] as! NSString).doubleValue
+            return az.truncatingRemainder(dividingBy: 360.0)
+        }
         
         throw DroneImageError.MissingMetaDataKey
-    }
+        
+    } // getGimbalYawDegree
     
     // look at exif/metadata to see who maker is
     // or XMP data
@@ -798,37 +821,164 @@ public class DroneImage {
     }
     
     // get ray angles in degrees offset from principal point (0.5,0.5)
+    // fixes for lens distortion; see OpenAthenaAndroid code for more documentation
+    
+    // broken right now for Skydio images XXX
+    // works for drones where we do not have correction parameters
+        
     private func getRayAnglesFromImagePixel(x: Double, y: Double) throws -> (Double,Double)
     {
-        print("getRayAnglesFromImagePixel: starting")
+        var matrix = try getIntrinsicMatrix()
+                        
+        let fx = matrix[0]
+        let fy = matrix[4]
+        let cx = matrix[2]
+        let cy = matrix[5]
+            
+        let pixelX = x - cx
+        let pixelY = y - cy
+                    
+        var azimuth: Double = atan2(pixelX,fx)
+        var elevation: Double = atan2(pixelY, fy)
+        azimuth = azimuth.degrees
+        elevation = elevation.degrees
+            
+        let roll = try getRoll()
+                        
+        (azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+                        
+        return (azimuth,elevation)
+    }
+    
+    private func getRayAnglesFromImagePixelCorrected(x: Double, y: Double) throws -> (Double,Double)
+    {
+        print("getRayAnglesFromImagePixel: corrected starting")
         
         var matrix = try getIntrinsicMatrix()
-        
-        print("getRayAnglesFromImagePixel: got intrinsic matrix")
-        
+                
         let fx = matrix[0]
         let fy = matrix[4]
         let cx = matrix[2]
         let cy = matrix[5]
         
-        let pixelX = x - cx
-        let pixelY = y - cy
+        // get distortion parameters for the drone
+        var xDistorted = x - cx
+        var yDistorted = y - cy
+        
+        var xUndistorted = xDistorted // initial guess
+        var yUndistorted = yDistorted // initial guess
+
+        do {
+            let makeModel: String = try getCameraMake() + getCameraModel()
+            var aDrone: DroneCCDInfo? = try droneParams?.getMatchingDrone(makeModel: makeModel,
+                                                                         targetWidth: cx*2.0)
+            
+            print("Found drone model info for \(makeModel)")
+            
+            var xNormalized = (xDistorted) / fx
+            var yNormalized = (yDistorted) / fy
+            
+            if aDrone?.lensType.caseInsensitiveCompare("perspective") == .orderedSame {
                 
-        var azimuth: Double = atan2(pixelX,fx)
-        var elevation: Double = atan2(pixelY, fy)
+                print("Perspective correction")
+                
+                let p2 = aDrone?.tangentialT2
+                let p1 = aDrone?.tangentialT1
+                let k1 = aDrone?.radialR1
+                let k2 = aDrone?.radialR2
+                let k3 = aDrone?.radialR3
+                
+                // see OpenAthenaAndroid for explanation of code
+                // "A Flexible New Technique for Camera Calibration", 1998 Microsoft
+                if !(k1 == 0.0 && k2 == 0.0 && k3 == 0.0 && p1 == 0.0 && p2 == 0.0) {
+                    
+                    let pdc = PerspectiveDistortionCorrector(k1: k1!, k2: k2!, p1: p1!, p2: p2!)
+                    
+                    (xUndistorted,yUndistorted) = pdc.correctDistortion(xNormalized: xNormalized, yNormalized: yNormalized)
+                    xUndistorted = xUndistorted * fx
+                    yUndistorted = yUndistorted * fy
+                }
+            }
+            else if aDrone?.lensType.caseInsensitiveCompare("fisheye") == .orderedSame {
+                
+                print("Fisheye correction")
+                
+                let p0 = aDrone?.poly0
+                let p1 = aDrone?.poly1
+                let p2 = aDrone?.poly2
+                let p3 = aDrone?.poly3
+                let p4 = aDrone?.poly4
+                let c = aDrone?.c
+                let d = aDrone?.d
+                let e = aDrone?.e
+                let f = aDrone?.f
+                
+                // fisheye distortion
+                // see How are the internal and external camera parameters defined from pix4d.com
+                
+                if !(c == 0.0 && d == 0.0 && e == 0.0 && f == 0.0) {
+                    let fdc = FisheyeDistortionCorrector(p0: p0!, p1: p1!, p2: p2!, p3: p3!, p4: p4!, c: c!, d: d!, e: e!, f: f!)
+                    (xUndistorted,yUndistorted) = fdc.correctDistortion(xNormalized: xNormalized, yNormalized: yNormalized)
+                    xUndistorted = xUndistorted * fx
+                    yUndistorted = yUndistorted * fy
+                }
+            }
+            else {
+                print("Unknown lens type\(aDrone?.lensType)")
+            }
+        }
+        catch {
+            print("No drone model info; use focal length ")
+            throw DroneImageError.MissingCCDInfo
+        }
+        
+        // now, calculate ray angles using undistorted coordinates
+        // TODO these calculations may be wrong for fisheye
+
+        //let pixelX = x - cx
+        //let pixelY = y - cy
+        //var azimuth: Double = atan2(pixelX,fx)
+        //var elevation: Double = atan2(pixelY, fy)
+        //azimuth = azimuth.degrees
+        //elevation = elevation.degrees
+        //let roll = try getRoll()
+        //(azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+        //return (azimuth,elevation)
+        
+        var azimuth: Double = atan2(xUndistorted,fx)
+        var elevation: Double = atan2(yUndistorted,fy)
+        
         azimuth = azimuth.degrees
         elevation = elevation.degrees
         
-        let roll = try getRoll()
+        // calculation of what the ray angle would be without distortion correction
+        // for debug use only
         
-        print("getRayAnglesFromImagePixel: roll is \(roll)")
+        var azDistorted = atan2(xDistorted,fx)
+        var elDistorted = atan2(yDistorted,fy)
+        azDistorted = azDistorted.degrees
+        elDistorted = elDistorted.degrees
         
-        (azimuth,elevation) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+        // physical roll angle of camera
+        do {
+            var roll: Double = try getRoll()
+            var (TBAngle0,TBAngle1) = correctRayAnglesForRoll(psi: azimuth, theta: elevation, roll: roll)
+            azimuth = TBAngle0
+            elevation = TBAngle1
+            
+            // for debug use only
+            (TBAngle0,TBAngle1) = correctRayAnglesForRoll(psi: azDistorted, theta: elDistorted, roll: roll)
+            azDistorted = TBAngle0
+            elDistorted = TBAngle1
+            
+            return (azimuth,elevation)
+        }
+        catch {
+            print("getRayAnglesFromImgPixel: couldnt get camera roll")
+            throw DroneImageError.MetaDataKeyNotFound
+        }
         
-        print("getRayAnglesFromImagePixel: returning corrected az and elevation")
-        
-        return (azimuth,elevation)
-    }
+    } // getRayAnglesFromImagePixel
     
     // for an image taken where camera lateral axis is not parallel to ground (e.g. roll), express ray angle
     // in terms of a frame of reference which is parallel to ground
@@ -1038,11 +1188,16 @@ public class DroneImage {
         do {
             try degAzimuth = getGimbalYawDegree()
             try degTheta = getGimbalPitchDegree()
-                        
-            (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixel(x: theImage!.size.width * targetXprop,
+                                    
+            // corrected or uncorrected versions of getRayAnglesFromImagePixel
+            
+            (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixelCorrected(x: theImage!.size.width * targetXprop,
                                                                          y: theImage!.size.height * targetYprop)
+            
             degAzimuth += azimuthOffset
             degTheta += thetaOffset
+            
+            print("resolveTarget: degAz \(degAzimuth) degTheta \(degTheta)")
             
             // convert to radians
             radAzimuth = degAzimuth.radians
@@ -1051,6 +1206,8 @@ public class DroneImage {
             try lat = getLatitude()
             try lon = getLongitude()
             try alt = getAltitude()
+            
+            print("resolveTarget: lat: \(lat) lon: \(lon) alt: \(alt)")
         }
         catch {
             print("resolveTarget: missing metadata at the start")
@@ -1063,6 +1220,7 @@ public class DroneImage {
         // fix bug 4/14/2023
         do {
             if fabs(radTheta - Double.pi/2.0)  <= 0.005 {
+                print("resolveTarget: target is below us, adjusting")
                 try terrainAlt = dem.getAltitudeFromLatLong(targetLat: lat,targetLong: lon)
                 tarLat = lat
                 tarLon = lon
@@ -1081,6 +1239,7 @@ public class DroneImage {
         // during manual data entry, please avoid abs values > 90 deg
         // fix for radTheta comparison 4/14/2023
         if radTheta > (Double.pi / 2.0) {
+            print("resolveTarget: normalizing theta")
             radAzimuth = DroneImage.normalizeRadians(inAngle: (radAzimuth + Double.pi))
             radTheta = Double.pi - radTheta
         }
@@ -1116,13 +1275,14 @@ public class DroneImage {
         var groundAlt: Double
         do {
             try groundAlt = dem.getAltitudeFromLatLong(targetLat: curLat, targetLong: curLon)
+            print("resolveTarget: groundAlt is \(groundAlt)")
         }
         catch {
             throw error
         }
 
         if (curAlt < groundAlt) {
-            print("curAlt < groundAlt while resolving target")
+            print("curAlt \(curAlt) < groundAlt \(groundAlt) while resolving target")
             throw ElevationModuleError.RequestedValueOOBError
         }
         
@@ -1291,16 +1451,24 @@ public class DroneImage {
                 skydioCameraOrientationNED = false
             }
             if elementName.contains("drone-skydio:Pitch") && skydioCameraOrientationNED {
+                print("Found skydio:CameraOrientationNED:Pitch in metadata parsing \(currentValue)")
                 metaData!["drone-skydio:CameraOrientationNED:Pitch"] = currentValue
                 currentValue = nil
             }
             if elementName.contains("drone-skydio:Yaw") && skydioCameraOrientationNED {
+                print("Found skydio:CameraOrientationNED:Yaw in metadata parsing \(currentValue)")
                 metaData!["drone-skydio:CameraOrientationNED:Yaw"] = currentValue
                 currentValue = nil
             }
             if elementName.contains("drone-skydio:Roll") && skydioCameraOrientationNED {
                 metaData!["drone-skydio:CameraOrientationNED:Roll"] = currentValue
+                print("Found skydio:CameraOrientationNED:Roll in metadata parsing \(currentValue)")
                 currentValue = nil
+            }
+            if elementName.contains("drone-skydio:AbsoluteAltitude") {
+                if currentValue != "" || currentValue != nil {
+                    metaData!["drone-skydio:AbsoluteAltitude"] = currentValue
+                }
             }
             
         } // didEndElement
@@ -1312,7 +1480,7 @@ public class DroneImage {
         func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?,
                     qualifiedName qName: String?, attributes attributeDict: [String: String]) {
             
-            print("Element name \(elementName)")
+            //print("Element name \(elementName)")
             
             // look for tiff: elements
             if elementName.contains("tiff:") {
@@ -1332,20 +1500,32 @@ public class DroneImage {
             }
             // some drone-skydio attributes appear in multiple elements
             // our attribute/tag parser handles
-
+            if elementName.contains("drone-skydio:AbsoluteAltitude") {
+                currentValue = String()
+            }
+            
             // dji, skydio data is in attributes
             // skydio often uses duplicate attributes
             // for diff elements
+            // skydio sometimes puts values directly in the element
+            // like AbsoluteValue
             
             // skydio is also including elements under elements
             // e.g. skydio_S1001975.JPG
             if elementName.contains("drone-skydio:CameraOrientationNED") {
                 skydioCameraOrientationNED = true
             }
+            if elementName.contains("drone-skydio:CameraOrientationNED") == false {
+                // don't forget to unset this flag if we've moved onto next element!!
+                skydioCameraOrientationNED = false
+            }
             if elementName.contains("drone-skydio:Pitch") && skydioCameraOrientationNED {
                 currentValue = String()
             }
             if elementName.contains("drone-skydio:Yaw") && skydioCameraOrientationNED {
+                currentValue = String()
+            }
+            if elementName.contains("drone-skydio:Roll") && skydioCameraOrientationNED {
                 currentValue = String()
             }
             
@@ -1368,6 +1548,7 @@ public class DroneImage {
                     metaData![t] = v
                 }
                 if t.contains("drone-skydio:") {
+                    print("drone-skydio tag \(t)")
                     if elementName.contains("drone-skydio") {
                         var newTag: String
                         let tArray = t.components(separatedBy: ":")

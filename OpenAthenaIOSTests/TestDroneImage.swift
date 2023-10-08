@@ -14,6 +14,7 @@ final class TestDroneImage: XCTestCase {
     var parrotImage: DroneImage!
     var autelImage: DroneImage!
     var skydioImage: DroneImage!
+    var parrot2Image: DroneImage!
     
     override func setUpWithError() throws {
         
@@ -40,6 +41,16 @@ final class TestDroneImage: XCTestCase {
         parrotImage.rawData = data
         parrotImage.theImage = image
         parrotImage.updateMetaData()
+        
+        imagePath = Bundle.main.path(forResource: "examples/parrot-2",
+                                         ofType: "jpg")
+        XCTAssert(imagePath != nil)
+        data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
+        image = UIImage(data: data)
+        parrot2Image = DroneImage()
+        parrot2Image.rawData = data
+        parrot2Image.theImage = image
+        parrot2Image.updateMetaData()
         
         imagePath = Bundle.main.path(forResource: "examples/skydio-catilina",
                                          ofType: "jpg")
@@ -71,6 +82,7 @@ final class TestDroneImage: XCTestCase {
         XCTAssertTrue(parrotImage!.isDroneImage())
         XCTAssertTrue(skydioImage!.isDroneImage())
         XCTAssertTrue(autelImage!.isDroneImage())
+        XCTAssertTrue(parrot2Image!.isDroneImage())
     }
     
     func testDJIDroneImageMetaData()
@@ -96,8 +108,13 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(djiImage.getFocalLength(),4.386)
             try XCTAssertEqual(djiImage.getFocalLengthIn35mm(),24.0)
             try XCTAssertEqual(djiImage.getRoll(),0.0)
-            
             try XCTAssert(djiImage.getExifDateTime() != "")
+            
+            try XCTAssert(djiImage.metaData!["drone-dji:AbsoluteAltitude"] as! String == "+416.99")
+            try XCTAssert(djiImage.metaData!["drone-dji:GimbalRollDegree"] as! String == "+0.00")
+            try XCTAssert(djiImage.metaData!["drone-dji:GimbalPitchDegree"] as! String == "-36.00")
+            try XCTAssert(djiImage.metaData!["drone-dji:GimbalYawDegree"] as! String == "+172.40")
+            
         }
         catch {
             XCTAssert(false)
@@ -129,6 +146,12 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(skydioImage.getRoll(),0.186841)
             
             try XCTAssert(skydioImage.getExifDateTime() != "")
+            
+            XCTAssert(skydioImage.metaData!["drone-skydio:AbsoluteAltitude"] as! String  == "1034.441910")
+            XCTAssert(skydioImage.metaData!["drone-skydio:CameraOrientationNED:Pitch"] as! String == "-7.468572")
+            XCTAssert(skydioImage.metaData!["drone-skydio:CameraOrientationNED:Roll"] as! String == "0.186841")
+            print("metaData is \(skydioImage.metaData!["drone-skydio:CameraOrientationNED:Yaw"])")
+            XCTAssert(skydioImage.metaData!["drone-skydio:CameraOrientationNED:Yaw"] as! String == "127.444323")
         }
         catch {
             XCTAssert(false)
@@ -161,6 +184,12 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(autelImage.getRoll(),0.0)
             
             try XCTAssert(autelImage.getExifDateTime() != "")
+            
+            try XCTAssert(autelImage.metaData!["Camera:Pitch"] as! String == "66.040000")
+            try XCTAssert(autelImage.metaData!["Camera:Roll"] as! String == "0.000000")
+            try XCTAssert(autelImage.metaData!["Camera:Yaw"] as! String == "2.420000")
+            try XCTAssert(autelImage.metaData!["Camera:ModelType"] as! String == "perspective")
+            
         }
         catch {
             XCTAssert(false)
@@ -171,6 +200,7 @@ final class TestDroneImage: XCTestCase {
     func testParrotImageMetaData() {
         
         XCTAssert(parrotImage != nil)
+        XCTAssert(parrot2Image != nil)
         
         // check lat, lon, others
         do {
@@ -198,6 +228,19 @@ final class TestDroneImage: XCTestCase {
             XCTAssert(false)
         }
         
-    } // autel waterloo
+        // check parrot-2 xml/xmp parameters
+        do {
+            try XCTAssert(parrot2Image.getExifDateTime() != "")
+            try XCTAssertTrue(parrot2Image.getCameraMake().lowercased() == "parrot")
+            XCTAssert(parrot2Image.metaData!["drone-parrot:CameraPitchDegree"] as! String == "-78.362686")
+            XCTAssert(parrot2Image.metaData!["drone-parrot:CameraRollDegree"] as! String == "-0.322913")
+            XCTAssert(parrot2Image.metaData!["drone-parrot:CameraYawDegree"] as! String == "176.310745")
+            
+        }
+        catch {
+            XCTAssert(false)
+        }
+        
+    } // parrot-1 and parrot-2
     
 } // TestDroneImage

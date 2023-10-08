@@ -44,6 +44,8 @@
 		59B62B46298F3D5200F0C6B1 /* DroneImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B45298F3D5200F0C6B1 /* DroneImage.swift */; };
 		59CC79532A15B40C00B07782 /* OpenAthenaIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */; };
 		59CC795A2A15B4B800B07782 /* TestDroneImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC79592A15B4B800B07782 /* TestDroneImage.swift */; };
+		59DBFF102AD0C456003C4B33 /* FisheyeDistortionCorrector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DBFF0F2AD0C456003C4B33 /* FisheyeDistortionCorrector.swift */; };
+		59DBFF122AD0C48A003C4B33 /* PerspectiveDistortionCorrector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DBFF112AD0C48A003C4B33 /* PerspectiveDistortionCorrector.swift */; };
 		90C0D64DD6EBFC3B16422909 /* Pods_OpenAthenaIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */; };
 		9A006EEF1FB8F575C4D93B1D /* Pods_OpenAthenaIOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB76E5F10A821FA838AF7851 /* Pods_OpenAthenaIOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -115,6 +117,8 @@
 		59CC79522A15B40C00B07782 /* OpenAthenaIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAthenaIOSTests.swift; sourceTree = "<group>"; };
 		59CC79592A15B4B800B07782 /* TestDroneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDroneImage.swift; sourceTree = "<group>"; };
 		59DBFEEC2AB9DBFC003C4B33 /* OpenAthenaIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenAthenaIOSTests.xctestplan; sourceTree = "<group>"; };
+		59DBFF0F2AD0C456003C4B33 /* FisheyeDistortionCorrector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FisheyeDistortionCorrector.swift; sourceTree = "<group>"; };
+		59DBFF112AD0C48A003C4B33 /* PerspectiveDistortionCorrector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerspectiveDistortionCorrector.swift; sourceTree = "<group>"; };
 		6C692FB0D6EB966F6747C8C9 /* Pods_OpenAthenaIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenAthenaIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7809D03F2E40D3EB329B208B /* Pods-OpenAthenaIOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOSTests.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C61831E288879E7F32010CF /* Pods-OpenAthenaIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.release.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 				597089DA2A3FD35600B5E1BF /* Cubic.swift */,
 				597089DB2A3FD35600B5E1BF /* EGM96complete.bin */,
 				597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */,
+				59DBFF0F2AD0C456003C4B33 /* FisheyeDistortionCorrector.swift */,
+				59DBFF112AD0C48A003C4B33 /* PerspectiveDistortionCorrector.swift */,
 				597089DD2A3FD35600B5E1BF /* EGM96Location.swift */,
 				592CABB42A0ACF61006E28AF /* examples */,
 				59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */,
@@ -426,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59DBFF102AD0C456003C4B33 /* FisheyeDistortionCorrector.swift in Sources */,
 				59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */,
 				59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */,
 				59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */,
@@ -447,6 +454,7 @@
 				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
 				59B62B2229876E6A00F0C6B1 /* SettingsViewController.swift in Sources */,
 				59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */,
+				59DBFF122AD0C48A003C4B33 /* PerspectiveDistortionCorrector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,7 +656,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -666,7 +674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.30;
+				MARKETING_VERSION = 1.35;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -685,7 +693,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -703,7 +711,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.30;
+				MARKETING_VERSION = 1.35;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -721,7 +729,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -741,7 +749,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -1,0 +1,6 @@
+framework module Pods_OpenAthenaIOSTests {
+  umbrella header "Pods-OpenAthenaIOSTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
