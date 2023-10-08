@@ -179,13 +179,19 @@ public class DroneImage {
         if (metaData!["drone:GimbalRollDegree"] != nil)  {
             return (metaData!["drone:GimbalRollDegree"] as! NSString).doubleValue
         }
+        // parrot drones often have both Camera:Roll and drone-parrot:DroneRollDegree
+        // which do we take first? take parrot first
+        
+        if metaData!["drone-parrot:CameraRollDegree"] != nil {
+            return (metaData!["drone-parrot:CameraRollDegree"] as! NSString).doubleValue
+        }
         if (metaData!["Camera:Roll"] != nil)  {
             return (metaData!["Camera:Roll"] as! NSString).doubleValue
         }
-        
         print("getRoll: missing metadata key")
         throw DroneImageError.MissingMetaDataKey
-    }
+        
+    } // getRoll
     
     public func getLatitude() throws -> Double {
         var lat = 0.0
@@ -328,6 +334,8 @@ public class DroneImage {
         
         print("getAltitude: \(alt), now going to make corrections")
         
+        // for parrot, what about Camera:AboveGroundAltitude XXX ?
+        
         // fallback to regular exif gps altitude data
         
         // metadata that is parsed by CGImage functions is
@@ -464,16 +472,21 @@ public class DroneImage {
             theta = (metaData!["drone:GimbalPitchDegree"] as! NSString).doubleValue
             return fabs(theta)
         }
-        if metaData!["Camera:Pitch"] != nil {
-            theta = (metaData!["Camera:Pitch"] as! NSString).doubleValue
-            return fabs(theta)
-        }
+        // some parrot drones have both Camera:Pitch and drone-parrot:CameraPitchDegree; which
+        // do we take first; take parrot params first
+        
         if metaData!["drone-parrot:CameraPitchDegree"] != nil {
             theta = (metaData!["drone-parrot:CameraPitchDegree"] as! NSString).doubleValue
             return fabs(theta)
         }
+        if metaData!["Camera:Pitch"] != nil {
+            theta = (metaData!["Camera:Pitch"] as! NSString).doubleValue
+            return fabs(theta)
+        }
+       
         throw DroneImageError.MissingMetaDataKey
-    }
+        
+    } // getGimbalPitchDegree
     
     // camera/gimbal yaw degree or azimuth
     public func getGimbalYawDegree() throws -> Double {
@@ -497,10 +510,9 @@ public class DroneImage {
             az = (metaData!["drone:GimbalYawDegree"] as! NSString).doubleValue
             return az.truncatingRemainder(dividingBy: 360.0)
         }
-        if metaData!["Camera:Yaw"] != nil {
-            az = (metaData!["Camera:Yaw"] as! NSString).doubleValue
-            return az.truncatingRemainder(dividingBy: 360.0)
-        }
+        // Some parrot drones have both Camera:Yaw and drone-parrot:CameraYawDegree
+        // which should we take first? take drone-parrot first
+        
         if metaData!["drone-parrot:CameraYawDegree"] != nil {
             az = (metaData!["drone-parrot:CameraYawDegree"] as! NSString).doubleValue
             return az.truncatingRemainder(dividingBy: 360.0)
@@ -509,9 +521,14 @@ public class DroneImage {
             az = (metaData!["drone-skydio:CameraOrientationNED:Yaw"] as! NSString).doubleValue
             return az.truncatingRemainder(dividingBy: 360.0)
         }
+        if metaData!["Camera:Yaw"] != nil {
+            az = (metaData!["Camera:Yaw"] as! NSString).doubleValue
+            return az.truncatingRemainder(dividingBy: 360.0)
+        }
         
         throw DroneImageError.MissingMetaDataKey
-    }
+        
+    } // getGimbalYawDegree
     
     // look at exif/metadata to see who maker is
     // or XMP data
@@ -1497,6 +1514,10 @@ public class DroneImage {
             // e.g. skydio_S1001975.JPG
             if elementName.contains("drone-skydio:CameraOrientationNED") {
                 skydioCameraOrientationNED = true
+            }
+            if elementName.contains("drone-skydio:CameraOrientationNED") == false {
+                // don't forget to unset this flag if we've moved onto next element!!
+                skydioCameraOrientationNED = false
             }
             if elementName.contains("drone-skydio:Pitch") && skydioCameraOrientationNED {
                 currentValue = String()

@@ -10,8 +10,14 @@ import XCTest
 
 final class TestCalculations: XCTestCase {
 
-    var droneImage: DroneImage!
-    var dem: DigitalElevationModel!
+    var djiDroneImage: DroneImage!
+    var djiDem: DigitalElevationModel!
+    var skydioDroneImage: DroneImage!
+    var skydioDem: DigitalElevationModel!
+    var autelDroneImage: DroneImage!
+    var autelDem: DigitalElevationModel!
+    var parrotDroneImage: DroneImage!
+    var parrotDem: DigitalElevationModel!
     
     // load cobb.tiff DEM and DJI_0419.JPG image for use
     override func setUpWithError() throws {
@@ -19,36 +25,93 @@ final class TestCalculations: XCTestCase {
         
         print("TestCalculations starting")
         
+        // load DJI image
+        
         var imagePath = Bundle.main.path(forResource: "examples/DJI_0419", ofType: "JPG")
         XCTAssert(imagePath != nil)
         var data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
         var image = UIImage(data: data)
-        droneImage = DroneImage()
-        droneImage.rawData = data
-        droneImage.updateMetaData()
-        droneImage.theImage = image
-        droneImage.targetXprop = 0.5
-        droneImage.targetYprop = 0.5
+        djiDroneImage = DroneImage()
+        djiDroneImage.rawData = data
+        djiDroneImage.updateMetaData()
+        djiDroneImage.theImage = image
+        djiDroneImage.targetXprop = 0.5
+        djiDroneImage.targetYprop = 0.5
         
         imagePath = Bundle.main.path(forResource: "examples/cobb", ofType: "tiff")
         XCTAssert(imagePath != nil)
-        dem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
-        XCTAssert(dem != nil)
+        djiDem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
+        XCTAssert(djiDem != nil)
+        
+        // load skydio image
+        
+        imagePath = Bundle.main.path(forResource: "examples/skydio-catilina",
+                                     ofType: "jpg")
+        XCTAssert(imagePath != nil)
+        data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
+        image = UIImage(data: data)
+        skydioDroneImage = DroneImage()
+        skydioDroneImage.rawData = data
+        skydioDroneImage.updateMetaData()
+        skydioDroneImage.theImage = image
+        skydioDroneImage.targetXprop = 0.5
+        skydioDroneImage.targetYprop = 0.5
+        
+        imagePath = Bundle.main.path(forResource: "examples/skydio-catilina-dem", ofType: "tiff")
+        XCTAssert(imagePath != nil)
+        skydioDem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
+        XCTAssert(skydioDem != nil)
+        
+        // load autel image
+        imagePath = Bundle.main.path(forResource: "examples/waterloo-autell",
+                                     ofType: "jpg")
+        XCTAssert(imagePath != nil)
+        data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
+        image = UIImage(data: data)
+        autelDroneImage = DroneImage()
+        autelDroneImage.rawData = data
+        autelDroneImage.updateMetaData()
+        autelDroneImage.theImage = image
+        autelDroneImage.targetXprop = 0.5
+        autelDroneImage.targetYprop = 0.5
+        
+        imagePath = Bundle.main.path(forResource: "examples/waterloo-autell-dem", ofType: "tiff")
+        XCTAssert(imagePath != nil)
+        autelDem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
+        XCTAssert(autelDem != nil)
+
+        // load parrot image
+        imagePath = Bundle.main.path(forResource: "examples/parrot-1", ofType: "jpg")
+        XCTAssert(imagePath != nil)
+        data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
+        image = UIImage(data: data)
+        parrotDroneImage = DroneImage()
+        parrotDroneImage.rawData = data
+        parrotDroneImage.updateMetaData()
+        parrotDroneImage.theImage = image
+        parrotDroneImage.targetXprop = 0.5
+        parrotDroneImage.targetYprop = 0.5
+        
+        imagePath = Bundle.main.path(forResource: "examples/parrot-1-dem", ofType: "tiff")
+        XCTAssert(imagePath != nil)
+        parrotDem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
+        XCTAssert(parrotDem != nil)
         
     } // setUpWithError
 
     // call resolveTarget with cobb.tiff and DJI_0419.JPG and
     // check results
-    func testResolveTarget5050() throws
+    
+    func testDJI() throws
     {
         var target: [Double] = [0,0,0,0,0]
         
-        XCTAssert(dem != nil)
-        XCTAssert(droneImage != nil)
+        XCTAssert(djiDem != nil)
+        XCTAssert(djiDroneImage != nil)
         
-        droneImage.targetXprop = 0.50
-        droneImage.targetYprop = 0.50
-        try target = droneImage.resolveTarget(dem: dem)
+        djiDroneImage.targetXprop = 0.50
+        djiDroneImage.targetYprop = 0.50
+        try target = djiDroneImage.resolveTarget(dem: djiDem)
         
         print("testResolveTarget: \(target)")
         
@@ -68,19 +131,10 @@ final class TestCalculations: XCTestCase {
         // XCTAssertEqual(target[2],-84.53849326691132)
         XCTAssertEqual(target[1],33.835458730005925)
         XCTAssertEqual(target[2],-84.53849210995045)
-        
-    } // testResolveTarget
-
-    func testResolveTarget2525() throws
-    {
-        var target: [Double] = [0,0,0,0,0]
-        
-        XCTAssert(dem != nil)
-        XCTAssert(droneImage != nil)
-        
-        droneImage.targetXprop = 0.25
-        droneImage.targetYprop = 0.25
-        try target = droneImage.resolveTarget(dem: dem)
+    
+        djiDroneImage.targetXprop = 0.25
+        djiDroneImage.targetYprop = 0.25
+        try target = djiDroneImage.resolveTarget(dem: djiDem)
         
         print("testResolveTarget: \(target)")
         
@@ -97,5 +151,133 @@ final class TestCalculations: XCTestCase {
         XCTAssertEqual(target[1],33.834557006016766)
         XCTAssertEqual(target[2],-84.53707402053148)
         
-    } // testResolveTarget
+    } // testDJI
+    
+    func testSkydio() throws
+    {
+        var target: [Double] = [0,0,0,0,0]
+        
+        XCTAssert(skydioDem != nil)
+        XCTAssert(skydioDroneImage != nil)
+        
+        skydioDroneImage.targetXprop = 0.50
+        skydioDroneImage.targetYprop = 0.50
+        try target = skydioDroneImage.resolveTarget(dem: skydioDem)
+        
+        print("target is \(target)")
+        
+        // altitude
+        XCTAssertEqual(target[3],1019.4415581971641)
+        // distance to target
+        XCTAssertEqual(target[0],343.32610143042746)
+        // target lat, lon
+        XCTAssertEqual(target[1],32.517076053635684)
+        XCTAssertEqual(target[2],-110.92166815563021)
+        
+        // 0.25, 0.25 throws DEM out of bounds on OA iOS and Android
+        // thats OK; make sure an error is thrown
+        skydioDroneImage.targetXprop = 0.25
+        skydioDroneImage.targetYprop = 0.25
+        XCTAssertThrowsError(target = try skydioDroneImage.resolveTarget(dem: skydioDem))
+        
+        print("testResolveTarget: \(target)")
+    } // testSkydio
+    
+    func testAutel() throws
+    {
+        var target: [Double] = [0,0,0,0,0]
+        
+        XCTAssert(autelDem != nil)
+        XCTAssert(autelDroneImage != nil)
+        
+        autelDroneImage.targetXprop = 0.50
+        autelDroneImage.targetYprop = 0.50
+        try target = autelDroneImage.resolveTarget(dem: autelDem)
+        
+        print("testResolveTarget: \(target)")
+        
+        // now that we are using drone ccd info and IDW, test numbers
+        // have changed just slightly for alpha 1.1 and newer
+        
+        // altitude
+        XCTAssertEqual(target[3],375.295988901877)
+
+        // distance to target
+        XCTAssertEqual(target[0],11.002642979911418)
+
+        // target lat, lon
+        XCTAssertEqual(target[1],41.3026818153707)
+        XCTAssertEqual(target[2],-96.3422510746897)
+    
+        autelDroneImage.targetXprop = 0.25
+        autelDroneImage.targetYprop = 0.25
+        try target = autelDroneImage.resolveTarget(dem: autelDem)
+        
+        print("testResolveTarget: \(target)")
+        
+        // now that we are using drone ccd info and IDW, test numbers
+        // have changed just slightly for alpha 1.1 and newer
+        
+        // altitude
+        XCTAssertEqual(target[3],375.11807673979945)
+
+        // distance to target
+        XCTAssertEqual(target[0],14.009504090355108)
+                       
+        // target lat, lon
+        XCTAssertEqual(target[1],41.302724028442604)
+        XCTAssertEqual(target[2],-96.34228617025856)
+        
+    } // testAutel
+    
+    func testParrot() throws
+    {
+        var target: [Double] = [0,0,0,0,0]
+        
+        XCTAssert(parrotDem != nil)
+        XCTAssert(parrotDroneImage != nil)
+        
+        parrotDroneImage.targetXprop = 0.50
+        parrotDroneImage.targetYprop = 0.50
+        
+        // right now, this parrot-1 image throws exception for out of bounds
+        // need to test on parrot-2 XXX
+        XCTAssertThrowsError(try target = parrotDroneImage.resolveTarget(dem: parrotDem))
+        
+//        print("testResolveTarget: \(target)")
+//
+//        // now that we are using drone ccd info and IDW, test numbers
+//        // have changed just slightly for alpha 1.1 and newer
+//
+//        // altitude
+//        XCTAssertEqual(target[3],0.0)
+//
+//        // distance to target
+//        XCTAssertEqual(target[0],0.0)
+//
+//        // target lat, lon
+//        XCTAssertEqual(target[1],0.0)
+//        XCTAssertEqual(target[2],0.0)
+//
+//        parrotDroneImage.targetXprop = 0.25
+//        parrotDroneImage.targetYprop = 0.25
+//        try target = parrotDroneImage.resolveTarget(dem: parrotDem)
+//
+//        print("testResolveTarget: \(target)")
+//
+//        // now that we are using drone ccd info and IDW, test numbers
+//        // have changed just slightly for alpha 1.1 and newer
+//
+//        // altitude
+//        XCTAssertEqual(target[3],0.0)
+//
+//        // distance to target
+//        XCTAssertEqual(target[0],0.0)
+//
+//        // target lat, lon
+//        XCTAssertEqual(target[1],0.0)
+//        XCTAssertEqual(target[2],0.0)
+        
+    } // testParrot
+        
 } // TestCalculations
