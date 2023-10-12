@@ -55,7 +55,23 @@ class ViewController: UIViewController {
         doMain()
         testEGM96Offsets()
         
+        requestNotificationAuthorization()
+        
     } // viewDidLoad
+    
+    private func requestNotificationAuthorization()
+    {
+        let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        app.uNC.requestAuthorization(options: authOptions, completionHandler: { (success, error) in
+            if let error = error {
+                print("Error requesting notification authorization \(error)")
+            }
+            else {
+                print("Notifications allowed: \(success)")
+            }
+            
+        })
+    }
     
     private func doMain()
     {
@@ -120,10 +136,17 @@ class ViewController: UIViewController {
         print("Configuring menus on main screen")
         
         let optionsMenu = UIMenu(title: "", children: [
-            UIAction(title:"Settings", image: UIImage(systemName:"gear.circle")) {
+            UIAction(title:"Settings", image: UIImage(systemName:"gear")) {
                 action in
                 print("Settings")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+                vc.vc = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            },
+            UIAction(title:"Manage Elevation Maps", image: UIImage(systemName:"map")) {
+                action in
+                print("Manage elevation maps")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManageDemViewController") as! ManageDemViewController
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },

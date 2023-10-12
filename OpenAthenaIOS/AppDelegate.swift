@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var settings: AthenaSettings = AthenaSettings()
+    var uNC = UNUserNotificationCenter.current()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("application: outputMode is \(settings.outputMode), \(settings.outputMode.rawValue)")
         
+        uNC.delegate = self
+        
         return true
     }
 
@@ -45,6 +49,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func sendNotification(title titleStr: String, text message: String)
+     {
+         let content = UNMutableNotificationContent()
+         
+         content.title = titleStr
+         content.body = message
+         content.sound = .default
+         
+         if let url = Bundle.main.url(forResource: "AppIcon", withExtension: "png") {
+             if let attachment = try? UNNotificationAttachment(identifier: "AppIcon", url: url, options: nil) {
+                 content.attachments = [attachment]
+             }
+         }
+         
+         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.5, repeats: false)
+         let request = UNNotificationRequest(identifier: "OpenAthena Notification",
+                                             content: content, trigger: trigger)
+         
+         uNC.add(request, withCompletionHandler: { error in
+             if error != nil {
+                 print("Notification error: ", error ?? "unknown error")
+             }
+             else {
+                 print("Notification sent")
+             }
+         })
+         
+     } // send notification
+     
+     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+         completionHandler()
+     }
+     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+         completionHandler([.alert,.badge,.sound])
+     }
+
 
 
 }

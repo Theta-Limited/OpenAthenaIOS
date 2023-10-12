@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59109B7F2AD85FFB000E75C4 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59109B7E2AD85FFB000E75C4 /* Secrets.plist */; };
+		59109B832AD866F9000E75C4 /* DemCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B822AD866F9000E75C4 /* DemCache.swift */; };
+		59109B852AD868F6000E75C4 /* DemCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B842AD868F6000E75C4 /* DemCacheController.swift */; };
+		59109B872AD86BE1000E75C4 /* DemDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B862AD86BE1000E75C4 /* DemDownloader.swift */; };
+		59109B892AD874D8000E75C4 /* NewDemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B882AD874D8000E75C4 /* NewDemController.swift */; };
+		59109B8B2AD884E6000E75C4 /* DemCacheEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B8A2AD884E6000E75C4 /* DemCacheEntryController.swift */; };
+		59109B8D2AD88D16000E75C4 /* ManageDemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B8C2AD88D16000E75C4 /* ManageDemViewController.swift */; };
 		592CABB52A0ACF61006E28AF /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
 		593A29C92A17B3170098EAF1 /* TestCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A29C82A17B3170098EAF1 /* TestCalculations.swift */; };
 		593A2A402A20FCF30098EAF1 /* TestMakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */; };
@@ -76,6 +83,13 @@
 /* Begin PBXFileReference section */
 		15B6AE10F93BC82815BD1AD0 /* Pods-OpenAthenaIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOS.debug.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOS/Pods-OpenAthenaIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		286D9AC72C55961D1BB26B41 /* Pods-OpenAthenaIOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenAthenaIOSTests.debug.xcconfig"; path = "Target Support Files/Pods-OpenAthenaIOSTests/Pods-OpenAthenaIOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		59109B7E2AD85FFB000E75C4 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		59109B822AD866F9000E75C4 /* DemCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemCache.swift; sourceTree = "<group>"; };
+		59109B842AD868F6000E75C4 /* DemCacheController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemCacheController.swift; sourceTree = "<group>"; };
+		59109B862AD86BE1000E75C4 /* DemDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemDownloader.swift; sourceTree = "<group>"; };
+		59109B882AD874D8000E75C4 /* NewDemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDemController.swift; sourceTree = "<group>"; };
+		59109B8A2AD884E6000E75C4 /* DemCacheEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemCacheEntryController.swift; sourceTree = "<group>"; };
+		59109B8C2AD88D16000E75C4 /* ManageDemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageDemViewController.swift; sourceTree = "<group>"; };
 		592CABB42A0ACF61006E28AF /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = examples; sourceTree = "<group>"; };
 		593A29C82A17B3170098EAF1 /* TestCalculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCalculations.swift; sourceTree = "<group>"; };
 		593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMakeModel.swift; sourceTree = "<group>"; };
@@ -159,6 +173,7 @@
 		59B62AF929844B6D00F0C6B1 = {
 			isa = PBXGroup;
 			children = (
+				59109B7E2AD85FFB000E75C4 /* Secrets.plist */,
 				59B62B0429844B6D00F0C6B1 /* OpenAthenaIOS */,
 				59CC79512A15B40C00B07782 /* OpenAthenaIOSTests */,
 				59B62B0329844B6D00F0C6B1 /* Products */,
@@ -201,12 +216,18 @@
 				596E927B2AAA0AC2003E35CD /* DroneViewController.swift */,
 				5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */,
 				59B62B0929844B6D00F0C6B1 /* ViewController.swift */,
+				59109B8A2AD884E6000E75C4 /* DemCacheEntryController.swift */,
+				59109B842AD868F6000E75C4 /* DemCacheController.swift */,
+				59109B862AD86BE1000E75C4 /* DemDownloader.swift */,
+				59109B8C2AD88D16000E75C4 /* ManageDemViewController.swift */,
+				59109B822AD866F9000E75C4 /* DemCache.swift */,
 				59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */,
 				59B62B1F29860BF400F0C6B1 /* ImageViewController.swift */,
 				59B62B45298F3D5200F0C6B1 /* DroneImage.swift */,
 				59B62B1D2984564300F0C6B1 /* AboutViewController.swift */,
 				59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */,
 				59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */,
+				59109B882AD874D8000E75C4 /* NewDemController.swift */,
 				59B62B0B29844B6D00F0C6B1 /* Main.storyboard */,
 				59B62B0E29844B6F00F0C6B1 /* Assets.xcassets */,
 				59B62B1029844B6F00F0C6B1 /* LaunchScreen.storyboard */,
@@ -328,6 +349,7 @@
 			files = (
 				59B62B1229844B6F00F0C6B1 /* LaunchScreen.storyboard in Resources */,
 				59B62B0F29844B6F00F0C6B1 /* Assets.xcassets in Resources */,
+				59109B7F2AD85FFB000E75C4 /* Secrets.plist in Resources */,
 				59B62B0D29844B6D00F0C6B1 /* Main.storyboard in Resources */,
 				592CABB52A0ACF61006E28AF /* examples in Resources */,
 				596E92792AA7B090003E35CD /* droneModels.json in Resources */,
@@ -434,21 +456,27 @@
 			files = (
 				59DBFF102AD0C456003C4B33 /* FisheyeDistortionCorrector.swift in Sources */,
 				59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */,
+				59109B872AD86BE1000E75C4 /* DemDownloader.swift in Sources */,
 				59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */,
 				59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */,
 				59B62B242988133000F0C6B1 /* AthenaSettings.swift in Sources */,
 				59B62B3F298DAE7300F0C6B1 /* DigitalElevationModel.swift in Sources */,
 				597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */,
 				597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */,
+				59109B8D2AD88D16000E75C4 /* ManageDemViewController.swift in Sources */,
 				59B62B42298DE4C900F0C6B1 /* DebugViewController.swift in Sources */,
 				59B62B2029860BF400F0C6B1 /* ImageViewController.swift in Sources */,
 				59B62B1E2984564300F0C6B1 /* AboutViewController.swift in Sources */,
 				597089E12A3FD35600B5E1BF /* EGM96Location.swift in Sources */,
 				593A2A422A214ECA0098EAF1 /* DroneParams.swift in Sources */,
 				5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */,
+				59109B832AD866F9000E75C4 /* DemCache.swift in Sources */,
+				59109B8B2AD884E6000E75C4 /* DemCacheEntryController.swift in Sources */,
+				59109B852AD868F6000E75C4 /* DemCacheController.swift in Sources */,
 				5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */,
 				59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */,
 				596E927C2AAA0AC2003E35CD /* DroneViewController.swift in Sources */,
+				59109B892AD874D8000E75C4 /* NewDemController.swift in Sources */,
 				59B62B46298F3D5200F0C6B1 /* DroneImage.swift in Sources */,
 				59B62B262989B97900F0C6B1 /* ElevationViewController.swift in Sources */,
 				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
@@ -656,7 +684,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -693,7 +721,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -729,7 +757,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -749,7 +777,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 90;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
