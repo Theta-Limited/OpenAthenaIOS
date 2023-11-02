@@ -91,8 +91,10 @@ Skydio, Autel, and Parrot aircraft models. The drone's position and
 its camera's orientation are automatically extracted from the image
 metadata.
 
+<p align="center">
 <img width="270" alt="OpenAthena™ iOS Image Selection demo using
 DJI_0419.JPG" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-select-drone-image.png">
+</p>
 
 After loading a drone image, OpenAthena will search through its cache
 for an appropriate elevation map.  If one is not found, OpenAthena
@@ -105,8 +107,7 @@ ground. You can tap the result display box to copy the result text to
 your clipboard or open the position in Google Maps by clicking the
 blue hyperlink:
 
-<p algin="center">
-
+<p align="center">
 <img style="border:1px solid black" width="270" alt="OpenAthena™ iOS Target Calculation demo using cobb.tiff and DJI_0419.JPG, output mode WGS84"
 src="./OpenAthenaIOS/examples/oa-calculate.png">
 </p>
