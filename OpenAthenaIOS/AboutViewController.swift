@@ -96,7 +96,9 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         + "<br><a href=\"https://github.com/mkrupczak3/OpenAthena\">View the project on GitHub</a>"
         + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br>"
         
-        + "<br><a href='https://github.com/Theta-Limited/OpenAthena/blob/main/EIO_fetch_geotiff_example.md'>Obtain a Digital Elevation Model Here</a><br>"
+//        + "<br><a //href='https://github.com/Theta-Limited/OpenAthena/blob/main/EIO_fetch_geotiff_example.md'>Obtain a Digital Elevation Maps Here</a><br>"
+        
+        + "<br>Elevation maps/data obtained from <a href='https://www.opentopography.org'>OpenTopography</a> SRTM_GL1 dataset<br>"
         
         + "<br>NATA/MGRS, WGS84, & UTM output vertical datum is EMG96 meters above mean sea level.  "
         + "CK-42 output vertical datum is meters height above the Krassowsky 1940 elippsoid.<p>"

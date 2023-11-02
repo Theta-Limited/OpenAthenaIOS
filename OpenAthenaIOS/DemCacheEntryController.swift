@@ -4,6 +4,9 @@
 //
 //  Created by Bobby Krupczak on 10/12/23.
 //
+//  Display elevation model details in a textView
+//  window and allow user to click on center point
+//  in google maps
 
 import Foundation
 import UIKit
@@ -35,6 +38,12 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
         let size = cacheEntry.bytes / 1024
         
         // build display to view DEM cache properties
+        // load the dem as well as sanity check
+        let aDem = DigitalElevationModel(fromURL: cacheEntry.fileURL)
+        var demLoaded = true
+        if aDem == nil {
+            demLoaded = false
+        }
         
         textField.isEditable = false
         
@@ -50,7 +59,8 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
         "w: \(truncateDouble(val: cacheEntry.w, precision: 6)) <br>" +
         "length: \(truncateDouble(val: cacheEntry.l, precision: 0)) meters <br>" +
         "center: <a href='\(urlStr)'> \(coordStr) </a><br>" +
-        "size: \(size) KBytes"
+        "size: \(size) KBytes <br>" +
+        "loaded ok: \(demLoaded)"
         
         setTextViewText(htmlStr: htmlString)
         
@@ -59,8 +69,6 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
     // export this file to somewhere else
     @objc private func didTapExport()
     {
-        print("Exporting an elevation model not yet supported")
-        
         // pick destination directory
         // then use filemanager
         if documentPicker == nil {
@@ -70,8 +78,8 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
             // it won't let us choose folders on network storage like iCloud, owncloud
             // if we add volume and mountpoint types, we can browse them but can't
             // chose folders to open/save to.  Ugh. XXX
+            
             let dTypes = [ UTType.folder]
-             //dTypes = [ kUTTypeFolder as String]
             documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: dTypes )
             documentPicker!.delegate = self
             documentPicker!.modalPresentationStyle = .formSheet
@@ -111,7 +119,7 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
             print("File copied/exported!")
             //self.app.sendNotification(title: "Elevation model export",
             //                          text: "\(cacheEntry.filename)")
-            var alert = UIAlertController(title: "Elevation model export",
+            var alert = UIAlertController(title: "Elevation model exported successfully",
                                           message: "\(cacheEntry.filename)",
                                           preferredStyle: .alert)
             var ok = UIAlertAction(title: "OK", style: .default, handler: nil)

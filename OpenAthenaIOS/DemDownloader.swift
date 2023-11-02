@@ -114,7 +114,6 @@ class DemDownloader
         task.resume()
         
     } // download
-
    
     // given a lat, lon in degrees, of a center point, return
     // the bounding box of lowerLeft, upperRight coordinates in degrees
@@ -167,6 +166,25 @@ class DemDownloader
     public static func truncateDouble(val: Double, precision: Double) -> Double {
         let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
         return num
+    }
+    
+    // convert http result codes to strings
+    public static func httpResultCodeToString(resultCode: Int) -> String
+    {
+        switch resultCode {
+        case -2:
+            return "No network connectivity"
+        case -1:
+            return "Error sending request"
+        case 200:
+            return "Success"
+        case 204:
+            return "No elevation data for coordinates"
+        case 400...499:
+            return "Error \(resultCode) with API; please report"
+        default:
+            return "\(resultCode)"
+        }
     }
     
 } // DemDownloader

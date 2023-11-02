@@ -320,15 +320,17 @@ public class DroneImage {
         
         if metaData!["drone-dji:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-dji:AbsoluteAltitude"] as! NSString).doubleValue
+            print("alt: drone-dji:AbsoluteAltitude \(alt)")
             //return alt
         }
         if metaData!["drone:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone:AbsoluteAltitude"] as! NSString).doubleValue
+            print("alt: drone:AbsoluteAltitude \(alt)")
             //return alt
         }
         if metaData!["drone-skydio:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-skydio:AbsoluteAltitude"] as! NSString).doubleValue
-            print("getAltitude: drone-skydio absolute altitude is \(alt)")
+            print("alt: drone-skydio:AbsoluteAltitude \(alt)")
             //return alt
         }
         
@@ -345,6 +347,8 @@ public class DroneImage {
         // if alt is still 0.0, grab here
         var altFromExif = false
         if alt == 0.0 {
+            print("alt:0.0, falling back to GPS")
+            
             if metaData!["{GPS}"] == nil {
                throw DroneImageError.NoMetaGPSData
             }
@@ -375,6 +379,8 @@ public class DroneImage {
         if alt == 0.0 {
             throw DroneImageError.NoMetaGPSData
         }
+        
+        print("alt: alt is now \(alt)")
         
         // look for metadata drone:RtkFlag
         var rtkFlag: Bool = false
@@ -440,7 +446,12 @@ public class DroneImage {
         
         // if we get here, its EGM96; convert to WGS84
         
+        print("alt: \(alt) offset: \(offset)")
+        
         alt = alt - offset
+        
+        print("alt: returning \(alt)")
+        
         return alt
     }
     
@@ -1192,7 +1203,7 @@ public class DroneImage {
             // corrected or uncorrected versions of getRayAnglesFromImagePixel
             
             (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixelCorrected(x: theImage!.size.width * targetXprop,
-                                                                         y: theImage!.size.height * targetYprop)
+                y: theImage!.size.height * targetYprop)
             
             degAzimuth += azimuthOffset
             degTheta += thetaOffset

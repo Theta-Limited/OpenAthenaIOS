@@ -129,6 +129,9 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(centerLat),\(centerLon)"
             self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
         }
+        else {
+            self.htmlString += "<br><b>DEM:</b> not loaded<br>"
+        }
         
         if vc.theDroneImage != nil {
             self.htmlString += "<br><b>Drone Image:</b> \(vc.theDroneImage!.name)<br>"

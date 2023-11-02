@@ -17,14 +17,16 @@ class ManageDemViewController: UIViewController
 {
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var vc: ViewController!
-    var demCache: DemCache?
     @IBOutlet var latLonText: UITextField!
     @IBOutlet var lookupResults: UILabel!
+    @IBOutlet var borderLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Manage Elevation Maps"
+        borderLabel.text = "   "
+        borderLabel.backgroundColor = .systemGray6
         
     }
     
@@ -32,19 +34,18 @@ class ManageDemViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        // reload dem cache now
-        demCache = DemCache()
-        print("Loaded \(demCache!.count()) cache entries")
+        print("Loaded \(vc.demCache!.count()) cache entries")
     }
     
     // manage our DemCache entries
     @IBAction func didTapManageCache()
     {
-        print("Manage elevation maps cache of \(demCache!.count()) entries")
+        print("Manage elevation maps cache of \(vc.demCache!.count()) entries")
     
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DemCacheTable") as! DemCacheController
+        let vct = self.storyboard?.instantiateViewController(withIdentifier: "DemCacheTable") as! DemCacheController
+        vct.vc = vc
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vct, animated: true)
         
     } // didTapManageCache()
     
@@ -65,7 +66,7 @@ class ManageDemViewController: UIViewController
         if pieces.count == 2 {
             let lat = (pieces[0] as! NSString).doubleValue
             let lon = (pieces[1] as! NSString).doubleValue
-            let demFilename = demCache!.searchCache(lat: lat, lon: lon)
+            let demFilename = vc.demCache!.searchCache(lat: lat, lon: lon)
           if demFilename == "" || demFilename == nil {
                lookupResults.text = "Nothing found"
             }
@@ -75,4 +76,4 @@ class ManageDemViewController: UIViewController
         }
     } // didTapLookup()
     
-}
+} // ManageDemViewController

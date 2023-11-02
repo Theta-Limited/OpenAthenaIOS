@@ -18,6 +18,8 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
     @IBOutlet var resultLabel: UILabel!
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var documentPicker: UIDocumentPickerViewController?
+    @IBOutlet var borderLabel: UILabel!
+    @IBOutlet var bottomLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,12 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
         title = "New Elevation Map"
 
         // Do any additional setup after loading the view.
+        resultLabel.numberOfLines = 2
+        borderLabel.text = "   "
+        borderLabel.backgroundColor = .systemGray6
+        bottomLabel.text = "   "
+        bottomLabel.backgroundColor = .systemGray6
+        
     }
     
     @IBAction func didTapFetch()
@@ -46,6 +54,9 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
             resultLabel.text = "Going to fetch elevation map . . ."
             //resultLabel.text = "\(lat),\(lon) x \(l)"
             
+            self.app.sendNotification(title: "Initiating download",
+                                      text: "Centered at \(lat),\(lon) x \(l)")
+            
             let aDownloader = DemDownloader(lat: lat, lon: lon, length: l)
             aDownloader.download(completionHandler: downloadComplete)
         }
@@ -62,7 +73,7 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
         print("Import a DEM from local device files")
         
         resultLabel.text = "Importing an elevation model"
-        
+                
         if documentPicker == nil {
             
             let dTypes = [ UTType.tiff ]
@@ -85,6 +96,8 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
             guard importFileURL.startAccessingSecurityScopedResource() else {
                 print("Dont have file permission to import")
                 self.resultLabel.text = "Don't have permission to access file"
+                // notify user
+                self.app.sendNotification(title: "Elevation map import failed", text: "Don't have permission to access file")
                 return
             }
         }
@@ -103,6 +116,8 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
             if aDem  == nil {
                 // failed to load
                 resultLabel.text = "Failed to load elevation model to import"
+                // notify user
+                self.app.sendNotification(title: "Elevation map import failed", text: "Failed to load elevation map")
                 return
             }
             print("Loaded DEM \(aDem!.getCenter() )\(aDem!.getDemHeight()), (aDem!.getDemWidth()")
@@ -122,15 +137,29 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
             
             if let destFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(filenameStr) {
                 do {
+                    print("Going to export to \(destFileURL)")
+                    guard importFileURL.startAccessingSecurityScopedResource() else {
+                        print("Dont have file permission to copy/import")
+                        self.resultLabel.text = "Don't have permission to access file"
+                        // notify user
+                        self.app.sendNotification(title: "Elevation map import failed", text: "Don't have permission to write file")
+                        return
+                    }
                     try? FileManager.default.removeItem(at: destFileURL)
                     try FileManager.default.copyItem(at: importFileURL, to: destFileURL)
                     
                     print("Elevation data written to \(filenameStr)")
-                    resultLabel.text = "Elevation model successfully imported"
+                    resultLabel.text = "Elevation map successfully imported"
+                    // notify user
+                    self.app.sendNotification(title: "Elevation map import succeded",
+                                              text: "Wrote \(filenameStr)")
                 }
                 catch {
                     print("Error writing data to file \(error)")
-                    self.resultLabel.text = "Error writing elevation data to file \(error)"
+                    self.resultLabel.text = "Error writing elevation data to file"
+                    // notify user
+                    self.app.sendNotification(title: "Elevation map import failed",
+                                              text: "\(error)")
                 }
                 
             }
@@ -138,7 +167,9 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
         }
         catch {
             print("Error importing elevation model")
-            self.resultLabel.text = "Error importing file \(error)"
+            self.resultLabel.text = "Error importing file"
+            // notify user
+            self.app.sendNotification(title: "Elevation map import failed", text: "\(error)")
         }
         
     } // documentPicker import
@@ -153,9 +184,10 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
         // in background
         print("Download complete \(resultCode) \(bytes)")
         DispatchQueue.main.async {
-            self.resultLabel.text = "Download result \(resultCode), bytes \(bytes)"
+            let resultStr = DemDownloader.httpResultCodeToString(resultCode: resultCode)
+            self.resultLabel.text = "Download result: \(resultStr)"
             self.app.sendNotification(title: "Download Result",
-                                     text: "Download result \(resultCode), \(bytes) bytes, \(filename)")
+                                     text: "Download result: \(resultStr), \(bytes) bytes, \(filename)")
         }
     }
 

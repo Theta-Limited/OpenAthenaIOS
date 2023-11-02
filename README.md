@@ -21,39 +21,48 @@ src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept
 
 # Operation Guide
 
-## Obtain a GeoTIFF Digital Elevation Model:
+## A note about GeoTIFF Digital Elevation Models/Maps:
 
-To use this app, you need a GeoTIFF Digital Elevation Model (DEM)
-file. GeoTIFF files store terrain elevation data for an area on
-Earth. OpenAthena performs a ray-cast from a drone camera's position
-and orientation towards the terrain, which can be used to precisely
-locate any point within a given picture.
+OpenAthena needs GeoTIFF digital elevation models/maps data.  GeoTIFF
+files store terrain elevation data for an area on Earth. OpenAthena
+performs a ray-cast from a drone camera's position and orientation
+towards the terrain, which can be used to precisely locate any point
+within a given picture.
 
-To obtain a GeoTIFF file for a certain area, use [this
-link](https://github.com/mkrupczak3/OpenAthena/blob/main/EIO_fetch_geotiff_example.md).
+OpenAthena for iOS can now download elevation maps directly from <a
+href="https://www.opentopography.org">OpenTopography</a> at the touch
+of a button.  Downloaded elevation maps are saved in the app's local
+storage.  Elevation maps can be imported, exported, or pre-fetched
+given a lat,lon.  When processing a drone image, OpenAthena will
+automatically search through its cache of elevation maps and select
+the correct one for the image being processed.  If an elevation map is
+not found, OpenAthena will offer to download one.  Image analysis can
+then continue.  Use the pre-fetch option if you will be offline while
+flying.
 
-Unfortunately, the [NGA tiff library for
-iOS](https://github.com/ngageoint/tiff-ios) does not support tiff
-compression.  Consequently, DEMs should be obtained using Method 1
-from the above web link.  Method one makes use of [Open Topography
-SRTM elevation
-data](https://portal.opentopography.org/raster?opentopoID=OTSRTM.082015.4326.1)
+<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main-menu.png">
 
-If you try to load or use an elevation model containing TIFF
-compression, the application will catch the NSException and not
-compute the altitude for the target location.
+To manage OpenAthena's elevation map cache, select "Manage Elevation
+Maps" from the main screen menu.  From there, you can manage or search
+your cache for an elevation map based on lat,lon coordinates.
 
-## Load a GeoTIFF Digital Elevation Model  ⛰:
+<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-manage-cache.png">
 
-Load the DEM file (e.g. cobb.tiff) using the "⛰" button. The app will
-display the size of the file and its latitude and longitude
-boundaries:
+<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-elevation-map-info.png">
 
-(NOTE: during file selection, the thumbnail image preview for any
-GeoTIFF ".tiff" file will be blank. This is normal.)
+You can delete elevation maps by swiping right or you can inspect an
+elevation map by selecting the cache entry.  Pressing "+" allows you
+to add a new elevation map to OpenAthena.
 
-<img style="border:1px solid black" width="586" alt="OpenAthena™ iOS GeoTIFF DEM loading demo using
-cobb.tiff" src="./OpenAthenaIOS/examples/oa-load-dem.png">
+<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-new-elevation-map.png">
+
+To add a new elevation map to OpenAthena, you have two options.
+First, you can import an elevation map you already have (in GeoTIFF
+format) from local file.  Second, you input the desired lat,lon
+coordinates and size in meters of the bounding box and OpenAthena will
+fetch and download an elevation map with those parameters.  This last
+feature is handy if you wish to pre-fetch elevation maps before
+flying.  (Internet access is needed to download elevation maps.)
 
 ## Calibrate your drone's compass sensor 🧭 and take photos :
 
@@ -74,11 +83,12 @@ Skydio, Autel, and Parrot aircraft models. The drone's position and
 its camera's orientation are automatically extracted from the image
 metadata.
 
-After loading a GeoTIFF DEM, use the "🖼" button to select a drone
-image containing the necessary metadata:
-
 <img width="586" alt="OpenAthena™ iOS Image Selection demo using
 DJI_0419.JPG" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-select-drone-image.png">
+
+After loading a drone image, OpenAthena will search through its cache
+for an appropriate elevation map.  If one is not found, OpenAthena
+will offer to download one for you.
 
 ## Calculate a target 🧮 🎯:
 

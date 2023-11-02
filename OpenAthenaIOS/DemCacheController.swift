@@ -13,9 +13,9 @@ import UIKit
 
 class DemCacheController: UIViewController
 {
-    var demCache: DemCache?
     @IBOutlet var tableView: UITableView!
     var totalStorage: Int = 0 // total storage in bytes
+    var vc: ViewController!
     
     override func viewDidLoad()
     {
@@ -38,9 +38,9 @@ class DemCacheController: UIViewController
         // reload the cache now rather than first loaded
         // that way, if we navigate back from subsequent view, we'll
         // refresh the list
-        demCache = DemCache()
+        vc.demCache = DemCache()
         
-        print("DemCacheController view will appear with \(demCache!.count()) entries")
+        print("DemCacheController view will appear with \(vc.demCache!.count()) entries")
         
         // force table to refresh
         DispatchQueue.main.async { self.tableView.reloadData() }
@@ -82,24 +82,24 @@ extension DemCacheController: UITableViewDelegate, UITableViewDataSource
         return 1
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row != demCache!.count() {
-            print("You tapped \(demCache!.cache[indexPath.row].filename)")
+        if indexPath.row != vc.demCache!.count() {
+            print("You tapped \(vc.demCache!.cache[indexPath.row].filename)")
             // switch to DemCacheEntryViewController
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DemCacheEntryController") as! DemCacheEntryController
-            vc.cacheEntry = demCache!.cache[indexPath.row]
-            self.navigationController?.pushViewController(vc, animated: true)
+            let newVc = self.storyboard?.instantiateViewController(withIdentifier: "DemCacheEntryController") as! DemCacheEntryController
+            newVc.cacheEntry = vc.demCache!.cache[indexPath.row]
+            self.navigationController?.pushViewController(newVc, animated: true)
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return demCache!.count() + 1
+        return vc.demCache!.count() + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DemCacheTableCell", for: indexPath)
       
-        if indexPath.row == demCache!.count() {
-            var totalSize: Double = Double(demCache!.totalStorage())
+        if indexPath.row == vc.demCache!.count() {
+            var totalSize: Double = Double(vc.demCache!.totalStorage())
             print("totalSize: \(totalSize), \(totalSize/1024), \(totalSize/1024*1024)")
             var totalSizeStr = "\(totalSize) bytes"
             if totalSize / 1024.0 > 1 {
@@ -114,14 +114,14 @@ extension DemCacheController: UITableViewDelegate, UITableViewDataSource
             cell.textLabel?.text = "Total size \(totalSizeStr)"
         }
         else {
-            cell.textLabel?.text = demCache!.cache[indexPath.row].filename + "\n"+"Another row of data"
+            cell.textLabel?.text = vc.demCache!.cache[indexPath.row].filename + "\n"+"Another row of data"
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         // don't allow delete of last row which is total storage size
-        if indexPath.row == demCache!.count() {
+        if indexPath.row == vc.demCache!.count() {
             return .none
         }
         else {
@@ -134,16 +134,16 @@ extension DemCacheController: UITableViewDelegate, UITableViewDataSource
         if editingStyle == .delete {
             tableView.beginUpdates()
             
-            let cacheEntry = demCache!.cache[indexPath.row]
+            let cacheEntry = vc.demCache!.cache[indexPath.row]
             //print("Going to delete \(demCache!.cache[indexPath.row].filename)")
             
             // delete table row
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             // delete cache entry and then file itself XXX
-            deleteFile(filename: demCache!.cache[indexPath.row].filename,
-                       fileURL: demCache!.cache[indexPath.row].fileURL)
-            demCache!.removeCacheEntry(index: indexPath.row)
+            deleteFile(filename: vc.demCache!.cache[indexPath.row].filename,
+                       fileURL: vc.demCache!.cache[indexPath.row].fileURL)
+            vc.demCache!.removeCacheEntry(index: indexPath.row)
                         
             tableView.endUpdates()
             

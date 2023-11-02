@@ -148,6 +148,48 @@ class DemCache
         return foundDemFilename
     }
     
+    // given a string, load the elevation map
+    func loadDemFromCache(lat: Double, lon: Double) throws -> DigitalElevationModel
+    {
+        var leastDistanceToCenter = Double.infinity
+        var theURL: URL?
+        
+        print("Searching cache for \(lat),\(lon)")
+        
+        for dem in cache {
+            //print("Examing box: \(dem.s),\(dem.n)   \(dem.w),\(dem.e)")
+            
+            // is the lat,lon within the DEM?
+            if lat < dem.n && lat > dem.s && lon > dem.w && lon < dem.e {
+                
+                // calculate distance to center
+                let p1 = CLLocation(latitude: lat, longitude: lon)
+                let p2 = CLLocation(latitude: dem.cLat, longitude: dem.cLon)
+                let d = p1.distance(from: p2)
+                
+                print("Within \(dem.filename), distance \(d)")
+                
+                if d < leastDistanceToCenter {
+                    theURL = dem.fileURL
+                    leastDistanceToCenter = d
+                    print("Closest to center: \(d)")
+                }
+            }
+        }
+        
+        if theURL == nil {
+            throw ElevationModuleError.NoSuch
+        }
+        
+        guard let dem = DigitalElevationModel(fromURL: theURL!) else {
+            print("Failed to load DEM \(theURL!)")
+            throw ElevationModuleError.NoSuch
+        }
+        
+        return dem
+        
+    } // loadDemFromCache and return the DEM
+    
     func dumpCache()
     {
         for dem in cache {
