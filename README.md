@@ -40,21 +40,25 @@ not found, OpenAthena will offer to download one.  Image analysis can
 then continue.  Use the pre-fetch option if you will be offline while
 flying.
 
-<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main-menu.png">
-
+<p float="left">
+  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main-menu.png">
+  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-manage-cache.png">
+</p>
+  
 To manage OpenAthena's elevation map cache, select "Manage Elevation
 Maps" from the main screen menu.  From there, you can manage or search
 your cache for an elevation map based on lat,lon coordinates.
 
-<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-manage-cache.png">
-
-<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-elevation-map-info.png">
+<p float="left">
+  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-elevation-map-info.png">
+  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-new-elevation-map.png">  
+</p>
 
 You can delete elevation maps by swiping right or you can inspect an
 elevation map by selecting the cache entry.  Pressing "+" allows you
 to add a new elevation map to OpenAthena.
 
-<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-new-elevation-map.png">
+
 
 To add a new elevation map to OpenAthena, you have two options.
 First, you can import an elevation map you already have (in GeoTIFF
@@ -83,7 +87,7 @@ Skydio, Autel, and Parrot aircraft models. The drone's position and
 its camera's orientation are automatically extracted from the image
 metadata.
 
-<img width="586" alt="OpenAthena™ iOS Image Selection demo using
+<img width="270" alt="OpenAthena™ iOS Image Selection demo using
 DJI_0419.JPG" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-select-drone-image.png">
 
 After loading a drone image, OpenAthena will search through its cache
