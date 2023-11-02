@@ -66,7 +66,7 @@ class ManageDemViewController: UIViewController
         if pieces.count == 2 {
             let lat = (pieces[0] as! NSString).doubleValue
             let lon = (pieces[1] as! NSString).doubleValue
-            let demFilename = vc.demCache!.searchCache(lat: lat, lon: lon)
+            let demFilename = vc.demCache!.searchCacheFilename(lat: lat, lon: lon)
           if demFilename == "" || demFilename == nil {
                lookupResults.text = "Nothing found"
             }

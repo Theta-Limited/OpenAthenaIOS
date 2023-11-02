@@ -117,10 +117,22 @@ class DemCache
     // lat, lon is in the DEM and is closest to center
     // return nil if no cache entry found
     
-    func searchCache(lat: Double, lon: Double) -> String
+    func searchCacheFilename(lat: Double, lon: Double) -> String
     {
-        var foundDemFilename: String = ""
+        var aDem: DEM_cache_entry? = searchCacheEntry(lat: lat, lon: lon)
+        
+        if aDem != nil {
+            return aDem!.filename
+        }
+        else {
+            return ""
+        }
+    }
+    
+    func searchCacheEntry(lat: Double, lon: Double) -> DEM_cache_entry?
+    {
         var leastDistanceToCenter = Double.infinity
+        var anEntry: DEM_cache_entry?
         
         print("Searching cache for \(lat),\(lon)")
         
@@ -138,14 +150,19 @@ class DemCache
                 print("Within \(dem.filename), distance \(d)")
                 
                 if d < leastDistanceToCenter {
-                    foundDemFilename = dem.filename
+                    anEntry = dem
                     leastDistanceToCenter = d
                     print("Closest to center: \(d)")
                 }
             }
-        }
+        } // for each
         
-        return foundDemFilename
+        if anEntry != nil {
+            return anEntry!
+        }
+        else {
+            return nil
+        }
     }
     
     // given a string, load the elevation map

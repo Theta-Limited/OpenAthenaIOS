@@ -25,7 +25,7 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
         var htmlString: String
         
         super.viewDidLoad()
-        title = "Elevation Model Details"
+        title = "Elevation Map Details"
         //view?.backgroundColor = .blue
         
         // add an export button

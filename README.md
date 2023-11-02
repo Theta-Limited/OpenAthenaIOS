@@ -13,11 +13,15 @@ OpenAthena™ allows common drones to spot precise geodetic locations.
 
 🖼️👨‍💻 + 🧮⛰️ = 🎯📍
 
-<a href="https://github.com/mkrupczak3/OpenAthena"><img width="540"
-alt="OpenAthena Drone Camera Terrain Raycast Concept Diagram"
+<p align="center">
+  <a href="https://github.com/mkrupczak3/OpenAthena">
+  <img width="540" alt="OpenAthena Drone Camera Terrain Raycast Concept Diagram"
 src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept_Diagram.png"></a>
+</p>
 
-<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main.png">
+<p align="center">
+ <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main.png">
+</p>
 
 # Operation Guide
 
@@ -101,15 +105,19 @@ ground. You can tap the result display box to copy the result text to
 your clipboard or open the position in Google Maps by clicking the
 blue hyperlink:
 
-<img style="border:1px solid black" width="586" alt="OpenAthena™ iOS Target Calculation demo using
-cobb.tiff and DJI_0419.JPG, output mode WGS84"
+<p algin="center">
+
+<img style="border:1px solid black" width="270" alt="OpenAthena™ iOS Target Calculation demo using cobb.tiff and DJI_0419.JPG, output mode WGS84"
 src="./OpenAthenaIOS/examples/oa-calculate.png">
+</p>
 
 ## Arbitrary Point Selection
 
 OpenAthena allows users to tap any point in the image to locate it. Tapping on any point in the image will move the marker and calculate the new location.
 
-<img width="586" alt="OpenAthena for iOS demo of arbitrary point selection for raycast calculation" src="./OpenAthenaIOS/examples/oa-calculate-point.png">
+<p align="center">
+<img width="270" alt="OpenAthena for iOS demo of arbitrary point selection for raycast calculation" src="./OpenAthenaIOS/examples/oa-calculate-point.png">
+</p>
 
 # Application Settings (optional) ⚙:
 
@@ -128,8 +136,9 @@ select "Settings":
 Select your desired output mode by pressing its button in the list and
 then click the Save button.
 
-<img style="border:1px solid black" width="270" alt="OpenAthena™ iOS 🎯 Output Modes Activity demo
-NATO MGRS 10m" src="./OpenAthenaIOS/examples/oa-settings.png">
+<p align="center">
+<img style="border:1px solid black" width="270" alt="OpenAthena™ iOS 🎯 Output Modes Activity demo NATO MGRS 10m" src="./OpenAthenaIOS/examples/oa-settings.png">
+</p>
 
 # Contributing
 

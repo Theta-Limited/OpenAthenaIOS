@@ -449,12 +449,16 @@ class ImageViewController: UIViewController,
             // regardless of whether we have a DEM already loaded,
             // just do a look up and load that DEM
             // possible again
-            let filename = vc.demCache!.searchCache(lat: lat, lon: lon)
+            let filename = vc.demCache!.searchCacheFilename(lat: lat, lon: lon)
             if filename != "" {
                 print("findLoadElevationMap: found \(filename)")
                 // load the DEM and return
                 try vc.dem = vc.demCache!.loadDemFromCache(lat: lat, lon: lon)
                 htmlString += "Loaded \(filename) from elevation map cache<br>"
+                // would be nice to have the resulting filename be
+                // clickable for more information on the DEM itself
+                // right now, user then has to go find the entry in the cache
+                // and then click on it.  Future version XXX
             }
             else {
                 print("Did not find DEM")
