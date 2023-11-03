@@ -12,13 +12,14 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 1.35
+    var version: Float = 1.37
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
     var theDroneImage: DroneImage?
     var htmlString: String = ""
     var droneParams: DroneParams?
+    var demCache: DemCache?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,10 @@ class ViewController: UIViewController {
             print("Drone params date \(droneParams?.droneParamsLastUpdate)")
         }
         
+        // load DEM cache
+        demCache = DemCache()
+        print("Loaded \(demCache!.count()) cache entries")
+        
         textView.isEditable = false
         textView.isSelectable = true
           
@@ -55,21 +60,40 @@ class ViewController: UIViewController {
         doMain()
         testEGM96Offsets()
         
+        requestNotificationAuthorization()
+        
     } // viewDidLoad
+    
+    private func requestNotificationAuthorization()
+    {
+        let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        app.uNC.requestAuthorization(options: authOptions, completionHandler: { (success, error) in
+            if let error = error {
+                print("Error requesting notification authorization \(error)")
+            }
+            else {
+                print("Notifications allowed: \(success)")
+            }
+            
+        })
+    }
     
     private func doMain()
     {
         htmlString = "OpenAthena alpha v\(version) build \(getAppBuildNumber()!) starting<br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
-        //htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
-        htmlString += "1: load a Digital Elevation Model (DEM) &#9968;<br>" // GeoTIFF
-        htmlString += "2: load a drone image &#128444; <br>"
-        htmlString += "3: calculate &#129518; <br>"
+        // we dont explicitly load a DEM now since adding support for
+        // automatic DEM downloading/loading
+        // htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
+        // htmlString += "1: load a Digital Elevation Model (DEM) &#9968;<br>" // GeoTIFF
+       
+        htmlString += "1: load a drone image &#128444; <br>"
+        htmlString += "2: calculate &#129518; <br>"
         htmlString += "<br>Mash the &#127937; button to begin!<br>"
         
-        //let aLocation = EGM96Location(lat: 33.753746, lng: -84.386330)
-        //let offset = EGM96Geoid.getOffset(location: aLocation)
-        //htmlString += "<br>Offset at \(aLocation) is \(offset)m<br>"
+        // let aLocation = EGM96Location(lat: 33.753746, lng: -84.386330)
+        // let offset = EGM96Geoid.getOffset(location: aLocation)
+        // htmlString += "<br>Offset at \(aLocation) is \(offset)m<br>"
         
         setTextViewText(htmlStr: htmlString)
         
@@ -109,8 +133,12 @@ class ViewController: UIViewController {
     @IBAction func didTapStartButton() {
         print("Start!")
         // start -> load digital elevation model -> load image -> calculate
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Elevation") as! ElevationViewController
+        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "Elevation") as! //ElevationViewController
+        
+        // go straight to ImageViewController to select an image
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ImageView") as! ImageViewController
         vc.vc = self
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -120,10 +148,17 @@ class ViewController: UIViewController {
         print("Configuring menus on main screen")
         
         let optionsMenu = UIMenu(title: "", children: [
-            UIAction(title:"Settings", image: UIImage(systemName:"gear.circle")) {
+            UIAction(title:"Settings", image: UIImage(systemName:"gear")) {
                 action in
                 print("Settings")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+                vc.vc = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            },
+            UIAction(title:"Manage Elevation Maps", image: UIImage(systemName:"map")) {
+                action in
+                print("Manage elevation maps")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManageDemViewController") as! ManageDemViewController
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },

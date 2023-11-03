@@ -23,6 +23,7 @@ enum ElevationModuleError: String, Error {
     case IllegalArgumentException = "DEM: illegal argument"
     case NullPointerException = "DEM: null pointer"
     case ElevationModuleException = "DEM: exception"
+    case NoSuch = "DEM: no such elevation model"
 }
 
 struct GeoDataAxisParams {
@@ -106,6 +107,13 @@ public class DigitalElevationModel {
         
         let tiePoint = directory.modelTiepoint()
         let pixelAxisScale = directory.modelPixelScale()
+        
+        // if the DEM was imported, and compressed, this
+        // could be nil; guard against condition
+        if tiePoint == nil {
+            print("load dem tie point is nil")
+            return nil
+        }
 
         xParams.start = tiePoint![3].doubleValue
         xParams.stepwiseIncrement = pixelAxisScale![0].doubleValue
@@ -147,18 +155,23 @@ public class DigitalElevationModel {
         return yParams.numberOfSteps
     }
     
+    // n,s,e,w corners of this elevation model 
+    public func getW() -> Double { getMinLongitude() }
     public func getMinLongitude() -> Double {
         return min(xParams.end, xParams.start)
     }
     
+    public func getE() -> Double { getMaxLongitude() }
     public func getMaxLongitude() -> Double {
         return max(xParams.end, xParams.start)
     }
     
+    public func getS() -> Double { return getMinLatitude() }
     public func getMinLatitude() -> Double {
         return min(yParams.end, yParams.start)
     }
     
+    public func getN() -> Double { return getMaxLatitude() }
     public func getMaxLatitude() -> Double {
         return max(yParams.end, yParams.start)
     }

@@ -93,7 +93,23 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
         self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"
+ 
+        // do I have an API key?
+        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
+            if dict["OpenTopographyApiKey"] as? String != nil {
+                self.htmlString += "API key present<br>"
+            }
+            else {
+                self.htmlString += "API key NOT present<br>"
+            }
+        }
         
+        // dem cache info
+        let demCache = DemCache()
+        self.htmlString += "\(demCache.count()) elevation maps in cache<br>"
+        self.htmlString += "\(demCache.totalStorage()) bytes in elevation maps cache<br>"
+
         if vc.dem != nil {
             self.htmlString += "<br><b>DEM:</b> \((vc.dem!.tiffURL!.lastPathComponent))<br>"
             self.htmlString += "Width:\(vc.dem!.getDemWidth()) Height:\(vc.dem!.getDemHeight())<br>"
@@ -112,6 +128,9 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             
             let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(centerLat),\(centerLon)"
             self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
+        }
+        else {
+            self.htmlString += "<br><b>DEM:</b> not loaded<br>"
         }
         
         if vc.theDroneImage != nil {

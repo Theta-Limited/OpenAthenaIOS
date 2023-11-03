@@ -144,7 +144,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
                                                       model: vc.theDroneImage!.getCameraModel())
             vc!.theDroneImage!.ccdInfo = ccdInfo
-            htmlString += "Found CCD info for drone make/model<br>"
+            htmlString += "Found CCD info for drone make/model \(ccdInfo!.makeModel)<br>"
         }
         catch {
             print("No CCD info for drone image, using estimates")
@@ -380,6 +380,13 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                 action in
                 print("About")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "About") as! AboutViewController
+                vc.vc = self.vc
+                self.navigationController?.pushViewController(vc, animated: true)
+            },
+            UIAction(title:"Manage Elevation Maps", image: UIImage(systemName:"map")) {
+                action in
+                print("Manage elevation maps")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManageDemViewController") as! ManageDemViewController
                 vc.vc = self.vc
                 self.navigationController?.pushViewController(vc, animated: true)
             },

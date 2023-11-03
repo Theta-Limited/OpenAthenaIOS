@@ -14,10 +14,13 @@ import UIKit
 import Foundation
 import UniformTypeIdentifiers
 
-class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
+class ImageViewController: UIViewController,
+                           PHPickerViewControllerDelegate,
                            UIDocumentPickerDelegate,
-                           UIScrollViewDelegate {
-    
+                           UIScrollViewDelegate,
+                           UIImagePickerControllerDelegate,
+                           UINavigationControllerDelegate
+{
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var vc: ViewController!
     var imageView: UIImageView = UIImageView()
@@ -28,6 +31,8 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
     var contentView: UIView = UIView()
     var htmlString: String = ""
     var documentPickerController: UIDocumentPickerViewController?
+    var photoPicker: PHPickerViewController?
+    var imagePicker: UIImagePickerController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +62,8 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         setTextViewText(htmlStr: htmlString)
         
         // button setup
+        // we can choose from several different pickers  -- photo, document, image
+        // image seems to be the one we want
         // selectButton.backgroundColor = .systemYellow
         selectButton.setTitle("Select Drone Image \u{1F5bc}", for: .normal)
         selectButton.addTarget(self, action: #selector(didTapSelectImage), for: .touchUpInside)
@@ -123,7 +130,13 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func didTapSelectImage()
+    // ---------------------------------------------------------------------
+    // select drone image from Documents
+    // Document picker can't access photos though and thats
+    // usually where drone images end up
+    // this code path deprecated with auto elevation map selection/downloading
+    
+    @IBAction func didTapSelectImageFromDocuments()
     {
         //var config = PHPickerConfiguration(photoLibrary: .shared())
         //config.selectionLimit = 1
@@ -141,20 +154,6 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         // pick back up where we left off (last location)
         if documentPickerController == nil {
             
-              // if we wanted permissions to access photo library, do this
-              // before we create the picker; unfortunately,
-              // you either pick images or you pick documents, but you can't
-              // do both from single picker XXX
-            
-//            PHPhotoLibrary.requestAuthorization { (status) in
-//                if status == .authorized {
-//                    print("Authorized to access photo library")
-//                }
-//                else {
-//                    print("Not authorized to access photo library")
-//                }
-//            }
-            
             documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: types)
             documentPickerController!.delegate = self
             if app.settings.imageDirectoryURL != nil {
@@ -164,54 +163,8 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         
         self.present(documentPickerController!, animated: true, completion: nil)
     }
-    
-    // this function used with photo picker; we've moved to document picker
-    // so we can access folders/files other than just ios photo library
-//    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-//        picker.dismiss(animated: true, completion: nil)
-//
-//        results.forEach { result in
-//            result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
-//                guard let image = reading as? UIImage, error == nil else {
-//                    DispatchQueue.main.async {
-//                        self.htmlString += "Error reading image . . .<br>"
-//                        self.textView.attributedText = NSAttributedString(string: self.htmlString)
-//                    }
-//                    return
-//                }
-//                self.vc.theDroneImage = DroneImage()
-//                self.vc.theDroneImage!.theImage = image
-//                self.vc.theDroneImage!.name = result.itemProvider.suggestedName
-//                result.itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) { data, err in
-//                    if let data = data {
-//                        let src = CGImageSourceCreateWithData(data as CFData,nil)!
-//                        //let md = CGImageSourceCopyPropertiesAtIndex(src,0,nil) as! [AnyHashable:Any]
-//                        let md = CGImageSourceCopyPropertiesAtIndex(src,0,nil) as! NSMutableDictionary
-//
-//                        let md2 = CGImageSourceCopyMetadataAtIndex(src,0,nil)
-//
-//                        self.vc.theDroneImage!.metaData = md
-//                        self.vc.theDroneImage!.rawMetaData = md2
-//                        self.vc.theDroneImage!.rawData = data as Data
-//
-//                        DispatchQueue.main.async { self.getImageData() }
-//                    }
-//                }
-//
-//                DispatchQueue.main.async {
-//
-//                    self.imageView.image = image
-//                    self.htmlString = "Loaded image \(result.itemProvider.suggestedName) . . .<br>"
-//                    self.textView.attributedText = NSAttributedString(string: self.htmlString)
-//
-//                } // DispatchQueue
-//
-//            } //result.itemProvidd
-//
-//        } // results.forEach
-//
-//    } // picker
-                               
+                     
+    // pick a photo via document picker
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
         guard let imageURL = urls.first else {
@@ -275,7 +228,137 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
        dismiss(animated: true, completion: nil)
     }
     
+    // ---------------------------------------------------------------------
+    // select drone image from shared photos using Photo Picker
+    // if we use the PHPickerViewController, we can't get at the
+    // raw data of the photo and thus we can't get the XMP meta data
+    // so for now, don't use this approach XXX
+    // this code path not active
+    
+    @IBAction func didTapSelectPhoto()
+    {
+        if photoPicker == nil {
+            var config = PHPickerConfiguration(photoLibrary: .shared())
+            config.selectionLimit = 1
+            config.filter = PHPickerFilter.any(of: [ .images ])
+            photoPicker = PHPickerViewController(configuration: config)
+            photoPicker!.delegate = self
+        }
+        present(photoPicker!, animated: true)
+    }
+    
+    // PHPicker delegate functions
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult])
+    {
+        picker.dismiss(animated: true, completion: nil)
+        
+        results.first!.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+            guard let image = reading as? UIImage, error == nil else {
+                print("Error reading image")
+                self.htmlString += "Error loading image \(error)<br>"
+                self.setTextViewText(htmlStr: self.htmlString)
+                return
+            }
+            
+            do {
+                // might not be able to get the raw image data
+                // var data = image XXX
+                var data = Data()
+                self.vc.theDroneImage = DroneImage()
+                self.vc.theDroneImage!.rawData = data
+                self.vc.theDroneImage!.theImage = image
+                self.vc.theDroneImage!.name = "unknown filename"
+                self.vc.theDroneImage!.droneParams = self.vc.droneParams
+                self.imageView.image = image
+                
+                // don't save directory since photo picker will do so
+                
+                self.vc.theDroneImage!.updateMetaData()
+                
+                // print out some of the meta data
+                self.getImageData()
+            }
+            catch {
+                print("Load photo result in error \(error)")
+                self.htmlString += "Loading photo resulted in error \(error)<br>"
+            }
+        }
+        setTextViewText(htmlStr: htmlString)
+            
+    } // photo picker
+    
+    // ---------------------------------------------------------------------
+    // pick image from photos; make sure we have permission and
+    // we should be able to access raw image data as well as metadata
+    // for image
+    // code path is active combined with auto elevation map fetching
+    // and downloading
+    
+    @IBAction func didTapSelectImage()
+    {
+        if imagePicker == nil {
+            imagePicker = UIImagePickerController()
+            imagePicker?.sourceType = .photoLibrary
+            imagePicker?.delegate = self
+            imagePicker?.allowsEditing = false
+        }
+        present(imagePicker!, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        // immediately dismiss so we can present alerts if needed
+        imagePicker!.dismiss(animated: true, completion: nil)
+
+        var imageURL = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerImageURL")] as? URL
+        
+        if imageURL != nil {
+            print("Image url is \(imageURL!)")
+            do {
+                let data = try Data(contentsOf: imageURL!)
+                var image = UIImage(data: data)
+                self.vc.theDroneImage = DroneImage()
+                self.vc.theDroneImage!.rawData = data
+                self.vc.theDroneImage!.theImage = image
+                self.vc.theDroneImage!.name = imageURL!.lastPathComponent
+                self.vc.theDroneImage!.droneParams = self.vc.droneParams
+                imageView.image = image
+                // no need to save image directory since imagepicker
+                // will save this for us
+                
+                self.vc.theDroneImage!.updateMetaData()
+                getImageData()
+                
+                // check for DEM and load if necessary
+                let result = findLoadElevationMap()
+                htmlString += "Found elevation map: \(result)<br>"
+            }
+            catch {
+                // error!
+                htmlString += "Loading image resulted in error \(error)<br>"
+            }
+        }
+        else {
+            // raise error
+            print("Not able to access image URL")
+            htmlString += "Not able to access image URL<br>"
+        }
+        
+        setTextViewText(htmlStr: htmlString)
+        
+        
+    } // imagePicker
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+    {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    // ---------------------------------------------------------------------
+    // regardless of picker, load raw image data
+    // we need raw image data to access meta data and XMP/XML additions
     // get meta data from image and output to textView
+    
     private func getImageData()
     {
         var lat, lon: Double
@@ -332,7 +415,7 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
             self.htmlString += "Zoom: \(error)<br>"
         }
         
-        self.htmlString += "Is Drone? \(self.vc.theDroneImage!.isDroneImage())"
+        self.htmlString += "Is Drone? \(self.vc.theDroneImage!.isDroneImage())<br>"
         
         // display the text finally!
         setTextViewText(htmlStr: self.htmlString)
@@ -342,6 +425,127 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         //print("viewForZooming returning imageView")
         return contentView
+    }
+    
+    // once image has been selected, find/load the
+    // elevation map from our cache of elevation maps
+    // if not found, offer to go fetch it
+    // then reload
+    private func findLoadElevationMap() -> Bool
+    {
+        var result = true
+        var lat: Double = 0.0
+        var lon: Double = 0.0
+        
+        print("findLoadElevationMap: starting")
+        
+        do {
+            lat = try vc.theDroneImage!.getLatitude()
+            lon = try vc.theDroneImage!.getLongitude()
+            lat = DemDownloader.truncateDouble(val: lat, precision: 6)
+            lon = DemDownloader.truncateDouble(val: lon, precision: 6)
+            htmlString += "Coordinates: \(lat),\(lon)<br>"
+            
+            // regardless of whether we have a DEM already loaded,
+            // just do a look up and load that DEM
+            // possible again
+            let filename = vc.demCache!.searchCacheFilename(lat: lat, lon: lon)
+            if filename != "" {
+                print("findLoadElevationMap: found \(filename)")
+                // load the DEM and return
+                try vc.dem = vc.demCache!.loadDemFromCache(lat: lat, lon: lon)
+                htmlString += "Loaded \(filename) from elevation map cache<br>"
+                // would be nice to have the resulting filename be
+                // clickable for more information on the DEM itself
+                // right now, user then has to go find the entry in the cache
+                // and then click on it.  Future version XXX
+            }
+            else {
+                print("Did not find DEM")
+                result = false
+                // would you like me to download one?
+                shouldIDownloadAlert(lat: lat, lon: lon, len: 15000.0)
+            }
+        }
+        catch {
+            print("Did not find DEM")
+            result = false
+            htmlString += "Error locating image coordinates or digital elevation map<br>"
+            // would you like me to download one?
+            if lat != 0 && lon != 0 {
+                shouldIDownloadAlert(lat: lat, lon: lon, len: 15000.0)
+            }
+            else {
+                htmlString += "Can't download an elevation map without coordinates<br>"
+            }
+        }
+        
+        setTextViewText(htmlStr: htmlString)
+        return result
+        
+    } // findLoadElevationModel
+    
+    // user has specifically requested we got get an elevation map/model
+    // if it succeeds, load it
+    private func fetchNewElevationMap(lat: Double, lon: Double, len: Double)
+    {
+        let aDownloader = DemDownloader(lat: lat, lon: lon, length: len)
+        aDownloader.download(completionHandler: { ( resultCode, bytes, filename ) in
+            let resultStr = DemDownloader.httpResultCodeToString(resultCode: resultCode)
+            self.app.sendNotification(title: "Download Result",
+                                      text: "Download result: \(resultStr), \(bytes) bytes, \(filename)")
+            if resultCode == 200 {
+                // gotta force cache reload
+                self.vc.demCache = DemCache()
+                let aDem = try? self.vc.demCache?.loadDemFromCache(lat: lat, lon: lon)
+                if aDem != nil {
+                    self.vc.dem = aDem
+                    self.htmlString += "Successfully downloaded and loaded elevation map<btr>"
+                    self.htmlString += "\(aDem!.tiffURL.lastPathComponent)<br>"
+                    self.updateTextView()
+                }
+            }
+            else {
+                self.htmlString += "Unable to download elevation map: \(resultStr)<br>"
+                self.updateTextView()
+            }
+            
+        })
+        
+    } // fetchNewElevationMap
+    
+    // handler courtesy of ChatGPT plus modifications
+    private func shouldIDownloadAlert(lat: Double, lon: Double, len: Double)
+    {
+        print("Should I download alert starting")
+        let alertController = UIAlertController(title: "Elevation map not found",
+                                                message: "Download an elevation map for surrounding area?",
+                                                preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            self.htmlString += "Downloading elevation map . . .<br>"
+            self.updateTextView()
+            self.fetchNewElevationMap(lat: lat, lon: lon, len: len)
+        }
+        let noAction = UIAlertAction(title: "No", style: .default) { (action) in
+            self.htmlString += "Not going to download elevation map<br>"
+            self.updateTextView()
+            // do nothing
+        }
+        
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    } // shouldI?
+    
+    // update the text view while not on main ui thread
+    // call this function from completion handlers and other
+    // code blocks that are not allowed to directly call the main UI thread
+    private func updateTextView()
+    {
+        DispatchQueue.main.async {
+            self.setTextViewText(htmlStr: self.htmlString)
+        }
     }
     
     // take htmlString and encode it and set
@@ -354,8 +558,7 @@ class ImageViewController: UIViewController , //PHPickerViewControllerDelegate,
         if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
-                                                                                               length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,length: attribString.length))
             self.textView.attributedText = attribString
         }
     }

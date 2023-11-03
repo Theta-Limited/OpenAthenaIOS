@@ -13,47 +13,71 @@ OpenAthena™ allows common drones to spot precise geodetic locations.
 
 🖼️👨‍💻 + 🧮⛰️ = 🎯📍
 
-<a href="https://github.com/mkrupczak3/OpenAthena"><img width="540"
-alt="OpenAthena Drone Camera Terrain Raycast Concept Diagram"
+<p align="center">
+  <a href="https://github.com/mkrupczak3/OpenAthena">
+  <img width="540" alt="OpenAthena Drone Camera Terrain Raycast Concept Diagram"
 src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept_Diagram.png"></a>
+</p>
 
-<img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main.png">
+<p align="center">
+ <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main.png">
+</p>
 
 # Operation Guide
 
-## Obtain a GeoTIFF Digital Elevation Model:
+## A note about GeoTIFF Digital Elevation Models/Maps:
 
-To use this app, you need a GeoTIFF Digital Elevation Model (DEM)
-file. GeoTIFF files store terrain elevation data for an area on
+OpenAthena for iOS needs GeoTIFF digital elevation models (aka
+elevation maps) data to calculate target locations within drone
+images.  GeoTIFF files store terrain elevation data for an area on
 Earth. OpenAthena performs a ray-cast from a drone camera's position
 and orientation towards the terrain, which can be used to precisely
 locate any point within a given picture.
 
-To obtain a GeoTIFF file for a certain area, use [this
-link](https://github.com/mkrupczak3/OpenAthena/blob/main/EIO_fetch_geotiff_example.md).
+OpenAthena for iOS can now download elevation maps for the user from
+<a href="https://www.opentopography.org">OpenTopography</a> at the
+touch of a button.  Downloaded elevation maps are saved in the app's
+local storage.  Elevation maps can be imported, exported, or
+pre-fetched for the area surrounding any given lat,lon.  When
+processing a drone image, OpenAthena will automatically search through
+its cache of elevation maps and select the correct one for the image
+being processed.  If an elevation map is not found, OpenAthena will
+offer to download one.  Image analysis can then continue.
 
-Unfortunately, the [NGA tiff library for
-iOS](https://github.com/ngageoint/tiff-ios) does not support tiff
-compression.  Consequently, DEMs should be obtained using Method 1
-from the above web link.  Method one makes use of [Open Topography
-SRTM elevation
-data](https://portal.opentopography.org/raster?opentopoID=OTSRTM.082015.4326.1)
+If you are planning on operating in an offline enviroment, you can use
+the pre-fetch functionality to download elevation maps for later
+offline use.
+  
+To manage OpenAthena's elevation map cache, select "Manage Elevation
+Maps" from the main screen menu.  From there, you can manage or search
+your cache for an elevation map based on lat,lon coordinates.
 
-If you try to load or use an elevation model containing TIFF
-compression, the application will catch the NSException and not
-compute the altitude for the target location.
+You can delete elevation maps by swiping right or you can inspect an
+elevation map by selecting the cache entry.  Pressing "+" allows you
+to add a new elevation map to OpenAthena.
 
-## Load a GeoTIFF Digital Elevation Model  ⛰:
+<p align="center">
+  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main-menu.png">
+  &nbsp; &nbsp; &nbsp; &nbsp
+  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-manage-cache.png">
+</p>
 
-Load the DEM file (e.g. cobb.tiff) using the "⛰" button. The app will
-display the size of the file and its latitude and longitude
-boundaries:
+To add a new elevation map to OpenAthena, you can either download one
+from online or import one from a local file. 
 
-(NOTE: during file selection, the thumbnail image preview for any
-GeoTIFF ".tiff" file will be blank. This is normal.)
+To download an elevation map from online, you input the desired
+lat,lon coordinates and length in meters of the bounding box and
+OpenAthena will fetch it.  Alternatively, you can load a drone image
+and OpenAthena will offer to download an elevation map of the
+surrounding area if needed.  (Internet access is needed to download
+elevation maps.)
 
-<img style="border:1px solid black" width="586" alt="OpenAthena™ iOS GeoTIFF DEM loading demo using
-cobb.tiff" src="./OpenAthenaIOS/examples/oa-load-dem.png">
+OpenAthena can also import an elevation map in GeoTIFF format from
+local storage.
+
+<p align="center">
+  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-new-elevation-map.png">  
+</p>
 
 ## Calibrate your drone's compass sensor 🧭 and take photos :
 
@@ -74,11 +98,14 @@ Skydio, Autel, and Parrot aircraft models. The drone's position and
 its camera's orientation are automatically extracted from the image
 metadata.
 
-After loading a GeoTIFF DEM, use the "🖼" button to select a drone
-image containing the necessary metadata:
-
-<img width="586" alt="OpenAthena™ iOS Image Selection demo using
+<p align="center">
+<img width="270" alt="OpenAthena™ iOS Image Selection demo using
 DJI_0419.JPG" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-select-drone-image.png">
+</p>
+
+After loading a drone image, OpenAthena will search through its cache
+for an appropriate elevation map.  If one is not found, OpenAthena
+will offer to download one for you.
 
 ## Calculate a target 🧮 🎯:
 
@@ -87,15 +114,18 @@ ground. You can tap the result display box to copy the result text to
 your clipboard or open the position in Google Maps by clicking the
 blue hyperlink:
 
-<img style="border:1px solid black" width="586" alt="OpenAthena™ iOS Target Calculation demo using
-cobb.tiff and DJI_0419.JPG, output mode WGS84"
+<p align="center">
+<img style="border:1px solid black" width="270" alt="OpenAthena™ iOS Target Calculation demo using cobb.tiff and DJI_0419.JPG, output mode WGS84"
 src="./OpenAthenaIOS/examples/oa-calculate.png">
+</p>
 
 ## Arbitrary Point Selection
 
 OpenAthena allows users to tap any point in the image to locate it. Tapping on any point in the image will move the marker and calculate the new location.
 
-<img width="586" alt="OpenAthena for iOS demo of arbitrary point selection for raycast calculation" src="./OpenAthenaIOS/examples/oa-calculate-point.png">
+<p align="center">
+<img width="270" alt="OpenAthena for iOS demo of arbitrary point selection for raycast calculation" src="./OpenAthenaIOS/examples/oa-calculate-point.png">
+</p>
 
 # Application Settings (optional) ⚙:
 
@@ -114,8 +144,9 @@ select "Settings":
 Select your desired output mode by pressing its button in the list and
 then click the Save button.
 
-<img style="border:1px solid black" width="270" alt="OpenAthena™ iOS 🎯 Output Modes Activity demo
-NATO MGRS 10m" src="./OpenAthenaIOS/examples/oa-settings.png">
+<p align="center">
+<img style="border:1px solid black" width="270" alt="OpenAthena™ iOS 🎯 Output Modes Activity demo NATO MGRS 10m" src="./OpenAthenaIOS/examples/oa-settings.png">
+</p>
 
 # Contributing
 
