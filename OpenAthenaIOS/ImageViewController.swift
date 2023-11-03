@@ -522,7 +522,7 @@ class ImageViewController: UIViewController,
                                                 message: "Download an elevation map for surrounding area?",
                                                 preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
-            self.htmlString += "Going to download elevation map<br>"
+            self.htmlString += "Downloading elevation map . . .<br>"
             self.updateTextView()
             self.fetchNewElevationMap(lat: lat, lon: lon, len: len)
         }

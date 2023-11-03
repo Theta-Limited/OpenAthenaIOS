@@ -27,50 +27,57 @@ src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept
 
 ## A note about GeoTIFF Digital Elevation Models/Maps:
 
-OpenAthena needs GeoTIFF digital elevation models/maps data.  GeoTIFF
-files store terrain elevation data for an area on Earth. OpenAthena
-performs a ray-cast from a drone camera's position and orientation
-towards the terrain, which can be used to precisely locate any point
-within a given picture.
+OpenAthena for iOS needs GeoTIFF digital elevation models (aka
+elevation maps) data to calculate target locations within drone
+images.  GeoTIFF files store terrain elevation data for an area on
+Earth. OpenAthena performs a ray-cast from a drone camera's position
+and orientation towards the terrain, which can be used to precisely
+locate any point within a given picture.
 
-OpenAthena for iOS can now download elevation maps directly from <a
-href="https://www.opentopography.org">OpenTopography</a> at the touch
-of a button.  Downloaded elevation maps are saved in the app's local
-storage.  Elevation maps can be imported, exported, or pre-fetched
-given a lat,lon.  When processing a drone image, OpenAthena will
-automatically search through its cache of elevation maps and select
-the correct one for the image being processed.  If an elevation map is
-not found, OpenAthena will offer to download one.  Image analysis can
-then continue.  Use the pre-fetch option if you will be offline while
-flying.
+OpenAthena for iOS can now download elevation maps for the user from
+<a href="https://www.opentopography.org">OpenTopography</a> at the
+touch of a button.  Downloaded elevation maps are saved in the app's
+local storage.  Elevation maps can be imported, exported, or
+pre-fetched for the area surrounding any given lat,lon.  When
+processing a drone image, OpenAthena will automatically search through
+its cache of elevation maps and select the correct one for the image
+being processed.  If an elevation map is not found, OpenAthena will
+offer to download one.  Image analysis can then continue.
+
+If you are planning on operating in an offline enviroment, you can use
+the pre-fetch functionality to download elevation maps for later
+offline use.
+  
+To manage OpenAthena's elevation map cache, select "Manage Elevation
+Maps" from the main screen menu.  From there, you can manage or search
+your cache for an elevation map based on lat,lon coordinates.
+
+You can delete elevation maps by swiping right or you can inspect an
+elevation map by selecting the cache entry.  Pressing "+" allows you
+to add a new elevation map to OpenAthena.
 
 <p align="center">
   <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main-menu.png">
   &nbsp; &nbsp; &nbsp; &nbsp
   <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-manage-cache.png">
 </p>
-  
-To manage OpenAthena's elevation map cache, select "Manage Elevation
-Maps" from the main screen menu.  From there, you can manage or search
-your cache for an elevation map based on lat,lon coordinates.
+
+To add a new elevation map to OpenAthena, you can either download one
+from online or import one from a local file. 
+
+To download an elevation map from online, you input the desired
+lat,lon coordinates and length in meters of the bounding box and
+OpenAthena will fetch it.  Alternatively, you can load a drone image
+and OpenAthena will offer to download an elevation map of the
+surrounding area if needed.  (Internet access is needed to download
+elevation maps.)
+
+OpenAthena can also import an elevation map in GeoTIFF format from
+local storage.
 
 <p align="center">
-  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-elevation-map-info.png">
-  &nbsp; &nbsp; &nbsp; &nbsp
   <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-new-elevation-map.png">  
 </p>
-
-You can delete elevation maps by swiping right or you can inspect an
-elevation map by selecting the cache entry.  Pressing "+" allows you
-to add a new elevation map to OpenAthena.
-
-To add a new elevation map to OpenAthena, you have two options.
-First, you can import an elevation map you already have (in GeoTIFF
-format) from local file.  Second, you input the desired lat,lon
-coordinates and size in meters of the bounding box and OpenAthena will
-fetch and download an elevation map with those parameters.  This last
-feature is handy if you wish to pre-fetch elevation maps before
-flying.  (Internet access is needed to download elevation maps.)
 
 ## Calibrate your drone's compass sensor 🧭 and take photos :
 
