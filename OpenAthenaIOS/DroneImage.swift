@@ -52,6 +52,7 @@ public class DroneImage {
     var ccdInfo: DroneCCDInfo?
     var xmlStringCopy: String?
     var droneParams: DroneParams?
+    var settings: AthenaSettings?
     
     //init(fromImage image: UIImage, withMetaData data: [AnyHashable:Any]) {
     init(suggestedName aName: String, fromImage image: UIImage,
@@ -80,6 +81,8 @@ public class DroneImage {
     // update meta data
     public func updateMetaData()
     {
+        print("Updating image meta data")
+        
         let src = CGImageSourceCreateWithData(rawData! as CFData,nil)
         
         // first cast to NSDictionary then use mutableCopy to finish casting/converting
@@ -89,8 +92,14 @@ public class DroneImage {
         let md = CGImageSourceCopyPropertiesAtIndex(src!,0,nil)! as NSDictionary
         let md2 = CGImageSourceCopyMetadataAtIndex(src!,0,nil)
         
+        print("updateMetaData: md is \(md)")
+        print("updateMetaData: md2 is \(md2)")
+        
         metaData = md.mutableCopy() as! NSMutableDictionary
         rawMetaData = md2
+        
+        print("Going to parse XMP meta data")
+        
         parseXmpMetaDataNoError()
     }
     
@@ -306,9 +315,10 @@ public class DroneImage {
         var alt = 0.0
         var gpsInfo: NSDictionary
         
-        print("getAltitude: starting")
+        print("getAltitude: starting with 0.0")
         
         if metaData == nil {
+            print("getAltitude: no metadata, bugging out")
             throw DroneImageError.NoMetaData
         }
                 
@@ -350,26 +360,37 @@ public class DroneImage {
             print("alt:0.0, falling back to GPS")
             
             if metaData!["{GPS}"] == nil {
-               throw DroneImageError.NoMetaGPSData
+                print("getAltitude: no gps meta data, bugging out")
+                throw DroneImageError.NoMetaGPSData
             }
             gpsInfo = metaData!["{GPS}"] as! NSDictionary
             if gpsInfo["Altitude"] == nil {
+                print("getAltitude: no altitude within GPS data, bugging out")
                 throw DroneImageError.MissingMetaDataKey
             }
             alt = gpsInfo["Altitude"] as! Double
             altFromExif = true
             
+            print("getAltitude: gps altitude is \(alt)")
+            
             // re autel drones, check altitude ref for 1 meaning below sea level XXX
             if gpsInfo["GPSAltitudeRef"] != nil {
                 let ref = gpsInfo["GPSAltitudeRef"] as! Int
-                //print("GPSAltitude ref is \(ref)")
+                print("getAltitude: GPSAltitude ref is \(ref)")
+                if ref == 1 {
+                    alt = -1.0 * alt
+                }
+            }
+            if gpsInfo["AltitudeRef"] != nil {
+                let ref = gpsInfo["AltitudeRef"] as! Int
+                print("getAltitude Altitude ref is \(ref)")
                 if ref == 1 {
                     alt = -1.0 * alt
                 }
             }
             if metaData!["exif:GPSAltitudeRef"] != nil {
                 let ref = (metaData!["exif:GPSAltitudeRef"] as! NSString).intValue
-                //print("GPS exif:GPSAltitudeRef is \(ref)")
+                print("getAltitude: GPS exif:GPSAltitudeRef is \(ref)")
                 if ref == 1 {
                     alt = -1.0 * alt
                 }
@@ -377,22 +398,46 @@ public class DroneImage {
         }
         
         if alt == 0.0 {
+            print("getAltitude: after everything, no gps data, bugging out")
             throw DroneImageError.NoMetaGPSData
         }
         
-        print("alt: alt is now \(alt)")
+        print("getAltitude: alt is now \(alt)")
         
-        // look for metadata drone:RtkFlag
+        // look for metadata drone:RtkAlt or drone:RtkAlt ?
+        // despite RtkAlt, we still think DJI is reporting
+        // altitude in EGM96
+        
         var rtkFlag: Bool = false
-        if metaData!["drone:RtkFlag"] != nil {
-            rtkFlag = true
-        }
-        if metaData!["drone-dji:RtkFlag"] != nil {
-            rtkFlag = true
-        }
+        
+//        if metaData!["drone:RtkAlt"] != nil || metaData!["drone:RtkFlag"] != nil || metaData!["drone:rtkalt"] != nil || metaData!["drone:rtkflag"] != nil {
+//            print("getAlt: rtkflag true drone:rtkxxx")
+//            rtkFlag = true
+//        }
+//        if metaData!["drone-dji:RtkAlt"] != nil || metaData!["drone-dji:rtkalt"] != nil ||
+//           metaData!["drone-dji:rtkflag"] != nil || metaData!["drone-dji:RtkFlag"] != nil {
+//            print("getAlt: drone-dji:RtkAlt/RtkFlag")
+//            rtkFlag = true
+//        }
+//        if metaData!["drone-dji:AltitudeType"] != nil {
+//            print("getAlt: drone-dji:AltitudeType present")
+//            let aStr = metaData!["drone-dji:AltitudeType"] as! String
+//            print("getAlt: testing \(aStr)")
+//            if aStr.caseInsensitiveCompare("RtkAlt") == .orderedSame {
+//                print("getAlt: drone-dji:AltitudeType = RtkAlt")
+//                rtkFlag = true
+//            }
+//        }
+        
+        // for DJI drones, look for this specific flag but ignore RtkAlt in
+        // drone-dji:AltitudeType=RtkAlt
+        
         if xmlStringCopy?.lowercased().contains("rtkflag") == true {
+            print("getAlt: xmlstringcopy rtkflag is true")
             rtkFlag = true
         }
+        
+        print("getAlt: rtkFlag is \(rtkFlag)")
         
         // now, depending on drone type/make, convert from EGM96 to WGS84 if necessary
         var offset:Double = 0.0
@@ -406,10 +451,12 @@ public class DroneImage {
             // DJI, autel if tag rtkflag then its already in WGS84
             
             if rtkFlag == true {
+                print("getAlt: rtkFlag so already in WGS84")
                 return alt // already in WGS84
             }
             
             if altFromExif == true {
+                print("getAlt: altFromExif, already in WGS84")
                 return alt // already in WGS84
             }
             
@@ -424,6 +471,7 @@ public class DroneImage {
                 // this is the front camera location with reference to the WGS84
                 // ellipsoid https://developer.parrot.com/docs/groundsdk-tools/photo-metadata.html
                 
+                print("getAlt: anafiai already in WGS84")
                 return alt // already in WGS84
             }
             
@@ -441,6 +489,7 @@ public class DroneImage {
             offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
         }
         catch {
+            print("getAltitude: throwing error \(error)")
             throw error
         }
         
@@ -515,10 +564,18 @@ public class DroneImage {
         
         if metaData!["drone-dji:GimbalYawDegree"] != nil {
             az = (metaData!["drone-dji:GimbalYawDegree"] as! NSString).doubleValue
+            if settings != nil {
+                print("Adding \(settings!.compassCorrection) to AZ")
+                az += Double(settings!.compassCorrection)
+            }
             return az.truncatingRemainder(dividingBy: 360.0)
         }
         if metaData!["drone:GimbalYawDegree"] != nil {
             az = (metaData!["drone:GimbalYawDegree"] as! NSString).doubleValue
+            if settings != nil {
+                print("Adding \(settings!.compassCorrection) to AZ")
+                az += Double(settings!.compassCorrection)
+            }
             return az.truncatingRemainder(dividingBy: 360.0)
         }
         // Some parrot drones have both Camera:Yaw and drone-parrot:CameraYawDegree
@@ -526,14 +583,26 @@ public class DroneImage {
         
         if metaData!["drone-parrot:CameraYawDegree"] != nil {
             az = (metaData!["drone-parrot:CameraYawDegree"] as! NSString).doubleValue
+            if settings != nil {
+                print("Adding \(settings!.compassCorrection) to AZ")
+                az += Double(settings!.compassCorrection)
+            }
             return az.truncatingRemainder(dividingBy: 360.0)
         }
         if metaData!["drone-skydio:CameraOrientationNED:Yaw"] != nil {
             az = (metaData!["drone-skydio:CameraOrientationNED:Yaw"] as! NSString).doubleValue
+            if settings != nil {
+                print("Adding \(settings!.compassCorrection) to AZ")
+                az += Double(settings!.compassCorrection)
+            }
             return az.truncatingRemainder(dividingBy: 360.0)
         }
         if metaData!["Camera:Yaw"] != nil {
             az = (metaData!["Camera:Yaw"] as! NSString).doubleValue
+            if settings != nil {
+                print("Adding \(settings!.compassCorrection) to AZ")
+                az += Double(settings!.compassCorrection)
+            }
             return az.truncatingRemainder(dividingBy: 360.0)
         }
         
@@ -1392,6 +1461,7 @@ public class DroneImage {
         
         // xmlString gets consumed by parser; we should parse a copy of it
         xmlStringCopy = xmlString
+        //print("parseXmpMetaData: xmlStringCopy is \(xmlStringCopy)")
         
         let xmlParser = XMLParser(data: Data(xmlString!.utf8))
         let mpd = MyParserDelegate()

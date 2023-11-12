@@ -79,6 +79,8 @@ public class AthenaSettings {
     static let LookupMode: DEMLookupModes = .DEMStatic
     static let UseCCDInfo: Bool = true
     static let FontSize: Int = 14
+    static let CompassCorrection: Float = 0.0
+    static let CompassSliderValue: Float = 100.0 // 0..200
     
     // saved defaults first set to defaults before loading
     var outputMode = OutputMode
@@ -87,6 +89,8 @@ public class AthenaSettings {
     var fontSize = FontSize
     var takMulticastPort: UInt16 = 6969
     var takMulticastIP = "239.2.3.1"
+    var compassCorrection: Float = CompassCorrection
+    var compassSliderValue: Float = CompassSliderValue
     
     // file/dir URLs
     var demURL: URL?
@@ -118,7 +122,13 @@ public class AthenaSettings {
                 fontSize = fontSizeNew
             }
         }
-        
+        if let compassCorrectionNew = defaults.object(forKey: "compassCorrection") as? Float {
+            compassCorrection = compassCorrectionNew
+        }
+        if let compassSliderValueNew = defaults.object(forKey: "compassSliderValue") as? Float {
+            compassSliderValue = compassSliderValueNew
+        }
+            
         if let aStr = defaults.object(forKey: "DigitalElevationModuleURL") as? String {
             print("Read \(aStr) for DEM URL")
             demURL = URL(string: aStr)
@@ -158,6 +168,8 @@ public class AthenaSettings {
         defaults.set(fontSize, forKey: "fontSize")
         defaults.set(takMulticastPort, forKey: "TAKMulticastPort")
         defaults.set(takMulticastIP, forKey: "TAKMulticastIP")
+        defaults.set(compassCorrection, forKey: "compassCorrection")
+        defaults.set(compassSliderValue, forKey: "compassSliderValue")
         
         if droneParamsURL != nil {
             defaults.set(droneParamsURL!.absoluteString, forKey: "DroneParamsURL")

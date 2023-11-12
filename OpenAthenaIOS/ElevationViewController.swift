@@ -50,8 +50,9 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
 //        documentPickerController!.delegate = self
         
         self.title = "Load DEM \u{26F0}"
-        view.backgroundColor = .white
-        
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
+
         // why are some back buttons "back" and the one in this view
         // is "OpenAthena" ?
         
@@ -309,8 +310,11 @@ class ElevationViewController: UIViewController, UIDocumentPickerDelegate, UIScr
         if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
-                                                                                               length: attribString.length))
+            
+            attribString.addAttribute(NSAttributedString.Key.font, value: font,
+                                      range: NSRange(location: 0,length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
+            
             self.textView.attributedText = attribString
         }
     }

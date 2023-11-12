@@ -18,8 +18,9 @@ class ManageDemViewController: UIViewController
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var vc: ViewController!
     @IBOutlet var latLonText: UITextField!
-    @IBOutlet var lookupResults: UILabel!
+    //@IBOutlet var lookupResults: UILabel!
     @IBOutlet var borderLabel: UILabel!
+    @IBOutlet var lookupResultsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,13 @@ class ManageDemViewController: UIViewController
         title = "Manage Elevation Maps"
         borderLabel.text = "   "
         borderLabel.backgroundColor = .systemGray6
+        
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
+        
+        // its both a label and a button; right now, its
+        // in label mode
+        lookupResultsButton.isEnabled = false
         
     }
     
@@ -36,6 +44,30 @@ class ManageDemViewController: UIViewController
         
         print("Loaded \(vc.demCache!.count()) cache entries")
     }
+    
+    // we enabled results button and user tapped it
+    // to zoom in and inspect a DEM
+    @IBAction func didTapResults()
+    {
+        if lookupResultsButton.currentTitle == nil {
+            return
+        }
+        
+        // given the name of the DEM file, get its cache entry
+        
+        // chop off "Found " to get results
+        let pieces = lookupResultsButton.currentTitle!.components(separatedBy: " ")
+        
+        if pieces.count == 2 {
+            // pieces[1] is the DEM_xxx filename
+            let dem = vc.demCache?.searchCacheByFilename(filename: pieces[1])
+            if dem != nil {
+                let vct = self.storyboard?.instantiateViewController(withIdentifier: "DemCacheEntryController") as! DemCacheEntryController
+                vct.cacheEntry = dem
+                self.navigationController?.pushViewController(vct, animated: true)
+            }
+        }
+    } // didTapResults
     
     // manage our DemCache entries
     @IBAction func didTapManageCache()
@@ -68,10 +100,12 @@ class ManageDemViewController: UIViewController
             let lon = (pieces[1] as! NSString).doubleValue
             let demFilename = vc.demCache!.searchCacheFilename(lat: lat, lon: lon)
           if demFilename == "" || demFilename == nil {
-               lookupResults.text = "Nothing found"
+              lookupResultsButton.setTitle("Nothing found", for: .normal)
+              lookupResultsButton.isEnabled = false
             }
             else {
-                lookupResults.text = "Found \(demFilename)"
+                lookupResultsButton.setTitle("Found \(demFilename)", for: .normal)
+                lookupResultsButton.isEnabled = true
             }
         }
     } // didTapLookup()

@@ -29,7 +29,8 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         super.viewDidLoad()
         
         self.title = "Load Drone Info"
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
         
         // build rest of view by hand
         
@@ -158,8 +159,11 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         if let attribString = try? NSMutableAttributedString(data: data,
                                                              options: [.documentType: NSAttributedString.DocumentType.html],
                                                              documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
-                                                                                               length: attribString.length))
+            
+            attribString.addAttribute(NSAttributedString.Key.font, value: font,
+                                      range: NSRange(location: 0,length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
+            
             self.textView.attributedText = attribString
         }
     }

@@ -35,7 +35,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         print("Calculate viewDidLoad invoked")
         
         self.title = "Calculate"
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
         
         // add settings and others to hamburger menu
         configureMenuItems()
@@ -49,6 +50,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.isUserInteractionEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .secondarySystemBackground
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -67,15 +69,16 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         textView.isEditable = false
         //textView.isScrollEnabled = false
         textView.font = .systemFont(ofSize: 16)
-        textView.heightAnchor.constraint(equalToConstant: 0.66*view.frame.size.height).isActive = true
-        textView.widthAnchor.constraint(equalToConstant: view.frame.size.width).isActive = true
+        //textView.heightAnchor.constraint(equalToConstant: 0.66*view.frame.size.height).isActive = true
         textView.isScrollEnabled = true // ?? was false but that sometimes chops text
+        textView.backgroundColor = .secondarySystemBackground
         
         // stackview setup
         stackView.frame = view.bounds
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(textView)
@@ -86,7 +89,9 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         // set the layout constraints
         textView.heightAnchor.constraint(equalToConstant: 0.60*view.frame.size.height).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 0.40*view.frame.size.height).isActive = true
-
+        
+        //textView.widthAnchor.constraint(equalToConstant: view.frame.size.width).isActive = true
+        
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -111,7 +116,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         
     } // viewDidLoad
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(animated)
         
         print("Calculate viewWillAppear invoked")
@@ -126,7 +132,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     {
         var ccdInfo: DroneCCDInfo?
         htmlString = "<b>OpenAthena</b><br>"
-        htmlString += "Elevation model: \(String(describing: vc.dem?.tiffURL?.lastPathComponent))<br>"
+        htmlString += "Elevation map: \(vc.dem?.tiffURL?.lastPathComponent ?? "")<br>"
         htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
         htmlString += "Image date: \(vc.theDroneImage!.getDateTimeUTC())<br>"
         
@@ -154,6 +160,15 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         
         // run the calculations
         do {
+            // determine alt of ground under drone itself first
+            // for comparison
+            
+            let groundAlt = try self.vc.dem?.getAltitudeFromLatLong(
+                    targetLat: self.vc.theDroneImage!.getLatitude(),
+                    targetLong: self.vc.theDroneImage!.getLongitude())
+            htmlString += "Ground altitude under drone is \(groundAlt ?? -1.0)<br>"
+            
+            // calculate altitude of what we're looking at
             try target = vc!.theDroneImage!.resolveTarget(dem: vc!.dem!)
         }
         catch let error as DroneImageError {
@@ -619,8 +634,11 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
-                                                                                               length: attribString.length))
+            
+            attribString.addAttribute(NSAttributedString.Key.font, value: font,
+                                      range: NSRange(location: 0,length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
+            
             self.textView.attributedText = attribString
         }
     }
