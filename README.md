@@ -148,6 +148,25 @@ then click the Save button.
 <img style="border:1px solid black" width="270" alt="OpenAthena™ iOS 🎯 Output Modes Activity demo NATO MGRS 10m" src="./OpenAthenaIOS/examples/oa-settings.png">
 </p>
 
+If you find your aircraft's compass sensor is still not providing
+correct heading information, you can use this slider to manually apply
+a configurable offset anywhere in the range of [-15.0,+15.0].  This
+offset will be added to your aircraft's camera heading before target
+calculation is performed.
+
+Once you find a suitable correction value, you may then use the value
+for all other images taken during the same flight.
+
+**NOTE:** This value is _**NOT**_ for setting [magnetic
+declination](https://ngdc.noaa.gov/geomag/declination.shtml)!
+Magnetic declination is already accounted for by your drone's onboard
+digital World Magnetic Model (WMM).  Improper use of this Manual
+Offset setting will result in bad target calculation output.
+
+Your selected manual correction value is saved automatically between
+launches of the app.  To reset the value, tap the Reset button in the
+Settings screen or move the slider back to the middle.
+
 # Contributing
 
 ## UI language translation

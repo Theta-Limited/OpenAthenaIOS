@@ -684,7 +684,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 328;
+				CURRENT_PROJECT_VERSION = 331;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -702,7 +702,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.40;
+				MARKETING_VERSION = 2.0;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -721,7 +721,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 328;
+				CURRENT_PROJECT_VERSION = 331;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -739,7 +739,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.40;
+				MARKETING_VERSION = 2.0;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -757,7 +757,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 328;
+				CURRENT_PROJECT_VERSION = 331;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -777,7 +777,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 328;
+				CURRENT_PROJECT_VERSION = 331;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
