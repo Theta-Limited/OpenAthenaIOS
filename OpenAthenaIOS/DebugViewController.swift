@@ -149,6 +149,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
                 try self.htmlString += "Make: \(vc.theDroneImage!.getCameraMake())<br>"
                 try self.htmlString += "Model: \(vc.theDroneImage!.getCameraModel())<br>"
+                self.htmlString += "Old Autel: \(vc.theDroneImage!.isOldAutel())<br>"
                                 
                 try self.htmlString += "Focal Length: \(vc.theDroneImage!.getFocalLength())<br>"
                 try self.htmlString += "Focal Length in 35mm: \(vc.theDroneImage!.getFocalLengthIn35mm())<br>"

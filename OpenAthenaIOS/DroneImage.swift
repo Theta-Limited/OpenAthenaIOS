@@ -21,6 +21,7 @@ enum DroneImageError: String, Error {
     case MissingMetaDataKey = "Missing meta data key"
     case MissingCCDInfo = "Missing CCD info for this image"
     case NoExifData = "No exif data"
+    case BadAltitude = "Bad altitude or terrain data; this image is unusable"
 }
 
 extension Data {
@@ -455,12 +456,19 @@ public class DroneImage {
                 return alt // already in WGS84
             }
             
-            if altFromExif == true {
+            if make.lowercased().contains("autel") {
+                print("getAlt: autel drone")
+            }
+            
+            // 10/15/2023 looks like most parrot exif data is NOT in WGS84
+            if altFromExif == true && !make.lowercased().contains("parrot") &&
+                !make.lowercased().contains("autel") {
                 print("getAlt: altFromExif, already in WGS84")
                 return alt // already in WGS84
             }
             
-            // if parrot anafiai is in WGS84
+            
+            // if parrot anafiai, is in WGS84
             if model.lowercased().contains("anafiai") == true {
                 
                 // Location altitude of where the photo was taken in meters expressed
@@ -539,9 +547,14 @@ public class DroneImage {
             theta = (metaData!["drone-parrot:CameraPitchDegree"] as! NSString).doubleValue
             return fabs(theta)
         }
+        
+        // for older autel drones, Camera:Pitch with pix4d is actually
+        // pitch = 90 - value 11/15/2023
+        
         if metaData!["Camera:Pitch"] != nil {
             theta = (metaData!["Camera:Pitch"] as! NSString).doubleValue
-            return fabs(theta)
+            print("getPitch: Camera:Pitch: tag")
+            return fabs(90 - theta)
         }
        
         throw DroneImageError.MissingMetaDataKey
@@ -549,6 +562,12 @@ public class DroneImage {
     } // getGimbalPitchDegree
     
     // camera/gimbal yaw degree or azimuth
+    // add in compass correction if set
+    // compass correction is NOT magnetic declination
+    // (which diff between magnetic north and true north for area)
+    // compass correction is merely to compensate for errors in drone's
+    // compass calibration
+    
     public func getGimbalYawDegree() throws -> Double {
         
         var az: Double
@@ -1268,6 +1287,8 @@ public class DroneImage {
         do {
             try degAzimuth = getGimbalYawDegree()
             try degTheta = getGimbalPitchDegree()
+            
+            print("resolveTarget: got az and theta")
                                     
             // corrected or uncorrected versions of getRayAnglesFromImagePixel
             
@@ -1363,7 +1384,8 @@ public class DroneImage {
 
         if (curAlt < groundAlt) {
             print("curAlt \(curAlt) < groundAlt \(groundAlt) while resolving target")
-            throw ElevationModuleError.RequestedValueOOBError
+            throw DroneImageError.BadAltitude
+            //throw ElevationModuleError.RequestedValueOOBError
         }
         
         var altDiff = curAlt - groundAlt
@@ -1430,6 +1452,32 @@ public class DroneImage {
             // do nothing
         }
     }
+    
+    
+    // old autel drones, look for rdf:Description and
+    // see if <rdf:Description rdf:about="Autel Robotics Meta Data"
+    // is present; if so, its an older model and return True
+    
+    public func isOldAutel() -> Bool {
+        if rawData == nil {
+            return false
+        }
+        
+        let fileData: [UInt8]
+        fileData = rawData!.bytes
+        var dataString = String(decoding: fileData, as: UTF8.self)
+        let beginRange = dataString.range(of: "Autel Robotics Meta Data")
+        
+        if beginRange == nil {
+            print("isOldAutel: false")
+            return false
+        }
+        
+        print("isOldAutel: true")
+        
+        return true
+    }
+    
     
     // parse XMP/XML data out of image throwing errors
     // if encountered
@@ -1527,8 +1575,10 @@ public class DroneImage {
             // elements; our attribute parser handles this
             
             // skydio sometimes put elements under elements
-            // handle that by looking for NED and seeting flag
+            // handle that by looking for NED and seting flag
+            // ending element
             if elementName.contains("drone-skydio:CameraOrientationNED") {
+                print("Found drone-skydio:CameraOrientationNED")
                 skydioCameraOrientationNED = false
             }
             if elementName.contains("drone-skydio:Pitch") && skydioCameraOrientationNED {
@@ -1596,10 +1646,12 @@ public class DroneImage {
             if elementName.contains("drone-skydio:CameraOrientationNED") {
                 skydioCameraOrientationNED = true
             }
-            if elementName.contains("drone-skydio:CameraOrientationNED") == false {
+            
+            //if elementName.contains("drone-skydio:CameraOrientationNED") == false {
                 // don't forget to unset this flag if we've moved onto next element!!
-                skydioCameraOrientationNED = false
-            }
+            //    skydioCameraOrientationNED = false
+            //}
+            
             if elementName.contains("drone-skydio:Pitch") && skydioCameraOrientationNED {
                 currentValue = String()
             }

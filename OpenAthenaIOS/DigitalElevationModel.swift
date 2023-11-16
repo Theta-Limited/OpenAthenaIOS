@@ -24,6 +24,7 @@ enum ElevationModuleError: String, Error {
     case NullPointerException = "DEM: null pointer"
     case ElevationModuleException = "DEM: exception"
     case NoSuch = "DEM: no such elevation model"
+    case BadAltitude = "DEM: bad altitude or terrain data"
 }
 
 struct GeoDataAxisParams {

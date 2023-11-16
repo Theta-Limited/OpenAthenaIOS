@@ -200,14 +200,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],375.295988901877)
+        XCTAssertEqual(target[3],378.5206141840482)
 
         // distance to target
-        XCTAssertEqual(target[0],11.002642979911418)
+        XCTAssertEqual(target[0],84.10228287675572)
 
         // target lat, lon
-        XCTAssertEqual(target[1],41.3026818153707)
-        XCTAssertEqual(target[2],-96.3422510746897)
+        XCTAssertEqual(target[1],41.30333157351147)
+        XCTAssertEqual(target[2],-96.34221452108417)
     
         autelDroneImage.targetXprop = 0.25
         autelDroneImage.targetYprop = 0.25
@@ -219,14 +219,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],375.11807673979945)
+        XCTAssertEqual(target[3],374.7118896180626)
 
         // distance to target
-        XCTAssertEqual(target[0],14.009504090355108)
+        XCTAssertEqual(target[0],447.64718832788265)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],41.302724028442604)
-        XCTAssertEqual(target[2],-96.34228617025856)
+        XCTAssertEqual(target[1],41.30647978318685)
+        XCTAssertEqual(target[2],-96.3437836011802)
         
     } // testAutel
     

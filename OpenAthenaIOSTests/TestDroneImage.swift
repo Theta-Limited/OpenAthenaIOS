@@ -167,13 +167,13 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(autelImage.getLatitude(),41.302641666666666)
             try XCTAssertEqual(autelImage.getLongitude(),-96.34225333333333)
-            try XCTAssertEqual(autelImage.getAltitude(),385.34811)
+            try XCTAssertEqual(autelImage.getAltitude(),412.6329107770481)
             
             // check drone maker
             try XCTAssertTrue(autelImage.getCameraMake() == "Autel Robotics")
             
             // check theta
-            try XCTAssertEqual(autelImage.getGimbalPitchDegree(),66.04)
+            try XCTAssertEqual(autelImage.getGimbalPitchDegree(),23.959999999999994)
             
             // check azimuth or yaw degree
             try XCTAssertEqual(autelImage.getGimbalYawDegree(),2.42)
@@ -206,13 +206,13 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(parrotImage.getLatitude(),57.99953166666667)
             try XCTAssertEqual(parrotImage.getLongitude(),25.549638333333334)
-            try XCTAssertEqual(parrotImage.getAltitude(),78.98716050710475)
+            try XCTAssertEqual(parrotImage.getAltitude(),59.190811490558836)
             
             // check drone maker
             try XCTAssertTrue(parrotImage.getCameraMake() == "PARROT")
             
             // check theta
-            try XCTAssertEqual(parrotImage.getGimbalPitchDegree(),2.054081678)
+            try XCTAssertEqual(parrotImage.getGimbalPitchDegree(),87.945918322)
             
             // check azimuth or yaw degree
             try XCTAssertEqual(parrotImage.getGimbalYawDegree(),18.678611755)
