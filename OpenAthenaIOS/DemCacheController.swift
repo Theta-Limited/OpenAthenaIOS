@@ -21,7 +21,8 @@ class DemCacheController: UIViewController
     {
         super.viewDidLoad()
         
-        //view?.backgroundColor = .gray
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
         
         tableView.delegate = self
         tableView.dataSource = self

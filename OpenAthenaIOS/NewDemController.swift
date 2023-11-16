@@ -25,6 +25,8 @@ class NewDemController: UIViewController, UIDocumentPickerDelegate
         super.viewDidLoad()
         
         title = "New Elevation Map"
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
 
         // Do any additional setup after loading the view.
         resultLabel.numberOfLines = 2

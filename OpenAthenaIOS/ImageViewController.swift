@@ -38,7 +38,8 @@ class ImageViewController: UIViewController,
         super.viewDidLoad()
 
         self.title = "Choose Image \u{1F5bc}"
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
         
         // build our view/display
         
@@ -49,6 +50,7 @@ class ImageViewController: UIViewController,
         scrollView.delegate = self
         scrollView.isUserInteractionEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .secondarySystemBackground
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -56,10 +58,11 @@ class ImageViewController: UIViewController,
         
         textView.isSelectable = true
         textView.isEditable = false
-        textView.isScrollEnabled = false
+        textView.isScrollEnabled = true // ???
         textView.font = .systemFont(ofSize: 16)
         htmlString = "Select a drone image<br>"
         setTextViewText(htmlStr: htmlString)
+        textView.backgroundColor = .secondarySystemBackground
         
         // button setup
         // we can choose from several different pickers  -- photo, document, image
@@ -118,6 +121,21 @@ class ImageViewController: UIViewController,
         
     } // viewDidLoad
     
+    // when view is set to appear, reset the htmlString
+    // if we go forward to calculate then back to selectImage,
+    // viewDidLoad may not be called again and then we
+    // run into scrolling issue
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        // don't reset the htmlString here because we may want to continue
+        // to see the image data for currently selected image if
+        // we go back from CalculateViewController
+        // htmlString = "Select a drone image<br>"
+        // setTextViewText(htmlStr: htmlString)
+    }
+    
     @objc func gotoNext() {
         guard vc.theDroneImage != nil else {
             //print("Please select a drone image")
@@ -135,6 +153,10 @@ class ImageViewController: UIViewController,
     // Document picker can't access photos though and thats
     // usually where drone images end up
     // this code path deprecated with auto elevation map selection/downloading
+    // Don't use this approach now because its difficult to get
+    // at drone images on this device; have to export, save to documents, etc.
+    // better approach is to use the imagePickerController which has
+    // access to photo libraries and gets image meta data
     
     @IBAction func didTapSelectImageFromDocuments()
     {
@@ -192,7 +214,7 @@ class ImageViewController: UIViewController,
             self.vc.theDroneImage!.theImage = image
             self.vc.theDroneImage!.name = imageURL.lastPathComponent
             self.vc.theDroneImage!.droneParams = self.vc.droneParams
-            
+            self.vc.theDroneImage!.settings = app.settings
             imageView.image = image
             
             // save the directory of where we got this file
@@ -270,7 +292,8 @@ class ImageViewController: UIViewController,
                 self.vc.theDroneImage!.name = "unknown filename"
                 self.vc.theDroneImage!.droneParams = self.vc.droneParams
                 self.imageView.image = image
-                
+                self.vc.theDroneImage!.settings = self.app.settings
+
                 // don't save directory since photo picker will do so
                 
                 self.vc.theDroneImage!.updateMetaData()
@@ -292,7 +315,7 @@ class ImageViewController: UIViewController,
     // we should be able to access raw image data as well as metadata
     // for image
     // code path is active combined with auto elevation map fetching
-    // and downloading
+    // and downloading!
     
     @IBAction func didTapSelectImage()
     {
@@ -313,6 +336,8 @@ class ImageViewController: UIViewController,
         var imageURL = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerImageURL")] as? URL
         
         if imageURL != nil {
+            // reset htmlString here
+            htmlString = "Loading image<br>"
             print("Image url is \(imageURL!)")
             do {
                 let data = try Data(contentsOf: imageURL!)
@@ -323,6 +348,7 @@ class ImageViewController: UIViewController,
                 self.vc.theDroneImage!.name = imageURL!.lastPathComponent
                 self.vc.theDroneImage!.droneParams = self.vc.droneParams
                 imageView.image = image
+                self.vc.theDroneImage!.settings = app.settings
                 // no need to save image directory since imagepicker
                 // will save this for us
                 
@@ -332,6 +358,14 @@ class ImageViewController: UIViewController,
                 // check for DEM and load if necessary
                 let result = findLoadElevationMap()
                 htmlString += "Found elevation map: \(result)<br>"
+                
+                do {
+                    let groundAlt = try self.vc.dem?.getAltitudeFromLatLong(
+                        targetLat: self.vc.theDroneImage!.getLatitude(),
+                        targetLong: self.vc.theDroneImage!.getLongitude())
+                    self.htmlString += "Ground altitude under drone is \(groundAlt ?? -1.0)<br>"
+                }
+                
             }
             catch {
                 // error!
@@ -382,16 +416,17 @@ class ImageViewController: UIViewController,
             //let urlStr = "https://maps.google.com/maps/@?api=1&map_action=map&center=\(lat),\(lon)"
             let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
             self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
+            
         }
         catch {
             self.htmlString += "Lat/lon: \(error)<br>"
         }
         
         do {
-            try self.htmlString += "Altitude: \(self.vc.theDroneImage!.getAltitude())<br>"
+            try self.htmlString += "Drone altitude: \(self.vc.theDroneImage!.getAltitude())<br>"
         }
         catch {
-            self.htmlString += "Altitude: \(error)<br>"
+            self.htmlString += "Drone altitude: \(error)<br>"
         }
         
         do {
@@ -558,7 +593,11 @@ class ImageViewController: UIViewController,
         if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,length: attribString.length))
+            
+            attribString.addAttribute(NSAttributedString.Key.font, value: font,
+                                      range: NSRange(location: 0,length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
+            
             self.textView.attributedText = attribString
         }
     }

@@ -129,6 +129,16 @@ class DemCache
         }
     }
     
+    func searchCacheByFilename(filename: String) -> DEM_cache_entry?
+    {
+        for dem in cache {
+            if dem.filename.elementsEqual(filename) {
+                return dem
+            }
+        }
+        return nil
+    }
+    
     func searchCacheEntry(lat: Double, lon: Double) -> DEM_cache_entry?
     {
         var leastDistanceToCenter = Double.infinity

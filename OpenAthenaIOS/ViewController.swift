@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 1.37
+    var version: Float = 1.40
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -31,7 +31,8 @@ class ViewController: UIViewController {
         
         self.title = "OpenAthena"
         navigationController?.navigationBar.tintColor = .label
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
         //navigationController?.navigationBar.tintColor = .systemPink
         configureMenuItems()
         
@@ -48,6 +49,7 @@ class ViewController: UIViewController {
         
         textView.isEditable = false
         textView.isSelectable = true
+        //textView.textColor = .label
           
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named:"athena")
@@ -213,8 +215,9 @@ class ViewController: UIViewController {
         if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
-                                                                                               length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.font, value: font,
+                                      range: NSRange(location: 0,length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
             self.textView.attributedText = attribString
         }
     }

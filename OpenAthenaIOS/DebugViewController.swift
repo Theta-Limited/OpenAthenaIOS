@@ -23,15 +23,18 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         self.title = "OpenAthena Debug"
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
         
         // build the view
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         textView.isEditable = false
         textView.isSelectable = true
-        textView.isScrollEnabled = false
+        textView.isScrollEnabled = true // enabled lest text get clipped
         textView.font = .systemFont(ofSize: 16)
+        textView.textColor = .label
+        textView.backgroundColor = .secondarySystemBackground
         
         scrollView.frame = view.bounds
         scrollView.zoomScale = 1.0
@@ -40,6 +43,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.isUserInteractionEnabled = true
+        scrollView.backgroundColor = .secondarySystemBackground
         
         htmlString = "Debug information<br>"
         setTextViewText(htmlStr: htmlString)
@@ -93,6 +97,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
         self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"
+        self.htmlString += "Compass correction: \(app.settings.compassCorrection)<br>"
  
         // do I have an API key?
         if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
@@ -134,7 +139,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         }
         
         if vc.theDroneImage != nil {
-            self.htmlString += "<br><b>Drone Image:</b> \(vc.theDroneImage!.name)<br>"
+            self.htmlString += "<br><b>Drone Image:</b> \(vc.theDroneImage!.name ?? "No name")<br>"
             do {
                 var lat = try self.vc.theDroneImage!.getLatitude()
                 var lon = try self.vc.theDroneImage!.getLongitude()
@@ -144,26 +149,48 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
                 try self.htmlString += "Make: \(vc.theDroneImage!.getCameraMake())<br>"
                 try self.htmlString += "Model: \(vc.theDroneImage!.getCameraModel())<br>"
-                
+                self.htmlString += "Old Autel: \(vc.theDroneImage!.isOldAutel())<br>"
+                                
                 try self.htmlString += "Focal Length: \(vc.theDroneImage!.getFocalLength())<br>"
                 try self.htmlString += "Focal Length in 35mm: \(vc.theDroneImage!.getFocalLengthIn35mm())<br>"
+                                
+                self.htmlString += "Date/Time UTC: \(vc.theDroneImage!.getDateTimeUTC())"
+                self.htmlString += "<br>aux:Lens \(vc.theDroneImage!.metaData!["aux:Lens"] ?? "not present")<br>"
+                                
+                if let mdTemp = vc.theDroneImage!.metaData {
+                    self.htmlString += "<br>MetaData: \(mdTemp)<br>"
+                }
+                else {
+                    self.htmlString += "<br>MetaData: none<br>"
+                }
+                if let mdTemp = vc.theDroneImage!.rawMetaData {
+                    self.htmlString += "<br>RawMetaData: \(mdTemp)<br>"
+                }
+                else {
+                    self.htmlString += "<br>RawMetaData: none<br>"
+                }
+                // can't print xml strings in html strings in swift due to backslashes
+                // and other special chars?
+                //if vc.theDroneImage!.xmlStringCopy != nil {
+                    //self.htmlString += "<br>Xmp/Xml: \(vc.theDroneImage!.xmlStringCopy)<br>"
+                    //print("Debug: xmlStringCopy is \(vc.theDroneImage!.xmlStringCopy)")
+                //}
                 
-                self.htmlString += "Date/Time UTC: \(vc.theDroneImage!.getDateTimeUTC())<br>"
-                
-                try self.htmlString += "Software version: \(vc.theDroneImage!.getMetaDataValue(key: "drone-parrot:SoftwareVersion"))<br>"
-                
+                do {
+                    try self.htmlString += "Software version: \(vc.theDroneImage!.getMetaDataValue(key: "drone-parrot:SoftwareVersion"))<br>"
+                }
+                catch { }
             }
             catch {
+                print("Caught an error \(error)")
                 self.htmlString += "Some meta data missing \(error)<br>"
+                self.htmlString += "Another catch clause<br>"
             }
-            self.htmlString += "<br>aux:Lens \(vc.theDroneImage!.metaData!["aux:Lens"])<br>"
-            
-            self.htmlString += "<br>MetaData: \(vc.theDroneImage!.metaData!)<br>"
-            self.htmlString += "<br>RawMetaData: \(vc.theDroneImage!.rawMetaData!)<br>"
-            self.htmlString += "<br>Xmp/Xml: \(vc.theDroneImage!.xmlString)<br>"
+        } else {
+            self.htmlString += "Image: not loaded<br>"
         }
         
-        // display the text finally!
+        // display the text finally
         setTextViewText(htmlStr: self.htmlString)
         
     }
@@ -178,8 +205,10 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
-                                                                                               length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.font,
+                                      value: font, range: NSRange(location: 0,
+                                      length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
             self.textView.attributedText = attribString
         }
     }

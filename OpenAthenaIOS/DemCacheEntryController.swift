@@ -26,7 +26,8 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
         
         super.viewDidLoad()
         title = "Elevation Map Details"
-        //view?.backgroundColor = .blue
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
         
         // add an export button
         navigationItem.rightBarButtonItem = UIBarButtonItem(

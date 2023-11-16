@@ -24,6 +24,7 @@ enum ElevationModuleError: String, Error {
     case NullPointerException = "DEM: null pointer"
     case ElevationModuleException = "DEM: exception"
     case NoSuch = "DEM: no such elevation model"
+    case BadAltitude = "DEM: bad altitude or terrain data"
 }
 
 struct GeoDataAxisParams {
@@ -224,7 +225,7 @@ public class DigitalElevationModel {
             throw ElevationModuleError.IllegalArgumentException
         }
         
-        //print("getAltitudeFromLatLong: started")
+        print("getAltitudeFromLatLong: started")
         
         let x0 = xParams.start
         let x1 = xParams.end
@@ -334,9 +335,10 @@ public class DigitalElevationModel {
         
         var altEGM96 = idwInterpolation(target: target, neighbors: neighbors, power: power)
         let offset = EGM96Geoid.getOffset(lat: lat, lng: lon)
+       
         let altWGS84 = altEGM96 - offset
         
-        //print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
+        print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
         
         return altWGS84
         

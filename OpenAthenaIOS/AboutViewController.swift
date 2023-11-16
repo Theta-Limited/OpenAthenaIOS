@@ -22,8 +22,9 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         self.title = "About OpenAthena"
-        view.backgroundColor = .white
-    
+        view.backgroundColor = .secondarySystemBackground
+        //view.overrideUserInterfaceStyle = .light
+        
         // scrollview
         scrollView.frame = view.bounds
         scrollView.zoomScale = 1.0
@@ -32,6 +33,7 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.isUserInteractionEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .secondarySystemBackground
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -40,6 +42,7 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         textView.isEditable = false
         textView.font = .systemFont(ofSize: 16)
         textView.isScrollEnabled = false
+        textView.backgroundColor = .secondarySystemBackground
 
         // image view
         imageView.image = UIImage(named: "athena")
@@ -47,7 +50,6 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
 
         // stackview
         stackView.frame = view.bounds
-        //stackView.backgroundColor = .systemYellow
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.spacing = 5
@@ -142,8 +144,11 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         if let attribString = try? NSMutableAttributedString(data: data,
                                                            options: [.documentType: NSAttributedString.DocumentType.html],
                                                            documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range: NSRange(location: 0,
-                                                                                               length: attribString.length))
+            
+            attribString.addAttribute(NSAttributedString.Key.font, value: font,
+                                      range: NSRange(location: 0,length: attribString.length))
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
+            
             self.textView.attributedText = attribString
         }
     }
