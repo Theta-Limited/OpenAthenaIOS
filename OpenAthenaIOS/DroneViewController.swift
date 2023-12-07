@@ -41,6 +41,7 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         scrollView.delegate = self
         scrollView.isUserInteractionEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .secondarySystemBackground
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -48,6 +49,7 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         textView.isEditable = false
         textView.font = .systemFont(ofSize: 16)
         textView.isScrollEnabled = false
+        textView.backgroundColor = .secondarySystemBackground
         htmlString = "Load a drone information file (in JSON format)<br>"
         setTextViewText(htmlStr: htmlString)
         
@@ -58,7 +60,7 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         selectButton.clipsToBounds = true
         
         // stackView setup
-        stackView.frame = scrollView.bounds
+        stackView.frame = view.bounds
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
@@ -123,7 +125,26 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         }
         
         self.htmlString += "Going to load new drone models json file<br>"
+        self.htmlString += "\(newURL.lastPathComponent)<br>"
         self.setTextViewText(htmlStr: htmlString)
+        
+        // re issue #19, make sure we have permission and if not, try to
+        // raise our permission level
+        // the URL we were using has permissions when its selected by user
+        // via this dialog but when this url is saved and loaded at app
+        // start time, the permissions are no longer present and the
+        //  file can't be loaded
+        var securityFlag: Bool = false
+        
+        if FileManager.default.isReadableFile(atPath: newURL.path) == false {
+            securityFlag = newURL.startAccessingSecurityScopedResource()
+            guard securityFlag == true else {
+                print("Dont' have permission to read this droneModels json file")
+                self.htmlString += "Don't have permission to read this file<br>"
+                setTextViewText(htmlStr: htmlString)
+                return
+            }
+        }
         
         let newDroneParams = DroneParams(jsonURL: newURL)
         
@@ -138,14 +159,31 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         
         // swap old for new
         vc.droneParams = newDroneParams
-        htmlString += "Loaded drone params date: \(vc.droneParams!.droneParamsDate!)<br>"
+        htmlString += "File date: \(vc.droneParams!.droneParamsDate!)<br>"
         htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         setTextViewText(htmlStr: htmlString)
         
         // save the URL so it can be reloaded at next app startup
-        app.settings.droneParamsURL = newURL
-        app.settings.writeDefaults()
-    }
+        // re issue #19, convert to a bookmark first before saving
+        // so that we can read next time app starts
+        // but we need to convert from bookmark back to url before reading again
+        // we may need to do this conversion before stopping security access
+        
+        do {
+            let bookmark = try newURL.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil)
+            app.settings.droneParamsURL = newURL
+            app.settings.droneParamsBookmark = bookmark
+            app.settings.writeDefaults()
+        }
+        catch {
+            print("DroneViewController: unable to convert url to bookmark for saving")
+        }
+        
+        if securityFlag == true {
+            newURL.stopAccessingSecurityScopedResource()
+        }
+        
+    } // documentPicker 
     
     public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         print("Document picker view was conancelled")

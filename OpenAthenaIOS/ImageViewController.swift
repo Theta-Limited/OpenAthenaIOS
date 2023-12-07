@@ -241,7 +241,8 @@ class ImageViewController: UIViewController,
         
         setTextViewText(htmlStr: htmlString)
         
-        //imageURL.stopAccessingSecurityScopedResource()
+        // call stopAccessing so as to not leak memory
+        imageURL.stopAccessingSecurityScopedResource()
         
     } // picked image file
 
@@ -430,6 +431,13 @@ class ImageViewController: UIViewController,
         }
         
         do {
+            try self.htmlString += "Drone relative altitude: \(self.vc.theDroneImage!.getRelativeAltitude())<br>"
+        }
+        catch {
+            self.htmlString += "Drone relative altitude: not reported<br>"
+        }
+        
+        do {
             try self.htmlString += "GimbalPitch/Theta \(self.vc.theDroneImage!.getGimbalPitchDegree())<br>"
         }
         catch {
@@ -490,6 +498,8 @@ class ImageViewController: UIViewController,
                 // load the DEM and return
                 try vc.dem = vc.demCache!.loadDemFromCache(lat: lat, lon: lon)
                 htmlString += "Loaded \(filename) from elevation map cache<br>"
+                htmlString += "Touching 🧮 to continue<br>"
+                
                 // would be nice to have the resulting filename be
                 // clickable for more information on the DEM itself
                 // right now, user then has to go find the entry in the cache
@@ -535,8 +545,9 @@ class ImageViewController: UIViewController,
                 let aDem = try? self.vc.demCache?.loadDemFromCache(lat: lat, lon: lon)
                 if aDem != nil {
                     self.vc.dem = aDem
-                    self.htmlString += "Successfully downloaded and loaded elevation map<btr>"
+                    self.htmlString += "Successfully downloaded and loaded elevation map<br>"
                     self.htmlString += "\(aDem!.tiffURL.lastPathComponent)<br>"
+                    self.htmlString += "Touching 🧮 to continue<br>"
                     self.updateTextView()
                 }
             }
@@ -587,18 +598,21 @@ class ImageViewController: UIViewController,
     // it to our textView
     private func setTextViewText(htmlStr hString: String)
     {
-        let data = Data(hString.utf8)
+        //let data = Data(hString.utf8)
+        let data = hString.data(using: String.Encoding.utf16, allowLossyConversion: true)
         let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
         
-        if let attribString = try? NSMutableAttributedString(data: data,
-                                                           options: [.documentType: NSAttributedString.DocumentType.html],
-                                                           documentAttributes: nil) {
-            
-            attribString.addAttribute(NSAttributedString.Key.font, value: font,
-                                      range: NSRange(location: 0,length: attribString.length))
-            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
-            
-            self.textView.attributedText = attribString
+        if let d = data {
+            if let attribString = try? NSMutableAttributedString(data: d,
+                                                                 options: [.documentType: NSAttributedString.DocumentType.html],
+                                                                 documentAttributes: nil) {
+                
+                attribString.addAttribute(NSAttributedString.Key.font, value: font,
+                                          range: NSRange(location: 0,length: attribString.length))
+                attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
+                
+                self.textView.attributedText = attribString
+            }
         }
     }
     

@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 2.0
+    var version: Float = 2.01
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -37,10 +37,28 @@ class ViewController: UIViewController {
         configureMenuItems()
         
         droneParams = DroneParams()
-        if app.settings.droneParamsURL != nil {
-            print("Going to load drone params from user supplied file")
-            droneParams = DroneParams(jsonURL: app.settings.droneParamsURL!)
-            print("Drone params date \(droneParams?.droneParamsLastUpdate)")
+        if app.settings.droneParamsBookmark != nil {
+            
+            // convert bookmark back into URL; save in defaults too
+            do {
+                var isStale = false
+                let aURL = try URL(resolvingBookmarkData: app.settings.droneParamsBookmark!, bookmarkDataIsStale: &isStale)
+                app.settings.droneParamsURL = aURL
+                print("Going to load drone params from user supplied bookmark/file \(app.settings.droneParamsURL)")
+                droneParams = DroneParams(jsonURL: app.settings.droneParamsURL!)
+                print("Drone params date \(droneParams?.droneParamsDate ?? "unkown")")
+                // depending on permissions, a droneParams json file may be loadable
+                // via dialog but not loadable at app start up; make sure we can
+                // fall back to the bundled loan param
+                // re issue #19
+                if droneParams == nil || droneParams?.droneParamsDate == nil || droneParams?.droneParamsDate == "" {
+                    print("Defaulting back to bundled droneParams file")
+                    droneParams = DroneParams()
+                }
+            }
+            catch {
+                print("Unable to convert saved drone params bookmark back to URL")
+            }
         }
         
         // load DEM cache
@@ -93,6 +111,8 @@ class ViewController: UIViewController {
         htmlString += "2: calculate &#129518; <br>"
         htmlString += "<br>Mash the &#127937; button to begin!<br>"
         
+        // htmlString += "<br>Drone params date: \(droneParams?.droneParamsDate ?? "none; please load")<br>"
+        
         // let aLocation = EGM96Location(lat: 33.753746, lng: -84.386330)
         // let offset = EGM96Geoid.getOffset(location: aLocation)
         // htmlString += "<br>Offset at \(aLocation) is \(offset)m<br>"
@@ -119,9 +139,9 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("ViewController viewWillAppear invoked")
+        // print("ViewController viewWillAppear invoked")
         doMain()
-                
+        
     } // viewWillAppear
     
     @objc private func didPinch(_ gesture: UIPinchGestureRecognizer) {
@@ -147,40 +167,40 @@ class ViewController: UIViewController {
     // create our main menu and glue it into navigation controller
     private func configureMenuItems()
     {
-        print("Configuring menus on main screen")
+        //print("Configuring menus on main screen")
         
         let optionsMenu = UIMenu(title: "", children: [
             UIAction(title:"Settings", image: UIImage(systemName:"gear")) {
                 action in
-                print("Settings")
+                //print("Settings")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"Manage Elevation Maps", image: UIImage(systemName:"map")) {
                 action in
-                print("Manage elevation maps")
+                //print("Manage elevation maps")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManageDemViewController") as! ManageDemViewController
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"Debug", image: UIImage(systemName:"binoculars.fill")) {
                 action in
-                print("Debug")
+                //print("Debug")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Debug") as! DebugViewController
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"Load Drone Info", image: UIImage(named:"drone")) {
                 action in
-                print("Load Drone Models")
+                //print("Load Drone Models")
                 let vc = DroneViewController()
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"About", image: UIImage(systemName:"info.circle")) {
                 action in
-                print("About")
+                //print("About")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "About") as! AboutViewController
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)

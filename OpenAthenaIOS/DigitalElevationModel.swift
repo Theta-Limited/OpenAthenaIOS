@@ -225,7 +225,7 @@ public class DigitalElevationModel {
             throw ElevationModuleError.IllegalArgumentException
         }
         
-        print("getAltitudeFromLatLong: started")
+        // print("getAltitudeFromLatLong: started")
         
         let x0 = xParams.start
         let x1 = xParams.end
@@ -338,7 +338,7 @@ public class DigitalElevationModel {
        
         let altWGS84 = altEGM96 - offset
         
-        print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
+        //print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
         
         return altWGS84
         

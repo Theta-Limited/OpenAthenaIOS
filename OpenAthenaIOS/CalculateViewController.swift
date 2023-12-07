@@ -381,40 +381,40 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     // create our main menu and glue it into navigation controller
     private func configureMenuItems()
     {
-        print("Configuring menus on calculate screen")
+        //print("Configuring menus on calculate screen")
         
         let optionsMenu = UIMenu(title: "", children: [
             UIAction(title:"Settings", image: UIImage(systemName:"gear.circle")) {
                 action in
-                print("Settings")
+                //print("Settings")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
                 vc.vc = self.vc
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"About", image: UIImage(systemName:"info.circle")) {
                 action in
-                print("About")
+                //print("About")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "About") as! AboutViewController
                 vc.vc = self.vc
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"Manage Elevation Maps", image: UIImage(systemName:"map")) {
                 action in
-                print("Manage elevation maps")
+                //print("Manage elevation maps")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManageDemViewController") as! ManageDemViewController
                 vc.vc = self.vc
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"Debug", image: UIImage(systemName:"binoculars.fill")) {
                 action in
-                print("Debug")
+                //print("Debug")
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "Debug") as! DebugViewController
                 vc.vc = self.vc
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             UIAction(title:"Reset pointer", image: UIImage(systemName:"arrow.clockwise")) {
                 action in
-                print("Reset pointer")
+                //print("Reset pointer")
                 // reset pointer back to 50% 50%
                 self.unMarkImagePixel()
                 self.vc.theDroneImage!.targetXprop =  0.50
@@ -426,7 +426,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             },
             UIAction(title:"Send CoT", image: UIImage(systemName: "target")) {
                 action in
-                print("Send CoT")
+                //print("Send CoT")
                 // grab target info out of target[] array
                 // get image date/time in iso8601/UTC format
                 let imageISO = self.vc.theDroneImage!.getDateTimeUTC()

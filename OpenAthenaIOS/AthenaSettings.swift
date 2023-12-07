@@ -97,6 +97,7 @@ public class AthenaSettings {
     var droneParamsURL: URL?
     var demDirectoryURL: URL?
     var imageDirectoryURL: URL?
+    var droneParamsBookmark: Data?
     
     public func loadDefaults()
     {
@@ -147,7 +148,11 @@ public class AthenaSettings {
             print("Read \(aStr) for ImageDirectoryURL")
             imageDirectoryURL = URL(string: aStr)
         }
-        
+        if let aBookmark = defaults.object(forKey: "DroneParamsBookmark") as? Data {
+            print("Read \(aBookmark) for DroneParamsBookmark")
+            droneParamsBookmark = aBookmark
+        }
+                
         if let aStr = defaults.object(forKey: "TAKMulticastIP") as? String {
             takMulticastIP = aStr
         }
@@ -186,6 +191,10 @@ public class AthenaSettings {
         if imageDirectoryURL != nil {
             print("Saving ImageDirectoryURL \(imageDirectoryURL!.absoluteString)")
             defaults.set(imageDirectoryURL!.absoluteString, forKey: "ImageDirectoryURL")
+        }
+        if droneParamsBookmark != nil {
+            print("Saving DroneParamsBookmark \(droneParamsBookmark)")
+            defaults.set(droneParamsBookmark!, forKey: "DroneParamsBookmark")
         }
         
         //print("writeDefault: outputMode is \(outputMode) \(outputMode.rawValue)")

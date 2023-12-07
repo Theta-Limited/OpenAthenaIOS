@@ -331,17 +331,17 @@ public class DroneImage {
         
         if metaData!["drone-dji:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-dji:AbsoluteAltitude"] as! NSString).doubleValue
-            print("alt: drone-dji:AbsoluteAltitude \(alt)")
+            print("getAltitude: drone-dji:AbsoluteAltitude \(alt)")
             //return alt
         }
         if metaData!["drone:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone:AbsoluteAltitude"] as! NSString).doubleValue
-            print("alt: drone:AbsoluteAltitude \(alt)")
+            print("getAltitude: drone:AbsoluteAltitude \(alt)")
             //return alt
         }
         if metaData!["drone-skydio:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-skydio:AbsoluteAltitude"] as! NSString).doubleValue
-            print("alt: drone-skydio:AbsoluteAltitude \(alt)")
+            print("getAltitude: drone-skydio:AbsoluteAltitude \(alt)")
             //return alt
         }
         
@@ -358,7 +358,7 @@ public class DroneImage {
         // if alt is still 0.0, grab here
         var altFromExif = false
         if alt == 0.0 {
-            print("alt:0.0, falling back to GPS")
+            print("getAltitude:0.0, falling back to GPS")
             
             if metaData!["{GPS}"] == nil {
                 print("getAltitude: no gps meta data, bugging out")
@@ -434,11 +434,11 @@ public class DroneImage {
         // drone-dji:AltitudeType=RtkAlt
         
         if xmlStringCopy?.lowercased().contains("rtkflag") == true {
-            print("getAlt: xmlstringcopy rtkflag is true")
+            print("getAltitude: xmlstringcopy rtkflag is true")
             rtkFlag = true
         }
         
-        print("getAlt: rtkFlag is \(rtkFlag)")
+        print("getAltitude: rtkFlag is \(rtkFlag)")
         
         // now, depending on drone type/make, convert from EGM96 to WGS84 if necessary
         var offset:Double = 0.0
@@ -452,18 +452,18 @@ public class DroneImage {
             // DJI, autel if tag rtkflag then its already in WGS84
             
             if rtkFlag == true {
-                print("getAlt: rtkFlag so already in WGS84")
+                print("getAltitude: rtkFlag so already in WGS84")
                 return alt // already in WGS84
             }
             
             if make.lowercased().contains("autel") {
-                print("getAlt: autel drone")
+                print("getAltitude: autel drone")
             }
             
             // 10/15/2023 looks like most parrot exif data is NOT in WGS84
             if altFromExif == true && !make.lowercased().contains("parrot") &&
                 !make.lowercased().contains("autel") {
-                print("getAlt: altFromExif, already in WGS84")
+                print("getAltitude: altFromExif, already in WGS84")
                 return alt // already in WGS84
             }
             
@@ -479,7 +479,7 @@ public class DroneImage {
                 // this is the front camera location with reference to the WGS84
                 // ellipsoid https://developer.parrot.com/docs/groundsdk-tools/photo-metadata.html
                 
-                print("getAlt: anafiai already in WGS84")
+                print("getAltitude: anafiai already in WGS84")
                 return alt // already in WGS84
             }
             
@@ -503,11 +503,76 @@ public class DroneImage {
         
         // if we get here, its EGM96; convert to WGS84
         
-        print("alt: \(alt) offset: \(offset)")
+        print("getAltitude: \(alt) offset: \(offset)")
         
         alt = alt - offset
         
-        print("alt: returning \(alt)")
+        print("getAltitude: returning \(alt)")
+        
+        return alt
+    }
+    
+    // given some DJIs and autel drones, altitude data can be erroneous
+    // so see if we have relative altitude and return that
+    // look for drone-dji:RelativeAltitude, drone:RelativeAltitude,
+    // and Camera.AboveGroundAltitude via XMP tags
+    
+    public func getRelativeAltitude() throws -> Double
+    {
+        var relativeAlt: Double = 0.0
+        
+        if metaData == nil {
+            print("getRelativeAltitude: no meta data")
+            throw DroneImageError.NoMetaData
+        }
+        
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        if metaData!["drone-dji:RelativeAltitude"] != nil {
+            relativeAlt = (metaData!["drone-dji:RelativeAltitude"] as! NSString).doubleValue
+            print("getRelativeAlt: drone dji relative alt is \(relativeAlt)")
+            return relativeAlt
+        }
+        
+        if metaData!["drone:RelativeAltitude"] != nil {
+            relativeAlt = (metaData!["drone:RelativeAltitude"] as! NSString).doubleValue
+            print("getRelativeAlt: drone relative alt is \(relativeAlt)")
+            return relativeAlt
+        }
+        
+        if metaData!["Camera:AboveGroundAltitude"] != nil {
+            let aStr = metaData!["Camera:AboveGroundAltitude"] as! NSString
+            // some values have a division / instead of just plain value
+            relativeAlt = try convertDivisionString(str: aStr)
+            print("getRelativeAlt: Camera AboveGroundAltitude is \(relativeAlt)")
+            return relativeAlt
+        }
+        
+        // throw error
+        throw DroneImageError.MissingMetaDataKey
+    }
+    
+    // get altitude in meters via relative altitude, DEM data, and EGM96 adjustments
+    // return altitude in WGS84
+    // can use this as fallback if drone reports nonsensical data for altitude
+    // sometimes drone report nonsensical relative altitude too XXX
+    // pass through any errors/exceptions we get
+    
+    public func getAltitudeViaRelative(dem: DigitalElevationModel) throws -> Double
+    {
+        var lat,lon: Double
+        
+        let relativeAlt = try getRelativeAltitude()
+        
+        // find alt of lat/lon and
+        try lat = getLatitude()
+        try lon = getLongitude()
+        let terrainAlt = try dem.getAltitudeFromLatLong(targetLat: lat, targetLong: lon)
+        let alt = relativeAlt + terrainAlt
+        
+        print("getAltitudeViaRelative: relative: \(relativeAlt), terrain: \(terrainAlt), alt: \(alt)")
         
         return alt
     }
@@ -1376,7 +1441,7 @@ public class DroneImage {
         var groundAlt: Double
         do {
             try groundAlt = dem.getAltitudeFromLatLong(targetLat: curLat, targetLong: curLon)
-            print("resolveTarget: groundAlt is \(groundAlt)")
+            //print("resolveTarget: groundAlt is \(groundAlt)")
         }
         catch {
             throw error
@@ -1710,6 +1775,25 @@ public class DroneImage {
      
     } // MyParserDelegate
 
+    // given a string that is value/value, do the division and return
+    // double; or just do the conversion
+    
+    private func convertDivisionString(str: NSString) throws -> Double
+    {
+        if str.contains("/") {
+            let aStr = String(str)
+            let components = aStr.split(separator:"/")
+            if let numerator = Double(components[0]), let denominator = Double(components[1]) {
+                return numerator / denominator
+            }
+        }
+        else {
+            return str.doubleValue
+        }
+        
+        throw DroneImageError.BadAltitude
+    }
+    
     
 } // DroneImage
     

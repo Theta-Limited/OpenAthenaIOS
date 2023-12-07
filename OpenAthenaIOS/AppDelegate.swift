@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // load the EGM96Geod here so its only loaded one time due to its size
         // and that it needs to be decompressed
         // XXX TODO
-        var aBool = EGM96Geoid.initEGM96Geoid()
+        let aBool = EGM96Geoid.initEGM96Geoid()
         if aBool == false {
             print("Failed to properly init EGM96Geoid")
         }        

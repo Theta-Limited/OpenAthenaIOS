@@ -30,6 +30,7 @@ final class TestDroneParams: XCTestCase {
         XCTAssertTrue((droneParams!.numberDroneModels()) > 1)
     }
     
+    // current for Nov 30 2023 droneModels release
     func testLookupDroneParams()
     {
         let ccdInfo = try? droneParams!.lookupDrone(makeModel: "djiFC3582")
@@ -37,27 +38,27 @@ final class TestDroneParams: XCTestCase {
         
         XCTAssert(ccdInfo != nil)
         XCTAssert(ccdInfo1 != nil)
-        XCTAssert(ccdInfo!.widthPixels == 8064)
-        XCTAssert(ccdInfo!.heightPixels == 6048)
-        XCTAssert(ccdInfo!.ccdWidthMMPerPixel == 9.7/8064.0)
-        XCTAssert(ccdInfo!.ccdHeightMMPerPixel == 7.3/6048.0)
+        XCTAssert(ccdInfo!.widthPixels == 4032)
+        XCTAssert(ccdInfo!.heightPixels == 3024)
+        XCTAssert(ccdInfo!.ccdWidthMMPerPixel == 0.0023883764)
+        XCTAssert(ccdInfo!.ccdHeightMMPerPixel == 0.002379536)
         
-        XCTAssert(ccdInfo1!.widthPixels == 8064)
-        XCTAssert(ccdInfo1!.heightPixels == 6048)
-        XCTAssert(ccdInfo1!.ccdWidthMMPerPixel == 9.7/8064.0)
-        XCTAssert(ccdInfo1!.ccdHeightMMPerPixel == 7.3/6048.0)
+        XCTAssert(ccdInfo1!.widthPixels == 4032)
+        XCTAssert(ccdInfo1!.heightPixels == 3024)
+        XCTAssert(ccdInfo1!.ccdWidthMMPerPixel == 0.0023883764)
+        XCTAssert(ccdInfo1!.ccdHeightMMPerPixel == 0.002379536)
         
         XCTAssert(ccdInfo1!.isThermal == false)
-        XCTAssert(ccdInfo1!.radialR1 == 0.0)
-        XCTAssert(ccdInfo1!.radialR2 == 0.0)
+        XCTAssert(ccdInfo1!.radialR1 == 0.11416479395258083)
+        XCTAssert(ccdInfo1!.radialR2 == -0.26230384345579)
         XCTAssert(ccdInfo1!.lensType == "perspective")
-        XCTAssert(ccdInfo1!.radialR3 == 0.0)
+        XCTAssert(ccdInfo1!.radialR3 == 0.22906477778853437)
         XCTAssert(ccdInfo1!.c == 0)
         XCTAssert(ccdInfo1!.d == 0)
         XCTAssert(ccdInfo1!.e == 0)
         XCTAssert(ccdInfo1!.f == 0)
-        XCTAssert(ccdInfo1!.tangentialT1 == 0.0)
-        XCTAssert(ccdInfo1!.tangentialT2 == 0.0)
+        XCTAssert(ccdInfo1!.tangentialT1 == -0.004601610146546272)
+        XCTAssert(ccdInfo1!.tangentialT2 == 0.0026292475166887)
     }
     
     func testMatchingDroneParams()

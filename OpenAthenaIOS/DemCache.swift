@@ -99,7 +99,7 @@ class DemCache
             print("Build cache: error \(error)")
         }
         
-        print("Cached \(cache.count) entries")
+        //print("Cached \(cache.count) entries")
         
     } // init
     
@@ -144,7 +144,7 @@ class DemCache
         var leastDistanceToCenter = Double.infinity
         var anEntry: DEM_cache_entry?
         
-        print("Searching cache for \(lat),\(lon)")
+        //print("Searching cache for \(lat),\(lon)")
         
         for dem in cache {
             //print("Examing box: \(dem.s),\(dem.n)   \(dem.w),\(dem.e)")
@@ -245,16 +245,16 @@ class DemCache
         
         // average the 4 distances
         let l = (d12 + d14 + d23 + d34) / 4
-        print("Distance \(l)")
+        // print("Distance \(l)")
         // calculate arlen
         let h = sqrt( 2.0 * pow((l/2.0),2.0)) / (6371 * 1000)
         
         // calculate center based on s,w -> width/length / 2
         let (clat,clon) = DemCache.translateCoordinate(lat: s, lon: w, bearing: 45.0, arcLen: h)
-        print("Center: \(clat),\(clon)")
+        //print("Center: \(clat),\(clon)")
         
         let p0 = CLLocation(latitude: clat, longitude: clon)
-        print("Distance to center is \(p0.distance(from: p1)) \(p0.distance(from: p2)) \(p0.distance(from: p3)) \(p0.distance(from: p4)) ")
+        //print("Distance to center is \(p0.distance(from: p1)) \(p0.distance(from: p2)) \(p0.distance(from: p3)) \(p0.distance(from: p4)) ")
         
         return (clat, clon, l)
         
@@ -266,7 +266,7 @@ class DemCache
     
     public static func translateCoordinate(lat: Double, lon: Double, bearing: Double, arcLen: Double) -> (Double, Double) {
         
-        print("translateCoordinate: \(lat),\(lon) \(arcLen)")
+        //print("translateCoordinate: \(lat),\(lon) \(arcLen)")
         
         let latR = lat * (Double.pi / 180.0)
         let lonR = lon * (Double.pi / 180.0)

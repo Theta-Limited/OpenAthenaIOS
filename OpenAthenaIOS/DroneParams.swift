@@ -75,14 +75,36 @@ public class DroneParams
                      poly4: 0)
     ]
     
-    // load drone params from the target url
+    // load drone params from the target url; this url must be converted
+    // to/from bookmark if it was saved from another UIDocumentPicker usage
+    // re issue #19
+    
     init(jsonURL theURL: URL)
     {
+        let fileManager = FileManager.default
+        var securityFlag: Bool = false
+        
         do {
+            
+            // re issue #19, make sure we have permission and if not, try to
+            // raise our permission level
+            if fileManager.isReadableFile(atPath: theURL.path) == false {
+                print("DroneParams: not readable so trying to scope resource")
+                securityFlag = theURL.startAccessingSecurityScopedResource()
+                guard securityFlag == true else {
+                    print("I don't have permission to read this drone models json file \(theURL.lastPathComponent)")
+                    return
+                }
+            }
             
             let data = try Data(contentsOf: theURL)
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
             //print("Json obj is: \(jsonObject)")
+            
+            if securityFlag == true {
+                theURL.stopAccessingSecurityScopedResource()
+            }
+            
             if let dictionary = jsonObject as? [String: Any] {
                 print("Drone models dictionary created!")
                 //let dateFormatter = DateFormatter()
