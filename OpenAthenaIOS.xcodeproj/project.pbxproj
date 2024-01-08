@@ -15,6 +15,10 @@
 		59109B8B2AD884E6000E75C4 /* DemCacheEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B8A2AD884E6000E75C4 /* DemCacheEntryController.swift */; };
 		59109B8D2AD88D16000E75C4 /* ManageDemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59109B8C2AD88D16000E75C4 /* ManageDemViewController.swift */; };
 		592CABB52A0ACF61006E28AF /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
+		593130432B48BA2E00DCE75B /* DroneImageDJI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593130422B48BA2E00DCE75B /* DroneImageDJI.swift */; };
+		593130452B48BB9E00DCE75B /* DroneImageAutel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593130442B48BB9E00DCE75B /* DroneImageAutel.swift */; };
+		593130472B48BBE500DCE75B /* DroneImageParrot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593130462B48BBE500DCE75B /* DroneImageParrot.swift */; };
+		593130492B48BC3600DCE75B /* DroneImageSkydio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593130482B48BC3600DCE75B /* DroneImageSkydio.swift */; };
 		593A29C92A17B3170098EAF1 /* TestCalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A29C82A17B3170098EAF1 /* TestCalculations.swift */; };
 		593A2A402A20FCF30098EAF1 /* TestMakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */; };
 		593A2A422A214ECA0098EAF1 /* DroneParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A2A412A214ECA0098EAF1 /* DroneParams.swift */; };
@@ -91,6 +95,10 @@
 		59109B8A2AD884E6000E75C4 /* DemCacheEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemCacheEntryController.swift; sourceTree = "<group>"; };
 		59109B8C2AD88D16000E75C4 /* ManageDemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageDemViewController.swift; sourceTree = "<group>"; };
 		592CABB42A0ACF61006E28AF /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = examples; sourceTree = "<group>"; };
+		593130422B48BA2E00DCE75B /* DroneImageDJI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneImageDJI.swift; sourceTree = "<group>"; };
+		593130442B48BB9E00DCE75B /* DroneImageAutel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneImageAutel.swift; sourceTree = "<group>"; };
+		593130462B48BBE500DCE75B /* DroneImageParrot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneImageParrot.swift; sourceTree = "<group>"; };
+		593130482B48BC3600DCE75B /* DroneImageSkydio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneImageSkydio.swift; sourceTree = "<group>"; };
 		593A29C82A17B3170098EAF1 /* TestCalculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCalculations.swift; sourceTree = "<group>"; };
 		593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMakeModel.swift; sourceTree = "<group>"; };
 		593A2A412A214ECA0098EAF1 /* DroneParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneParams.swift; sourceTree = "<group>"; };
@@ -224,6 +232,10 @@
 				59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */,
 				59B62B1F29860BF400F0C6B1 /* ImageViewController.swift */,
 				59B62B45298F3D5200F0C6B1 /* DroneImage.swift */,
+				593130422B48BA2E00DCE75B /* DroneImageDJI.swift */,
+				593130442B48BB9E00DCE75B /* DroneImageAutel.swift */,
+				593130482B48BC3600DCE75B /* DroneImageSkydio.swift */,
+				593130462B48BBE500DCE75B /* DroneImageParrot.swift */,
 				59B62B1D2984564300F0C6B1 /* AboutViewController.swift */,
 				59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */,
 				59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */,
@@ -454,8 +466,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				593130452B48BB9E00DCE75B /* DroneImageAutel.swift in Sources */,
+				593130432B48BA2E00DCE75B /* DroneImageDJI.swift in Sources */,
 				59DBFF102AD0C456003C4B33 /* FisheyeDistortionCorrector.swift in Sources */,
 				59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */,
+				593130472B48BBE500DCE75B /* DroneImageParrot.swift in Sources */,
 				59109B872AD86BE1000E75C4 /* DemDownloader.swift in Sources */,
 				59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */,
 				59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */,
@@ -474,6 +489,7 @@
 				59109B8B2AD884E6000E75C4 /* DemCacheEntryController.swift in Sources */,
 				59109B852AD868F6000E75C4 /* DemCacheController.swift in Sources */,
 				5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */,
+				593130492B48BC3600DCE75B /* DroneImageSkydio.swift in Sources */,
 				59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */,
 				596E927C2AAA0AC2003E35CD /* DroneViewController.swift in Sources */,
 				59109B892AD874D8000E75C4 /* NewDemController.swift in Sources */,
@@ -684,7 +700,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 421;
+				CURRENT_PROJECT_VERSION = 444;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -721,7 +737,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 421;
+				CURRENT_PROJECT_VERSION = 444;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -757,7 +773,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 421;
+				CURRENT_PROJECT_VERSION = 444;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -777,7 +793,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 421;
+				CURRENT_PROJECT_VERSION = 444;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

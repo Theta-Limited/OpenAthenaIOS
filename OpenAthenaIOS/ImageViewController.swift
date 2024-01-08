@@ -13,6 +13,8 @@ import PhotosUI
 import UIKit
 import Foundation
 import UniformTypeIdentifiers
+import ImageIO
+import MobileCoreServices
 
 class ImageViewController: UIViewController,
                            PHPickerViewControllerDelegate,
@@ -207,15 +209,17 @@ class ImageViewController: UIViewController,
         }
             
         do {
-            var data = try Data(contentsOf: imageURL)
-            var image = UIImage(data: data)
-            self.vc.theDroneImage = DroneImage()
-            self.vc.theDroneImage!.rawData = data
-            self.vc.theDroneImage!.theImage = image
-            self.vc.theDroneImage!.name = imageURL.lastPathComponent
-            self.vc.theDroneImage!.droneParams = self.vc.droneParams
-            self.vc.theDroneImage!.settings = app.settings
-            imageView.image = image
+//            var data = try Data(contentsOf: imageURL)
+//            var image = UIImage(data: data)
+//            self.vc.theDroneImage = DroneImage()
+//            self.vc.theDroneImage!.rawData = data
+//            self.vc.theDroneImage!.theImage = image
+//            self.vc.theDroneImage!.name = imageURL.lastPathComponent
+//            self.vc.theDroneImage!.droneParams = self.vc.droneParams
+//            self.vc.theDroneImage!.settings = app.settings
+//            imageView.image = image
+            
+            var anImage = createDroneImage(imageURL: imageURL)
             
             // save the directory of where we got this file
             var aDir = imageURL.deletingLastPathComponent()
@@ -229,10 +233,11 @@ class ImageViewController: UIViewController,
             //self.vc.theDroneImage!.metaData = md
             //self.vc.theDroneImage!.rawMetaData = md2
             
-            self.vc.theDroneImage!.updateMetaData()
+            // self.vc.theDroneImage!.updateMetaData()
 
             // print out some of the meta data
             getImageData()
+            
         }
         catch {
             print("Load image resulting in error \(error)")
@@ -286,6 +291,11 @@ class ImageViewController: UIViewController,
             do {
                 // might not be able to get the raw image data
                 // var data = image XXX
+                
+                // if we switch pack to photo picker, we need to handle
+                // determination of drone maker and create DroneImage or subclasses
+                // based on the manufacturer XXX
+                                
                 var data = Data()
                 self.vc.theDroneImage = DroneImage()
                 self.vc.theDroneImage!.rawData = data
@@ -341,22 +351,28 @@ class ImageViewController: UIViewController,
             htmlString = "Loading image<br>"
             print("Image url is \(imageURL!)")
             do {
-                let data = try Data(contentsOf: imageURL!)
-                var image = UIImage(data: data)
-                self.vc.theDroneImage = DroneImage()
-                self.vc.theDroneImage!.rawData = data
-                self.vc.theDroneImage!.theImage = image
-                self.vc.theDroneImage!.name = imageURL!.lastPathComponent
-                self.vc.theDroneImage!.droneParams = self.vc.droneParams
-                imageView.image = image
-                self.vc.theDroneImage!.settings = app.settings
+                
+                var anImage = createDroneImage(imageURL: imageURL!)
+                
+//                let data = try Data(contentsOf: imageURL!)
+//                var image = UIImage(data: data)
+//                self.vc.theDroneImage = DroneImage()
+//                self.vc.theDroneImage!.rawData = data
+//                self.vc.theDroneImage!.theImage = image
+//                self.vc.theDroneImage!.name = imageURL!.lastPathComponent
+//                self.vc.theDroneImage!.droneParams = self.vc.droneParams
+//                imageView.image = image
+//                self.vc.theDroneImage!.settings = app.settings
+                
                 // no need to save image directory since imagepicker
                 // will save this for us
                 
-                self.vc.theDroneImage!.updateMetaData()
+                // self.vc.theDroneImage!.updateMetaData()
+                
                 getImageData()
                 
                 // check for DEM and load if necessary
+                // if lat,lon == 0.0,0.0 don't bother XXX
                 let result = findLoadElevationMap()
                 htmlString += "Found elevation map: \(result)<br>"
                 
@@ -380,8 +396,7 @@ class ImageViewController: UIViewController,
         }
         
         setTextViewText(htmlStr: htmlString)
-        
-        
+                
     } // imagePicker
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
@@ -390,8 +405,78 @@ class ImageViewController: UIViewController,
     }
     
     // ---------------------------------------------------------------------
-    // regardless of picker, load raw image data
+    // regardless of picker, create a DroneImage and load raw image data
     // we need raw image data to access meta data and XMP/XML additions
+    
+    // create a drone image or subclass based on the image
+    // and manufacturer; kinda a chicken and egg
+    // in that we have to fetch some metadata
+    // to make the determination
+    // not all the EXIFF data is retrieved by
+    // the ios/swift libs so we use tiff:Make
+    // instead of exif.image.make
+    
+    func createDroneImage(imageURL: URL) -> DroneImage?
+    {
+        do {
+            
+            let data = try Data(contentsOf: imageURL)
+            var image = UIImage(data: data)
+            
+            let src = CGImageSourceCreateWithData(data as CFData, nil)
+            let md = CGImageSourceCopyPropertiesAtIndex(src!,0,nil)! as NSDictionary
+            let md2 = CGImageSourceCopyMetadataAtIndex(src!,0,nil)
+            let exifDict = md[kCGImagePropertyExifDictionary as String] as? [String: Any]
+            let metaData = md.mutableCopy() as! NSMutableDictionary
+            let rawMetaData = md2
+
+            //print("createDroneImage: exif dictionary is \(exifDict)")
+            
+            var makeStr = "unknown"
+            if metaData["tiff:Make"] != nil {
+                makeStr = metaData["tiff:Make"] as! String
+            }
+            else {
+                if metaData["{TIFF}"] != nil {
+                    var dict = metaData["{TIFF}"] as! NSDictionary
+                    if dict["Make"] != nil {
+                        makeStr = dict["Make"] as! String
+                    }
+                }
+            }
+            print("createDroneImage: make is \(makeStr)")
+            
+            switch makeStr.lowercased() {
+            case let str where str.contains("dji"):
+                self.vc.theDroneImage = DroneImageDJI()
+            case let str where str.contains("skydio"):
+                self.vc.theDroneImage = DroneImageSkydio()
+            case let str where str.contains("parrot"):
+                self.vc.theDroneImage = DroneImageParrot()
+            case let str where str.contains("autel"):
+                self.vc.theDroneImage = DroneImageAutel()
+            default: // all else including unknown
+                self.vc.theDroneImage = DroneImage()
+            }
+            self.vc.theDroneImage!.rawData = data
+            self.vc.theDroneImage!.theImage = image
+            self.vc.theDroneImage!.name = imageURL.lastPathComponent
+            self.vc.theDroneImage!.droneParams = self.vc.droneParams
+            self.vc.theDroneImage!.settings = app.settings
+            imageView.image = image
+            self.vc.theDroneImage!.updateMetaData()
+            
+            return nil
+        }
+        catch {
+            // error!
+            htmlString += "Loading image resulted in error \(error)<br>"
+        }
+        
+        return nil
+        
+    } // createDroneImage
+    
     // get meta data from image and output to textView
     
     private func getImageData()
@@ -498,7 +583,7 @@ class ImageViewController: UIViewController,
                 // load the DEM and return
                 try vc.dem = vc.demCache!.loadDemFromCache(lat: lat, lon: lon)
                 htmlString += "Loaded \(filename) from elevation map cache<br>"
-                htmlString += "Touching 🧮 to continue<br>"
+                htmlString += "Touch 🧮 to continue<br>"
                 
                 // would be nice to have the resulting filename be
                 // clickable for more information on the DEM itself
