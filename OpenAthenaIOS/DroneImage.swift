@@ -1329,7 +1329,9 @@ public class DroneImage {
     // 3 last altitude along raycast
     // 4 terrain altitude of datapoint nearest last raycast position
     // 5 is the gimbal pitch or theta in degrees
-    // 6 is set to zero for now for extra storage for target[3] + offset
+    // 6 azimuthOffset in degrees
+    // 7 thetaOffset or pitch offset in degrees
+    // 8 0.0 which used by caller to calculate target[3] + offset
     
     // add drone ccd info, if available, so we can locate target not at center XXX
     
@@ -1359,6 +1361,8 @@ public class DroneImage {
             
             (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixelCorrected(x: theImage!.size.width * targetXprop,
                 y: theImage!.size.height * targetYprop)
+            
+            print("resolveTarget: azOff \(azimuthOffset), thetaOff \(thetaOffset)")
             
             degAzimuth += azimuthOffset
             degTheta += thetaOffset
@@ -1392,7 +1396,7 @@ public class DroneImage {
                 tarLon = lon
                 tarAlt = terrainAlt
                 finalDist = fabs(alt - terrainAlt)
-                return [ finalDist, tarLat, tarLon, tarAlt, terrainAlt, degTheta, 0.0 ]
+                return [ finalDist, tarLat, tarLon, tarAlt, terrainAlt, degTheta, azimuthOffset, thetaOffset, 0.0 ]
             }
         }
         catch {
@@ -1486,7 +1490,7 @@ public class DroneImage {
         finalDist = sqrt(finalHorizDist*finalHorizDist + finalVertDist*finalVertDist)
         terrainAlt = groundAlt
         
-        return [finalDist, curLat, curLon, curAlt, terrainAlt, degTheta, 0.0 ]
+        return [finalDist, curLat, curLon, curAlt, terrainAlt, degTheta, azimuthOffset, thetaOffset, 0.0 ]
         
     } // resolveTarget()
     
