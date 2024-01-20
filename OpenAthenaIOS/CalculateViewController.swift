@@ -25,7 +25,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView = UIScrollView()
     var contentView: UIView = UIView()
     var htmlString: String = ""
-    var target: [Double] = [0,0,0,0,0,0,0]
+    var target: [Double] = [0,0,0,0,0,0,0,0,0]
     var adjustedAlt: Double = 0.0
     var cotSender: CursorOnTargetSender?
     
@@ -212,10 +212,12 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         // 3 last altitude along raycast is WGS84 
         // 4 terrain altitude of datapoint nearest last raycast position
         // 5 is the gimbalPitchDegree or theta
-        // 6 is adjusted alt target[3] + offset which we calculate and set
+        // 6 azimuthOffset in degrees
+        // 7 thetaOffset or pitch offset in degrees
+        // 8 is adjusted alt target[3] + offset which we calculate and set
+        // check for [ 0,0,0,0,0,0,0,0 ]
         
-        // check for [ 0,0,0,0,0,0,0 ]
-        if target == [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] {
+        if target == [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] {
             setTextViewText(htmlStr: htmlString)
             return
         }
@@ -227,10 +229,18 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         let lonStr = roundDigitsToString(val: target[2], precision: 6)
         let distanceStr = roundDigitsToString(val: target[0], precision: 6)
         let altStr = roundDigitsToString(val: target[3] + offset, precision: 6)
-        target[6] = target[3] + offset
+        let azOff = roundDigitsToString(val: target[6], precision: 2)
+        // swap sign of thetaOff to keep with aircraft conventions (tait-bryan)
+        let thetaOff = roundDigitsToString(val: -1.0 * target[7], precision: 2)
+        target[8] = target[3] + offset
+        
         //let nearestAltStr = roundDigitsToString(val: target[4] + offset, precision: 6)
         
         print("resolveTarget returned \(target)")
+        
+        htmlString += "Azimuth offset: \(azOff) degrees<br>"
+        htmlString += "Theta (pitch) offset: \(thetaOff) degrees<br>"
+        
         htmlString += "Distance to target \(distanceStr) meters<br>"
         //htmlString += "Nearest terrain alt \(nearestAltStr) meters<br>"
         
@@ -361,7 +371,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         }
         
         do {
-            try self.htmlString += "GimbalPitch/Theta \(self.vc.theDroneImage!.getGimbalPitchDegree())<br>"
+            // convert display output to tait-bryan which is down is negative
+            try self.htmlString += "GimbalPitch/Theta \(-1.0 * self.vc.theDroneImage!.getGimbalPitchDegree())<br>"
         }
         catch {
             self.htmlString += "GimbalPitch/Theta: \(error)<br>"
@@ -433,8 +444,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                                 
                 let ret = self.cotSender?.sendCoT(targetLat: self.target[1], targetLon: self.target[2],
                                                   // adjusted alt of target
-                                                  // Hae: self.target[6],
-                                                  Hae: self.target[3], 
+                                                  // Hae: self.target[8],
+                                                  Hae: self.target[3],
                                                   Theta: self.target[5],
                                                   exifDateTimeISO: imageISO)
                 
