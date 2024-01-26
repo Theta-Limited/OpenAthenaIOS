@@ -783,11 +783,13 @@ public class DroneImage {
         if metaData!["{Exif}"] != nil {
             var dict = metaData!["{Exif}"] as! NSDictionary
             if dict["FocalLengthIn35mmFormat"] != nil {
-                return dict["FocalLengthIn35mmFormat"] as! Double
+                var fl: Double = dict["FocalLengthIn35mmFormat"] as! Double
+                print("getFocalLengthIn35mm: returning \(fl)")
+                return fl
             }
         }
         
-        print("getFocalLengthIn354mm metadata key not found")
+        print("getFocalLengthIn35mm metadata key not found")
         
         throw DroneImageError.MetaDataKeyNotFound
     }
@@ -1014,6 +1016,8 @@ public class DroneImage {
         return (azimuth,elevation)
     }
     
+    // if drone is unknown, don't bomb out of this function
+    // issue #21
     private func getRayAnglesFromImagePixelCorrected(x: Double, y: Double) throws -> (Double,Double)
     {
         print("getRayAnglesFromImagePixel: corrected starting")
@@ -1093,7 +1097,9 @@ public class DroneImage {
         }
         catch {
             print("No drone model info; use focal length ")
-            throw DroneImageError.MissingCCDInfo
+            //throw DroneImageError.MissingCCDInfo
+            // don't throw error, instead have a popup warning XXX
+            // a warning is output in the text field for the calculation
         }
         
         // now, calculate ray angles using undistorted coordinates

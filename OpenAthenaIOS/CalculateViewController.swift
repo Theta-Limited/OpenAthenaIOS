@@ -166,7 +166,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             let groundAlt = try self.vc.dem?.getAltitudeFromLatLong(
                     targetLat: self.vc.theDroneImage!.getLatitude(),
                     targetLong: self.vc.theDroneImage!.getLongitude())
-            htmlString += "Ground altitude under drone is \(groundAlt ?? -1.0)<br>"
+            let groundAltStr = roundDigitsToString(val: groundAlt ?? -1, precision: 6)
+            htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
             
             // calculate altitude of what we're looking at
             try target = vc!.theDroneImage!.resolveTarget(dem: vc!.dem!)
@@ -364,7 +365,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         do {
             let droneAlt = try self.vc.theDroneImage!.getAltitude()
             let droneAltStr = roundDigitsToString(val: droneAlt, precision: 6)
-            self.htmlString += "Drone Altitude: \(droneAltStr)<br>"
+            self.htmlString += "Drone Altitude: \(droneAltStr)m (hae)<br>"
         }
         catch {
             self.htmlString += "DroneAltitude: \(error)<br>"

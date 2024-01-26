@@ -14,8 +14,8 @@
             filePath = "OpenAthenaIOS/DroneImage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1355"
-            endingLineNumber = "1355"
+            startingLineNumber = "1361"
+            endingLineNumber = "1361"
             landmarkName = "resolveTarget(dem:)"
             landmarkType = "7">
          </BreakpointContent>

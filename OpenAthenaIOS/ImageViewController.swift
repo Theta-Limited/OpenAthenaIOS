@@ -380,7 +380,8 @@ class ImageViewController: UIViewController,
                     let groundAlt = try self.vc.dem?.getAltitudeFromLatLong(
                         targetLat: self.vc.theDroneImage!.getLatitude(),
                         targetLong: self.vc.theDroneImage!.getLongitude())
-                    self.htmlString += "Ground altitude under drone is \(groundAlt ?? -1.0)<br>"
+                    let groundAltStr = roundDigitsToString(val: groundAlt ?? -1.0, precision: 6)
+                    self.htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
                 }
                 
             }
@@ -509,14 +510,18 @@ class ImageViewController: UIViewController,
         }
         
         do {
-            try self.htmlString += "Drone altitude: \(self.vc.theDroneImage!.getAltitude())<br>"
+            let droneAlt = try self.vc.theDroneImage!.getAltitude()
+            let droneAltStr = roundDigitsToString(val: droneAlt, precision: 6)
+            self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
         }
         catch {
             self.htmlString += "Drone altitude: \(error)<br>"
         }
         
         do {
-            try self.htmlString += "Drone relative altitude: \(self.vc.theDroneImage!.getRelativeAltitude())<br>"
+            let droneRelAlt = try self.vc.theDroneImage!.getRelativeAltitude()
+            let droneRelAltStr = roundDigitsToString(val: droneRelAlt, precision: 6)
+            self.htmlString += "Drone relative altitude: \(droneRelAltStr)m (hae)<br>"
         }
         catch {
             self.htmlString += "Drone relative altitude: not reported<br>"
@@ -594,19 +599,24 @@ class ImageViewController: UIViewController,
                 print("Did not find DEM")
                 result = false
                 // would you like me to download one?
-                shouldIDownloadAlert(lat: lat, lon: lon, len: 15000.0)
+                if lat != 0.0 && lon != 0.0 {
+                    shouldIDownloadAlert(lat: lat, lon: lon, len: 15000.0)
+                }
+                else {
+                    htmlString += "Can't download an elevation map without coordinates.  Does this image have exif data?<br>"
+                }
             }
         }
         catch {
-            print("Did not find DEM")
+            print("Caught error: Did not find DEM for \(lat),\(lon)")
             result = false
             htmlString += "Error locating image coordinates or digital elevation map<br>"
             // would you like me to download one?
-            if lat != 0 && lon != 0 {
+            if lat != 0.0 && lon != 0.0 {
                 shouldIDownloadAlert(lat: lat, lon: lon, len: 15000.0)
             }
             else {
-                htmlString += "Can't download an elevation map without coordinates<br>"
+                htmlString += "Can't download an elevation map without coordinates.  Does this image have exif data?<br>"
             }
         }
         
@@ -699,6 +709,13 @@ class ImageViewController: UIViewController,
                 self.textView.attributedText = attribString
             }
         }
+    }
+    
+    // take a double (e.g. lat, lon, elevation, etc. and round to 6 digits of precision and
+    // return string
+    public func roundDigitsToString(val: Double, precision: Double) -> String {
+        let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
+        return String(num)
     }
     
 } // ImageViewController
