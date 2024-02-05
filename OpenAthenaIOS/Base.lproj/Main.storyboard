@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lTP-Rq-dii">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lTP-Rq-dii">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -349,96 +349,6 @@
             </objects>
             <point key="canvasLocation" x="697" y="663"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="KbT-1M-y7y">
-            <objects>
-                <viewController storyboardIdentifier="Settings" title="Settings" id="Wyq-3u-bVp" customClass="SettingsViewController" customModule="OpenAthena" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UFh-t4-6Ug">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nk-Dw-Lfg">
-                                <rect key="frame" x="36.666666666666657" y="166" width="320" height="216"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                <color key="tintColor" systemColor="labelColor"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎯Output Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrG-MY-WdS">
-                                <rect key="frame" x="120.33333333333333" y="134" width="152.33333333333337" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbA-uP-BoZ">
-                                <rect key="frame" x="166" y="733" width="61" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
-                                <connections>
-                                    <action selector="didTapSaveButton" destination="Wyq-3u-bVp" eventType="touchUpInside" id="7pj-fV-oIi"/>
-                                </connections>
-                            </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zda-Fq-85h">
-                                <rect key="frame" x="69.666666666666686" y="523" width="254" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="zwm-O5-z8q"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="compassCorrectionSliderDidSlide:" destination="Wyq-3u-bVp" eventType="valueChanged" id="hOu-5q-zln"/>
-                                </connections>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Azimuth Correction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtn-IQ-xTB">
-                                <rect key="frame" x="93" y="432" width="207" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QH9-U5-sl3">
-                                <rect key="frame" x="100" y="473" width="100" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="86Z-GI-FoQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9C-mx-D2j">
-                                <rect key="frame" x="250" y="468" width="68" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Reset"/>
-                                <connections>
-                                    <action selector="didTouchReset" destination="Wyq-3u-bVp" eventType="touchUpInside" id="L2I-4V-fyU"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Qhg-kq-cGG"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Rtn-IQ-xTB" firstAttribute="centerX" secondItem="UFh-t4-6Ug" secondAttribute="centerX" id="1D6-Ai-F5t"/>
-                            <constraint firstItem="RrG-MY-WdS" firstAttribute="centerX" secondItem="UFh-t4-6Ug" secondAttribute="centerX" id="2gP-A9-HyL"/>
-                            <constraint firstItem="zda-Fq-85h" firstAttribute="centerX" secondItem="UFh-t4-6Ug" secondAttribute="centerX" id="CqU-xb-qdS"/>
-                            <constraint firstItem="NbA-uP-BoZ" firstAttribute="centerX" secondItem="UFh-t4-6Ug" secondAttribute="centerX" id="J3P-CJ-ZHE"/>
-                            <constraint firstItem="Qhg-kq-cGG" firstAttribute="bottom" secondItem="NbA-uP-BoZ" secondAttribute="bottom" constant="50" id="N6f-yg-aKa"/>
-                            <constraint firstItem="zda-Fq-85h" firstAttribute="top" secondItem="t9C-mx-D2j" secondAttribute="bottom" constant="20" id="Q0H-nV-VWY"/>
-                            <constraint firstItem="Rtn-IQ-xTB" firstAttribute="top" secondItem="3nk-Dw-Lfg" secondAttribute="bottom" constant="50" id="R8K-Pt-7ya"/>
-                            <constraint firstItem="3nk-Dw-Lfg" firstAttribute="centerX" secondItem="UFh-t4-6Ug" secondAttribute="centerX" id="UZY-hP-mXR"/>
-                            <constraint firstItem="QH9-U5-sl3" firstAttribute="leading" secondItem="Qhg-kq-cGG" secondAttribute="leading" constant="100" id="XpO-hR-cxG"/>
-                            <constraint firstItem="t9C-mx-D2j" firstAttribute="leading" secondItem="QH9-U5-sl3" secondAttribute="trailing" constant="50" id="dVV-0A-qBM"/>
-                            <constraint firstItem="3nk-Dw-Lfg" firstAttribute="top" secondItem="RrG-MY-WdS" secondAttribute="bottom" constant="5" id="n7b-uo-9d8"/>
-                            <constraint firstItem="t9C-mx-D2j" firstAttribute="top" secondItem="Rtn-IQ-xTB" secondAttribute="bottom" constant="15" id="qEj-Qc-cNK"/>
-                            <constraint firstItem="RrG-MY-WdS" firstAttribute="top" secondItem="Qhg-kq-cGG" secondAttribute="top" constant="75" id="rls-AK-waT"/>
-                            <constraint firstItem="QH9-U5-sl3" firstAttribute="top" secondItem="Rtn-IQ-xTB" secondAttribute="bottom" constant="20" id="s3A-tC-2fE"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="compassOffsetLabel" destination="Rtn-IQ-xTB" id="nnW-B6-hLl"/>
-                        <outlet property="compassOffsetSlider" destination="zda-Fq-85h" id="AHe-Vc-EUx"/>
-                        <outlet property="compassOffsetValueLabel" destination="QH9-U5-sl3" id="VuF-gc-uxd"/>
-                        <outlet property="pickerView" destination="3nk-Dw-Lfg" id="Mmf-f3-qnY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nHj-XW-mZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1368.7022900763359" y="662.67605633802816"/>
-        </scene>
         <!--About-->
         <scene sceneID="TrB-wu-ISd">
             <objects>
@@ -515,10 +425,10 @@
     </scenes>
     <resources>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

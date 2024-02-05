@@ -22,6 +22,16 @@ enum DroneImageError: String, Error {
     case MissingCCDInfo = "Missing CCD info for this image"
     case NoExifData = "No exif data"
     case BadAltitude = "Bad altitude or terrain data; this image is unusable"
+    case MissingAltitude = "Missing altitude data"
+    case MissingAzimuth = "Missing azimuth/yaw data"
+    case MissingTheta = "Missing pitch/theta data"
+    case ParameterNotImplemented = "Parameter not implemented"
+}
+
+public enum DroneTargetResolution {
+    case AltitudeFromGPS       // use reported GPS altitude value from metadata within image
+    case AltitudeFromRelative  // calculate altitude from reported relative altitude and ground alt under drone
+    case AltitudeAboveGround   // calculate altitude from reported AboveGroundGround and ground alt under drone
 }
 
 extension Data {
@@ -367,7 +377,7 @@ public class DroneImage {
             gpsInfo = metaData!["{GPS}"] as! NSDictionary
             if gpsInfo["Altitude"] == nil {
                 print("getAltitude: no altitude within GPS data, bugging out")
-                throw DroneImageError.MissingMetaDataKey
+                throw DroneImageError.MissingAltitude
             }
             alt = gpsInfo["Altitude"] as! Double
             altFromExif = true
@@ -467,7 +477,6 @@ public class DroneImage {
                 return alt // already in WGS84
             }
             
-            
             // if parrot anafiai, is in WGS84
             if model.lowercased().contains("anafiai") == true {
                 
@@ -517,64 +526,28 @@ public class DroneImage {
     // look for drone-dji:RelativeAltitude, drone:RelativeAltitude,
     // and Camera.AboveGroundAltitude via XMP tags
     
+    // should be implemented by subclasses
     public func getRelativeAltitude() throws -> Double
     {
-        var relativeAlt: Double = 0.0
-        
-        if metaData == nil {
-            print("getRelativeAltitude: no meta data")
-            throw DroneImageError.NoMetaData
-        }
-        
-        if xmpDataRead == false {
-            parseXmpMetaDataNoError()
-        }
-        
-        if metaData!["drone-dji:RelativeAltitude"] != nil {
-            relativeAlt = (metaData!["drone-dji:RelativeAltitude"] as! NSString).doubleValue
-            print("getRelativeAlt: drone dji relative alt is \(relativeAlt)")
-            return relativeAlt
-        }
-        
-        if metaData!["drone:RelativeAltitude"] != nil {
-            relativeAlt = (metaData!["drone:RelativeAltitude"] as! NSString).doubleValue
-            print("getRelativeAlt: drone relative alt is \(relativeAlt)")
-            return relativeAlt
-        }
-        
-        if metaData!["Camera:AboveGroundAltitude"] != nil {
-            let aStr = metaData!["Camera:AboveGroundAltitude"] as! NSString
-            // some values have a division / instead of just plain value
-            relativeAlt = try convertDivisionString(str: aStr)
-            print("getRelativeAlt: Camera AboveGroundAltitude is \(relativeAlt)")
-            return relativeAlt
-        }
-        
-        // throw error
-        throw DroneImageError.MissingMetaDataKey
+        throw DroneImageError.ParameterNotImplemented
+    }
+    public func getAltitudeAboveGround() throws -> Double
+    {
+        throw DroneImageError.ParameterNotImplemented
     }
     
-    // get altitude in meters via relative altitude, DEM data, and EGM96 adjustments
+    // get altitude in meters via relative or above ground altitude, DEM data, and EGM96 adjustments
     // return altitude in WGS84
     // can use this as fallback if drone reports nonsensical data for altitude
-    // sometimes drone report nonsensical relative altitude too XXX
+    // sometimes drone report nonsensical relative altitude too 
     // pass through any errors/exceptions we get
     
-    public func getAltitudeViaRelative(dem: DigitalElevationModel) throws -> Double
-    {
-        var lat,lon: Double
-        
-        let relativeAlt = try getRelativeAltitude()
-        
-        // find alt of lat/lon and
-        try lat = getLatitude()
-        try lon = getLongitude()
-        let terrainAlt = try dem.getAltitudeFromLatLong(targetLat: lat, targetLong: lon)
-        let alt = relativeAlt + terrainAlt
-        
-        print("getAltitudeViaRelative: relative: \(relativeAlt), terrain: \(terrainAlt), alt: \(alt)")
-        
-        return alt
+    // should be implemented by subclasses
+    public func getAltitudeViaRelative(dem: DigitalElevationModel) throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    public func getAltitudeViaAboveGround(dem: DigitalElevationModel) throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
     }
     
     // camera/gimbal pitch degree or theta
@@ -622,7 +595,7 @@ public class DroneImage {
             return fabs(90 - theta)
         }
        
-        throw DroneImageError.MissingMetaDataKey
+        throw DroneImageError.MissingTheta
         
     } // getGimbalPitchDegree
     
@@ -690,7 +663,7 @@ public class DroneImage {
             return az.truncatingRemainder(dividingBy: 360.0)
         }
         
-        throw DroneImageError.MissingMetaDataKey
+        throw DroneImageError.MissingAzimuth
         
     } // getGimbalYawDegree
     
@@ -929,6 +902,7 @@ public class DroneImage {
         // focal length in pixels
         var alphaX = (imageWidth * zoomRatio) * focalLength35mmEquiv / 36.0
         var alphaY = alphaX / ccdAspectRatio
+        
         matrix[0] = alphaX // focal length in X direction in pixels
         matrix[1] = 0.0 // gamma, the skew coefficient between x, y axis; often 0
         matrix[4] = alphaY // focal length in Y direction in pixels
@@ -967,11 +941,23 @@ public class DroneImage {
         var imageHeight = theImage!.size.height
         var pixelAspectRatio = ccdInfo!.ccdWidthMMPerPixel / ccdInfo!.ccdHeightMMPerPixel
         
+        // if its a autel drone and its a thermal then
+        // ignore zoom
+        // issue #25
+        var cameraMake = ""
+        do { cameraMake = try getCameraMake() } catch { cameraMake = "" }
+
+        if ccdInfo!.isThermal == true && cameraMake.lowercased() == "autel robotics" {
+            print("getIntrinsicMatrixFromKnownCCD: autel thermal camera, setting zoom to 1.0")
+            zoomRatio = 1.0
+        }
+        
         var scaleRatio = imageWidth * zoomRatio / ccdInfo!.widthPixels // ratio current size : original size on x axis
         var alphaX = f / ccdInfo!.ccdWidthMMPerPixel // focal length in x direction in pixels
         alphaX = alphaX * scaleRatio
         var alphaY = alphaX / pixelAspectRatio // focal length in y direction in pixels
-        alphaY = alphaY * scaleRatio
+        // re issue #27, don't multiply alphay again by scaleRatio
+        // alphaY = alphaY * scaleRatio
         
         matrix[0] = alphaX
         matrix[1] = 0.0 // gamma, skew coefficient between x and y axis, often 0
@@ -1339,9 +1325,15 @@ public class DroneImage {
     // 7 thetaOffset or pitch offset in degrees
     // 8 0.0 which used by caller to calculate target[3] + offset
     
-    // add drone ccd info, if available, so we can locate target not at center XXX
+    // add drone ccd info, if available, so we can locate target not at center
     
-    public func resolveTarget(dem: DigitalElevationModel) throws -> [Double]
+    // normally, calculate using normal altitude contained within metadata
+    // but sometimes consumer drones like DJI have pretty bad altitude readings
+    // consequently, we can also run the calculations using a derived altitude
+    // computed using relative altitude plus wgs84 ground altitude under drone
+    // offer this as option if user so chooses
+    
+    public func resolveTarget(dem: DigitalElevationModel, altReference: DroneTargetResolution) throws -> [Double]
     {
         var finalDist, tarLat, tarLon, tarAlt, terrainAlt: Double
         var radAzimuth: Double
@@ -1381,7 +1373,17 @@ public class DroneImage {
             radTheta = degTheta.radians
             try lat = getLatitude()
             try lon = getLongitude()
-            try alt = getAltitude()
+            switch altReference {
+            case .AltitudeFromGPS:
+                print("resolveTarget: GPS altitude")
+                try alt = getAltitude()
+            case .AltitudeAboveGround:
+                print("resolveTarget: altitude above ground")
+                try alt = getAltitudeViaAboveGround(dem: dem)
+            case .AltitudeFromRelative:
+                print("resolveTarget: relative altitude")
+                try alt = getAltitudeViaRelative(dem: dem)
+            }
             
             print("resolveTarget: lat: \(lat) lon: \(lon) alt: \(alt)")
         }
@@ -1788,7 +1790,7 @@ public class DroneImage {
     // given a string that is value/value, do the division and return
     // double; or just do the conversion
     
-    private func convertDivisionString(str: NSString) throws -> Double
+    internal func convertDivisionString(str: NSString) throws -> Double
     {
         if str.contains("/") {
             let aStr = String(str)

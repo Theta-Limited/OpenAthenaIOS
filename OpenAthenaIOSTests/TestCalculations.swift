@@ -111,7 +111,7 @@ final class TestCalculations: XCTestCase {
         
         djiDroneImage.targetXprop = 0.50
         djiDroneImage.targetYprop = 0.50
-        try target = djiDroneImage.resolveTarget(dem: djiDem)
+        try target = djiDroneImage.resolveTarget(dem: djiDem, altReference: DroneTargetResolution.AltitudeFromGPS)
         
         print("testResolveTarget: \(target)")
         
@@ -134,7 +134,8 @@ final class TestCalculations: XCTestCase {
     
         djiDroneImage.targetXprop = 0.25
         djiDroneImage.targetYprop = 0.25
-        try target = djiDroneImage.resolveTarget(dem: djiDem)
+        try target = djiDroneImage.resolveTarget(dem: djiDem,
+                                                 altReference: DroneTargetResolution.AltitudeFromGPS)
         
         print("testResolveTarget: \(target)")
         
@@ -162,7 +163,7 @@ final class TestCalculations: XCTestCase {
         
         skydioDroneImage.targetXprop = 0.50
         skydioDroneImage.targetYprop = 0.50
-        try target = skydioDroneImage.resolveTarget(dem: skydioDem)
+        try target = skydioDroneImage.resolveTarget(dem: skydioDem,altReference: DroneTargetResolution.AltitudeFromGPS)
         
         print("target is \(target)")
         
@@ -178,7 +179,7 @@ final class TestCalculations: XCTestCase {
         // thats OK; make sure an error is thrown
         skydioDroneImage.targetXprop = 0.25
         skydioDroneImage.targetYprop = 0.25
-        XCTAssertThrowsError(target = try skydioDroneImage.resolveTarget(dem: skydioDem))
+        XCTAssertThrowsError(target = try skydioDroneImage.resolveTarget(dem: skydioDem,altReference: DroneTargetResolution.AltitudeFromGPS))
         
         print("testResolveTarget: \(target)")
     } // testSkydio
@@ -192,7 +193,7 @@ final class TestCalculations: XCTestCase {
         
         autelDroneImage.targetXprop = 0.50
         autelDroneImage.targetYprop = 0.50
-        try target = autelDroneImage.resolveTarget(dem: autelDem)
+        try target = autelDroneImage.resolveTarget(dem: autelDem,altReference: DroneTargetResolution.AltitudeFromGPS)
         
         print("testResolveTarget: \(target)")
         
@@ -211,7 +212,7 @@ final class TestCalculations: XCTestCase {
     
         autelDroneImage.targetXprop = 0.25
         autelDroneImage.targetYprop = 0.25
-        try target = autelDroneImage.resolveTarget(dem: autelDem)
+        try target = autelDroneImage.resolveTarget(dem: autelDem,altReference: DroneTargetResolution.AltitudeFromGPS)
         
         print("testResolveTarget: \(target)")
         
@@ -242,7 +243,7 @@ final class TestCalculations: XCTestCase {
         
         // right now, this parrot-1 image throws exception for out of bounds
         // need to test on parrot-2 XXX
-        XCTAssertThrowsError(try target = parrotDroneImage.resolveTarget(dem: parrotDem))
+        XCTAssertThrowsError(try target = parrotDroneImage.resolveTarget(dem: parrotDem,altReference: DroneTargetResolution.AltitudeFromGPS))
         
 //        print("testResolveTarget: \(target)")
 //

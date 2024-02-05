@@ -40,7 +40,7 @@ public class DroneImageParrot: DroneImage
         var gpsInfo = metaData!["{GPS}"] as! NSDictionary
         if gpsInfo["Altitude"] == nil {
             print("getAltitudeParrot: no altitude within gps data")
-            throw DroneImageError.MissingMetaDataKey
+            throw DroneImageError.MissingAltitude
         }
         alt = gpsInfo["Altitude"] as! Double
     
@@ -98,4 +98,53 @@ public class DroneImageParrot: DroneImage
         return alt
     }
     
-}
+    override public func getRelativeAltitude() throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    override public func getAltitudeViaRelative(dem: DigitalElevationModel) throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    
+    override public func getAltitudeAboveGround() throws -> Double
+    {
+        var relativeAlt: Double = 0.0
+        
+        if metaData == nil {
+            print("getAltitudeAboveGroundParrot: no meta data")
+            throw DroneImageError.NoMetaData
+        }
+        
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        if metaData!["Camera:AboveGroundAltitude"] != nil {
+            let aStr = metaData!["Camera:AboveGroundAltitude"] as! NSString
+            // some values have a division / instead of just plain value
+            relativeAlt = try super.convertDivisionString(str: aStr)
+            print("getAltitudeAboveGroundParrot: Camera AboveGroundAltitude is \(relativeAlt)")
+            return relativeAlt
+        }
+        
+        // throw error
+        throw DroneImageError.MissingAltitude
+    }
+
+    override public func getAltitudeViaAboveGround(dem: DigitalElevationModel) throws -> Double
+    {
+        var lat,lon: Double
+        
+        let altAboveGround = try getAltitudeAboveGround()
+        
+        // find alt of lat/lon and
+        try lat = getLatitude()
+        try lon = getLongitude()
+        let terrainAlt = try dem.getAltitudeFromLatLong(targetLat: lat, targetLong: lon)
+        let alt = altAboveGround + terrainAlt
+        
+        print("getAltitudeViaAboveGroundParrot: altAboveGround: \(altAboveGround), terrain: \(terrainAlt), alt: \(alt)")
+        
+        return alt
+    }
+    
+} // DroneImageParrot

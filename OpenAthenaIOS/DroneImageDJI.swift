@@ -74,5 +74,54 @@ public class DroneImageDJI: DroneImage
         
         return alt
     }
-}
+    
+    override public func getRelativeAltitude() throws -> Double
+    {
+        var relativeAlt: Double = 0.0
+        
+        if metaData == nil {
+            print("getRelativeAltitudeDJI: no meta data")
+            throw DroneImageError.NoMetaData
+        }
+        
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        if metaData!["drone-dji:RelativeAltitude"] != nil {
+            relativeAlt = (metaData!["drone-dji:RelativeAltitude"] as! NSString).doubleValue
+            print("getRelativeAltDJI: drone relative alt is \(relativeAlt)")
+            return relativeAlt
+        }
+        
+        // throw error
+        throw DroneImageError.MissingAltitude
+    }
+    
+    // DJIs don't provide Camera:AltitudeAboveGround
+    override public func getAltitudeAboveGround() throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    override public func getAltitudeViaAboveGround(dem: DigitalElevationModel) throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    
+    override public func getAltitudeViaRelative(dem: DigitalElevationModel) throws -> Double
+    {
+        var lat,lon: Double
+        
+        let relativeAlt = try getRelativeAltitude()
+        
+        // find alt of lat/lon and
+        try lat = getLatitude()
+        try lon = getLongitude()
+        let terrainAlt = try dem.getAltitudeFromLatLong(targetLat: lat, targetLong: lon)
+        let alt = relativeAlt + terrainAlt
+        
+        print("getAltitudeViaRelativeDJI: relative: \(relativeAlt), terrain: \(terrainAlt), alt: \(alt)")
+        
+        // altitude is in WGS84
+        return alt
+    }
+} // DroneImageDJI
 

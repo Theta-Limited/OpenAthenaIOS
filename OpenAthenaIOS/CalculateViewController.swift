@@ -109,7 +109,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
             
         markImagePixel(x_prop: vc.theDroneImage!.targetXprop, y_prop: vc.theDroneImage!.targetYprop)
-        doCalculations()
+        doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
         
         // create a cursor on target sender and pass Athena settings
         cotSender = CursorOnTargetSender(params: app.settings)
@@ -123,18 +123,26 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         print("Calculate viewWillAppear invoked")
         
         // do/re-do calculations and output
-        doCalculations()
+        doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
         
     } // viewWillAppear
     
-    // resolveTarget needs to be updated for arbitrary point selection XXX
-    private func doCalculations()
+    // do image calculations anytime willAppear is invoked
+    private func doCalculations(altReference: DroneTargetResolution)
     {
         var ccdInfo: DroneCCDInfo?
         htmlString = "<b>OpenAthena</b><br>"
         htmlString += "Elevation map: \(vc.dem?.tiffURL?.lastPathComponent ?? "")<br>"
         htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
         htmlString += "Image date: \(vc.theDroneImage!.getDateTimeUTC())<br>"
+        switch altReference {
+        case DroneTargetResolution.AltitudeFromGPS:
+            htmlString += "Altitude: GPS<br>"
+        case DroneTargetResolution.AltitudeFromRelative:
+            htmlString += "Altitude: relative<br>"
+        case DroneTargetResolution.AltitudeAboveGround:
+            htmlString += "Altitude: above ground<br>"
+        }
         
         // if no DEM, throw error
         if vc.dem == nil {
@@ -148,7 +156,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         // try to get CCD info for drone make/model
         do {
             ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
-                                                      model: vc.theDroneImage!.getCameraModel())
+                                                      model: vc.theDroneImage!.getCameraModel(),
+                                                      targetWidth: vc.theDroneImage!.theImage!.size.width)
             vc!.theDroneImage!.ccdInfo = ccdInfo
             htmlString += "Found CCD info for drone make/model \(ccdInfo!.makeModel)<br>"
         }
@@ -170,7 +179,23 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
             
             // calculate altitude of what we're looking at
-            try target = vc!.theDroneImage!.resolveTarget(dem: vc!.dem!)
+            try target = vc!.theDroneImage!.resolveTarget(dem: vc!.dem!, 
+                                                          altReference: altReference)
+        }
+        catch DroneImageError.BadAltitude {
+            htmlString += "Bad altitude data<br>"
+            // raise alert
+            let alert = UIAlertController(title: "Bad Altitude Data",
+                                          message: "Image contains bad altitude data.  Would you like me to re-try using altitude above ground estimate if available?",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
+                print("doCalculate: attempting re-calculate with altitude above ground estimate")
+                self.htmlString += "Attempting to re-calculate with altitude above ground estimate<br>"
+                self.doCalculations(altReference: DroneTargetResolution.AltitudeAboveGround)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler:nil))
+            self.present(alert, animated: true)
         }
         catch let error as DroneImageError {
             print("Calculate error \(error.rawValue)")
@@ -203,7 +228,6 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler:nil))
             self.present(alert, animated: true)
-            
         }
         
         // return from resolveTarget
@@ -219,6 +243,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         // check for [ 0,0,0,0,0,0,0,0 ]
         
         if target == [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] {
+            print("doCalculations: target return values all zeros, returning")
             setTextViewText(htmlStr: htmlString)
             return
         }
@@ -399,7 +424,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             UIAction(title:"Settings", image: UIImage(systemName:"gear.circle")) {
                 action in
                 //print("Settings")
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+                //let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+                let vc = SettingsViewController()
                 vc.vc = self.vc
                 self.navigationController?.pushViewController(vc, animated: true)
             },
@@ -434,7 +460,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                 self.markImagePixel(x_prop: self.vc.theDroneImage!.targetXprop, y_prop: self.vc.theDroneImage!.targetYprop)
                 
                 // recalculate new target location
-                self.doCalculations()
+                self.doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
             },
             UIAction(title:"Send CoT", image: UIImage(systemName: "target")) {
                 action in
@@ -506,7 +532,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         markImagePixel(x_prop: vc.theDroneImage!.targetXprop, y_prop: vc.theDroneImage!.targetYprop)
         
         // recalculate new target location
-        doCalculations()
+        doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
    
     } // didTapImage
     

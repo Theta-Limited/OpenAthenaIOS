@@ -142,7 +142,8 @@ class ImageViewController: UIViewController,
         guard vc.theDroneImage != nil else {
             //print("Please select a drone image")
             htmlString += "Please select a drone image<br>"
-            textView.attributedText = NSAttributedString(string: htmlString)
+            setTextViewText(htmlStr: htmlString)
+            //textView.attributedText = NSAttributedString(string: htmlString)
             return
         }
         let vc = storyboard?.instantiateViewController(withIdentifier: "Calculate") as! CalculateViewController
@@ -518,14 +519,14 @@ class ImageViewController: UIViewController,
             self.htmlString += "Drone altitude: \(error)<br>"
         }
         
-        do {
-            let droneRelAlt = try self.vc.theDroneImage!.getRelativeAltitude()
-            let droneRelAltStr = roundDigitsToString(val: droneRelAlt, precision: 6)
-            self.htmlString += "Drone relative altitude: \(droneRelAltStr)m (hae)<br>"
-        }
-        catch {
-            self.htmlString += "Drone relative altitude: not reported<br>"
-        }
+//        do {
+//            let droneRelAlt = try self.vc.theDroneImage!.getRelativeAltitude()
+//            let droneRelAltStr = roundDigitsToString(val: droneRelAlt, precision: 6)
+//            self.htmlString += "Drone relative altitude: \(droneRelAltStr)m (hae)<br>"
+//        }
+//        catch {
+//            self.htmlString += "Drone relative altitude: not reported<br>"
+//        }
         
         do {
             try self.htmlString += "GimbalPitch/Theta \(self.vc.theDroneImage!.getGimbalPitchDegree())<br>"

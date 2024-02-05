@@ -47,4 +47,19 @@ public class DroneImageSkydio: DroneImage
         return alt
     }
     
-}
+    override public func getRelativeAltitude() throws -> Double
+    {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    override public func getAltitudeViaRelative(dem: DigitalElevationModel) throws -> Double
+    {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    override public func getAltitudeAboveGround() throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    override public func getAltitudeViaAboveGround(dem: DigitalElevationModel) throws -> Double {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    
+} // DroneImageSkydio

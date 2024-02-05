@@ -190,6 +190,20 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             self.htmlString += "Image: not loaded<br>"
         }
         
+        if vc.dem != nil && vc.theDroneImage != nil {
+            do {
+                let alt = try vc.theDroneImage!.getAltitude()
+                let relAlt = try vc.theDroneImage!.getRelativeAltitude()
+                let altFromRel = try vc.theDroneImage!.getAltitudeViaRelative(dem: vc.dem!)
+                self.htmlString += "Altitude: \(alt)<br>"
+                self.htmlString += "RelativeAlt: \(relAlt)<br>"
+                self.htmlString += "AltFromRelative: \(altFromRel)<br>"
+            }
+            catch {
+                self.htmlString += "Some altitude data missing<br>"
+            }
+        }
+        
         // display the text finally
         setTextViewText(htmlStr: self.htmlString)
         

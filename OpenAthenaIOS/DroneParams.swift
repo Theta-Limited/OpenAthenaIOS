@@ -216,6 +216,12 @@ public class DroneParams
         return try lookupDrone(makeModel: makeModel.lowercased())
     }
     
+    func lookupDrone(make: String, model: String, targetWidth: Double) throws -> DroneCCDInfo?
+    {
+        let makeModel:String = make+model
+        return try getMatchingDrone(makeModel: makeModel.lowercased(), targetWidth: targetWidth)
+    }
+    
     func numberDroneModels() -> Int {
         return droneCCDParams.count
     }

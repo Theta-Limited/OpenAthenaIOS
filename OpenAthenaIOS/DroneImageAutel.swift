@@ -64,4 +64,58 @@ public class DroneImageAutel: DroneImage
         return alt
     }
     
-}
+    // relative altitude in meters either above takeoff point (DJI)
+    override public func getRelativeAltitude() throws -> Double
+    {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    override public func getAltitudeViaRelative(dem: DigitalElevationModel) throws -> Double
+    {
+        throw DroneImageError.ParameterNotImplemented
+    }
+    
+    //  altitude above ground allegedly below drone
+    
+    override public func getAltitudeAboveGround() throws -> Double
+    {
+        var relativeAlt: Double = 0.0
+        
+        if metaData == nil {
+            print("getAltitudeAboveGroundAutel: no meta data")
+            throw DroneImageError.NoMetaData
+        }
+        
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        if metaData!["Camera:AboveGroundAltitude"] != nil {
+            let aStr = metaData!["Camera:AboveGroundAltitude"] as! NSString
+            // some values have a division / instead of just plain value
+            relativeAlt = try convertDivisionString(str: aStr)
+            print("getAltitudeAboveGroundAutel: Camera AboveGroundAltitude is \(relativeAlt)")
+            return relativeAlt
+        }
+        
+        // throw error
+        throw DroneImageError.MissingAltitude
+    }
+    
+    override public func getAltitudeViaAboveGround(dem: DigitalElevationModel) throws -> Double
+    {
+        var lat,lon: Double
+        
+        let altAboveGround = try getAltitudeAboveGround()
+        
+        // find alt of lat/lon and
+        try lat = getLatitude()
+        try lon = getLongitude()
+        let terrainAlt = try dem.getAltitudeFromLatLong(targetLat: lat, targetLong: lon)
+        let alt = altAboveGround + terrainAlt
+        
+        print("getAltitudeViaAboveGroundAutel: aboveGround: \(altAboveGround), terrain: \(terrainAlt), alt: \(alt)")
+        
+        return alt
+    }
+    
+} // DroneImageAutel

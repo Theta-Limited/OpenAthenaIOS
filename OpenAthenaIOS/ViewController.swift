@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 2.06
+    var version: Float = 2.08
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -173,7 +173,8 @@ class ViewController: UIViewController {
             UIAction(title:"Settings", image: UIImage(systemName:"gear")) {
                 action in
                 //print("Settings")
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+                //let vc = self.storyboard?.instantiateViewController(withIdentifier: "Settings") //as! SettingsViewController
+                let vc = SettingsViewController()
                 vc.vc = self
                 self.navigationController?.pushViewController(vc, animated: true)
             },
