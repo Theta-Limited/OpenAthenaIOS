@@ -41,9 +41,11 @@ public class CursorOnTargetSender
         let host: NWEndpoint.Host = NWEndpoint.Host(settings.takMulticastIP)
         let port: NWEndpoint.Port = NWEndpoint.Port(rawValue: settings.takMulticastPort)!
         
+        print("CursorOnTarget: init starting")
+        
         guard let multicast = try? NWMulticastGroup(for: [ .hostPort(host: host,
                                                                      port: port) ]) else {
-            print("Failed to initialize multicast group")
+            print("CursorOnTarget: Failed to initialize multicast group")
             return
         }
 
@@ -52,21 +54,30 @@ public class CursorOnTargetSender
         //group = NWConnectionGroup(with: multicast, using: .udp)
         group = NWConnectionGroup(with: multicast, using: parameters)
         group?.stateUpdateHandler = { (newState) in
-            print("Group entered state \(String(describing: newState))")
+            print("CursorOnTarget: Group entered state \(String(describing: newState))")
         }
         
         // even though we are not intending to receive messages, we need to
         // set a receiver lest we will not be able to send; why?  No idea
         group?.setReceiveHandler(maximumMessageSize: 16384, rejectOversizedMessages: true) { (message,content,isComplete) in
-            print("Received message")
+            print("CursorOnTarget: received message")
         }
         group?.start(queue: .main)
+        
+        print("CursorOnTarget: init finished")
     }
     
     deinit
     {
-        print("CursorOnTargetSender: deinit")
+        print("CursorOnTarget: deinit")
         group?.cancel()
+    }
+    
+    // close group and
+    public func close() {
+        print("CursorOnTarget: closing")
+        group?.cancel()
+        
     }
     
     // return my status; true if group initialized and available to send
@@ -80,15 +91,17 @@ public class CursorOnTargetSender
     // send a CoT message given the selection parameters/location
     // exifDateTimeISO has already been converted
     
-    public func sendCoT(targetLat: Double, targetLon: Double, Hae: Double, Theta: Double, exifDateTimeISO: String) -> Bool {
+    public func sendCoT(targetLat: Double, targetLon: Double, Hae: Double, Theta: Double, exifDateTimeISO: String) -> Bool 
+    {
+        print("CursorOnTarget: sendCoT starting")
         
         // check args
         if exifDateTimeISO == "" || exifDateTimeISO == "unknown" {
-            print("Invalid image date")
+            print("CursorOnTarget: invalid image date")
             return false
         }
         if targetLat == 0.0 && targetLon == 0.0 && Hae == 0.0 && Theta == 0.0 {
-            print("Invalid target")
+            print("CursorOnTarget: invalid target")
             return false
         }
         
@@ -131,17 +144,17 @@ public class CursorOnTargetSender
         xmlString += "</event>"
         
         // convert to Data to send
-        print("sendCot: xml string is: ")
-        print("\(xmlString)")
+        //print("sendCot: xml string is: ")
+        //print("\(xmlString)")
         let sendContent = Data(xmlString.utf8)
         
         // send away!
         group?.send(content: sendContent) { (error) in
             if error == nil {
-                print("Send completed with no error")
+                print("CursorOnTarget: sendCoT send completed with no error")
             }
             else {
-                print("Send completed with error \(String(describing:  error))")
+                print("CursorOnTarget: sendCoT send completed with error \(String(describing:  error))")
             }
         }
        

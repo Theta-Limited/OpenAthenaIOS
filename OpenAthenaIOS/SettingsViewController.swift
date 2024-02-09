@@ -31,7 +31,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     var pickView = UIView()
     var slideView = UIView()
 
-    // manually build our view
+    // manually build our view re Issue #24
     override func viewDidLoad() {
         super.viewDidLoad()
         

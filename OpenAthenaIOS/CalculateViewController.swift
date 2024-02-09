@@ -27,7 +27,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
     var htmlString: String = ""
     var target: [Double] = [0,0,0,0,0,0,0,0,0]
     var adjustedAlt: Double = 0.0
-    var cotSender: CursorOnTargetSender?
+    var cotSender: CursorOnTargetSender? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +112,10 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
         
         // create a cursor on target sender and pass Athena settings
-        cotSender = CursorOnTargetSender(params: app.settings)
+        if cotSender == nil {
+            print("Calculate: creating CursorOnTarget object")
+            cotSender = CursorOnTargetSender(params: app.settings)
+        }
         
     } // viewDidLoad
     
@@ -126,6 +129,15 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
         
     } // viewWillAppear
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        print("Calculate viewWillDisappear")
+        
+        cotSender?.close()
+        
+    }
     
     // do image calculations anytime willAppear is invoked
     private func doCalculations(altReference: DroneTargetResolution)
