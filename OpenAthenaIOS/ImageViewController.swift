@@ -35,9 +35,13 @@ class ImageViewController: UIViewController,
     var documentPickerController: UIDocumentPickerViewController?
     var photoPicker: PHPickerViewController?
     var imagePicker: UIImagePickerController?
+    var style: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // set html style
+        style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
 
         self.title = "Choose Image \u{1F5bc}"
         view.backgroundColor = .secondarySystemBackground
@@ -62,7 +66,7 @@ class ImageViewController: UIViewController,
         textView.isEditable = false
         textView.isScrollEnabled = true // ???
         textView.font = .systemFont(ofSize: 16)
-        htmlString = "Select a drone image<br>"
+        htmlString = "\(style)Select a drone image<br>"
         setTextViewText(htmlStr: htmlString)
         textView.backgroundColor = .secondarySystemBackground
         
@@ -134,7 +138,7 @@ class ImageViewController: UIViewController,
         // don't reset the htmlString here because we may want to continue
         // to see the image data for currently selected image if
         // we go back from CalculateViewController
-        // htmlString = "Select a drone image<br>"
+        // htmlString = "\(style)<b>OpenAthena</b><br>Select a drone image<br>"
         // setTextViewText(htmlStr: htmlString)
     }
     
@@ -349,7 +353,7 @@ class ImageViewController: UIViewController,
         
         if imageURL != nil {
             // reset htmlString here
-            htmlString = "Loading image<br>"
+            htmlString = "\(style)<b>OpenAthena</b><br>Loading image<br>"
             print("Image url is \(imageURL!)")
             do {
                 
@@ -381,7 +385,8 @@ class ImageViewController: UIViewController,
                     let groundAlt = try self.vc.dem?.getAltitudeFromLatLong(
                         targetLat: self.vc.theDroneImage!.getLatitude(),
                         targetLong: self.vc.theDroneImage!.getLongitude())
-                    let groundAltStr = roundDigitsToString(val: groundAlt ?? -1.0, precision: 6)
+                    // re issue #30, round degrees to 6 and distance/alt to 0
+                    let groundAltStr = roundDigitsToString(val: groundAlt ?? -1.0, precision: 0)
                     self.htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
                 }
                 
@@ -498,8 +503,10 @@ class ImageViewController: UIViewController,
             // will have both or have neither
             try lat = self.vc.theDroneImage!.getLatitude()
             try lon = self.vc.theDroneImage!.getLongitude()
-            self.htmlString += "Latitude: \(lat)<br>"
-            self.htmlString += "Longitude: \(lon)<br>"
+            let latStr = roundDigitsToString(val: lat, precision: 6)
+            let lonStr = roundDigitsToString(val: lon, precision: 6)
+            self.htmlString += "Latitude: \(latStr)<br>"
+            self.htmlString += "Longitude: \(lonStr)<br>"
             // build a maps URL for clicking on
             //let urlStr = "https://maps.google.com/maps/@?api=1&map_action=map&center=\(lat),\(lon)"
             let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
@@ -512,7 +519,8 @@ class ImageViewController: UIViewController,
         
         do {
             let droneAlt = try self.vc.theDroneImage!.getAltitude()
-            let droneAltStr = roundDigitsToString(val: droneAlt, precision: 6)
+            // re issue #30, round degrees to 6 and distance/alt to 0
+            let droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
             self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
         }
         catch {
@@ -692,7 +700,7 @@ class ImageViewController: UIViewController,
     
     // take htmlString and encode it and set
     // it to our textView
-    private func setTextViewText(htmlStr hString: String)
+    private func setTextViewTextOld(htmlStr hString: String)
     {
         //let data = Data(hString.utf8)
         let data = hString.data(using: String.Encoding.utf16, allowLossyConversion: true)
@@ -710,12 +718,48 @@ class ImageViewController: UIViewController,
                 self.textView.attributedText = attribString
             }
         }
+    } // setTextViewOld
+    
+    // take html string and encode it and set it to our textView
+    // use newer function, written by ChatGPT, to better encode the HTML that
+    // we want
+    private func setTextViewText(htmlStr hString: String)
+    {
+        if let attribString = htmlToAttributedString(fromHTML: hString) {
+            self.textView.attributedText = attribString
+        }
+    }
+    
+    // written by ChatGPT with mods by rdk
+    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
+    {
+        guard let data = html.data(using: .utf8) else { return nil }
+        
+        // options for document type and char encoding
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        // try to create an attributed string from the html
+        do {
+            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
+            return attributedString
+        }
+        catch {
+            print("Error converting HTML to attributed string \(error)")
+            return nil
+        }
     }
     
     // take a double (e.g. lat, lon, elevation, etc. and round to 6 digits of precision and
     // return string
     public func roundDigitsToString(val: Double, precision: Double) -> String {
         let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
+        // if precision is 0, drop the .0 from float
+        if precision == 0 {
+            return String(Int(num))
+        }
         return String(num)
     }
     

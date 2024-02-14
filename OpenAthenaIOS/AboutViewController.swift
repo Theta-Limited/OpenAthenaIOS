@@ -17,9 +17,13 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView = UIScrollView()
     var contentView: UIView = UIView()
     var vc: ViewController!
+    var style: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set html style
+        style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
         self.title = "About OpenAthena"
         view.backgroundColor = .secondarySystemBackground
@@ -89,13 +93,13 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     
     private func getAbout()
     {
-        let htmlString = "<!DOCTYPE html><html><body>"
-        + "<h2>OpenAthena alpha version \(vc!.getAppVersion()) build \(vc.getAppBuildNumber()!)</h2>"
+        let htmlString = "\(style) "
+        + "<b>OpenAthena alpha version \(vc!.getAppVersion()) build \(vc.getAppBuildNumber()!)</b></br>"
         + "Matthew Krupczak, Bobby Krupczak et al.<br>"
         + "GPL-3.0, some rights reserved "
         + "<a href=\"https://openathena.com/\">OpenAthena.com</a><br>"
         + "<br>OpenAthena allows common drones to spot precise geodetic locations.<br>"
-        + "<br><a href=\"https://github.com/mkrupczak3/OpenAthena\">View the project on GitHub</a>"
+        + "<br><a href=\"https://github.com/Theta-Limited/OpenAthena\">View the project on GitHub</a>"
         + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br>"
         
 //        + "<br><a //href='https://github.com/Theta-Limited/OpenAthena/blob/main/EIO_fetch_geotiff_example.md'>Obtain a Digital Elevation Maps Here</a><br>"
@@ -136,7 +140,7 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     
     // take htmlString and encode it and set
     // it to our textView
-    private func setTextViewText(htmlStr hString: String)
+    private func setTextViewTextOld(htmlStr hString: String)
     {
         let data = Data(hString.utf8)
         let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
@@ -150,6 +154,38 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
             attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
             
             self.textView.attributedText = attribString
+        }
+    }
+    
+    // take html string and encode it and set it to our textView
+    // use newer function, written by ChatGPT, to better encode the HTML that
+    // we want
+    private func setTextViewText(htmlStr hString: String)
+    {
+        if let attribString = htmlToAttributedString(fromHTML: hString) {
+            self.textView.attributedText = attribString
+        }
+    }
+    
+    // written by ChatGPT with mods by rdk
+    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
+    {
+        guard let data = html.data(using: .utf8) else { return nil }
+        
+        // options for document type and char encoding
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        // try to create an attributed string from the html
+        do {
+            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
+            return attributedString
+        }
+        catch {
+            print("Error converting HTML to attributed string \(error)")
+            return nil
         }
     }
     

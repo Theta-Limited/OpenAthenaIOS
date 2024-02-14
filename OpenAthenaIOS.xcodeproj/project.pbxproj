@@ -222,6 +222,7 @@
 				5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */,
 				59B62B252989B97900F0C6B1 /* ElevationViewController.swift */,
 				596E927B2AAA0AC2003E35CD /* DroneViewController.swift */,
+				59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */,
 				5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */,
 				59B62B0929844B6D00F0C6B1 /* ViewController.swift */,
 				59109B8C2AD88D16000E75C4 /* ManageDemViewController.swift */,
@@ -229,17 +230,16 @@
 				59109B842AD868F6000E75C4 /* DemCacheController.swift */,
 				59109B862AD86BE1000E75C4 /* DemDownloader.swift */,
 				59109B822AD866F9000E75C4 /* DemCache.swift */,
-				59B62B2129876E6A00F0C6B1 /* SettingsViewController.swift */,
 				59B62B1F29860BF400F0C6B1 /* ImageViewController.swift */,
 				59B62B45298F3D5200F0C6B1 /* DroneImage.swift */,
 				593130422B48BA2E00DCE75B /* DroneImageDJI.swift */,
+				59109B882AD874D8000E75C4 /* NewDemController.swift */,
 				593130442B48BB9E00DCE75B /* DroneImageAutel.swift */,
 				593130482B48BC3600DCE75B /* DroneImageSkydio.swift */,
 				593130462B48BBE500DCE75B /* DroneImageParrot.swift */,
 				59B62B1D2984564300F0C6B1 /* AboutViewController.swift */,
 				59B62B3E298DAE7300F0C6B1 /* DigitalElevationModel.swift */,
 				59B62B41298DE4C900F0C6B1 /* DebugViewController.swift */,
-				59109B882AD874D8000E75C4 /* NewDemController.swift */,
 				59B62B0B29844B6D00F0C6B1 /* Main.storyboard */,
 				59B62B0E29844B6F00F0C6B1 /* Assets.xcassets */,
 				59B62B1029844B6F00F0C6B1 /* LaunchScreen.storyboard */,
@@ -700,7 +700,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 584;
+				CURRENT_PROJECT_VERSION = 659;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -718,7 +718,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.10;
+				MARKETING_VERSION = 2.11;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -737,7 +737,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 584;
+				CURRENT_PROJECT_VERSION = 659;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -755,7 +755,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.10;
+				MARKETING_VERSION = 2.11;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -773,7 +773,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 584;
+				CURRENT_PROJECT_VERSION = 659;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -793,7 +793,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 584;
+				CURRENT_PROJECT_VERSION = 659;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

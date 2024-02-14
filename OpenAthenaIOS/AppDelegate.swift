@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // load defaults
         settings.loadDefaults()
+        settings.fontSize = 18
         
         // load the EGM96Geod here so its only loaded one time due to its size
         // and that it needs to be decompressed

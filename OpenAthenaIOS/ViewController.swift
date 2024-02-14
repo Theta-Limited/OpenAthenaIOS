@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 2.10
+    var version: Float = 2.11
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -20,11 +20,15 @@ class ViewController: UIViewController {
     var htmlString: String = ""
     var droneParams: DroneParams?
     var demCache: DemCache?
+    var style: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("OpenAthena starts!")
+        
+        // set html style
+        style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
         print("viewController: output mode is \(app.settings.outputMode)")
         print("viewController: output mode rawval is \(app.settings.outputMode.rawValue)")
@@ -100,7 +104,7 @@ class ViewController: UIViewController {
     
     private func doMain()
     {
-        htmlString = "OpenAthena alpha v\(version) build \(getAppBuildNumber()!) starting<br>"
+        htmlString = "\(style)<b>OpenAthena alpha v\(version) build \(getAppBuildNumber()!) starting</b><br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
         // we dont explicitly load a DEM now since adding support for
         // automatic DEM downloading/loading
@@ -228,7 +232,7 @@ class ViewController: UIViewController {
 
     // take htmlString and encode it and set
     // it to our textView
-    private func setTextViewText(htmlStr hString: String)
+    private func setTextViewTextOld(htmlStr hString: String)
     {
         let data = Data(hString.utf8)
         let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
@@ -243,5 +247,36 @@ class ViewController: UIViewController {
         }
     }
     
+    // take html string and encode it and set it to our textView
+    // use newer function, written by ChatGPT, to better encode the HTML that
+    // we want
+    private func setTextViewText(htmlStr hString: String)
+    {
+        if let attribString = htmlToAttributedString(fromHTML: hString) {
+            self.textView.attributedText = attribString
+        }
+    }
+    
+    // written by ChatGPT with mods by rdk
+    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
+    {
+        guard let data = html.data(using: .utf8) else { return nil }
+        
+        // options for document type and char encoding
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        // try to create an attributed string from the html
+        do {
+            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
+            return attributedString
+        }
+        catch {
+            print("Error converting HTML to attributed string \(error)")
+            return nil
+        }
+    }
 } // ViewController
 

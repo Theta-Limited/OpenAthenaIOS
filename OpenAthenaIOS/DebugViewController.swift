@@ -18,9 +18,13 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     var contentView: UIView = UIView()
     var vc: ViewController!
     var htmlString: String = ""
+    var style:  String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set html style
+        style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
         self.title = "OpenAthena Debug"
         view.backgroundColor = .secondarySystemBackground
@@ -45,7 +49,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         scrollView.isUserInteractionEnabled = true
         scrollView.backgroundColor = .secondarySystemBackground
         
-        htmlString = "Debug information<br>"
+        htmlString = "\(style)Debug information<br>"
         setTextViewText(htmlStr: htmlString)
         
         stackView.frame = scrollView.bounds
@@ -90,7 +94,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     
     private func debug()
     {
-        self.htmlString = "<b>OpenAthena Debug Info alpha \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
+        self.htmlString = "\(style)<b>OpenAthena Debug Info alpha \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
         
         self.htmlString += "Coordinate system \(app.settings.outputMode)<br>"
         self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate ?? "unknown"))<br>"
@@ -98,6 +102,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
         self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"
         self.htmlString += "Compass correction: \(app.settings.compassCorrection)<br>"
+        self.htmlString += "Font size: \(app.settings.fontSize)<br>"
  
         // do I have an API key?
         if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
@@ -158,16 +163,16 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 self.htmlString += "<br>aux:Lens \(vc.theDroneImage!.metaData!["aux:Lens"] ?? "not present")<br>"
                                 
                 if let mdTemp = vc.theDroneImage!.metaData {
-                    self.htmlString += "<br>MetaData: \(mdTemp)<br>"
+                    self.htmlString += "<br><b>MetaData:</b> \(mdTemp)<br>"
                 }
                 else {
-                    self.htmlString += "<br>MetaData: none<br>"
+                    self.htmlString += "<br><b>MetaData:</b> none<br>"
                 }
                 if let mdTemp = vc.theDroneImage!.rawMetaData {
-                    self.htmlString += "<br>RawMetaData: \(mdTemp)<br>"
+                    self.htmlString += "<br><b>RawMetaData:</b> \(mdTemp)<br>"
                 }
                 else {
-                    self.htmlString += "<br>RawMetaData: none<br>"
+                    self.htmlString += "<br><b>RawMetaData:</b> none<br>"
                 }
                 // can't print xml strings in html strings in swift due to backslashes
                 // and other special chars?
@@ -187,31 +192,49 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 self.htmlString += "Another catch clause<br>"
             }
         } else {
-            self.htmlString += "Image: not loaded<br>"
+            self.htmlString += "<br><b>Image:</b> not loaded<br>"
         }
         
         if vc.dem != nil && vc.theDroneImage != nil {
+            self.htmlString += "<br><b>Altitude Data:</b><br>"
             do {
                 let alt = try vc.theDroneImage!.getAltitude()
-                let relAlt = try vc.theDroneImage!.getRelativeAltitude()
-                let altFromRel = try vc.theDroneImage!.getAltitudeViaRelative(dem: vc.dem!)
                 self.htmlString += "Altitude: \(alt)<br>"
-                self.htmlString += "RelativeAlt: \(relAlt)<br>"
-                self.htmlString += "AltFromRelative: \(altFromRel)<br>"
+            }
+            catch { htmlString += "Altitude: missing<br>"}
+            do {
+                let relAlt = try vc.theDroneImage!.getRelativeAltitude()
+                self.htmlString += "Relative altitude: \(relAlt)<br>"
+            }
+            catch { self.htmlString += "Relative altitude: not preseent<br>" }
+            do {
+                let altFromRel = try vc.theDroneImage!.getAltitudeViaRelative(dem: vc.dem!)
+                self.htmlString += "Drone altitude via relative alt: \(altFromRel)<br>"
+            }
+            catch { self.htmlString += "Drone altitude via relative alt: unable to calculate<br>"}
+            do {
+                let altAboveGround = try vc.theDroneImage!.getAltitudeAboveGround()
+                self.htmlString += "Altitude above ground: \(altAboveGround)<br>"
+            }
+            catch { self.htmlString += "Altitude above ground: not present<br>" }
+            do {
+                let altFromAboveGround = try vc.theDroneImage!.getAltitudeViaAboveGround(dem: vc.dem!)
+                self.htmlString += "Drone altitude via above ground alt: \(altFromAboveGround)<br>"
             }
             catch {
-                self.htmlString += "Some altitude data missing<br>"
+                self.htmlString += "Drone altitude via above ground alt: unable to calculate<br>"
             }
-        }
-        
+            
+        } // if DEM and image loaded, examine altitude data
+            
         // display the text finally
         setTextViewText(htmlStr: self.htmlString)
         
-    }
+    } // debug()
         
     // take htmlString and encode it and set
     // it to our textView
-    private func setTextViewText(htmlStr hString: String)
+    private func setTextViewTextOld(htmlStr hString: String)
     {
         let data = Data(hString.utf8)
         let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
@@ -225,5 +248,38 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
             self.textView.attributedText = attribString
         }
+    } // setTextViewTextOld
+    
+    // take html string and encode it and set it to our textView
+    // use newer function, written by ChatGPT, to better encode the HTML that
+    // we want
+    private func setTextViewText(htmlStr hString: String)
+    {
+        if let attribString = htmlToAttributedString(fromHTML: hString) {
+            self.textView.attributedText = attribString
+        }
     }
+    
+    // written by ChatGPT with mods by rdk
+    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
+    {
+        guard let data = html.data(using: .utf8) else { return nil }
+        
+        // options for document type and char encoding
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        // try to create an attributed string from the html
+        do {
+            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
+            return attributedString
+        }
+        catch {
+            print("Error converting HTML to attributed string \(error)")
+            return nil
+        }
+    }
+        
 } // DebugViewController

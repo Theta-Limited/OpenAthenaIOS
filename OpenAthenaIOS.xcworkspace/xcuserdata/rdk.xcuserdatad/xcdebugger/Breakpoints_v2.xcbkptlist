@@ -39,122 +39,62 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC"
+            uuid = "6A5B274B-24DB-45B1-861A-562121B50A0D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OpenAthenaIOSTests/TestSettings.swift"
+            filePath = "OpenAthenaIOS/CalculateViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "TestSettings"
-            landmarkType = "3">
+            startingLineNumber = "714"
+            endingLineNumber = "714"
+            landmarkName = "setTextViewTextOld(htmlStr:)"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC - 95662c7b1b76d65d"
+                  uuid = "6A5B274B-24DB-45B1-861A-562121B50A0D - c57187723dfd13d7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "OpenAthenaIOSTests.TestSettings.__allocating_init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; OpenAthenaIOSTests.TestSettings"
-                  moduleName = "OpenAthenaIOSTests"
+                  symbolName = "OpenAthena.CalculateViewController.setTextViewTextOld(htmlStr: Swift.String) -&gt; ()"
+                  moduleName = "OpenAthena"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOSTests/TestSettings.swift"
+                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOS/CalculateViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "20">
+                  startingLineNumber = "714"
+                  endingLineNumber = "714"
+                  offsetFromSymbolStart = "1008">
                </Location>
                <Location
-                  uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC - 2764e7138dda2831"
+                  uuid = "6A5B274B-24DB-45B1-861A-562121B50A0D - 633267a746ecbf1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "OpenAthenaIOSTests.TestSettings.init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; OpenAthenaIOSTests.TestSettings"
-                  moduleName = "OpenAthenaIOSTests"
+                  symbolName = "OpenAthena.CalculateViewController.setTextViewText(htmlStr: Swift.String) -&gt; ()"
+                  moduleName = "OpenAthena"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOSTests/TestSettings.swift"
+                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOS/CalculateViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "88">
+                  startingLineNumber = "714"
+                  endingLineNumber = "714"
+                  offsetFromSymbolStart = "56">
                </Location>
                <Location
-                  uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC - 77af7709a1630cbc"
+                  uuid = "6A5B274B-24DB-45B1-861A-562121B50A0D - c57187723dfd13d7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "OpenAthenaIOSTests.TestSettings.__allocating_init(selector: ObjectiveC.Selector) -&gt; OpenAthenaIOSTests.TestSettings"
-                  moduleName = "OpenAthenaIOSTests"
+                  symbolName = "OpenAthena.CalculateViewController.setTextViewTextOld(htmlStr: Swift.String) -&gt; ()"
+                  moduleName = "OpenAthena"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOSTests/TestSettings.swift"
+                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOS/CalculateViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC - b6a6ab272085e691"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "OpenAthenaIOSTests.TestSettings.init(selector: ObjectiveC.Selector) -&gt; OpenAthenaIOSTests.TestSettings"
-                  moduleName = "OpenAthenaIOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOSTests/TestSettings.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "88">
-               </Location>
-               <Location
-                  uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC - e533460dc42b8f6a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "OpenAthenaIOSTests.TestSettings.__allocating_init() -&gt; OpenAthenaIOSTests.TestSettings"
-                  moduleName = "OpenAthenaIOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOSTests/TestSettings.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC - d86e211dbee56977"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "OpenAthenaIOSTests.TestSettings.init() -&gt; OpenAthenaIOSTests.TestSettings"
-                  moduleName = "OpenAthenaIOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOSTests/TestSettings.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  uuid = "132174CC-AB06-44E2-9DE0-11BD83FC6DCC - e6951c9ee8745fe1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "OpenAthenaIOSTests.TestSettings.__deallocating_deinit"
-                  moduleName = "OpenAthenaIOSTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOSTests/TestSettings.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "28">
+                  startingLineNumber = "714"
+                  endingLineNumber = "714"
+                  offsetFromSymbolStart = "1060">
                </Location>
             </Locations>
          </BreakpointContent>
