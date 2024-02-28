@@ -96,7 +96,8 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     {
         self.htmlString = "\(style)<b>OpenAthena Debug Info alpha \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
         
-        self.htmlString += "Coordinate system \(app.settings.outputMode)<br>"
+        self.htmlString += "Coordinate system: \(app.settings.outputMode)<br>"
+        self.htmlString += "Units: \(app.settings.unitsMode)<br>"
         self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate ?? "unknown"))<br>"
         self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
@@ -199,27 +200,52 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             self.htmlString += "<br><b>Altitude Data:</b><br>"
             do {
                 let alt = try vc.theDroneImage!.getAltitude()
-                self.htmlString += "Altitude: \(alt)<br>"
+                if app.settings.unitsMode == .Metric {
+                    self.htmlString += "Altitude: \(alt)m<br>"
+                }
+                else {
+                    self.htmlString += "Altitude: \(app.metersToFeet(meters: alt))ft<br>"
+                }
             }
             catch { htmlString += "Altitude: missing<br>"}
             do {
                 let relAlt = try vc.theDroneImage!.getRelativeAltitude()
-                self.htmlString += "Relative altitude: \(relAlt)<br>"
+                if app.settings.unitsMode == .Metric {
+                    self.htmlString += "Relative altitude: \(relAlt)m<br>"
+                }
+                else {
+                    self.htmlString += "Relative altitude: \(app.metersToFeet(meters: relAlt))ft<br>"
+                }
             }
             catch { self.htmlString += "Relative altitude: not preseent<br>" }
             do {
                 let altFromRel = try vc.theDroneImage!.getAltitudeViaRelative(dem: vc.dem!)
-                self.htmlString += "Drone altitude via relative alt: \(altFromRel)<br>"
+                if app.settings.unitsMode == .Metric {
+                    self.htmlString += "Drone altitude via relative alt: \(altFromRel)m<br>"
+                }
+                else {
+                    self.htmlString += "Drone altitude via relative alt: \(app.metersToFeet(meters: altFromRel))ft<br>"
+                }
             }
             catch { self.htmlString += "Drone altitude via relative alt: unable to calculate<br>"}
             do {
                 let altAboveGround = try vc.theDroneImage!.getAltitudeAboveGround()
-                self.htmlString += "Altitude above ground: \(altAboveGround)<br>"
+                if app.settings.unitsMode == .Metric {
+                    self.htmlString += "Altitude above ground: \(altAboveGround)m<br>"
+                }
+                else {
+                    self.htmlString += "Altitude above ground: \(app.metersToFeet(meters: altAboveGround))ft<br>"
+                }
             }
             catch { self.htmlString += "Altitude above ground: not present<br>" }
             do {
                 let altFromAboveGround = try vc.theDroneImage!.getAltitudeViaAboveGround(dem: vc.dem!)
-                self.htmlString += "Drone altitude via above ground alt: \(altFromAboveGround)<br>"
+                if app.settings.unitsMode == .Metric {
+                    self.htmlString += "Drone altitude via above ground alt: \(altFromAboveGround)m<br>"
+                }
+                else {
+                    self.htmlString += "Drone altitude via above ground alt: \(app.metersToFeet(meters: altFromAboveGround))ft<br>"
+                }
             }
             catch {
                 self.htmlString += "Drone altitude via above ground alt: unable to calculate<br>"
