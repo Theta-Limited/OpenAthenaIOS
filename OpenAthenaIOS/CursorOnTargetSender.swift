@@ -21,6 +21,7 @@
 import Foundation
 import Network
 import UIKit
+import CryptoKit
 
 enum CursorOnTargetError: String, Error {
     case IllegalArgumentException = "CoT: illegal argument"
@@ -33,8 +34,8 @@ extension Double {
 public class CursorOnTargetSender
 {
     var group: NWConnectionGroup?
-    var eventUid: Int64 = 0
     var settings: AthenaSettings
+    var hashedHostname = ""
     
     init(params: AthenaSettings) {
         settings = params
@@ -42,6 +43,8 @@ public class CursorOnTargetSender
         let port: NWEndpoint.Port = NWEndpoint.Port(rawValue: settings.takMulticastPort)!
         
         print("CursorOnTarget: init starting")
+        
+        hashedHostname = CursorOnTargetSender.getDeviceHostnameHash()
         
         guard let multicast = try? NWMulticastGroup(for: [ .hostPort(host: host,
                                                                      port: port) ]) else {
@@ -116,7 +119,14 @@ public class CursorOnTargetSender
         let lonStr = roundDigitsToString(val: targetLon, precision: 6)
         let haeStr = roundDigitsToString(val: Hae, precision: 6)
         
-        let uidStr = "openathena-ios+\(UIDevice.current.identifierForVendor!.uuidString)+\(Int(NSDate().timeIntervalSince1970))"
+        //let uidStr = "openathena-ios+\(UIDevice.current.identifierForVendor!.uuidString)+\(Int(NSDate().timeIntervalSince1970))"
+        
+        // re issue #31 make this unique id shorter
+        //let uidStr = "openathena-ios-\(hashedHostname)-\(Int(NSDate().timeIntervalSince1970))"
+        
+        let uidStr = "openathena-\(hashedHostname)-\(settings.eventUID)"
+        settings.eventUID += 1
+        settings.writeDefaults()
         
         // build the document and convert to string
         // because XMLDocument classes only available on MacOS, we'll
@@ -187,6 +197,24 @@ public class CursorOnTargetSender
     private func roundDigitsToString(val: Double, precision: Double) -> String {
         let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
         return String(num)
+    }
+    
+    // written with aid of ChatGPT
+    public class func getDeviceHostnameHash() -> String {
+        var aString: String = ""
+        
+        aString = UIDevice.current.name
+        if aString == "" {
+            aString = "unknown-hostname"
+        }
+        if let inputData = aString.data(using: .utf8) {
+            let hashData = SHA256.hash(data: inputData)
+            let hashString = hashData.compactMap { String(format: "%02x",$0) }.joined()
+            let truncatedHash = String(hashString.prefix(8))
+            return truncatedHash
+        }
+        
+        return "feedface"
     }
     
     

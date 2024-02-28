@@ -106,6 +106,7 @@ public class AthenaSettings {
     var compassCorrection: Float = CompassCorrection
     var compassSliderValue: Float = CompassSliderValue
     var unitsMode: ImperialVsMetric = UnitsMode
+    var eventUID: Int64 = 0 // for CoT messages
     
     // file/dir URLs
     var demURL: URL?
@@ -117,6 +118,12 @@ public class AthenaSettings {
     public func loadDefaults()
     {
         let defaults = UserDefaults.standard
+        
+        // re issue #31, use shorter CoT event IDs
+        if let anInt64 = defaults.object(forKey: "eventuid") as? Int64 {
+            eventUID = anInt64
+            print("loadSettings: eventUID is \(eventUID)")
+        }
         
         // re issue #32,
         if var unitsModeRaw = defaults.object(forKey: "unitsMode") as? Int {
@@ -192,6 +199,8 @@ public class AthenaSettings {
     public func writeDefaults()
     {
         let defaults = UserDefaults.standard
+        
+        defaults.set(eventUID, forKey: "eventuid")
         defaults.set(unitsMode.rawValue, forKey: "unitsMode")
         defaults.set(outputMode.rawValue, forKey: "outputMode")
         defaults.set(lookupMode.rawValue, forKey: "lookupMode")

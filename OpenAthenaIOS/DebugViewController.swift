@@ -104,6 +104,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"
         self.htmlString += "Compass correction: \(app.settings.compassCorrection)<br>"
         self.htmlString += "Font size: \(app.settings.fontSize)<br>"
+        self.htmlString += "Device hash: \(CursorOnTargetSender.getDeviceHostnameHash())<br>"
  
         // do I have an API key?
         if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
