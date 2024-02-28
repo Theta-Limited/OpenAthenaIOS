@@ -386,8 +386,15 @@ class ImageViewController: UIViewController,
                         targetLat: self.vc.theDroneImage!.getLatitude(),
                         targetLong: self.vc.theDroneImage!.getLongitude())
                     // re issue #30, round degrees to 6 and distance/alt to 0
-                    let groundAltStr = roundDigitsToString(val: groundAlt ?? -1.0, precision: 0)
-                    self.htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
+                    var groundAltStr = roundDigitsToString(val: groundAlt ?? -1.0, precision: 0)
+                    if app.settings.unitsMode == .Metric {
+                        self.htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
+                    }
+                    else {
+                        let groundAltFt = app.metersToFeet(meters: groundAlt ?? -1.0)
+                        groundAltStr = roundDigitsToString(val: groundAltFt , precision: 0)
+                        self.htmlString += "Ground altitude under drone is \(groundAltStr)ft (hae)<br>"
+                    }
                 }
                 
             }
@@ -520,8 +527,15 @@ class ImageViewController: UIViewController,
         do {
             let droneAlt = try self.vc.theDroneImage!.getAltitude()
             // re issue #30, round degrees to 6 and distance/alt to 0
-            let droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
-            self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
+            var droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
+            if app.settings.unitsMode == .Metric {
+                self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
+            }
+            else {
+                let droneAltFt = app.metersToFeet(meters: droneAlt)
+                droneAltStr = roundDigitsToString(val: droneAltFt, precision: 0)
+                self.htmlString += "Drone altitude: \(droneAltStr)ft (hae)<br>"
+            }
         }
         catch {
             self.htmlString += "Drone altitude: \(error)<br>"

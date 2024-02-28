@@ -239,6 +239,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         // 7 thetaOffset or pitch offset in degrees
         // 8 is adjusted alt target[3] + offset which we calculate and set
         // check for [ 0,0,0,0,0,0,0,0 ]
+        // internally, all distances/altitudes are in meters
         
         if target == [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] {
             print("doCalculations: target return values all zeros, returning")
@@ -252,8 +253,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         let latStr = roundDigitsToString(val: target[1], precision: 6)
         let lonStr = roundDigitsToString(val: target[2], precision: 6)
         // issue #30, round distance, alt to nearest meter
-        let distanceStr = roundDigitsToString(val: target[0], precision: 0)
-        let altStr = roundDigitsToString(val: target[3] + offset, precision: 0)
+        var distanceStr = roundDigitsToString(val: target[0], precision: 0)
+        var altStr = roundDigitsToString(val: target[3] + offset, precision: 0)
         let azOff = roundDigitsToString(val: target[6], precision: 2)
         // swap sign of thetaOff to keep with aircraft conventions (tait-bryan)
         let thetaOff = roundDigitsToString(val: -1.0 * target[7], precision: 2)
@@ -269,7 +270,16 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         //let urlStr = "https://maps.../maps/@?api=1&map_action=map&center=\(target[1]),\(target[2])"
         let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(latStr),\(lonStr)"
         htmlString += "<a href='\(urlStr)'><h2>Lat,Lon: \(latStr),\(lonStr)</h2></a><br>"
-        htmlString += "<h2>Alt: \(altStr)m</h2><br>"
+        if app.settings.unitsMode == .Metric {
+            htmlString += "<h2>Alt: \(altStr)m</h2><br>"
+        }
+        else {
+            let altFt = app.metersToFeet(meters: target[3])
+            altStr = roundDigitsToString(val: altFt, precision: 0)
+            htmlString += "<h2>Alt: \(altStr)ft</h2><br>"
+            let distanceFt = app.metersToFeet(meters: target[0])
+            distanceStr = roundDigitsToString(val: distanceFt, precision: 0)
+        }
         
         // would love a URL that we could have two pins on -- one for where drone is
         // and one for where target is; don't think we can do that w/o an Maps API key
@@ -288,7 +298,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             // issue #30, round alt to nearest meter
             let ck42altStr = roundDigitsToString(val: ck42alt, precision: 0)
             htmlString += "<h2>CK42 Lat,Lon: \(ck42latStr),\(ck42lonStr)</h2><br>"
-            htmlString += "<h2>CK42 Alt: \(ck42altStr)</h2><br>"
+            htmlString += "<h2>CK42 Alt: \(ck42altStr)m</h2><br>"
         }
         
         if app.settings.outputMode == AthenaSettings.OutputModes.CK42GaussKruger {
@@ -299,7 +309,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             // issue #30, round alt to nearest meter
             let ck42altStr = roundDigitsToString(val: ck42alt, precision: 0)
             htmlString += "<h2>CK42 Lat,Lon: \(ck42latStr),\(ck42lonStr)</h2><br>"
-            htmlString += "<h2>CK42 Alt: \(ck42altStr)</h2><br>"
+            htmlString += "<h2>CK42 Alt: \(ck42altStr)m</h2><br>"
             
             var ck42GKlat, ck42GKlon: Int64
             
@@ -315,7 +325,12 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
             //htmlString += "<h2>MGRS1m: \(mgrsStr)</h2><br>"
             let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(mgrsStr)"
             htmlString += "<a href='\(urlStr)'><h2>MGRS1m: \(mgrsStr)</h2></a><br>"
-            htmlString += "<h2>Alt: \(altStr)</h2><br>"
+            if app.settings.unitsMode == .Metric {
+                htmlString += "<h2>Alt: \(altStr)m</h2><br>"
+            }
+            else {
+                htmlString += "<h2>Alt: \(altStr)ft</h2><br>"
+            }
 
             let mgrs10Str = MGRSGeodetic.WGS84_MGRS10m(Lat: target[1], Lon: target[2],Alt: target[3])
             htmlString += "<h2>MGRS10m: \(mgrs10Str)</h2><br>"
@@ -345,7 +360,13 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         htmlString += "Azimuth offset: \(azOff) degrees<br>"
         htmlString += "Theta (pitch) offset: \(thetaOff) degrees<br>"
         
-        htmlString += "Distance to target \(distanceStr)m<br>"
+        if app.settings.unitsMode == .Metric {
+            htmlString += "Distance to target \(distanceStr)m<br>"
+        }
+        else {
+            // previously calculated, converted
+            htmlString += "Distance to target \(distanceStr)ft<br>"
+        }
         //htmlString += "Nearest terrain alt \(nearestAltStr) meters<br>"
         
         do {
@@ -357,8 +378,15 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                 targetLong: self.vc.theDroneImage!.getLongitude())
             
             // issue #30, round alt to nearest meter
-            let groundAltStr = roundDigitsToString(val: groundAlt ?? -1, precision: 0)
-            htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
+            var groundAltStr = roundDigitsToString(val: groundAlt ?? -1, precision: 0)
+            if app.settings.unitsMode == .Metric {
+                htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
+            }
+            else {
+                let groundAltFt = app.metersToFeet(meters: groundAlt ?? -1)
+                groundAltStr = roundDigitsToString(val: groundAltFt, precision: 0)
+                htmlString += "Ground altitude under drone is \(groundAltStr)ft (hae)<br>"
+            }
         } catch { htmlString += "Unable to determine ground altitude under drone?!<br>" }
         
         switch altReference {
@@ -419,8 +447,15 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         do {
             let droneAlt = try self.vc.theDroneImage!.getAltitude()
             // issue #30, round alt to nearest meter
-            let droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
-            self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
+            var droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
+            if app.settings.unitsMode == .Metric {
+                self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
+            }
+            else {
+                let droneAltFt = app.metersToFeet(meters: droneAlt)
+                droneAltStr = roundDigitsToString(val: droneAltFt, precision: 0)
+                self.htmlString += "Drone altitude: \(droneAltStr)ft (hae)<br>"
+            }
         }
         catch {
             self.htmlString += "Drone altitude: \(error)<br>"

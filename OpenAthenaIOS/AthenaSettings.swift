@@ -22,6 +22,19 @@ public class AthenaSettings {
         }
     } // DEM lookup modes
     
+    // re issue #32
+    enum ImperialVsMetric: Int, CaseIterable {
+        case Imperial = 0  // use imperial for distances, heights
+        case Metric = 1    // use metric for distances, heights
+        
+        var description: String {
+            switch self {
+            case .Imperial: return "Imperial units"
+            case .Metric: return "Metric units"
+            }
+        }
+    }
+    
     enum VerticalDatumTypes: Int, CaseIterable {
         case WGS84 = 0
         case EGM96 = 1
@@ -81,6 +94,7 @@ public class AthenaSettings {
     static let FontSize: Int = 14
     static let CompassCorrection: Float = 0.0
     static let CompassSliderValue: Float = 100.0 // 0..200
+    static let UnitsMode: ImperialVsMetric = .Metric
     
     // saved defaults first set to defaults before loading
     var outputMode = OutputMode
@@ -91,6 +105,7 @@ public class AthenaSettings {
     var takMulticastIP = "239.2.3.1"
     var compassCorrection: Float = CompassCorrection
     var compassSliderValue: Float = CompassSliderValue
+    var unitsMode: ImperialVsMetric = UnitsMode
     
     // file/dir URLs
     var demURL: URL?
@@ -103,6 +118,16 @@ public class AthenaSettings {
     {
         let defaults = UserDefaults.standard
         
+        // re issue #32,
+        if var unitsModeRaw = defaults.object(forKey: "unitsMode") as? Int {
+            print("loadSettings: read unitsModeRaw \(unitsModeRaw)")
+            if unitsModeRaw < 0 || unitsModeRaw > 1 {
+                unitsModeRaw = 0
+            }
+            unitsMode = ImperialVsMetric(rawValue: unitsModeRaw)!
+            print("loadSettings: unitsMode to \(unitsMode)")
+            print("loadSettings: unitsMode rawValue \(unitsMode.rawValue)")
+        }
         if var outputModeRaw = defaults.object(forKey: "outputMode") as? Int {
             print("loadSettings: read outputModeRaw \(outputModeRaw)")
             if outputModeRaw < 0 || outputModeRaw > 4 {
@@ -167,6 +192,7 @@ public class AthenaSettings {
     public func writeDefaults()
     {
         let defaults = UserDefaults.standard
+        defaults.set(unitsMode.rawValue, forKey: "unitsMode")
         defaults.set(outputMode.rawValue, forKey: "outputMode")
         defaults.set(lookupMode.rawValue, forKey: "lookupMode")
         defaults.set(useCCDInfo, forKey: "useCCDInfo")

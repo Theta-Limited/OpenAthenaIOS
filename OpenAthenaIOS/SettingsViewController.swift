@@ -14,7 +14,9 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var vc: ViewController!
     var pickerView: UIPickerView = UIPickerView()
+    var unitsPickerView: UIPickerView = UIPickerView()
     var newOutputMode: AthenaSettings.OutputModes!
+    var newUnitsMode: AthenaSettings.ImperialVsMetric!
     var newLookupMode: AthenaSettings.DEMLookupModes!
     var azOffsetSlider: UISlider = UISlider()
     var azOffsetLabel: UILabel = UILabel()
@@ -28,7 +30,9 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     var saveButton: UIButton = UIButton()
     var resetButton: UIButton = UIButton()
     var outputModeLabel: UILabel = UILabel()
+    var unitsModeLabel: UILabel = UILabel()
     var pickView = UIView()
+    var unitsView = UIView()
     var slideView = UIView()
 
     // manually build our view re Issue #24
@@ -43,6 +47,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         
         pickerView.dataSource = self
         pickerView.delegate = self
+        pickerView.tag = 1
         pickerView.selectRow(app.settings.outputMode.rawValue, inComponent: 0, animated: true)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         newOutputMode = app.settings.outputMode
@@ -53,6 +58,17 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         pickView.addSubview(pickerView)
         pickView.translatesAutoresizingMaskIntoConstraints = false
         //pickView.backgroundColor = .blue
+        
+        unitsPickerView.dataSource = self
+        unitsPickerView.delegate = self
+        unitsPickerView.tag = 2
+        unitsPickerView.selectRow(app.settings.unitsMode.rawValue, inComponent: 0, animated: true)
+        unitsPickerView.translatesAutoresizingMaskIntoConstraints = false
+        newUnitsMode = app.settings.unitsMode
+        unitsPickerView.layer.borderWidth = 0.15
+        unitsPickerView.layer.borderColor = UIColor.lightGray.cgColor
+        unitsView.addSubview(unitsPickerView)
+        unitsView.translatesAutoresizingMaskIntoConstraints = false
         
         // initialize AZ settings slider to current value and
         // set slider parameters; keep consistent with OAAndroid
@@ -97,11 +113,15 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         
         outputModeLabel.text = "Ouput Mode \u{1f3af}"
         outputModeLabel.textAlignment = .center
+        unitsModeLabel.text = "Units \u{1f4cf}"
+        unitsModeLabel.textAlignment = .center
         stackView.addArrangedSubview(outputModeLabel)
         stackView.addArrangedSubview(pickView)
         stackView.addArrangedSubview(azOffsetLabel)
         stackView.addArrangedSubview(resetButton)
         stackView.addArrangedSubview(slideView)
+        stackView.addArrangedSubview(unitsModeLabel)
+        stackView.addArrangedSubview(unitsView)
         stackView.addArrangedSubview(saveButton)
         
         contentView.addSubview(stackView)
@@ -112,15 +132,19 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         // tweaks for various pieces for height, widths
         
         outputModeLabel.heightAnchor.constraint(equalToConstant: 0.05*view.frame.size.height).isActive = true
-        resetButton.heightAnchor.constraint(equalToConstant: 0.05*view.frame.size.height).isActive = true
+        unitsModeLabel.heightAnchor.constraint(equalToConstant: 0.05*view.frame.size.height).isActive = true
+        resetButton.heightAnchor.constraint(equalToConstant: 0.025*view.frame.size.height).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 0.20*view.frame.size.height).isActive = true
         azOffsetLabel.heightAnchor.constraint(equalToConstant: 0.05*view.frame.size.height).isActive = true
-        pickView.heightAnchor.constraint(equalToConstant: 0.3*view.frame.size.height).isActive = true
+        pickView.heightAnchor.constraint(equalToConstant: 0.30*view.frame.size.height).isActive = true
         pickView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         pickerView.centerXAnchor.constraint(equalTo: pickView.centerXAnchor).isActive = true
+        unitsView.heightAnchor.constraint(equalToConstant: 0.20*view.frame.size.height).isActive = true
+        unitsView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        unitsPickerView.centerXAnchor.constraint(equalTo: unitsView.centerXAnchor).isActive = true
         
         slideView.widthAnchor.constraint(equalToConstant: view.frame.size.width*0.75).isActive = true
-        slideView.heightAnchor.constraint(equalToConstant: 0.15*view.frame.size.height).isActive = true
+        slideView.heightAnchor.constraint(equalToConstant: 0.10*view.frame.size.height).isActive = true
         azOffsetSlider.centerXAnchor.constraint(equalTo: slideView.centerXAnchor).isActive = true
         azOffsetSlider.widthAnchor.constraint(equalToConstant: view.frame.size.width*0.75).isActive = true
         azOffsetSlider.centerYAnchor.constraint(equalTo: slideView.centerYAnchor).isActive = true
@@ -226,6 +250,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         app.settings.outputMode = newOutputMode
         app.settings.compassCorrection = newAZCorrection
         app.settings.compassSliderValue = newAZSliderValue
+        app.settings.unitsMode = newUnitsMode
         app.settings.writeDefaults()
         
         let alert = UIAlertController(title: "OpenAthena Settings",
@@ -250,7 +275,12 @@ extension SettingsViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return AthenaSettings.OutputModes.allCases.count
+        if pickerView.tag == 1 {
+            return AthenaSettings.OutputModes.allCases.count
+        }
+        else {
+            return AthenaSettings.ImperialVsMetric.allCases.count
+        }
     }
 
 } // SettingsViewController extension
@@ -258,12 +288,23 @@ extension SettingsViewController: UIPickerViewDataSource {
 extension SettingsViewController: UIPickerViewDelegate {
    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return AthenaSettings.OutputModes.allCases[row].description
+        if pickerView.tag == 1 {
+            return AthenaSettings.OutputModes.allCases[row].description
+        }
+        else {
+            return AthenaSettings.ImperialVsMetric.allCases[row].description
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("Settings picked \(row) in pickerView")
-        newOutputMode = AthenaSettings.OutputModes(rawValue: row)
+        
+        if pickerView.tag == 1 {
+            newOutputMode = AthenaSettings.OutputModes(rawValue: row)
+        }
+        else {
+            newUnitsMode = AthenaSettings.ImperialVsMetric(rawValue: row)
+        }
     }
     
 } // SettingsViewController Extension

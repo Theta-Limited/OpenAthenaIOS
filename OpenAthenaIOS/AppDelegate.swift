@@ -86,6 +86,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
      func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
          completionHandler([.alert,.badge,.sound])
      }
+    
+    func feetToMeters(feet: Double) -> Double {
+        let meters = feet * 0.3048
+        return meters
+    }
+    
+    func metersToFeet(meters: Double) -> Double {
+        let feet = meters * 3.28084
+        return feet
+    }
 
 
 

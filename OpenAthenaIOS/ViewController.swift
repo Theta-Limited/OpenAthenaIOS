@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 2.11
+    var version: Float = 2.12
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         
         print("viewController: output mode is \(app.settings.outputMode)")
         print("viewController: output mode rawval is \(app.settings.outputMode.rawValue)")
+        print("viewController: units mode is \(app.settings.unitsMode)")
         
         self.title = "OpenAthena"
         navigationController?.navigationBar.tintColor = .label
@@ -106,6 +107,8 @@ class ViewController: UIViewController {
     {
         htmlString = "\(style)<b>OpenAthena alpha v\(version) build \(getAppBuildNumber()!) starting</b><br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
+        htmlString += "Units: \(app.settings.unitsMode)<p>"
+        
         // we dont explicitly load a DEM now since adding support for
         // automatic DEM downloading/loading
         // htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
