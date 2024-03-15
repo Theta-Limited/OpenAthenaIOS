@@ -22,6 +22,8 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("AboutViewController viewDidLoad starting")
+        
         // set html style
         style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         

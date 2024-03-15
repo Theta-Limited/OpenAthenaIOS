@@ -146,7 +146,22 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         }
         
         if vc.theDroneImage != nil {
+            var foundCCDInfoString: String = ""
+            
             self.htmlString += "<br><b>Drone Image:</b> \(vc.theDroneImage!.name ?? "No name")<br>"
+            // try to get CCD info for drone make/model
+            do {
+                let ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
+                                                          model: vc.theDroneImage!.getCameraModel(),
+                                                          targetWidth: vc.theDroneImage!.theImage!.size.width)
+                vc!.theDroneImage!.ccdInfo = ccdInfo
+                foundCCDInfoString = "Found CCD info for drone make/model \(ccdInfo!.makeModel)<br>"
+            }
+            catch {
+                print("No CCD info for drone image, using estimates")
+                foundCCDInfoString = "No CCD info for drone make/model, estimate using exif 35mm equivalent<br>"
+                vc!.theDroneImage!.ccdInfo = nil
+            }           
             do {
                 var lat = try self.vc.theDroneImage!.getLatitude()
                 var lon = try self.vc.theDroneImage!.getLongitude()
@@ -157,13 +172,46 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 try self.htmlString += "Make: \(vc.theDroneImage!.getCameraMake())<br>"
                 try self.htmlString += "Model: \(vc.theDroneImage!.getCameraModel())<br>"
                 self.htmlString += "Old Autel: \(vc.theDroneImage!.isOldAutel())<br>"
+                self.htmlString += foundCCDInfoString
                                 
                 try self.htmlString += "Focal Length: \(vc.theDroneImage!.getFocalLength())<br>"
                 try self.htmlString += "Focal Length in 35mm: \(vc.theDroneImage!.getFocalLengthIn35mm())<br>"
                                 
                 self.htmlString += "Date/Time UTC: \(vc.theDroneImage!.getDateTimeUTC())"
                 self.htmlString += "<br>aux:Lens \(vc.theDroneImage!.metaData!["aux:Lens"] ?? "not present")<br>"
-                                
+                
+                do {
+                    try self.htmlString += "GimbalPitch/Theta \(vc.theDroneImage!.getGimbalPitchDegree())<br>"
+                }
+                catch {
+                    self.htmlString += "GimbalPitch/Theta: \(error)<br>"
+                }
+                do {
+                    try self.htmlString += "GimbalYaw/Az: \(vc.theDroneImage!.getGimbalYawDegree())<br>"
+                }
+                catch {
+                    self.htmlString += "GimbalYaw/Az: \(error)<br>"
+                }
+                self.htmlString += "DigitalZoom: \(vc.theDroneImage!.getZoom())<br>"
+                self.htmlString += "Is Drone? \(self.vc.theDroneImage!.isDroneImage())<br>"
+                
+                do {
+                    let droneAlt = try self.vc.theDroneImage!.getAltitude()
+                    // re issue #30, round degrees to 6 and distance/alt to 0
+                    var droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
+                    if app.settings.unitsMode == .Metric {
+                        self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
+                    }
+                    else {
+                        let droneAltFt = app.metersToFeet(meters: droneAlt)
+                        droneAltStr = roundDigitsToString(val: droneAltFt, precision: 0)
+                        self.htmlString += "Drone altitude: \(droneAltStr)ft (hae)<br>"
+                    }
+                }
+                catch {
+                    self.htmlString += "Drone altitude: \(error)<br>"
+                }
+                
                 if let mdTemp = vc.theDroneImage!.metaData {
                     self.htmlString += "<br><b>MetaData:</b> \(mdTemp)<br>"
                 }
@@ -308,5 +356,16 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             return nil
         }
     }
-        
+    
+    // take a double (e.g. lat, lon, elevation, distance, etc. and round to X digits of precision and
+    // return string
+    public func roundDigitsToString(val: Double, precision: Double) -> String {
+        let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
+        // after we round it, if caller wanted 0 digits of precision, chop the .0 off of float
+        if precision == 0 {
+            return String(Int(num))
+        }
+        return String(num)
+    }
+    
 } // DebugViewController

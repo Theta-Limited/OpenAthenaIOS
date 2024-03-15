@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 2.12
+    var version: Float = 2.50
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -114,15 +114,17 @@ class ViewController: UIViewController {
         // htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
         // htmlString += "1: load a Digital Elevation Model (DEM) &#9968;<br>" // GeoTIFF
        
-        htmlString += "1: load a drone image &#128444; <br>"
-        htmlString += "2: calculate &#129518; <br>"
-        htmlString += "<br>Mash the &#127937; button to begin!<br>"
+        // htmlString += "1: load a drone image &#128444; <br>"
+        // htmlString += "2: calculate &#129518; <br>"
+        // htmlString += "<br>Mash the &#127937; button to begin!<br>"
         
         // htmlString += "<br>Drone params date: \(droneParams?.droneParamsDate ?? "none; please load")<br>"
         
         // let aLocation = EGM96Location(lat: 33.753746, lng: -84.386330)
         // let offset = EGM96Geoid.getOffset(location: aLocation)
         // htmlString += "<br>Offset at \(aLocation) is \(offset)m<br>"
+        
+        htmlString += "Press &#127937; Start to begin<br>"
         
         setTextViewText(htmlStr: htmlString)
         
@@ -164,8 +166,8 @@ class ViewController: UIViewController {
         // start -> load digital elevation model -> load image -> calculate
         //let vc = self.storyboard?.instantiateViewController(withIdentifier: "Elevation") as! //ElevationViewController
         
-        // go straight to ImageViewController to select an image
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ImageView") as! ImageViewController
+        // go straight to LoadCalculateViewController to select an image
+        let vc = LoadCalculateViewController()
         vc.vc = self
         
         self.navigationController?.pushViewController(vc, animated: true)
