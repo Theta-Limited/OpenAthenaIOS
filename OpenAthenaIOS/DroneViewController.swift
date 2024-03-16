@@ -24,7 +24,8 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
     var scrollView = UIScrollView()
     var contentView = UIView()
     var documentPickerController: UIDocumentPickerViewController?
-
+    var style: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +34,8 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         //view.overrideUserInterfaceStyle = .light
         
         // build rest of view by hand
+        
+        style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
         scrollView.frame = view.bounds
         scrollView.zoomScale = 1.0
@@ -50,7 +53,7 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
         textView.font = .systemFont(ofSize: 16)
         textView.isScrollEnabled = false
         textView.backgroundColor = .secondarySystemBackground
-        htmlString = "Load a drone information file (in JSON format)<br>"
+        htmlString = "\(style)Load a drone information file (in JSON format)<br>"
         setTextViewText(htmlStr: htmlString)
         
         // button setup
@@ -191,18 +194,17 @@ class DroneViewController: UIViewController, UIDocumentPickerDelegate, UIScrollV
     }
     
     private func setTextViewText(htmlStr hString: String) {
-        let data = Data(hString.utf8)
-        let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
-        
-        if let attribString = try? NSMutableAttributedString(data: data,
-                                                             options: [.documentType: NSAttributedString.DocumentType.html],
-                                                             documentAttributes: nil) {
-            
-            attribString.addAttribute(NSAttributedString.Key.font, value: font,
-                                      range: NSRange(location: 0,length: attribString.length))
-            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
-            
+        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
             self.textView.attributedText = attribString
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
+    {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+           setTextViewText(htmlStr: htmlString)
         }
     }
     

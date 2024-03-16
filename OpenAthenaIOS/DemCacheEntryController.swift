@@ -19,15 +19,18 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet var textField: UITextView!
     var documentPicker: UIDocumentPickerViewController?
+    var htmlString: String = ""
+    var vc: ViewController!
+    var style: String = ""
     
     override func viewDidLoad()
     {
-        var htmlString: String
-        
         super.viewDidLoad()
         title = "Elevation Map Details"
         view.backgroundColor = .secondarySystemBackground
         //view.overrideUserInterfaceStyle = .light
+        
+        style =  "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
         // add an export button
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -51,7 +54,7 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
         let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(cacheEntry.cLat),\(cacheEntry.cLon)"
         let coordStr = "\(truncateDouble(val: cacheEntry.cLat, precision: 6)),\(truncateDouble(val: cacheEntry.cLon, precision: 6))"
         
-        htmlString = "\(cacheEntry.filename)<br>" +
+        htmlString = "\(style)\(cacheEntry.filename)<br>" +
         "Created: \(cacheEntry.createDate)<br>" +
         "Modified: \(cacheEntry.modDate)<br>" +
         "n: \(truncateDouble(val: cacheEntry.n, precision: 6)) <br>" +
@@ -156,15 +159,18 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
     // it to our textView
     private func setTextViewText(htmlStr hString: String)
     {
-        let data = Data(hString.utf8)
-        let font = UIFont.systemFont(ofSize: 14)
-        
-        if let attribString = try? NSMutableAttributedString(data: data,
-                                                           options: [.documentType: NSAttributedString.DocumentType.html],
-                                                           documentAttributes: nil) {
-            attribString.addAttribute(NSAttributedString.Key.font, value: font, range:                              NSRange(location: 0, length: attribString.length))
+        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
             self.textField.attributedText = attribString
         }
+        
     } // setTextViewText
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
+    {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+           setTextViewText(htmlStr: htmlString)
+        }
+    }
 }

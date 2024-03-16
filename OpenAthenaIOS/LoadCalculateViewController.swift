@@ -498,32 +498,9 @@ class LoadCalculateViewController: UIViewController,
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = htmlToAttributedString(fromHTML: hString) {
+        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
             self.textView.attributedText = attribString
         }
-    }
-    
-    // written by ChatGPT with mods by rdk
-    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
-    {
-        guard let data = html.data(using: .utf8) else { return nil }
-        
-        // options for document type and char encoding
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        
-        // try to create an attributed string from the html
-        do {
-            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
-            return attributedString
-        }
-        catch {
-            print("Error converting HTML to attributed string \(error)")
-            return nil
-        }
-        
     }
     
     // do image calculations anytime willAppear is invoked
@@ -1098,6 +1075,15 @@ class LoadCalculateViewController: UIViewController,
         
         // return Date().description(with: .current)
         
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
+    {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+           setTextViewText(htmlStr: htmlString)
+        }
     }
     
 } // LoadCalculateViewController

@@ -6,14 +6,12 @@
 //  Created by Bobby Krupczak on 1/27/23.
 //
 
-// put X or something in center of picture
-// for user knows what we are locating XXX
+// deprecated view controller; loading a DEM and calculating
+// have moved into single LoadCalculateViewController
 
 import UIKit
 import CoreLocation
 import UTMConversion
-
-// add scrollview around imageview for pinch/zoom ?
 
 class CalculateViewController: UIViewController, UIScrollViewDelegate {
     

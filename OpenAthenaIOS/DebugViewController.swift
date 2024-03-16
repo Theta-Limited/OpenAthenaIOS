@@ -26,7 +26,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         // set html style
         style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
-        self.title = "OpenAthena Debug"
+        self.title = "OpenAthena\u{2122} Debug"
         view.backgroundColor = .secondarySystemBackground
         //view.overrideUserInterfaceStyle = .light
         
@@ -94,7 +94,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     
     private func debug()
     {
-        self.htmlString = "\(style)<b>OpenAthena Debug Info alpha \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
+        self.htmlString = "\(style)<b>OpenAthena\u{2122} Debug Info \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
         
         self.htmlString += "Coordinate system: \(app.settings.outputMode)<br>"
         self.htmlString += "Units: \(app.settings.unitsMode)<br>"
@@ -330,30 +330,8 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = htmlToAttributedString(fromHTML: hString) {
+        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
             self.textView.attributedText = attribString
-        }
-    }
-    
-    // written by ChatGPT with mods by rdk
-    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
-    {
-        guard let data = html.data(using: .utf8) else { return nil }
-        
-        // options for document type and char encoding
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        
-        // try to create an attributed string from the html
-        do {
-            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
-            return attributedString
-        }
-        catch {
-            print("Error converting HTML to attributed string \(error)")
-            return nil
         }
     }
     
@@ -366,6 +344,15 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             return String(Int(num))
         }
         return String(num)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
+    {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+           setTextViewText(htmlStr: htmlString)
+        }
     }
     
 } // DebugViewController
