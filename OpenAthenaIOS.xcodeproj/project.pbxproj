@@ -23,6 +23,8 @@
 		593A2A402A20FCF30098EAF1 /* TestMakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */; };
 		593A2A422A214ECA0098EAF1 /* DroneParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A2A412A214ECA0098EAF1 /* DroneParams.swift */; };
 		593A2A462A2642400098EAF1 /* TestDroneParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593A2A452A2642400098EAF1 /* TestDroneParams.swift */; };
+		59576BC72BA2441100A400A1 /* LoadCalculateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59576BC62BA2441100A400A1 /* LoadCalculateViewController.swift */; };
+		59576BC92BA4C8B400A400A1 /* TestDEMDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59576BC82BA4C8B400A400A1 /* TestDEMDownload.swift */; };
 		5958A58A29EF21EB00CBEF99 /* CK42Geodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */; };
 		5958A58E29F02DB000CBEF99 /* CK42GaussKruger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */; };
 		5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */; };
@@ -103,6 +105,8 @@
 		593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMakeModel.swift; sourceTree = "<group>"; };
 		593A2A412A214ECA0098EAF1 /* DroneParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneParams.swift; sourceTree = "<group>"; };
 		593A2A452A2642400098EAF1 /* TestDroneParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDroneParams.swift; sourceTree = "<group>"; };
+		59576BC62BA2441100A400A1 /* LoadCalculateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCalculateViewController.swift; sourceTree = "<group>"; };
+		59576BC82BA4C8B400A400A1 /* TestDEMDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDEMDownload.swift; sourceTree = "<group>"; };
 		5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42Geodetic.swift; sourceTree = "<group>"; };
 		5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CK42GaussKruger.swift; sourceTree = "<group>"; };
 		5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSGeodetic.swift; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 				597089DD2A3FD35600B5E1BF /* EGM96Location.swift */,
 				592CABB42A0ACF61006E28AF /* examples */,
 				59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */,
+				59576BC62BA2441100A400A1 /* LoadCalculateViewController.swift */,
 				59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */,
 				593A2A412A214ECA0098EAF1 /* DroneParams.swift */,
 				59B62B232988133000F0C6B1 /* AthenaSettings.swift */,
@@ -260,6 +265,7 @@
 				593A2A3F2A20FCF30098EAF1 /* TestMakeModel.swift */,
 				597089E22A4126DD00B5E1BF /* TestEGM96.swift */,
 				59DBFEEC2AB9DBFC003C4B33 /* OpenAthenaIOSTests.xctestplan */,
+				59576BC82BA4C8B400A400A1 /* TestDEMDownload.swift */,
 			);
 			path = OpenAthenaIOSTests;
 			sourceTree = "<group>";
@@ -475,6 +481,7 @@
 				59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */,
 				59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */,
 				59B62B242988133000F0C6B1 /* AthenaSettings.swift in Sources */,
+				59576BC72BA2441100A400A1 /* LoadCalculateViewController.swift in Sources */,
 				59B62B3F298DAE7300F0C6B1 /* DigitalElevationModel.swift in Sources */,
 				597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */,
 				597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */,
@@ -511,6 +518,7 @@
 				597089E32A4126DD00B5E1BF /* TestEGM96.swift in Sources */,
 				593A2A402A20FCF30098EAF1 /* TestMakeModel.swift in Sources */,
 				59CC795A2A15B4B800B07782 /* TestDroneImage.swift in Sources */,
+				59576BC92BA4C8B400A400A1 /* TestDEMDownload.swift in Sources */,
 				5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */,
 				597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */,
 				59CC79532A15B40C00B07782 /* OpenAthenaIOSTests.swift in Sources */,
@@ -700,7 +708,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 687;
+				CURRENT_PROJECT_VERSION = 787;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -718,7 +726,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.12;
+				MARKETING_VERSION = 2.50;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -737,7 +745,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 687;
+				CURRENT_PROJECT_VERSION = 787;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -755,7 +763,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.12;
+				MARKETING_VERSION = 2.50;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -773,7 +781,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 687;
+				CURRENT_PROJECT_VERSION = 787;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -793,7 +801,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 687;
+				CURRENT_PROJECT_VERSION = 787;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

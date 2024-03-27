@@ -26,7 +26,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         // set html style
         style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
-        self.title = "OpenAthena Debug"
+        self.title = "OpenAthena\u{2122} Debug"
         view.backgroundColor = .secondarySystemBackground
         //view.overrideUserInterfaceStyle = .light
         
@@ -94,7 +94,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     
     private func debug()
     {
-        self.htmlString = "\(style)<b>OpenAthena Debug Info alpha \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
+        self.htmlString = "\(style)<b>OpenAthena\u{2122} Debug Info \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
         
         self.htmlString += "Coordinate system: \(app.settings.outputMode)<br>"
         self.htmlString += "Units: \(app.settings.unitsMode)<br>"
@@ -146,7 +146,22 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         }
         
         if vc.theDroneImage != nil {
+            var foundCCDInfoString: String = ""
+            
             self.htmlString += "<br><b>Drone Image:</b> \(vc.theDroneImage!.name ?? "No name")<br>"
+            // try to get CCD info for drone make/model
+            do {
+                let ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
+                                                          model: vc.theDroneImage!.getCameraModel(),
+                                                          targetWidth: vc.theDroneImage!.theImage!.size.width)
+                vc!.theDroneImage!.ccdInfo = ccdInfo
+                foundCCDInfoString = "Found CCD info for drone make/model \(ccdInfo!.makeModel)<br>"
+            }
+            catch {
+                print("No CCD info for drone image, using estimates")
+                foundCCDInfoString = "No CCD info for drone make/model, estimate using exif 35mm equivalent<br>"
+                vc!.theDroneImage!.ccdInfo = nil
+            }           
             do {
                 var lat = try self.vc.theDroneImage!.getLatitude()
                 var lon = try self.vc.theDroneImage!.getLongitude()
@@ -157,13 +172,46 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 try self.htmlString += "Make: \(vc.theDroneImage!.getCameraMake())<br>"
                 try self.htmlString += "Model: \(vc.theDroneImage!.getCameraModel())<br>"
                 self.htmlString += "Old Autel: \(vc.theDroneImage!.isOldAutel())<br>"
+                self.htmlString += foundCCDInfoString
                                 
                 try self.htmlString += "Focal Length: \(vc.theDroneImage!.getFocalLength())<br>"
                 try self.htmlString += "Focal Length in 35mm: \(vc.theDroneImage!.getFocalLengthIn35mm())<br>"
                                 
                 self.htmlString += "Date/Time UTC: \(vc.theDroneImage!.getDateTimeUTC())"
                 self.htmlString += "<br>aux:Lens \(vc.theDroneImage!.metaData!["aux:Lens"] ?? "not present")<br>"
-                                
+                
+                do {
+                    try self.htmlString += "GimbalPitch/Theta \(vc.theDroneImage!.getGimbalPitchDegree())<br>"
+                }
+                catch {
+                    self.htmlString += "GimbalPitch/Theta: \(error)<br>"
+                }
+                do {
+                    try self.htmlString += "GimbalYaw/Az: \(vc.theDroneImage!.getGimbalYawDegree())<br>"
+                }
+                catch {
+                    self.htmlString += "GimbalYaw/Az: \(error)<br>"
+                }
+                self.htmlString += "DigitalZoom: \(vc.theDroneImage!.getZoom())<br>"
+                self.htmlString += "Is Drone? \(self.vc.theDroneImage!.isDroneImage())<br>"
+                
+                do {
+                    let droneAlt = try self.vc.theDroneImage!.getAltitude()
+                    // re issue #30, round degrees to 6 and distance/alt to 0
+                    var droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
+                    if app.settings.unitsMode == .Metric {
+                        self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
+                    }
+                    else {
+                        let droneAltFt = app.metersToFeet(meters: droneAlt)
+                        droneAltStr = roundDigitsToString(val: droneAltFt, precision: 0)
+                        self.htmlString += "Drone altitude: \(droneAltStr)ft (hae)<br>"
+                    }
+                }
+                catch {
+                    self.htmlString += "Drone altitude: \(error)<br>"
+                }
+                
                 if let mdTemp = vc.theDroneImage!.metaData {
                     self.htmlString += "<br><b>MetaData:</b> \(mdTemp)<br>"
                 }
@@ -282,31 +330,29 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = htmlToAttributedString(fromHTML: hString) {
+        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
             self.textView.attributedText = attribString
         }
     }
     
-    // written by ChatGPT with mods by rdk
-    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
-    {
-        guard let data = html.data(using: .utf8) else { return nil }
-        
-        // options for document type and char encoding
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        
-        // try to create an attributed string from the html
-        do {
-            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
-            return attributedString
+    // take a double (e.g. lat, lon, elevation, distance, etc. and round to X digits of precision and
+    // return string
+    public func roundDigitsToString(val: Double, precision: Double) -> String {
+        let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
+        // after we round it, if caller wanted 0 digits of precision, chop the .0 off of float
+        if precision == 0 {
+            return String(Int(num))
         }
-        catch {
-            print("Error converting HTML to attributed string \(error)")
-            return nil
+        return String(num)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
+    {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+           setTextViewText(htmlStr: htmlString)
         }
     }
-        
+    
 } // DebugViewController

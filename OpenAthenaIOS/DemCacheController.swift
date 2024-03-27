@@ -88,6 +88,7 @@ extension DemCacheController: UITableViewDelegate, UITableViewDataSource
             // switch to DemCacheEntryViewController
             let newVc = self.storyboard?.instantiateViewController(withIdentifier: "DemCacheEntryController") as! DemCacheEntryController
             newVc.cacheEntry = vc.demCache!.cache[indexPath.row]
+            newVc.vc = vc
             self.navigationController?.pushViewController(newVc, animated: true)
         }
     }

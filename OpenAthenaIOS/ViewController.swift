@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Float = 2.12
+    var version: Double = 2.50
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -21,14 +21,19 @@ class ViewController: UIViewController {
     var droneParams: DroneParams?
     var demCache: DemCache?
     var style: String = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("OpenAthena starts!")
         
-        // set html style
-        style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
+        // set html style and accommodate dark mode and light mode
+        //
+        style =
+    "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
+        
+        //textView.textColor = .label
+        //textView.overrideUserInterfaceStyle = .unspecified
         
         print("viewController: output mode is \(app.settings.outputMode)")
         print("viewController: output mode rawval is \(app.settings.outputMode.rawValue)")
@@ -73,7 +78,7 @@ class ViewController: UIViewController {
         textView.isEditable = false
         textView.isSelectable = true
         //textView.textColor = .label
-          
+        
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named:"athena")
         
@@ -88,6 +93,18 @@ class ViewController: UIViewController {
         requestNotificationAuthorization()
         
     } // viewDidLoad
+    
+    // if user changed from dark mode to regular mode, or vice versa, this call back
+    // will have been invoked.  If color appearance changed, re-draw the html string
+    // using appropriate font colors
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
+    {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+           setTextViewText(htmlStr: htmlString)
+        }
+    }
     
     private func requestNotificationAuthorization()
     {
@@ -105,7 +122,7 @@ class ViewController: UIViewController {
     
     private func doMain()
     {
-        htmlString = "\(style)<b>OpenAthena alpha v\(version) build \(getAppBuildNumber()!) starting</b><br>"
+        htmlString = "\(style)<body><b>OpenAthena\u{2122} v\(getAppVersion())</b><br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
         htmlString += "Units: \(app.settings.unitsMode)<p>"
         
@@ -113,16 +130,18 @@ class ViewController: UIViewController {
         // automatic DEM downloading/loading
         // htmlString += "1: load a Digital Elevation Model (DEM) &#\u{26F0};<br>" // GeoTIFF
         // htmlString += "1: load a Digital Elevation Model (DEM) &#9968;<br>" // GeoTIFF
-       
-        htmlString += "1: load a drone image &#128444; <br>"
-        htmlString += "2: calculate &#129518; <br>"
-        htmlString += "<br>Mash the &#127937; button to begin!<br>"
+        
+        // htmlString += "1: load a drone image &#128444; <br>"
+        // htmlString += "2: calculate &#129518; <br>"
+        // htmlString += "<br>Mash the &#127937; button to begin!<br>"
         
         // htmlString += "<br>Drone params date: \(droneParams?.droneParamsDate ?? "none; please load")<br>"
         
         // let aLocation = EGM96Location(lat: 33.753746, lng: -84.386330)
         // let offset = EGM96Geoid.getOffset(location: aLocation)
         // htmlString += "<br>Offset at \(aLocation) is \(offset)m<br>"
+        
+        htmlString += "Press &#127937; Start to begin<br>"
         
         setTextViewText(htmlStr: htmlString)
         
@@ -142,7 +161,7 @@ class ViewController: UIViewController {
         print("Atlanta (\(lat),\(lng)) offset \(offset)")
         
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -164,13 +183,13 @@ class ViewController: UIViewController {
         // start -> load digital elevation model -> load image -> calculate
         //let vc = self.storyboard?.instantiateViewController(withIdentifier: "Elevation") as! //ElevationViewController
         
-        // go straight to ImageViewController to select an image
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ImageView") as! ImageViewController
+        // go straight to LoadCalculateViewController to select an image
+        let vc = LoadCalculateViewController()
         vc.vc = self
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     // create our main menu and glue it into navigation controller
     private func configureMenuItems()
     {
@@ -228,11 +247,15 @@ class ViewController: UIViewController {
         
     } // configure menu items
     
-    func getAppVersion() -> String { return "\(version)" }
+    func getAppVersion() -> String 
+    { 
+        let formattedString = String(format: "%.2f",version);
+        return formattedString
+    }
     func getAppBuildNumber() -> String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
-
+    
     // take htmlString and encode it and set
     // it to our textView
     private func setTextViewTextOld(htmlStr hString: String)
@@ -241,11 +264,16 @@ class ViewController: UIViewController {
         let font = UIFont.systemFont(ofSize: CGFloat(app.settings.fontSize))
         
         if let attribString = try? NSMutableAttributedString(data: data,
-                                                           options: [.documentType: NSAttributedString.DocumentType.html],
-                                                           documentAttributes: nil) {
+                                                             options: [.documentType: NSAttributedString.DocumentType.html],
+                                                             documentAttributes: nil) {
             attribString.addAttribute(NSAttributedString.Key.font, value: font,
                                       range: NSRange(location: 0,length: attribString.length))
-            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.label, range: NSMakeRange(0,attribString.length))
+            
+            //attribString.addAttribute(NSAttributedString.Key.foregroundColor, value: //UIColor.label, range: NSMakeRange(0,attribString.length))
+            
+            attribString.addAttribute(NSAttributedString.Key.foregroundColor, value:
+                UIColor.white, range: NSMakeRange(0,attribString.length))
+            
             self.textView.attributedText = attribString
         }
     }
@@ -261,19 +289,26 @@ class ViewController: UIViewController {
     }
     
     // written by ChatGPT with mods by rdk
-    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
+    public func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
     {
         guard let data = html.data(using: .utf8) else { return nil }
         
         // options for document type and char encoding
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
+            .characterEncoding: String.Encoding.utf8.rawValue,
         ]
         
         // try to create an attributed string from the html
         do {
-            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
+            var attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
+            
+            if traitCollection.userInterfaceStyle == .dark {
+                attributedString = applyColorToAttributredString(attributedString, color: .white)
+            }
+            else {
+                attributedString = applyColorToAttributredString(attributedString, color: .black)
+            }
             return attributedString
         }
         catch {
@@ -281,5 +316,13 @@ class ViewController: UIViewController {
             return nil
         }
     }
+    
+    public func applyColorToAttributredString(_ attributedString: NSAttributedString, color: UIColor) -> NSAttributedString
+    {
+        let mutable = NSMutableAttributedString(attributedString: attributedString)
+        mutable.addAttributes([.foregroundColor: color], range: NSRange(location: 0, length: mutable.length))
+        return mutable
+    }
+    
 } // ViewController
 

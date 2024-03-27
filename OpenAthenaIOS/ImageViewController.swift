@@ -8,6 +8,9 @@
 //  Stack Overflow
 //  questions/2660201/what-parameters-should-i-use-in-a-google-maps-url-to-go-to-a-lat-lon
 
+// deprecated view controller; loading a DEM and calculating
+// have moved into single LoadCalculateViewController
+
 import Photos
 import PhotosUI
 import UIKit

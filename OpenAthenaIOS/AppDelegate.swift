@@ -96,8 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let feet = meters * 3.28084
         return feet
     }
-
-
-
+    
 }
 

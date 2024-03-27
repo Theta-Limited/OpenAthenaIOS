@@ -18,14 +18,17 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     var contentView: UIView = UIView()
     var vc: ViewController!
     var style: String = ""
-
+    var htmlString: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("AboutViewController viewDidLoad starting")
         
         // set html style
         style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
         
-        self.title = "About OpenAthena"
+        self.title = "About OpenAthena\u{2122}"
         view.backgroundColor = .secondarySystemBackground
         //view.overrideUserInterfaceStyle = .light
         
@@ -93,17 +96,18 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     
     private func getAbout()
     {
-        let htmlString = "\(style) "
-        + "<b>OpenAthena alpha version \(vc!.getAppVersion()) build \(vc.getAppBuildNumber()!)</b></br>"
+        htmlString = "\(style) "
+        + "<b>OpenAthena\u{2122} version \(vc!.getAppVersion()) build \(vc.getAppBuildNumber()!)</b></br>"
         + "Matthew Krupczak, Bobby Krupczak et al.<br>"
         + "GPL-3.0, some rights reserved "
         + "<a href=\"https://openathena.com/\">OpenAthena.com</a><br>"
-        + "<br>OpenAthena allows common drones to spot precise geodetic locations.<br>"
+        + "<br>OpenAthena\u{2122} allows common drones to spot precise geodetic locations.<br>"
+        
+        + "<br>For best results, please calibrate your drone's compass\u{1F9ED} before flight!<br>"
+        
         + "<br><a href=\"https://github.com/Theta-Limited/OpenAthena\">View the project on GitHub</a>"
         + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br>"
-        
-//        + "<br><a //href='https://github.com/Theta-Limited/OpenAthena/blob/main/EIO_fetch_geotiff_example.md'>Obtain a Digital Elevation Maps Here</a><br>"
-        
+                
         + "<br>Elevation maps/data obtained from <a href='https://www.opentopography.org'>OpenTopography</a> SRTM_GL1 dataset<br>"
         
         + "<br>NATA/MGRS, WGS84, & UTM output vertical datum is EMG96 meters above mean sea level.  "
@@ -121,7 +125,7 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         + "</ul>"
         
         // privacy policy
-        + "<br>See <a href='https://openathena.com/privacy'>this page</a> for the OpenAthena privacy policy"
+        + "<br>See <a href='https://openathena.com/privacy'>this page</a> for the OpenAthena\u{2122} privacy policy"
            
         setTextViewText(htmlStr: htmlString)
         
@@ -137,6 +141,8 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     {
         
     }
+    
+    
     
     // take htmlString and encode it and set
     // it to our textView
@@ -162,30 +168,17 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = htmlToAttributedString(fromHTML: hString) {
+        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
             self.textView.attributedText = attribString
         }
     }
     
-    // written by ChatGPT with mods by rdk
-    private func htmlToAttributedString(fromHTML html: String) -> NSAttributedString?
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
     {
-        guard let data = html.data(using: .utf8) else { return nil }
+        super.traitCollectionDidChange(previousTraitCollection)
         
-        // options for document type and char encoding
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        
-        // try to create an attributed string from the html
-        do {
-            let attributedString = try NSAttributedString(data: data, options: options, documentAttributes: nil )
-            return attributedString
-        }
-        catch {
-            print("Error converting HTML to attributed string \(error)")
-            return nil
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+           setTextViewText(htmlStr: htmlString)
         }
     }
     

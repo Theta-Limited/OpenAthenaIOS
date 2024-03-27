@@ -1,9 +1,12 @@
-//
-//  ElevationViewController.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 1/27/23
+// ElevationViewController.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 1/27/23
+
+// deprecated view controller; loading an image and calculating
+// have moved into single LoadCalculateViewController and
+// DEMs are automatically loaded and/or downloaded now
 
 // download, build, import
 // https://github.com/ngageoint/tiff-ios
