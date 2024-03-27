@@ -94,6 +94,9 @@ class ViewController: UIViewController {
         
     } // viewDidLoad
     
+    // if user changed from dark mode to regular mode, or vice versa, this call back
+    // will have been invoked.  If color appearance changed, re-draw the html string
+    // using appropriate font colors
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
     {
         super.traitCollectionDidChange(previousTraitCollection)

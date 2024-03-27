@@ -42,6 +42,7 @@ class LoadCalculateViewController: UIViewController,
     var target: [Double] = [0,0,0,0, 0,0,0,0, 0]
     var actionSendCoT: UIAction? = nil
     var actionResetPtr: UIAction? = nil
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -1028,8 +1029,32 @@ class LoadCalculateViewController: UIViewController,
     // if it succeeds, load it
     private func fetchNewElevationMap(lat: Double, lon: Double, len: Double)
     {
+        
+        // start spinner or activity indicator first
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(activityIndicator)
+        //activityIndicator.center = self.view.center
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
+        ])
+        //activityIndicator.backgroundColor = .white
+        //activityIndicator.color = .red
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        
+        // unleash the download
+        
         let aDownloader = DemDownloader(lat: lat, lon: lon, length: len)
         aDownloader.download(completionHandler: { ( resultCode, bytes, filename ) in
+            
+            // stop the spinner or activity indicator
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
+            
+            // now handle result processing
             let resultStr = DemDownloader.httpResultCodeToString(resultCode: resultCode)
             self.app.sendNotification(title: "Download Result",
                                       text: "Download result: \(resultStr), \(bytes) bytes, \(filename)")
