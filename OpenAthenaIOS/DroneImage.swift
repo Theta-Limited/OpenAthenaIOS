@@ -606,9 +606,12 @@ public class DroneImage {
     // compass correction is merely to compensate for errors in drone's
     // compass calibration
     
-    public func getGimbalYawDegree() throws -> Double {
+    public func getGimbalYawDegree() throws -> Double 
+    {
         
         var az: Double
+        
+        print("getGimbalYawDegree starting")
         
         if metaData == nil {
             throw DroneImageError.NoMetaData
@@ -620,6 +623,7 @@ public class DroneImage {
         }
         
         if metaData!["drone-dji:GimbalYawDegree"] != nil {
+            print("getGimbalYawDegree: drone-dji:GimbalYawDegree present")
             az = (metaData!["drone-dji:GimbalYawDegree"] as! NSString).doubleValue
             if settings != nil {
                 print("Adding \(settings!.compassCorrection) to AZ")
@@ -1558,7 +1562,9 @@ public class DroneImage {
     
     // parse XMP/XML data out of image throwing errors
     // if encountered
-    public func parseXmpMetaData() throws {
+    public func parseXmpMetaData() throws
+    {
+        print("parseXmpMetaData: starting")
         
         if rawData == nil {
             xmpDataRead = false
@@ -1575,14 +1581,14 @@ public class DroneImage {
         let beginRange = dataString.range(of: "<?xpacket begin")
         let endRange = dataString.range(of: "<?xpacket end.*?>", options: .regularExpression)
         if beginRange == nil || endRange == nil {
-            //print("parseXmpMetaData: did not find tags\n")
+            print("parseXmpMetaData: did not find tags\n")
             throw DroneImageError.NoXmpMetaData
         }
         let startIndex = beginRange!.lowerBound
         let endIndex = endRange!.upperBound
         xmlString = String(dataString[startIndex..<endIndex])
         print("XML doc length is \(xmlString!.count)")
-        //print("XML String to parse is \(xmlString!)")
+        print("XML String to parse is \(xmlString!)")
         
         // xmlString gets consumed by parser; we should parse a copy of it
         xmlStringCopy = xmlString

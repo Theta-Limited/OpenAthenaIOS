@@ -110,6 +110,9 @@ class LoadCalculateViewController: UIViewController,
         
         if vc.theDroneImage != nil {
             imageView.image = vc.theDroneImage?.theImage
+            // mark the image as its already been selected previously
+            // re issue #35
+            markImagePixel(x_prop: vc.theDroneImage!.targetXprop, y_prop: vc.theDroneImage!.targetYprop)
         }
         
         contentView.addSubview(stackView)
@@ -140,6 +143,12 @@ class LoadCalculateViewController: UIViewController,
                 
     } // viewDidLoad
     
+    // re issue #36, don't forget this function so that we can pinch/zoom
+    // the image
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return contentView
+    }
+    
     // when view is set to appear, reset the htmlString
     // if we go forward to calculate then back to selectImage,
     // viewDidLoad may not be called again and then we
@@ -147,6 +156,8 @@ class LoadCalculateViewController: UIViewController,
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        print("LoadCalculateViewController: viewWillAppear starting")
         
         // create a cursor on target sender and pass Athena settings
         cotSender = CursorOnTargetSender(params: app.settings)
@@ -440,6 +451,8 @@ class LoadCalculateViewController: UIViewController,
     {
         var lat, lon: Double
         
+        print("getImageData: starting")
+        
         if vc.theDroneImage == nil {
             return
         }
@@ -486,8 +499,10 @@ class LoadCalculateViewController: UIViewController,
             }
         }
         catch {
-            self.htmlString += "Drone altitude: \(error)<br>"
+            self.htmlString += "Drone altitude: \(error)<br>" 
         }
+        
+        print("getImageData: done, going to setTextViewText")
         
         // display the text finally!
         setTextViewText(htmlStr: self.htmlString)
@@ -499,8 +514,13 @@ class LoadCalculateViewController: UIViewController,
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
-            self.textView.attributedText = attribString
+        // to avoid crashing due to NSInternalConsistencyException, don't set
+        // on calling thread; dispatch to main async
+        // re issue #37
+        DispatchQueue.main.async {
+            if let attribString = self.vc.htmlToAttributedString(fromHTML: hString) {
+                self.textView.attributedText = attribString
+            }
         }
     }
     
@@ -603,6 +623,8 @@ class LoadCalculateViewController: UIViewController,
         // check for [ 0,0,0,0, 0,0,0,0, 0 ]
         // internally, all distances/altitudes are in meters
         
+        print("resolveTarget returned \(target)")
+        
         if target == [ 0.0, 0.0, 0.0, 0.0,  0.0, 0.0, 0.0, 0.0,  0.0] {
             print("doCalculations: target return values all zeros, returning")
             setTextViewText(htmlStr: htmlString)
@@ -623,14 +645,12 @@ class LoadCalculateViewController: UIViewController,
         target[8] = target[3] + offset
         
         //let nearestAltStr = roundDigitsToString(val: target[4] + offset, precision: 6)
-        
-        print("resolveTarget returned \(target)")
-        
+                
         //htmlString += "<h2>Target Lat,Lon: \(latStr),\(lonStr)</h2><br>"
         
         //htmlString += "Resolve target: \(target)<br>"
         //let urlStr = "https://maps.../maps/@?api=1&map_action=map&center=\(target[1]),\(target[2])"
-        let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(latStr),\(lonStr)"
+        let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(latStr),\(lonStr)"
         htmlString += "<a href='\(urlStr)'><h2>Lat,Lon: \(latStr),\(lonStr)</h2></a><br>"
         if app.settings.unitsMode == .Metric {
             htmlString += "<h2>Alt: \(altStr)m</h2><br>"
@@ -685,7 +705,7 @@ class LoadCalculateViewController: UIViewController,
             
             let mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: target[1],Lon: target[2],Alt: target[3])
             //htmlString += "<h2>MGRS1m: \(mgrsStr)</h2><br>"
-            let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(mgrsStr)"
+            let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(mgrsStr)"
             htmlString += "<a href='\(urlStr)'><h2>MGRS1m: \(mgrsStr)</h2></a><br>"
             if app.settings.unitsMode == .Metric {
                 htmlString += "<h2>Alt: \(altStr)m</h2><br>"
@@ -760,6 +780,8 @@ class LoadCalculateViewController: UIViewController,
         case DroneTargetResolution.AltitudeAboveGround:
             htmlString += "Altitude: above ground<br>"
         }
+        
+        print("doCalculations: going to get image data")
         
         getImageData()
                 

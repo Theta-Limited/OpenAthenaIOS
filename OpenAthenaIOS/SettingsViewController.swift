@@ -74,7 +74,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         // set slider parameters; keep consistent with OAAndroid
         newAZCorrection = app.settings.compassCorrection
         newAZSliderValue = app.settings.compassSliderValue
-        azOffsetLabel.text = "Manual Azimuth Correction \(newAZCorrection)"
+        azOffsetLabel.text = "Manual Azimuth Correction: \(newAZCorrection) \u{00B0}"
         azOffsetLabel.textAlignment = .center
         //azOffsetValueLabel.text = "\(newAZCorrection)"
         azOffsetSlider.minimumValue = 0.0
@@ -210,7 +210,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         newAZCorrection = 0.0
         azOffsetSlider.value = 100.0
         //azOffsetValueLabel.text = "Manual Azimuth Correction: \(newAZCorrection)"
-        azOffsetLabel.text = "Manual Azimuth Correction: \(newAZCorrection)"
+        azOffsetLabel.text = "Manual Azimuth Correction: \(newAZCorrection) \u{00B0}"
     }
     
     // user changed value via slider
@@ -221,7 +221,8 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         newAZCorrection = calculateAZCorrectionOffset(sliderValue: newAZSliderValue)
         //correctionTextField.text = "Manual Azimuth Correction: \(newCompassCorrection)"
         //azOffsetValueLabel.text = "\(newAZCorrection)"
-        azOffsetLabel.text = "Manual Azimuth Correction: \(newAZCorrection)"
+        // re issue #35, add colon and degree symbol
+        azOffsetLabel.text = "Manual Azimuth Correction: \(newAZCorrection) \u{00B0}"
     }
     
     // user changed value via text view
@@ -328,7 +329,7 @@ extension SettingsViewController: UIPickerViewDelegate {
 //        newCompassCorrection = app.settings.compassCorrection
 //        newCompassSliderValue = app.settings.compassSliderValue
 //        compassOffsetLabel.text = "Manual Azimuth Correction"
-//        compassOffsetValueLabel.text = "\(newCompassCorrection)"
+//        compassOffsetValueLabel.text = "\(newCompassCorrection) \u{00B0}"
 //        compassOffsetSlider.minimumValue = 0.0
 //        compassOffsetSlider.maximumValue = 200.0
 //        compassOffsetSlider.value = newCompassSliderValue

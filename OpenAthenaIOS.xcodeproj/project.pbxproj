@@ -207,10 +207,10 @@
 			isa = PBXGroup;
 			children = (
 				59BEF5E92AB61C3700D5A56D /* OpenAthenaIOSRelease.entitlements */,
-				59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */,
-				596E92782AA7B090003E35CD /* droneModels.json */,
 				597089DA2A3FD35600B5E1BF /* Cubic.swift */,
+				59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */,
 				597089DB2A3FD35600B5E1BF /* EGM96complete.bin */,
+				596E92782AA7B090003E35CD /* droneModels.json */,
 				597089DC2A3FD35600B5E1BF /* EGM96Geoid.swift */,
 				59DBFF0F2AD0C456003C4B33 /* FisheyeDistortionCorrector.swift */,
 				59DBFF112AD0C48A003C4B33 /* PerspectiveDistortionCorrector.swift */,
@@ -708,7 +708,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 787;
+				CURRENT_PROJECT_VERSION = 842;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -726,7 +726,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.50;
+				MARKETING_VERSION = 2.52;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -745,7 +745,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 787;
+				CURRENT_PROJECT_VERSION = 842;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -763,7 +763,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.50;
+				MARKETING_VERSION = 2.52;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -781,7 +781,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 787;
+				CURRENT_PROJECT_VERSION = 842;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -801,7 +801,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 787;
+				CURRENT_PROJECT_VERSION = 842;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

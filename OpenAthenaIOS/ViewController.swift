@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Double = 2.50
+    var version: Double = 2.52
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -283,8 +283,11 @@ class ViewController: UIViewController {
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = htmlToAttributedString(fromHTML: hString) {
-            self.textView.attributedText = attribString
+        // re issue #37, run all of this on dispatchqueue main
+        DispatchQueue.main.async {
+            if let attribString = self.htmlToAttributedString(fromHTML: hString) {
+                self.textView.attributedText = attribString
+            }
         }
     }
     

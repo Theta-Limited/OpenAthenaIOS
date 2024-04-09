@@ -98,7 +98,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         
         self.htmlString += "Coordinate system: \(app.settings.outputMode)<br>"
         self.htmlString += "Units: \(app.settings.unitsMode)<br>"
-        self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate ?? "unknown"))<br>"
+        self.htmlString += "Drone params date: \(vc.droneParams!.droneParamsDate ?? "unknown")<br>"
         self.htmlString += "CCD data for \(vc.droneParams!.droneCCDParams.count) drones<br>"
         self.htmlString += "Use CCD Info: \(app.settings.useCCDInfo)<br>"
         self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"
@@ -138,7 +138,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             var centerLat,centerLon : Double
             (centerLat,centerLon) = vc.dem!.getCenter()
             
-            let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(centerLat),\(centerLon)"
+            let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(centerLat),\(centerLon)"
             self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
         }
         else {
@@ -167,7 +167,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 var lon = try self.vc.theDroneImage!.getLongitude()
                 self.htmlString += "Latitude: \(lat)<br>"
                 self.htmlString += "Longitude: \(lon)<br>"
-                let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
+                let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
                 self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
                 try self.htmlString += "Make: \(vc.theDroneImage!.getCameraMake())<br>"
                 try self.htmlString += "Model: \(vc.theDroneImage!.getCameraModel())<br>"
@@ -330,8 +330,11 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
-            self.textView.attributedText = attribString
+        // re issue #37, run entire call on dispatchqueue main async
+        DispatchQueue.main.async {
+            if let attribString = self.vc.htmlToAttributedString(fromHTML: hString) {
+                self.textView.attributedText = attribString
+            }
         }
     }
     

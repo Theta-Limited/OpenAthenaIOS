@@ -168,8 +168,11 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     // we want
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
-            self.textView.attributedText = attribString
+        // re issue #37, run entire on dispatchqueue
+        DispatchQueue.main.async {
+            if let attribString = self.vc.htmlToAttributedString(fromHTML: hString) {
+                self.textView.attributedText = attribString
+            }
         }
     }
     
