@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Double = 2.52
+    var version: Double = 2.60
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         //textView.overrideUserInterfaceStyle = .unspecified
         
         print("viewController: output mode is \(app.settings.outputMode)")
-        print("viewController: output mode rawval is \(app.settings.outputMode.rawValue)")
+        //print("viewController: output mode rawval is \(app.settings.outputMode.rawValue)")
         print("viewController: units mode is \(app.settings.unitsMode)")
         
         self.title = "OpenAthena"

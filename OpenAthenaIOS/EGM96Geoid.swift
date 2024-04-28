@@ -434,7 +434,7 @@ class EGM96Geoid {
         
         // eat blank links or lines with space at beginning -- rdk
         if line.isEmpty {
-            print("EGM96Geoid: Skipping parsing empty line")
+            //print("EGM96Geoid: Skipping parsing empty line")
             return false
         }
 

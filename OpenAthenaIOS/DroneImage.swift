@@ -103,8 +103,8 @@ public class DroneImage {
         let md = CGImageSourceCopyPropertiesAtIndex(src!,0,nil)! as NSDictionary
         let md2 = CGImageSourceCopyMetadataAtIndex(src!,0,nil)
         
-        print("updateMetaData: md is \(md)")
-        print("updateMetaData: md2 is \(md2)")
+        //print("updateMetaData: md is \(md)")
+        //print("updateMetaData: md2 is \(md2)")
         
         metaData = md.mutableCopy() as! NSMutableDictionary
         rawMetaData = md2
@@ -326,7 +326,7 @@ public class DroneImage {
         var alt = 0.0
         var gpsInfo: NSDictionary
         
-        print("getAltitude: starting with 0.0")
+        //print("getAltitude: starting with 0.0")
         
         if metaData == nil {
             print("getAltitude: no metadata, bugging out")
@@ -341,21 +341,21 @@ public class DroneImage {
         
         if metaData!["drone-dji:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-dji:AbsoluteAltitude"] as! NSString).doubleValue
-            print("getAltitude: drone-dji:AbsoluteAltitude \(alt)")
+            //print("getAltitude: drone-dji:AbsoluteAltitude \(alt)")
             //return alt
         }
         if metaData!["drone:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone:AbsoluteAltitude"] as! NSString).doubleValue
-            print("getAltitude: drone:AbsoluteAltitude \(alt)")
+            //print("getAltitude: drone:AbsoluteAltitude \(alt)")
             //return alt
         }
         if metaData!["drone-skydio:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-skydio:AbsoluteAltitude"] as! NSString).doubleValue
-            print("getAltitude: drone-skydio:AbsoluteAltitude \(alt)")
+            //print("getAltitude: drone-skydio:AbsoluteAltitude \(alt)")
             //return alt
         }
         
-        print("getAltitude: \(alt), now going to make corrections")
+        //print("getAltitude: \(alt), now going to make corrections")
         
         // for parrot, what about Camera:AboveGroundAltitude XXX ?
         
@@ -368,7 +368,7 @@ public class DroneImage {
         // if alt is still 0.0, grab here
         var altFromExif = false
         if alt == 0.0 {
-            print("getAltitude:0.0, falling back to GPS")
+            //print("getAltitude:0.0, falling back to GPS")
             
             if metaData!["{GPS}"] == nil {
                 print("getAltitude: no gps meta data, bugging out")
@@ -382,26 +382,26 @@ public class DroneImage {
             alt = gpsInfo["Altitude"] as! Double
             altFromExif = true
             
-            print("getAltitude: gps altitude is \(alt)")
+            //print("getAltitude: gps altitude is \(alt)")
             
             // re autel drones, check altitude ref for 1 meaning below sea level XXX
             if gpsInfo["GPSAltitudeRef"] != nil {
                 let ref = gpsInfo["GPSAltitudeRef"] as! Int
-                print("getAltitude: GPSAltitude ref is \(ref)")
+                //print("getAltitude: GPSAltitude ref is \(ref)")
                 if ref == 1 {
                     alt = -1.0 * alt
                 }
             }
             if gpsInfo["AltitudeRef"] != nil {
                 let ref = gpsInfo["AltitudeRef"] as! Int
-                print("getAltitude Altitude ref is \(ref)")
+                //print("getAltitude Altitude ref is \(ref)")
                 if ref == 1 {
                     alt = -1.0 * alt
                 }
             }
             if metaData!["exif:GPSAltitudeRef"] != nil {
                 let ref = (metaData!["exif:GPSAltitudeRef"] as! NSString).intValue
-                print("getAltitude: GPS exif:GPSAltitudeRef is \(ref)")
+                //print("getAltitude: GPS exif:GPSAltitudeRef is \(ref)")
                 if ref == 1 {
                     alt = -1.0 * alt
                 }
@@ -413,7 +413,7 @@ public class DroneImage {
             throw DroneImageError.NoMetaGPSData
         }
         
-        print("getAltitude: alt is now \(alt)")
+        //print("getAltitude: alt is now \(alt)")
         
         // look for metadata drone:RtkAlt or drone:RtkAlt ?
         // despite RtkAlt, we still think DJI is reporting
@@ -444,11 +444,11 @@ public class DroneImage {
         // drone-dji:AltitudeType=RtkAlt
         
         if xmlStringCopy?.lowercased().contains("rtkflag") == true {
-            print("getAltitude: xmlstringcopy rtkflag is true")
+            //print("getAltitude: xmlstringcopy rtkflag is true")
             rtkFlag = true
         }
         
-        print("getAltitude: rtkFlag is \(rtkFlag)")
+        //print("getAltitude: rtkFlag is \(rtkFlag)")
         
         // now, depending on drone type/make, convert from EGM96 to WGS84 if necessary
         var offset:Double = 0.0
@@ -462,7 +462,7 @@ public class DroneImage {
             // DJI, autel if tag rtkflag then its already in WGS84
             
             if rtkFlag == true {
-                print("getAltitude: rtkFlag so already in WGS84")
+                //print("getAltitude: rtkFlag so already in WGS84")
                 return alt // already in WGS84
             }
             
@@ -473,7 +473,7 @@ public class DroneImage {
             // 10/15/2023 looks like most parrot exif data is NOT in WGS84
             if altFromExif == true && !make.lowercased().contains("parrot") &&
                 !make.lowercased().contains("autel") {
-                print("getAltitude: altFromExif, already in WGS84")
+                //print("getAltitude: altFromExif, already in WGS84")
                 return alt // already in WGS84
             }
             
@@ -1347,6 +1347,8 @@ public class DroneImage {
         var degAzimuth, degTheta: Double
         var azimuthOffset, thetaOffset: Double
         
+        //print("resolveTarget: starting ******")
+        
         // azimuth is direction of aircraft's camera 0 is north, increase clockwise
         // which is reported as Yaw degree
         // theta is angle of depression (pitch) of aircraft's camera; positive value
@@ -1357,19 +1359,19 @@ public class DroneImage {
             try degAzimuth = getGimbalYawDegree()
             try degTheta = getGimbalPitchDegree()
             
-            print("resolveTarget: got az and theta")
+            //print("resolveTarget: got az and theta")
                                     
             // corrected or uncorrected versions of getRayAnglesFromImagePixel
             
             (azimuthOffset,thetaOffset) = try getRayAnglesFromImagePixelCorrected(x: theImage!.size.width * targetXprop,
                 y: theImage!.size.height * targetYprop)
             
-            print("resolveTarget: azOff \(azimuthOffset), thetaOff \(thetaOffset)")
+            //print("resolveTarget: azOff \(azimuthOffset), thetaOff \(thetaOffset)")
             
             degAzimuth += azimuthOffset
             degTheta += thetaOffset
             
-            print("resolveTarget: degAz \(degAzimuth) degTheta \(degTheta)")
+            //print("resolveTarget: degAz \(degAzimuth) degTheta \(degTheta)")
             
             // convert to radians
             radAzimuth = degAzimuth.radians
@@ -1389,7 +1391,7 @@ public class DroneImage {
                 try alt = getAltitudeViaRelative(dem: dem)
             }
             
-            print("resolveTarget: lat: \(lat) lon: \(lon) alt: \(alt)")
+            print("resolveTarget: starting lat: \(lat) lon: \(lon) alt: \(alt)")
         }
         catch {
             print("resolveTarget: missing metadata at the start")
@@ -1451,26 +1453,34 @@ public class DroneImage {
         // meters of acceptable distance between constructed line and datapoint.  somewhat arbitrary
         var THRESHOLD: Double = post_spacing_meters / 16.0
         
+        print("resolveTarget: setting THRESHOLD \(THRESHOLD)")
+        
         var curLat = lat
         var curLon = lon
         var curAlt = alt
         var groundAlt: Double
         do {
             try groundAlt = dem.getAltitudeFromLatLong(targetLat: curLat, targetLong: curLon)
-            //print("resolveTarget: groundAlt is \(groundAlt)")
+            print("resolveTarget: groundAlt is \(groundAlt)")
         }
         catch {
             throw error
         }
 
         if (curAlt < groundAlt) {
-            print("curAlt \(curAlt) < groundAlt \(groundAlt) while resolving target")
+            print("resolveTarget: curAlt \(curAlt) < groundAlt \(groundAlt) while resolving target")
             throw DroneImageError.BadAltitude
             //throw ElevationModuleError.RequestedValueOOBError
         }
         
         var altDiff = curAlt - groundAlt
+        
+        //print("resolveTarget: entering while loop, altDiff is \(altDiff)")
+        
         while altDiff > THRESHOLD {
+            
+            //print("resolveTarget: altDiff \(altDiff) > \(THRESHOLD)")
+            
             do {
                 try groundAlt = dem.getAltitudeFromLatLong(targetLat: curLat, targetLong: curLon)
             }
@@ -1486,6 +1496,8 @@ public class DroneImage {
             avgAlt = (avgAlt + curAlt) / 2.0
             
             (curLat,curLon) = DroneImage.inverse_haversine(lat1: curLat, lon1: curLon, d: horizScalar*INCREMENT, radAzimuth: radAzimuth, alt: avgAlt)
+            
+            //print("resolveTarget: iterate curr lat,lon \(curLat),\(curLon)")
             
         } // while altDiff > threshold
         

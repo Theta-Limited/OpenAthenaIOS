@@ -156,6 +156,9 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                                                           targetWidth: vc.theDroneImage!.theImage!.size.width)
                 vc!.theDroneImage!.ccdInfo = ccdInfo
                 foundCCDInfoString = "Found CCD info for drone make/model \(ccdInfo!.makeModel)<br>"
+                foundCCDInfoString += "Lens type: \(ccdInfo!.lensType)<br>"
+                foundCCDInfoString += "Comment: \(ccdInfo!.comment)<br>"
+                foundCCDInfoString += "Thermal?: \(ccdInfo!.isThermal)<br>"
             }
             catch {
                 print("No CCD info for drone image, using estimates")
@@ -249,51 +252,66 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             self.htmlString += "<br><b>Altitude Data:</b><br>"
             do {
                 let alt = try vc.theDroneImage!.getAltitude()
+                let altStr = roundDigitsToString(val: alt, precision: 0)
                 if app.settings.unitsMode == .Metric {
-                    self.htmlString += "Altitude: \(alt)m<br>"
+                    self.htmlString += "Altitude: \(altStr)m<br>"
                 }
                 else {
-                    self.htmlString += "Altitude: \(app.metersToFeet(meters: alt))ft<br>"
+                    let altFt = app.metersToFeet(meters: alt)
+                    let altFtStr = roundDigitsToString(val: altFt, precision: 0)
+                    self.htmlString += "Altitude: \(altFtStr)ft<br>"
                 }
             }
             catch { htmlString += "Altitude: missing<br>"}
             do {
                 let relAlt = try vc.theDroneImage!.getRelativeAltitude()
+                let relAltStr = roundDigitsToString(val: relAlt, precision: 0)
                 if app.settings.unitsMode == .Metric {
-                    self.htmlString += "Relative altitude: \(relAlt)m<br>"
+                    self.htmlString += "Relative altitude: \(relAltStr)m<br>"
                 }
                 else {
-                    self.htmlString += "Relative altitude: \(app.metersToFeet(meters: relAlt))ft<br>"
+                    let relAltFt = app.metersToFeet(meters: relAlt)
+                    let relAltFtStr = roundDigitsToString(val: relAltFt, precision: 0)
+                    self.htmlString += "Relative altitude: \( relAltFtStr)ft<br>"
                 }
             }
             catch { self.htmlString += "Relative altitude: not preseent<br>" }
             do {
                 let altFromRel = try vc.theDroneImage!.getAltitudeViaRelative(dem: vc.dem!)
+                let altFromRelStr = roundDigitsToString(val: altFromRel, precision: 0)
                 if app.settings.unitsMode == .Metric {
-                    self.htmlString += "Drone altitude via relative alt: \(altFromRel)m<br>"
+                    self.htmlString += "Drone altitude via relative alt: \(altFromRelStr)m<br>"
                 }
                 else {
-                    self.htmlString += "Drone altitude via relative alt: \(app.metersToFeet(meters: altFromRel))ft<br>"
+                    let altFromRelFt = app.metersToFeet(meters: altFromRel)
+                    let altFromRelFtStr = roundDigitsToString(val: altFromRelFt, precision: 0)
+                    self.htmlString += "Drone altitude via relative alt: \(altFromRelStr)ft<br>"
                 }
             }
             catch { self.htmlString += "Drone altitude via relative alt: unable to calculate<br>"}
             do {
                 let altAboveGround = try vc.theDroneImage!.getAltitudeAboveGround()
+                let altAboveGroundStr = roundDigitsToString(val: altAboveGround, precision: 0)
                 if app.settings.unitsMode == .Metric {
-                    self.htmlString += "Altitude above ground: \(altAboveGround)m<br>"
+                    self.htmlString += "Altitude above ground: \(altAboveGroundStr)m<br>"
                 }
                 else {
-                    self.htmlString += "Altitude above ground: \(app.metersToFeet(meters: altAboveGround))ft<br>"
+                    let altAboveGroundFt = app.metersToFeet(meters: altAboveGround)
+                    let altAboveGroundFtStr = roundDigitsToString(val: altAboveGroundFt, precision: 0)
+                    self.htmlString += "Altitude above ground: \(altAboveGroundStr)ft<br>"
                 }
             }
             catch { self.htmlString += "Altitude above ground: not present<br>" }
             do {
                 let altFromAboveGround = try vc.theDroneImage!.getAltitudeViaAboveGround(dem: vc.dem!)
+                let altFromAboveGroundStr = roundDigitsToString(val: altFromAboveGround, precision: 0)
                 if app.settings.unitsMode == .Metric {
-                    self.htmlString += "Drone altitude via above ground alt: \(altFromAboveGround)m<br>"
+                    self.htmlString += "Drone altitude via above ground alt: \(altFromAboveGroundStr)m<br>"
                 }
                 else {
-                    self.htmlString += "Drone altitude via above ground alt: \(app.metersToFeet(meters: altFromAboveGround))ft<br>"
+                    let altFromAboveGroundFt = app.metersToFeet(meters: altFromAboveGround)
+                    let altFromAboveGroundFtStr = roundDigitsToString(val: altFromAboveGroundFt, precision: 0)
+                    self.htmlString += "Drone altitude via above ground alt: \(altFromAboveGroundFtStr))ft<br>"
                 }
             }
             catch {

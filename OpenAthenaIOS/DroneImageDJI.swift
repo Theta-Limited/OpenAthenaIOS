@@ -22,7 +22,7 @@ public class DroneImageDJI: DroneImage
         var alt = 0.0
         var gpsInfo: NSDictionary
         
-        print("getAltitudeDJI: invoked")
+        //print("getAltitudeDJI: invoked")
         
         let superAlt = try super.getAltitude()
         
@@ -37,10 +37,10 @@ public class DroneImageDJI: DroneImage
         
         if metaData!["drone-dji:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-dji:AbsoluteAltitude"] as! NSString).doubleValue
-            print("getAltitudeDJI: drone-dji:AbsoluteAltitude \(alt)")
+            //print("getAltitudeDJI: drone-dji:AbsoluteAltitude \(alt)")
         }
         
-        print("getAltitudeDJI: alt is \(alt) now going to make corrections")
+        //print("getAltitudeDJI: alt is \(alt) now going to make corrections")
         
         // for DJI drones, look for this flag bug ignore RtkAlt in drone-dji:AltitudeType=RtkAlt
         var rtkFlag = false

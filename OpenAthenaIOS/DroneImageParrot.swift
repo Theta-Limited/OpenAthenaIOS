@@ -10,6 +10,30 @@ import UIKit
 
 public class DroneImageParrot: DroneImage
 {
+    // get parrot software version
+    // return 0.0 if unknown
+    
+    public func getVersion() -> String
+    {
+        var version: String = "0.0"
+        
+        //drone-parrot:SoftwareVersion
+        if metaData!["drone-parrot:SoftwareVersion"] != nil {
+            version = metaData!["drone-parrot:SoftwareVersion"] as! String
+        }
+        
+        print("getVersionParrot: \(version)")
+        
+        var ret = compareVersions("1.8.0",version)
+        
+        print("getVersionParrot 1.8.0 <=> \(version) is \(ret)")
+        
+        ret = compareVersions("1.9","1.9.0")
+        print("getVersionParrot 1.9 <=> 1.9.0 is \(ret)")
+        
+        return version
+    }
+    
     // get altitude in meters
     // use GPS data from digested metadata
     // GPS altitude or derone specific altitude
@@ -147,4 +171,52 @@ public class DroneImageParrot: DroneImage
         return alt
     }
     
+    // Parrots use NED -- north, east, down -- just like always
+    // no need to do anything special; code is here just in
+    // case we want to tweak it.  4/26/2024
+    
+    override public func getGimbalYawDegree() throws -> Double
+    {
+        var superYawDegree: Double
+        
+        try superYawDegree = super.getGimbalYawDegree()
+        
+        print("getGimbalYawDegree parrot is \(superYawDegree)")
+        
+        return superYawDegree
+    }
+    
+    // chatgpt derived code!
+    // compare two version strings of format x.y.z
+    
+    func compareVersions(_ version1: String, _ version2: String) -> Int {
+        let components1 = version1.components(separatedBy: ".")
+        let components2 = version2.components(separatedBy: ".")
+        
+        // Ensure both versions have the same number of components
+        let maxLength = max(components1.count, components2.count)
+        let paddedComponents1 = components1 + Array(repeating: "0", count: maxLength - components1.count)
+        let paddedComponents2 = components2 + Array(repeating: "0", count: maxLength - components2.count)
+        
+        // Compare each component numerically
+        for (component1, component2) in zip(paddedComponents1, paddedComponents2) {
+            if let num1 = Int(component1), let num2 = Int(component2) {
+                if num1 < num2 {
+                    return -1
+                } else if num1 > num2 {
+                    return 1
+                }
+            } else {
+                // If components are not numeric, compare them lexicographically
+                let comparisonResult = component1.compare(component2)
+                if comparisonResult != .orderedSame {
+                    return comparisonResult == .orderedAscending ? -1 : 1
+                }
+            }
+        }
+        
+        // If all components are equal, versions are equal
+        return 0
+    }
+
 } // DroneImageParrot

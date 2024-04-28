@@ -20,8 +20,9 @@ import ImageIO
 import MobileCoreServices
 import UTMConversion
 import CoreLocation
+import mgrs_ios
 
-class LoadCalculateViewController: UIViewController, 
+class LoadCalculateViewController: UIViewController,
                                     UIImagePickerControllerDelegate, 
                                     UINavigationControllerDelegate,
                                     UIScrollViewDelegate
@@ -451,7 +452,7 @@ class LoadCalculateViewController: UIViewController,
     {
         var lat, lon: Double
         
-        print("getImageData: starting")
+        //print("getImageData: starting")
         
         if vc.theDroneImage == nil {
             return
@@ -502,7 +503,7 @@ class LoadCalculateViewController: UIViewController,
             self.htmlString += "Drone altitude: \(error)<br>" 
         }
         
-        print("getImageData: done, going to setTextViewText")
+        //print("getImageData: done, going to setTextViewText")
         
         // display the text finally!
         setTextViewText(htmlStr: self.htmlString)
@@ -704,9 +705,11 @@ class LoadCalculateViewController: UIViewController,
         if app.settings.outputMode == AthenaSettings.OutputModes.MGRS {
             
             let mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: target[1],Lon: target[2],Alt: target[3])
+            let mgrsSplitStr = MGRSGeodetic.splitMGRS(mgrs: mgrsStr)
+            
             //htmlString += "<h2>MGRS1m: \(mgrsStr)</h2><br>"
             let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(mgrsStr)"
-            htmlString += "<a href='\(urlStr)'><h2>MGRS1m: \(mgrsStr)</h2></a><br>"
+            htmlString += "<a href='\(urlStr)'><h2>MGRS1m: \(mgrsSplitStr)</h2></a><br>"
             if app.settings.unitsMode == .Metric {
                 htmlString += "<h2>Alt: \(altStr)m</h2><br>"
             }
@@ -715,10 +718,17 @@ class LoadCalculateViewController: UIViewController,
             }
 
             let mgrs10Str = MGRSGeodetic.WGS84_MGRS10m(Lat: target[1], Lon: target[2],Alt: target[3])
-            htmlString += "<h2>MGRS10m: \(mgrs10Str)</h2><br>"
+            let mgrs10SplitStr = MGRSGeodetic.splitMGRSRegex(mgrs: mgrs10Str)
+            htmlString += "<h2>MGRS10m: \(mgrs10SplitStr)</h2><br>"
                         
             let mgrs100Str = MGRSGeodetic.WGS84_MGRS100m(Lat: target[1], Lon: target[2],Alt: target[3])
-            htmlString += "<h2>MGRS100m: \(mgrs100Str)</h2><br>"
+            let mgrs100SplitStr = MGRSGeodetic.splitMGRSRegex(mgrs: mgrs100Str)
+            htmlString += "<h2>MGRS100m: \(mgrs100SplitStr)</h2><br>"
+            
+            //htmlString += "\(mgrsStr)<br>"
+            //htmlString += "\(mgrs10Str)<br>"
+            //htmlString += "\(mgrs100Str)<br>"
+            
         }
 
         // UTM
@@ -784,6 +794,18 @@ class LoadCalculateViewController: UIViewController,
         print("doCalculations: going to get image data")
         
         getImageData()
+        
+        // display some params from the drone ccd info params that we matched
+        // to this drone; re issue #38
+        
+        if ccdInfo != nil {
+            htmlString += "Drone CCD Info for: \(ccdInfo!.makeModel)<br>"
+            htmlString += "Drone lens type: \(ccdInfo!.lensType)<br>"
+            htmlString += "Drone thermal: \(ccdInfo!.isThermal)<br>"
+            htmlString += "Drone image width: \(ccdInfo!.widthPixels)<br>"
+            htmlString += "Drone image height: \(ccdInfo!.heightPixels)<br>"
+            htmlString += "Drone: \(ccdInfo!.comment)<br>"
+        }
                 
         setTextViewText(htmlStr: htmlString)
         

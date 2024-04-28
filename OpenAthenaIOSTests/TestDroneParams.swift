@@ -30,7 +30,7 @@ final class TestDroneParams: XCTestCase {
         XCTAssertTrue((droneParams!.numberDroneModels()) > 1)
     }
     
-    // current for Nov 30 2023 droneModels release
+    // current for Apr 28 2024 droneModels release
     func testLookupDroneParams()
     {
         let ccdInfo = try? droneParams!.lookupDrone(makeModel: "djiFC3582")
@@ -59,6 +59,47 @@ final class TestDroneParams: XCTestCase {
         XCTAssert(ccdInfo1!.f == 0)
         XCTAssert(ccdInfo1!.tangentialT1 == -0.004601610146546272)
         XCTAssert(ccdInfo1!.tangentialT2 == 0.0026292475166887)
+        
+        // verify fix for issue #38
+        var ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "parrotAnafiUSA", targetWidth: 2304.0)
+        XCTAssert(ccdInfo2!.isThermal == false)
+        XCTAssert(ccdInfo2!.radialR1 == -0.249096)
+        XCTAssert(ccdInfo2!.radialR2 == 0.0199733)
+        XCTAssert(ccdInfo2!.radialR3 == 0.0116606)
+        XCTAssert(ccdInfo2!.tangentialT1 == 0.0001663350)
+        XCTAssert(ccdInfo2!.tangentialT2 == 0.000881907)
+        
+        ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "DJIfc2204", targetWidth: 4000.0)
+        XCTAssert(ccdInfo2!.isThermal == false)
+        XCTAssert(ccdInfo2!.radialR1 == 0.0)
+        XCTAssert(ccdInfo2!.radialR2 == 0.0)
+        XCTAssert(ccdInfo2!.radialR3 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT1 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT2 == 0.0)
+        
+        ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "autel roboticsxl709", targetWidth: 640.0)
+        XCTAssert(ccdInfo2!.isThermal == true)
+        XCTAssert(ccdInfo2!.radialR1 == 0.0)
+        XCTAssert(ccdInfo2!.radialR2 == 0.0)
+        XCTAssert(ccdInfo2!.radialR3 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT1 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT2 == 0.0)
+        
+        ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "parrotBEBOP 2", targetWidth: 4000)
+        XCTAssert(ccdInfo2!.isThermal == false)
+        XCTAssert(ccdInfo2!.lensType == "fisheye")
+        XCTAssert(ccdInfo2!.c == 2203.93)
+        XCTAssert(ccdInfo2!.d == 0.0)
+        XCTAssert(ccdInfo2!.e == 0.0)
+        XCTAssert(ccdInfo2!.f == 2203.93)
+
+        ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "parrotANAFITHERMAL", targetWidth: 320.0)
+        XCTAssert(ccdInfo2!.isThermal == true)
+        XCTAssert(ccdInfo2!.radialR1 == 0.0)
+        XCTAssert(ccdInfo2!.radialR2 == 0.0)
+        XCTAssert(ccdInfo2!.radialR3 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT1 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT2 == 0.0)
     }
     
     func testMatchingDroneParams()

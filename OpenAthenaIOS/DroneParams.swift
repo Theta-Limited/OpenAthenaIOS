@@ -174,20 +174,33 @@ public class DroneParams
     
     // given an image width, find the make/model drone with the
     // closest match
+    // re issue #38 sometimes we might match the wrong version of a drone
+    // that reports same make/model for both thermal and non-thermal
+    // so, use drone with nearest width by ratio rather than linear distance
+    
     func getMatchingDrone(makeModel: String, targetWidth: Double) throws -> DroneCCDInfo?
     {
         var theDrones: [DroneCCDInfo]
         var smallestDifference = Double.infinity
         var closestDrone: DroneCCDInfo?
-        var difference: Double
+        //var difference: Double
+        var difference_ratio: Double
+        
+        print("getMatchingDrone: looking for \(makeModel) \(targetWidth)")
                 
         try theDrones = getMatchingDrones(makeModel: makeModel)
         
         for drone in theDrones {
-            difference = fabs(drone.widthPixels - targetWidth)
-            if difference < smallestDifference {
+            //difference = fabs(drone.widthPixels - targetWidth)
+            difference_ratio = drone.widthPixels / targetWidth
+            if difference_ratio < 1.0 {
+                difference_ratio = 1 / difference_ratio
+            }
+            //if difference < smallestDifference {
+            if difference_ratio < smallestDifference {
                 closestDrone = drone
-                smallestDifference = difference
+                //smallestDifference = difference
+                smallestDifference = difference_ratio
             }
         }
         
