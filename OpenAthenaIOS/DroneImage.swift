@@ -712,10 +712,12 @@ public class DroneImage {
             return metaData!["Exif:FocalLength"] as! Double
         }
         
-        // XXX not sure this is accurate
-        if metaData!["drone-skydio:CalibratedFocalLength"] != nil {
-            return metaData!["drone-skydio:CalibratedFocalLength"] as! Double
-        }
+        // not sure this is accurate; this xmp entry is a struct, not a value we can work with
+        // issue #41
+        // if metaData!["drone-skydio:CalibratedFocalLength"] != nil {
+        //    print("getFocalLength: drone-skydio:CalibratedFocalLength found")
+        //    return metaData!["drone-skydio:CalibratedFocalLength"] as! Double
+        //}
 
         if metaData!["{Exif}"] != nil {
             var dict = metaData!["{Exif}"] as! NSDictionary
@@ -928,16 +930,32 @@ public class DroneImage {
         var matrix = [Double](repeating: 0.0, count: 9)
         var f: Double
         
+        print("getIntrinsicMatrixFromKnownCCD starting")
+        
         if ccdInfo == nil {
             throw DroneImageError.MissingCCDInfo
         }
         
         do {
             f = try getFocalLength()
+            print("getIntrinsicMatrixFromKnownCCD: focal length \(f) from meta data")
         }
         catch {
-            // need to test this
-            return try getIntrinsicMatrixFromExif35mm()
+            // re issue #41, if focal length not in exif meta data, use
+            // the value that is in the known CCD info
+            // if we're here, we know ccdInfo != nil
+            
+            // should we try to get focal length from exif35mm before
+            // we resort to hardcoded focalLength?
+            
+            if ccdInfo!.focalLength != 0.0 {
+                f = ccdInfo!.focalLength
+                print("getIntrinsicMatrixFromKnownCCD: using focal length from drome params \(f)")
+            }
+            else  {
+                // need to test this
+                return try getIntrinsicMatrixFromExif35mm()
+            }
         }
         
         var zoomRatio = getZoom()

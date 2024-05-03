@@ -24,7 +24,9 @@ public struct DroneCCDInfo {
     let widthPixels: Double
     let heightPixels: Double
     let comment: String
+    // re issue #41, don't forget focalLength
     let isThermal: Bool
+    let focalLength: Double
     let lensType: String // perspective or fisheye
     let radialR1: Double // R1,2,3, T1,T2: only if perspective
     let radialR2: Double
@@ -58,6 +60,7 @@ public class DroneParams
                      ccdHeightMMPerPixel: 4.55/3000.0, widthPixels: 4000.0,
                      heightPixels: 3000.0, comment: "",
                      isThermal: false,
+                     focalLength: 0.0,
                      lensType: "persective",
                      radialR1: 0.032984,
                      radialR2: -0.085597,
@@ -259,6 +262,7 @@ public class DroneParams
                let widthPixels = dictionary["widthPixels"] as? Double,
                let heightPixels = dictionary["heightPixels"] as? Double,
                let isThermal = dictionary["isThermal"] as? Bool,
+               let focalLength = dictionary["focalLength", default: 0.0] as? Double,
                let lensType = dictionary["lensType"] as? String,
                let radialR1 = dictionary["radialR1", default: 0.0] as? Double,
                let radialR2 = dictionary["radialR2", default: 0.0] as? Double,
@@ -287,6 +291,7 @@ public class DroneParams
                     heightPixels: heightPixels,
                     comment: comment,
                     isThermal: isThermal,
+                    focalLength: focalLength,
                     lensType: lensType,
                     radialR1: radialR1,
                     radialR2: radialR2,

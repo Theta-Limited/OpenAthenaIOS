@@ -18,6 +18,8 @@ final class TestCalculations: XCTestCase {
     var autelDem: DigitalElevationModel!
     var parrotDroneImage: DroneImage!
     var parrotDem: DigitalElevationModel!
+    var thermalDroneImage: DroneImage!
+    var thermalDem: DigitalElevationModel!
     var droneParams: DroneParams?
     
     // load cobb.tiff DEM and DJI_0419.JPG image for use
@@ -102,10 +104,28 @@ final class TestCalculations: XCTestCase {
         parrotDem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
         XCTAssert(parrotDem != nil)
         
+        // re issue #41 load a thermal image w/o focalLength in meta data
+        imagePath = Bundle.main.path(forResource: "examples/S1008521", ofType: "JPG")
+        XCTAssert(imagePath != nil)
+        data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
+        image = UIImage(data: data)
+        thermalDroneImage = DroneImage()
+        thermalDroneImage.rawData = data
+        thermalDroneImage.updateMetaData()
+        thermalDroneImage.theImage = image
+        thermalDroneImage.targetXprop = 0.5
+        thermalDroneImage.targetYprop = 0.5
+        
+        imagePath = Bundle.main.path(forResource: "examples/S1008521", ofType: "tiff")
+        XCTAssert(imagePath != nil)
+        thermalDem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
+        XCTAssert(thermalDem != nil)
+        
+        
     } // setUpWithError
 
     // call resolveTarget with cobb.tiff and DJI_0419.JPG and
-    // check results
+    // check result
     
     func testDJIExif35() throws
     {
@@ -408,6 +428,69 @@ final class TestCalculations: XCTestCase {
         print("testSkydio: \(target)")
         
     } // testSkydio
+    
+    // re issue #41, we should test a thermal camera/drone that does
+    // not include focalLength in exif/metadata
+    // add S1008521.JPG to examples
+    
+    func testSkydioX2DThermal() throws
+    {
+        var target: [Double] = [0,0,0,0,0]
+        
+        XCTAssert(thermalDem != nil)
+        XCTAssert(thermalDroneImage != nil)
+        
+        print("testSkydioX2DThermal() starting")
+        
+        // find the CCDInfo for this drone
+        do {
+            let ccdInfo = try droneParams!.lookupDrone(make: thermalDroneImage.getCameraMake(),
+                                                       model: thermalDroneImage.getCameraModel(),
+                                                       targetWidth: thermalDroneImage!.theImage!.size.width)
+            thermalDroneImage.ccdInfo = ccdInfo
+        }
+        catch {
+            XCTFail("Error looking up thermal drone model info")
+        }
+        
+        thermalDroneImage.targetXprop = 0.50
+        thermalDroneImage.targetYprop = 0.50
+        try target = thermalDroneImage.resolveTarget(dem: thermalDem,altReference: DroneTargetResolution.AltitudeFromGPS)
+        
+        print("testSkydioX2DThermal: \(target)")
+        
+        // now that we are using drone ccd info and IDW, test numbers
+        // have changed just slightly for alpha 1.1 and newer
+        
+        // altitude
+        XCTAssertEqual(target[3],59.079129567708435)
+
+        // distance to target
+        XCTAssertEqual(target[0],18.003780235200725)
+
+        // target lat, lon
+        XCTAssertEqual(target[1],29.786015029765696)
+        XCTAssertEqual(target[2],-95.63541650179917)
+    
+        thermalDroneImage.targetXprop = 0.25
+        thermalDroneImage.targetYprop = 0.25
+        try target = thermalDroneImage.resolveTarget(dem: thermalDem,altReference: DroneTargetResolution.AltitudeFromGPS)
+        
+        print("testSkydioX2DThermal \(target)")
+        
+        // now that we are using drone ccd info and IDW, test numbers
+        // have changed just slightly for alpha 1.1 and newer
+        
+        // altitude
+        XCTAssertEqual(target[3],59.091028582754305)
+
+        // distance to target
+        XCTAssertEqual(target[0],19.00520183825258)
+                       
+        // target lat, lon
+        XCTAssertEqual(target[1],29.78603127806782)
+        XCTAssertEqual(target[2],-95.6354282850735)
+    }
     
     func testAutel() throws
     {

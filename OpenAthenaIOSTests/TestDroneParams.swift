@@ -100,6 +100,17 @@ final class TestDroneParams: XCTestCase {
         XCTAssert(ccdInfo2!.radialR3 == 0.0)
         XCTAssert(ccdInfo2!.tangentialT1 == 0.0)
         XCTAssert(ccdInfo2!.tangentialT2 == 0.0)
+        
+        // re issue #41, find a skydiox2d thermal and check if focalLength has been parsed
+        ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "skydiox2d", targetWidth: 320.0)
+        XCTAssert(ccdInfo2!.isThermal == true)
+        XCTAssert(ccdInfo2!.focalLength == 9.1)
+        XCTAssert(ccdInfo2!.radialR1 == 0.0)
+        XCTAssert(ccdInfo2!.radialR2 == 0.0)
+        XCTAssert(ccdInfo2!.radialR3 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT1 == 0.0)
+        XCTAssert(ccdInfo2!.tangentialT2 == 0.0)
+
     }
     
     func testMatchingDroneParams()
