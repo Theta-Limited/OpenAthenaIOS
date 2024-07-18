@@ -1,7 +1,7 @@
 # OpenAthena™ for iOS
 OpenAthena for iOS
 
-(This software is currently in alpha.)
+(This software is currently in beta.)
 
 An iOS port of the [OpenAthena project](http://OpenAthena.com)
 
