@@ -1,9 +1,11 @@
+// TestMakeModel.swift
+// OpenAthenaIOSTests
 //
-//  TestMakeModel.swift
-//  OpenAthenaIOSTests
+// Created by Bobby Krupczak on 5/26/23.
 //
-//  Created by Bobby Krupczak on 5/26/23.
-//
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import XCTest
 @testable import OpenAthena

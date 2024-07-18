@@ -1,10 +1,11 @@
-//
-//  SettingsViewController.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 1/29/23.
-//
+// SettingsViewController.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 1/29/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import UIKit

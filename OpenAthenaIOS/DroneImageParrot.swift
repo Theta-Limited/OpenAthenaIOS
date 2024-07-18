@@ -1,9 +1,11 @@
-//
-//  DroneImageParrot.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 1/5/24.
-//  Subclass DroneImage with Parrot specific code, data, methods
+// DroneImageParrot.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 1/5/24.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
+// Subclass DroneImage with Parrot specific code, data, methods
 
 import Foundation
 import UIKit
@@ -184,6 +186,12 @@ public class DroneImageParrot: DroneImage
         print("getGimbalYawDegree parrot is \(superYawDegree)")
         
         return superYawDegree
+    }
+    
+    // does this drone image have RTK flag set?
+    override public func isRTK() -> ExtendedBoolean
+    {
+        return .ExtendedBooleanUnknown
     }
     
     // chatgpt derived code!

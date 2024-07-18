@@ -1,12 +1,13 @@
-//
-//  MGRSGeodetic.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 4/19/23.
-//  Make use of mgrs-ios library provided by the NGA
-//  https://github.com/ngaeoint
-//  https://github.com/ngageoint/mgrs-ios
-//  Cocoa pod ios-mgrs et al
+// MGRSGeodetic.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 4/19/23.
+// Make use of mgrs-ios library provided by the NGA
+// https://github.com/ngaeoint
+// https://github.com/ngageoint/mgrs-ios
+// Cocoa pod ios-mgrs et al
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import mgrs_ios

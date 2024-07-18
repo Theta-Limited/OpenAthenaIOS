@@ -1,8 +1,10 @@
-//
-//  DroneImageDJI.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 1/5/24.
+// DroneImageDJI.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 1/5/24.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
 //  Subclass DroneImage with DJI specific methods/code/data
 
 import Foundation
@@ -73,6 +75,12 @@ public class DroneImageDJI: DroneImage
         }
         
         return alt
+    }
+    
+    // does this drone image have RTK flag set?
+    override public func isRTK() -> ExtendedBoolean
+    {
+        return .ExtendedBooleanUnknown
     }
     
     override public func getRelativeAltitude() throws -> Double

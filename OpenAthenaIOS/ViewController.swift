@@ -1,18 +1,19 @@
-//
-//  ViewController.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 1/27/23.
-//
-//  App main view controller
+// ViewController.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 1/27/23.
+// App main view controller
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import UIKit
 
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var version: Double = 2.61
+    static var version: Double = 2.70
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?
@@ -21,6 +22,8 @@ class ViewController: UIViewController {
     var droneParams: DroneParams?
     var demCache: DemCache?
     var style: String = ""
+    // super secret debug variable; for release builds, set to false
+    static var Debug: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +125,7 @@ class ViewController: UIViewController {
     
     private func doMain()
     {
-        htmlString = "\(style)<body><b>OpenAthena\u{2122} v\(getAppVersion())</b><br>"
+        htmlString = "\(style)<body><b>OpenAthena\u{2122} v\(ViewController.getAppVersion())</b><br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
         htmlString += "Units: \(app.settings.unitsMode)<p>"
         
@@ -247,8 +250,8 @@ class ViewController: UIViewController {
         
     } // configure menu items
     
-    func getAppVersion() -> String 
-    { 
+    static func getAppVersion() -> String
+    {
         let formattedString = String(format: "%.2f",version);
         return formattedString
     }

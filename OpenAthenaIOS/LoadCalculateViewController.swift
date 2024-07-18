@@ -1,17 +1,19 @@
+// LoadCalculateViewController.swift
+// OpenAthenaIOS
 //
-//  LoadCalculateViewController.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 3/13/24.
-//  Load and calculate all within a single view controller
-//  in order to simplify the UI and align it more closely
-//  with Android version of OA
-//  Essentially combine ImageViewController and
-//  CalculateViewController into single view controller
-//  and handle everything in a single view
-//  We leave ImageViewController and CalculateViewController
-//  in the code base so that we can refer back to them and/or
-//  change back to them.
+// Created by Bobby Krupczak on 3/13/24.
+// Load and calculate all within a single view controller
+// in order to simplify the UI and align it more closely
+// with Android version of OA
+// Essentially combine ImageViewController and
+// CalculateViewController into single view controller
+// and handle everything in a single view
+// We leave ImageViewController and CalculateViewController
+// in the code base so that we can refer back to them and/or
+// change back to them.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import UIKit
@@ -223,13 +225,13 @@ class LoadCalculateViewController: UIViewController,
                         targetLat: self.vc.theDroneImage!.getLatitude(),
                         targetLong: self.vc.theDroneImage!.getLongitude())
                     // re issue #30, round degrees to 6 and distance/alt to 0
-                    var groundAltStr = roundDigitsToString(val: groundAlt ?? -1.0, precision: 0)
+                    var groundAltStr = LoadCalculateViewController.roundDigitsToString(val: groundAlt ?? -1.0, precision: 0)
                     if app.settings.unitsMode == .Metric {
                         self.htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
                     }
                     else {
                         let groundAltFt = app.metersToFeet(meters: groundAlt ?? -1.0)
-                        groundAltStr = roundDigitsToString(val: groundAltFt , precision: 0)
+                        groundAltStr = LoadCalculateViewController.roundDigitsToString(val: groundAltFt , precision: 0)
                         self.htmlString += "Ground altitude under drone is \(groundAltStr)ft (hae)<br>"
                     }
                 }
@@ -294,7 +296,8 @@ class LoadCalculateViewController: UIViewController,
                                               // Hae: self.target[8],
                                               Hae: self.target[3],
                                               Theta: self.target[5],
-                                              exifDateTimeISO: imageISO)
+                                              exifDateTimeISO: imageISO,
+                                              calculationInfo: self.vc.theDroneImage!.calculationInfo)
             
             // if CoT sent, give some sorta notification XXX
             if ret == false {
@@ -471,16 +474,16 @@ class LoadCalculateViewController: UIViewController,
             // will have both or have neither
             try lat = self.vc.theDroneImage!.getLatitude()
             try lon = self.vc.theDroneImage!.getLongitude()
-            let latStr = roundDigitsToString(val: lat, precision: 6)
-            let lonStr = roundDigitsToString(val: lon, precision: 6)
+            let latStr = LoadCalculateViewController.roundDigitsToString(val: lat, precision: 6)
+            let lonStr = LoadCalculateViewController.roundDigitsToString(val: lon, precision: 6)
             //self.htmlString += "Drone lat: \(latStr)<br>"
             //self.htmlString += "Drone lon: \(lonStr)<br>"
             // build a maps URL for clicking on
             //let urlStr = "https://maps.google.com/maps/@?api=1&map_action=map&center=\(lat),\(lon)"
             //let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
-            let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
+            //let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
+            let urlStr = LoadCalculateViewController.getMapsUrlStr(latStr: latStr, lonStr: lonStr)
             self.htmlString += "<a href='\(urlStr)'>Drone: \(latStr),\(lonStr)</a><br>"
-            
         }
         catch {
             self.htmlString += "Lat/lon: \(error)<br>"
@@ -489,13 +492,13 @@ class LoadCalculateViewController: UIViewController,
         do {
             let droneAlt = try self.vc.theDroneImage!.getAltitude()
             // re issue #30, round degrees to 6 and distance/alt to 0
-            var droneAltStr = roundDigitsToString(val: droneAlt, precision: 0)
+            var droneAltStr = LoadCalculateViewController.roundDigitsToString(val: droneAlt, precision: 0)
             if app.settings.unitsMode == .Metric {
                 self.htmlString += "Drone altitude: \(droneAltStr)m (hae)<br>"
             }
             else {
                 let droneAltFt = app.metersToFeet(meters: droneAlt)
-                droneAltStr = roundDigitsToString(val: droneAltFt, precision: 0)
+                droneAltStr = LoadCalculateViewController.roundDigitsToString(val: droneAltFt, precision: 0)
                 self.htmlString += "Drone altitude: \(droneAltStr)ft (hae)<br>"
             }
         }
@@ -632,36 +635,47 @@ class LoadCalculateViewController: UIViewController,
             return
         }
         
+        let finalTheta = target[5] + target[7]
+        
         // get EGM96 offset from WGS84
         let offset = EGM96Geoid.getOffset(lat: target[1], lng: target[2])
         
-        let latStr = roundDigitsToString(val: target[1], precision: 6)
-        let lonStr = roundDigitsToString(val: target[2], precision: 6)
+        let latStr = LoadCalculateViewController.roundDigitsToString(val: target[1], precision: 6)
+        let lonStr = LoadCalculateViewController.roundDigitsToString(val: target[2], precision: 6)
         // issue #30, round distance, alt to nearest meter
-        var distanceStr = roundDigitsToString(val: target[0], precision: 0)
-        var altStr = roundDigitsToString(val: target[3] + offset, precision: 0)
-        let azOff = roundDigitsToString(val: target[6], precision: 2)
+        var distanceStr = LoadCalculateViewController.roundDigitsToString(val: target[0], precision: 0)
+        var altStr = LoadCalculateViewController.roundDigitsToString(val: target[3] + offset, precision: 0)
+        let azOff = LoadCalculateViewController.roundDigitsToString(val: target[6], precision: 2)
         // swap sign of thetaOff to keep with aircraft conventions (tait-bryan)
-        let thetaOff = roundDigitsToString(val: -1.0 * target[7], precision: 2)
+        let thetaOff = LoadCalculateViewController.roundDigitsToString(val: -1.0 * target[7], precision: 2)
         target[8] = target[3] + offset
         
-        //let nearestAltStr = roundDigitsToString(val: target[4] + offset, precision: 6)
-                
-        //htmlString += "<h2>Target Lat,Lon: \(latStr),\(lonStr)</h2><br>"
+        // re issue #48 calculate errors
+        let predictedCE = CursorOnTargetSender.calculateCircularError(theta: finalTheta)
+        let TLE_Cat = CursorOnTargetSender.errorCategoryFromCE(circular_error: predictedCE)
+        let fontColor = CursorOnTargetSender.htmlColorFromTLE_Category(tle_cat: TLE_Cat)
+        print("doCalculations: color is \(fontColor)")
+        var errorStr = "CircErr: \(LoadCalculateViewController.roundDigitsToString(val: predictedCE, precision: 0)) m, "
+        + TLE_Cat.description + "<br>"
         
+        //let nearestAltStr = roundDigitsToString(val: target[4] + offset, precision: 6)
+        //htmlString += "<h2>Target Lat,Lon: \(latStr),\(lonStr)</h2><br>"
         //htmlString += "Resolve target: \(target)<br>"
-        //let urlStr = "https://maps.../maps/@?api=1&map_action=map&center=\(target[1]),\(target[2])"
-        let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(latStr),\(lonStr)"
+        
+        // re issue #50 see which maps app we have and if none default to web
+        
+        let urlStr = LoadCalculateViewController.getMapsUrlStr(latStr: latStr, lonStr: lonStr)
         htmlString += "<a href='\(urlStr)'><h2>Lat,Lon: \(latStr),\(lonStr)</h2></a><br>"
         if app.settings.unitsMode == .Metric {
             htmlString += "<h2>Alt: \(altStr)m</h2><br>"
         }
         else {
             let altFt = app.metersToFeet(meters: target[3])
-            altStr = roundDigitsToString(val: altFt, precision: 0)
+            altStr = LoadCalculateViewController.roundDigitsToString(val: altFt, precision: 0)
             htmlString += "<h2>Alt: \(altStr)ft</h2><br>"
             let distanceFt = app.metersToFeet(meters: target[0])
-            distanceStr = roundDigitsToString(val: distanceFt, precision: 0)
+            distanceStr = LoadCalculateViewController.roundDigitsToString(val: distanceFt, precision: 0)
+            errorStr = "CircErr: \(LoadCalculateViewController.roundDigitsToString(val: app.metersToFeet(meters: predictedCE), precision: 0)) ft, "+TLE_Cat.description + "<br>"
         }
         
         // would love a URL that we could have two pins on -- one for where drone is
@@ -676,10 +690,10 @@ class LoadCalculateViewController: UIViewController,
             var ck42lat, ck42lon, ck42alt: Double
             (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: target[1], Ld: target[2], H: target[3])
             
-            let ck42latStr = roundDigitsToString(val: ck42lat, precision: 6)
-            let ck42lonStr = roundDigitsToString(val: ck42lon, precision: 6)
+            let ck42latStr = LoadCalculateViewController.roundDigitsToString(val: ck42lat, precision: 6)
+            let ck42lonStr = LoadCalculateViewController.roundDigitsToString(val: ck42lon, precision: 6)
             // issue #30, round alt to nearest meter
-            let ck42altStr = roundDigitsToString(val: ck42alt, precision: 0)
+            let ck42altStr = LoadCalculateViewController.roundDigitsToString(val: ck42alt, precision: 0)
             htmlString += "<h2>CK42 Lat,Lon: \(ck42latStr),\(ck42lonStr)</h2><br>"
             htmlString += "<h2>CK42 Alt: \(ck42altStr)m</h2><br>"
         }
@@ -687,18 +701,12 @@ class LoadCalculateViewController: UIViewController,
         if app.settings.outputMode == AthenaSettings.OutputModes.CK42GaussKruger {
             var ck42lat, ck42lon, ck42alt: Double
             (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: target[1], Ld: target[2], H: target[3])
-            let ck42latStr = roundDigitsToString(val: ck42lat, precision: 6)
-            let ck42lonStr = roundDigitsToString(val: ck42lon, precision: 6)
             // issue #30, round alt to nearest meter
-            let ck42altStr = roundDigitsToString(val: ck42alt, precision: 0)
-            htmlString += "<h2>CK42 Lat,Lon: \(ck42latStr),\(ck42lonStr)</h2><br>"
-            htmlString += "<h2>CK42 Alt: \(ck42altStr)m</h2><br>"
-            
+            let ck42altStr = LoadCalculateViewController.roundDigitsToString(val: ck42alt, precision: 0)
             var ck42GKlat, ck42GKlon: Int64
-            
             (ck42GKlat,ck42GKlon) = CK42GaussKruger.CK42_to_GaussKruger(CK42_LatDegrees: ck42lat, CK42_LonDegrees: ck42lon)
-            
             htmlString += "<h2>CK42 GK Northing, Easting: \(ck42GKlat),\(ck42GKlon)</h2><br>"
+            htmlString += "<h2>CK42 Alt: \(ck42altStr)m</h2><br>"
         }
         
         // all MGRS 1m, 10m, 100m
@@ -735,20 +743,17 @@ class LoadCalculateViewController: UIViewController,
         if app.settings.outputMode == AthenaSettings.OutputModes.UTM {
             let coordinate = CLLocationCoordinate2D(latitude: target[1], longitude: target[2])
             let utmCoordinate = coordinate.utmCoordinate()
-            let nStr = roundDigitsToString(val: utmCoordinate.northing, precision: 6)
-            let eStr = roundDigitsToString(val: utmCoordinate.easting, precision: 6)
-            if (utmCoordinate.hemisphere == .northern) {
-                htmlString += "<h2>UTM: N, \(utmCoordinate.zone) \(eStr) E, \(nStr) N</h2><br>"
-            }
-            else {
-                htmlString += "<h2>UTM: S, \(utmCoordinate.zone) \(eStr) E, \(eStr) N</h2><br>"
-            }
+            let utmStr = LoadCalculateViewController.utmToString(coord: utmCoordinate)
+            htmlString += "<h2>UTM: \(utmStr)</h2><br>"
         } // UTM
         
         //htmlString += "Elevation map: \(vc.dem?.tiffURL?.lastPathComponent ?? "")<br>"
         //htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
         //htmlString += "Image date: \(vc.theDroneImage!.getDateTimeUTC())<br>"
         //htmlString += "\(foundCCDInfoString)"
+        
+        // re issue #48 provide error estimates
+        htmlString += errorStr
         
         htmlString += "Azimuth offset: \(azOff) degrees<br>"
         htmlString += "Theta (pitch) offset: \(thetaOff) degrees<br>"
@@ -771,13 +776,13 @@ class LoadCalculateViewController: UIViewController,
                 targetLong: self.vc.theDroneImage!.getLongitude())
             
             // issue #30, round alt to nearest meter
-            var groundAltStr = roundDigitsToString(val: groundAlt ?? -1, precision: 0)
+            var groundAltStr = LoadCalculateViewController.roundDigitsToString(val: groundAlt ?? -1, precision: 0)
             if app.settings.unitsMode == .Metric {
                 htmlString += "Ground altitude under drone is \(groundAltStr)m (hae)<br>"
             }
             else {
                 let groundAltFt = app.metersToFeet(meters: groundAlt ?? -1)
-                groundAltStr = roundDigitsToString(val: groundAltFt, precision: 0)
+                groundAltStr = LoadCalculateViewController.roundDigitsToString(val: groundAltFt, precision: 0)
                 htmlString += "Ground altitude under drone is \(groundAltStr)ft (hae)<br>"
             }
         } catch { htmlString += "Unable to determine ground altitude under drone?!<br>" }
@@ -901,6 +906,12 @@ class LoadCalculateViewController: UIViewController,
          imageView.image!.draw(at: CGPoint.zero)
          var uiColor = hexToUIColor(rgbVal: 0xFE00DD)
          uiColor.setFill()
+         
+         // draw a small dot at actualX, actualY -- issue #53
+         let circleDiameter = max(imageSize.width/256, imageSize.height/256)
+         let circleRadius = circleDiameter / 2
+         var circle = CGRect(x: actualX-circleRadius, y: actualY-circleRadius, width: circleDiameter, height: circleDiameter)
+         UIRectFill(circle)
 
          // horizontal lines in target
          var rectangle = CGRect(x: actualX - length - gap, y: actualY-width/2,
@@ -972,7 +983,7 @@ class LoadCalculateViewController: UIViewController,
      
      // take a double (e.g. lat, lon, elevation, distance, etc. and round to X digits of precision and
      // return string
-     public func roundDigitsToString(val: Double, precision: Double) -> String {
+     public class func roundDigitsToString(val: Double, precision: Double) -> String {
          let num = (val * pow(10,precision)).rounded(.toNearestOrAwayFromZero) / pow(10,precision)
          // after we round it, if caller wanted 0 digits of precision, chop the .0 off of float
          if precision == 0 {
@@ -1004,10 +1015,12 @@ class LoadCalculateViewController: UIViewController,
             // just do a look up and load that DEM
             // possible again
             let filename = vc.demCache!.searchCacheFilename(lat: lat, lon: lon)
+            //let aDem = vc.demCache!.searchCacheMaxCoverage(lat: lat, lon: lon)
             if filename != "" {
                 print("findLoadElevationMap: found \(filename)")
                 // load the DEM and return
-                try vc.dem = vc.demCache!.loadDemFromCache(lat: lat, lon: lon)
+                // re issue #43 find entry with max coverage
+                try vc.dem = vc.demCache!.loadDemFromCacheMaxCoverage(lat: lat, lon: lon)
                 htmlString += "Loaded \(filename) from elevation map cache<br>"
                                 
                 // would be nice to have the resulting filename be
@@ -1153,6 +1166,50 @@ class LoadCalculateViewController: UIViewController,
         if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
            setTextViewText(htmlStr: htmlString)
         }
+    }
+    
+    // re issue #50 check to see if we can open google maps; other wise, open apple maps
+    // otherwise give the URL for google
+    // don't forget to add LSApplicationQueriesSchemes to the Info.plist so that we can
+    // query for comgooglemaps; don't seem to need to add anything for apple maps
+    
+    public class func getMapsUrlStr(latStr: String, lonStr: String) -> String
+    {
+        let gUrl = URL(string: "comgooglemaps://?q=\(latStr),\(lonStr)")!
+        let aUrl = URL(string: "http://maps.apple.com/?q=\(latStr),\(lonStr)")!
+                      
+        //let urlStr = "https://maps.../maps/@?api=1&map_action=map&center=\(target[1]),\(target[2])"
+        //let urlStr = "https://maps.apple.com/?q=\(latStr),\(lonStr)"
+        //let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(latStr),\(lonStr)"
+        
+        if UIApplication.shared.canOpenURL(gUrl) {
+            print("getMapsUrlStr: returning google url "+gUrl.absoluteString)
+            return gUrl.absoluteString
+        }
+        else if UIApplication.shared.canOpenURL (aUrl) {
+            print("getMapsUrlStr: returning apple url "+aUrl.absoluteString)
+            return aUrl.absoluteString
+        }
+        else {
+            print("getMapsUrlStr: retunring default google maps web url")
+            return "https://www.google.com/maps/search/?api=1&t=k&query=\(latStr),\(lonStr)"
+        }
+    }
+    
+    // re issue #42
+    public class func utmToString(coord: UTMCoordinate) -> String
+    {
+        var aStr: String
+        
+        let nStr = roundDigitsToString(val: coord.northing, precision: 6)
+        let eStr = roundDigitsToString(val: coord.easting, precision: 6)
+        if coord.hemisphere == .northern {
+            aStr = "\(coord.zone) N  \(eStr) E \(nStr) N"
+        }
+        else {
+            aStr = "\(coord.zone) S \(eStr) E \(nStr) N"
+        }
+        return aStr
     }
     
 } // LoadCalculateViewController

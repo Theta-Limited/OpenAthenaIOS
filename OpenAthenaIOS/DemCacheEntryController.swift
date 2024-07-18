@@ -1,17 +1,20 @@
-//
-//  DemCacheEntryController.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/12/23.
-//
-//  Display elevation model details in a textView
-//  window and allow user to click on center point
-//  in google maps
+// DemCacheEntryController.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 10/12/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
+// Display elevation model details in a textView
+// window and allow user to click on center point
+// in google maps
 
 import Foundation
 import UIKit
 import UniformTypeIdentifiers
 import CoreServices
+import CoreLocation
+import UTMConversion
 
 class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
 {
@@ -39,7 +42,7 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
                                                             target: self,
                                                             action: #selector(didTapExport))
         
-        let size = cacheEntry.bytes / 1024
+        //let size = cacheEntry.bytes / 1024
         
         // build display to view DEM cache properties
         // load the dem as well as sanity check
@@ -50,24 +53,137 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
         }
         
         textField.isEditable = false
+        let latStr = "\(cacheEntry.cLat)"
+        let lonStr = "\(cacheEntry.cLon)"
+        let urlStr = LoadCalculateViewController.getMapsUrlStr(latStr: latStr, lonStr: lonStr)
+        //let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(cacheEntry.cLat),\(cacheEntry.cLon)"
         
-        let urlStr = "https://maps.google.com/maps/search/?api=1&t=k&query=\(cacheEntry.cLat),\(cacheEntry.cLon)"
         let coordStr = "\(truncateDouble(val: cacheEntry.cLat, precision: 6)),\(truncateDouble(val: cacheEntry.cLon, precision: 6))"
         
         htmlString = "\(style)\(cacheEntry.filename)<br>" +
         "Created: \(cacheEntry.createDate)<br>" +
-        "Modified: \(cacheEntry.modDate)<br>" +
-        "n: \(truncateDouble(val: cacheEntry.n, precision: 6)) <br>" +
-        "s: \(truncateDouble(val: cacheEntry.s, precision: 6)) <br>" +
-        "e: \(truncateDouble(val: cacheEntry.e, precision: 6)) <br>" +
-        "w: \(truncateDouble(val: cacheEntry.w, precision: 6)) <br>" +
-        "length: \(truncateDouble(val: cacheEntry.l, precision: 0)) meters <br>" +
-        "center: <a href='\(urlStr)'> \(coordStr) </a><br>" +
-        "size: \(size) KBytes <br>" +
-        "loaded ok: \(demLoaded)"
+        "Modified: \(cacheEntry.modDate)<br>"
+        
+        // re issue #42 display coordinates in measurement system according to settings
+        
+        if app.settings.outputMode == .WGS84 {
+            htmlString += 
+                "n: \(truncateDouble(val: cacheEntry.n, precision: 6)) <br>" +
+                "s: \(truncateDouble(val: cacheEntry.s, precision: 6)) <br>" +
+                "e: \(truncateDouble(val: cacheEntry.e, precision: 6)) <br>" +
+                "w: \(truncateDouble(val: cacheEntry.w, precision: 6)) <br>" +
+                "center: <a href='\(urlStr)'> \(coordStr) </a><br>"
+        }
+        if app.settings.outputMode == .UTM {
+            // upper left
+            var coord = CLLocationCoordinate2D(latitude: cacheEntry.n, longitude: cacheEntry.w)
+            var aUTM = coord.utmCoordinate()
+            htmlString += "nw: \(LoadCalculateViewController.utmToString(coord: aUTM))<br>"
+            
+            // upper right
+            coord = CLLocationCoordinate2D(latitude: cacheEntry.n, longitude: cacheEntry.e)
+            aUTM = coord.utmCoordinate()
+            htmlString += "ne: \(LoadCalculateViewController.utmToString(coord: aUTM))<br>"
+            
+            // lower left
+            coord = CLLocationCoordinate2D(latitude: cacheEntry.s, longitude: cacheEntry.w)
+            aUTM = coord.utmCoordinate()
+            htmlString += "sw: \(LoadCalculateViewController.utmToString(coord: aUTM))<br>"
+
+            // lower right
+            coord = CLLocationCoordinate2D(latitude: cacheEntry.s, longitude: cacheEntry.e)
+            aUTM = coord.utmCoordinate()
+            htmlString += "se: \(LoadCalculateViewController.utmToString(coord: aUTM))<br>"
+        }
+        if app.settings.outputMode == .MGRS {
+            // upper left
+            var mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: cacheEntry.n, Lon: cacheEntry.w, Alt: 0.0)
+            var mgrsSplitStr = MGRSGeodetic.splitMGRS(mgrs: mgrsStr)
+            htmlString += "nw: \(mgrsSplitStr)<br>"
+            
+            // upper right
+            mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: cacheEntry.n, Lon: cacheEntry.e, Alt: 0.0)
+            mgrsSplitStr = MGRSGeodetic.splitMGRS(mgrs: mgrsStr)
+            htmlString += "ne: \(mgrsSplitStr)<br>"
+            
+            // lower left
+            mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: cacheEntry.s, Lon: cacheEntry.w, Alt: 0.0)
+            mgrsSplitStr = MGRSGeodetic.splitMGRS(mgrs: mgrsStr)
+            htmlString += "sw: \(mgrsSplitStr)<br>"
+
+            // lower right
+            mgrsStr = MGRSGeodetic.WGS84_MGRS1m(Lat: cacheEntry.s, Lon: cacheEntry.e, Alt: 0.0)
+            mgrsSplitStr = MGRSGeodetic.splitMGRS(mgrs: mgrsStr)
+            htmlString += "se: \(mgrsSplitStr)<br>"
+        }
+        if app.settings.outputMode == .CK42Geodetic {
+            var ck42lat, ck42lon, ck42alt: Double
+            var ck42latStr, ck42lonStr: String
+            
+            // upper left
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.n, Ld: cacheEntry.w, H: 0.0)
+            ck42latStr = LoadCalculateViewController.roundDigitsToString(val: ck42lat, precision: 6)
+            ck42lonStr = LoadCalculateViewController.roundDigitsToString(val: ck42lon, precision: 6)
+            htmlString += "nw: \(ck42latStr),\(ck42lonStr)<br>"
+            // upper right
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.n, Ld: cacheEntry.e, H: 0.0)
+            ck42latStr = LoadCalculateViewController.roundDigitsToString(val: ck42lat, precision: 6)
+            ck42lonStr = LoadCalculateViewController.roundDigitsToString(val: ck42lon, precision: 6)
+            htmlString += "ne: \(ck42latStr),\(ck42lonStr)<br>"
+            // lower left
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.s, Ld: cacheEntry.w, H: 0.0)
+            ck42latStr = LoadCalculateViewController.roundDigitsToString(val: ck42lat, precision: 6)
+            ck42lonStr = LoadCalculateViewController.roundDigitsToString(val: ck42lon, precision: 6)
+            htmlString += "sw: \(ck42latStr),\(ck42lonStr)<br>"
+            // lower right
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.s, Ld: cacheEntry.e, H: 0.0)
+            ck42latStr = LoadCalculateViewController.roundDigitsToString(val: ck42lat, precision: 6)
+            ck42lonStr = LoadCalculateViewController.roundDigitsToString(val: ck42lon, precision: 6)
+            htmlString += "se: \(ck42latStr),\(ck42lonStr)<br>"
+        }
+        if app.settings.outputMode == .CK42GaussKruger {
+            var ck42lat, ck42lon, ck42alt: Double
+            var ck42gklatStr, ck42gklonStr: String
+            var ck42gklat, ck42gklon: Int64
+            
+            // upper left
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.n, Ld: cacheEntry.w, H: 0.0)
+            (ck42gklat,ck42gklon) = CK42GaussKruger.CK42_to_GaussKruger(CK42_LatDegrees: ck42lat, CK42_LonDegrees: ck42lon)
+            ck42gklatStr = "\(ck42gklat)"
+            ck42gklonStr = "\(ck42gklon)"
+            htmlString += "nw: \(ck42gklatStr),\(ck42gklonStr)<br>"
+            // upper right
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.n, Ld: cacheEntry.e, H: 0.0)
+            (ck42gklat,ck42gklon) = CK42GaussKruger.CK42_to_GaussKruger(CK42_LatDegrees: ck42lat, CK42_LonDegrees: ck42lon)
+            ck42gklatStr = "\(ck42gklat)"
+            ck42gklonStr = "\(ck42gklon)"
+            htmlString += "ne: \(ck42gklatStr),\(ck42gklonStr)<br>"
+            // lower left
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.s, Ld: cacheEntry.w, H: 0.0)
+            (ck42gklat,ck42gklon) = CK42GaussKruger.CK42_to_GaussKruger(CK42_LatDegrees: ck42lat, CK42_LonDegrees: ck42lon)
+            ck42gklatStr = "\(ck42gklat)"
+            ck42gklonStr = "\(ck42gklon)"
+            htmlString += "sw: \(ck42gklatStr),\(ck42gklonStr)<br>"
+            // lower right
+            (ck42lat,ck42lon,ck42alt) = CK42Geodetic.WGS84_CK42(Bd: cacheEntry.s, Ld: cacheEntry.e, H: 0.0)
+            (ck42gklat,ck42gklon) = CK42GaussKruger.CK42_to_GaussKruger(CK42_LatDegrees: ck42lat, CK42_LonDegrees: ck42lon)
+            ck42gklatStr = "\(ck42gklat)"
+            ck42gklonStr = "\(ck42gklon)"
+            htmlString += "se: \(ck42gklatStr),\(ck42gklonStr)<br>"
+        }
+        
+        // meters or feet?
+        if app.settings.unitsMode == .Metric {
+            htmlString += "length: \(truncateDouble(val: cacheEntry.l, precision: 0)) meters <br>"
+        }
+        else {
+            htmlString += "length: \(truncateDouble(val: app.metersToFeet(meters: cacheEntry.l), precision: 0)) ft<br>"
+        }
+
+        htmlString += "size: \(app.formatSize(bytes: cacheEntry.bytes))<br>"
+        htmlString += "loaded ok: \(demLoaded)"
         
         setTextViewText(htmlStr: htmlString)
-        
     }
 
     // export this file to somewhere else
@@ -159,8 +275,13 @@ class DemCacheEntryController: UIViewController, UIDocumentPickerDelegate
     // it to our textView
     private func setTextViewText(htmlStr hString: String)
     {
-        if let attribString = vc.htmlToAttributedString(fromHTML: hString) {
-            self.textField.attributedText = attribString
+        // to avoid crashing due to NSInternalConsistencyException, don't set
+        // on calling thread; dispatch to main async
+        // re issue #37
+        DispatchQueue.main.async {
+            if let attribString = self.vc.htmlToAttributedString(fromHTML: hString) {
+                self.textField.attributedText = attribString
+            }
         }
         
     } // setTextViewText

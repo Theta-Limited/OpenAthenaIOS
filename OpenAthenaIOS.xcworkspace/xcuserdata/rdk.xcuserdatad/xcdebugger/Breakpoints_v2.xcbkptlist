@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "83162CE9-B194-47F1-99C3-5A1DE102179D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OpenAthenaIOS/DroneImage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1377"
-            endingLineNumber = "1377"
-            landmarkName = "resolveTarget(dem:altReference:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5988255B-AA73-466A-9F54-BF5DA9FE10C6"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -30,8 +14,8 @@
             filePath = "OpenAthenaIOS/DroneImageAutel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "getAltitude()"
             landmarkType = "7">
          </BreakpointContent>
@@ -40,14 +24,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6A5B274B-24DB-45B1-861A-562121B50A0D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OpenAthenaIOS/CalculateViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "747"
-            endingLineNumber = "747"
+            startingLineNumber = "749"
+            endingLineNumber = "749"
             landmarkName = "setTextViewTextOld(htmlStr:)"
             landmarkType = "7">
             <Locations>
@@ -95,6 +79,21 @@
                   startingLineNumber = "747"
                   endingLineNumber = "747"
                   offsetFromSymbolStart = "1060">
+               </Location>
+               <Location
+                  uuid = "6A5B274B-24DB-45B1-861A-562121B50A0D - c57187723dfd0f4a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OpenAthena.CalculateViewController.setTextViewTextOld(htmlStr: Swift.String) -&gt; ()"
+                  moduleName = "OpenAthena"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rdk/OpenAthenaIOS/OpenAthenaIOS/CalculateViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "749"
+                  endingLineNumber = "749"
+                  offsetFromSymbolStart = "1008">
                </Location>
             </Locations>
          </BreakpointContent>

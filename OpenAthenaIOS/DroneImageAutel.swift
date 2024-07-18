@@ -1,9 +1,11 @@
-//
-//  DroneImageAutel.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 1/5/24.
-//  Subclass DroneImage with Autel specific code, data, methods
+// DroneImageAutel.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 1/5/24.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
+// Subclass DroneImage with Autel specific code, data, methods
 
 import Foundation
 import UIKit
@@ -74,8 +76,14 @@ public class DroneImageAutel: DroneImage
         throw DroneImageError.ParameterNotImplemented
     }
     
-    //  altitude above ground allegedly below drone
+    // does this drone image have RTK flag set?
+    override public func isRTK() -> ExtendedBoolean
+    {
+        return .ExtendedBooleanUnknown
+    }
     
+    
+    //  altitude above ground allegedly below drone
     override public func getAltitudeAboveGround() throws -> Double
     {
         var relativeAlt: Double = 0.0

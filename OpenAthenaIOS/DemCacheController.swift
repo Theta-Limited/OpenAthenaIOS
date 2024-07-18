@@ -1,12 +1,12 @@
-//
-//  DemCacheController.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/12/23.
-//
-//  Display our cache of elevation maps in a TableView and allow
-//  user to delete or to add new elevation maps/models
-//  or view specs on elevation map
+// DemCacheController.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 10/12/23.
+// Display our cache of elevation maps in a TableView and allow
+// user to delete or to add new elevation maps/models
+// or view specs on elevation map
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import UIKit

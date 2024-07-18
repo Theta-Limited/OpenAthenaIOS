@@ -5,8 +5,10 @@
 // make sure to include EGM96complete.dat[.gz]
 // and GeoidHeights.dat[.gz] in the bundle
 // so they can be read
-
 // mods and tweaks by Matthew Krupczak, Bobby Krupczak
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import Compression

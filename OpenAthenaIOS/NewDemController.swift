@@ -1,9 +1,10 @@
-//
-//  NewDemController.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/12/23.
-//
+// NewDemController.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 10/12/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
 //  Screen for creating a new elevation model via
 //  download from internet or import from file
 

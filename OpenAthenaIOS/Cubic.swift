@@ -4,6 +4,9 @@
 // package org.matthiaszimmermann.location.egm96;
 // http://mrl.nyu.edu/~perlin/cubic/Cubic_java.html">http://mrl.nyu.edu/~perlin/cubic/Cubic_java.html
 // Ken Perlin
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 class Cubic {
     static let BEZIER: [[Double]] = [      // Bezier basis matrix

@@ -1,9 +1,11 @@
-//
-//  DroneImageSkydio.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 1/5/24.
-//  Subclass DroneImage with Skydio specific code, data, methods
+// DroneImageSkydio.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 1/5/24.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
+// Subclass DroneImage with Skydio specific code, data, methods
 
 import Foundation
 import UIKit
@@ -45,6 +47,12 @@ public class DroneImageSkydio: DroneImage
         
         if alt == 0.0 { return superAlt }
         return alt
+    }
+    
+    // does this drone image have RTK flag set?
+    override public func isRTK() -> ExtendedBoolean
+    {
+        return .ExtendedBooleanUnknown
     }
     
     override public func getRelativeAltitude() throws -> Double

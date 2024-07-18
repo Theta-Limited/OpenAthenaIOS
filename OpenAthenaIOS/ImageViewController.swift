@@ -1,12 +1,14 @@
-//
-//  ImageViewController.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 1/28/23.
-//  IOAcademy photo picker tutorial
-//  Stack Overflow
-//  questions/2660201/what-parameters-should-i-use-in-a-google-maps-url-to-go-to-a-lat-lon
+// ImageViewController.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 1/28/23.
+// IOSAcademy photo picker tutorial
+// Stack Overflow
+// questions/2660201/what-parameters-should-i-use-in-a-google-maps-url-to-go-to-a-lat-lon
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 // deprecated view controller; loading a DEM and calculating
 // have moved into single LoadCalculateViewController

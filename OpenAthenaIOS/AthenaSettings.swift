@@ -1,9 +1,11 @@
-//
-//  AthenaSettings.swift
-//  OpenAthenaIOS
-//  https://github.com/Theta-Limited/OpenAthenaIOS
-//  https://openathena.com//
-//  Created by Bobby Krupczak on 1/30/23.
+// AthenaSettings.swift
+// OpenAthenaIOS
+// https://github.com/Theta-Limited/OpenAthenaIOS
+// https://openathena.com//
+// Created by Bobby Krupczak on 1/30/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import UIKit
@@ -107,6 +109,7 @@ public class AthenaSettings {
     var compassSliderValue: Float = CompassSliderValue
     var unitsMode: ImperialVsMetric = UnitsMode
     var eventUID: Int64 = 0 // for CoT messages
+    var OpenAthenaVersion: Double = 0.0
     
     // file/dir URLs
     var demURL: URL?
@@ -193,6 +196,11 @@ public class AthenaSettings {
             takMulticastPort = takMulticastPortNew
         }
         
+        // re issue #54 load athenaVersion
+        if let aDouble = defaults.object(forKey: "OpenAthenaVersion") as? Double {
+            OpenAthenaVersion = aDouble
+        }
+        
         print("loadDefaults: returning, outputMode is \(outputMode), \(outputMode.rawValue)")
     }
     
@@ -210,6 +218,7 @@ public class AthenaSettings {
         defaults.set(takMulticastIP, forKey: "TAKMulticastIP")
         defaults.set(compassCorrection, forKey: "compassCorrection")
         defaults.set(compassSliderValue, forKey: "compassSliderValue")
+        defaults.set(OpenAthenaVersion, forKey: "OpenAthenaVersion")
         
         if droneParamsURL != nil {
             defaults.set(droneParamsURL!.absoluteString, forKey: "DroneParamsURL")

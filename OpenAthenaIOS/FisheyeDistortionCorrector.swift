@@ -1,9 +1,11 @@
+// FisheyeDistortionCorrector.swift
+// OpenAthenaIOS
 //
-//  FisheyeDistortionCorrector.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/6/23.
-//  Ported from OpenAthenaAndroid java code
+// Created by Bobby Krupczak on 10/6/23.
+// Ported from OpenAthenaAndroid java code
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 

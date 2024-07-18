@@ -1,10 +1,11 @@
-//
-//  AboutViewController.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 1/27/23.
-//
+// AboutViewController.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 1/27/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import UIKit
 
@@ -48,7 +49,7 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         textView.isSelectable = true
         textView.isEditable = false
         textView.font = .systemFont(ofSize: 16)
-        textView.isScrollEnabled = false
+        textView.isScrollEnabled = true
         textView.backgroundColor = .secondarySystemBackground
 
         // image view
@@ -97,36 +98,36 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
     private func getAbout()
     {
         htmlString = "\(style) "
-        + "<b>OpenAthena\u{2122} version \(vc!.getAppVersion()) build \(vc.getAppBuildNumber()!)</b></br>"
+        + "<b>OpenAthena\u{2122} version \(ViewController.getAppVersion()) build \(vc.getAppBuildNumber()!)</b></br>"
         + "Matthew Krupczak, Bobby Krupczak et al.<br>"
-        + "GPL-3.0, some rights reserved "
-        + "<a href=\"https://openathena.com/\">OpenAthena.com</a><br>"
+        + "AGPL-3.0, some rights reserved "
+        + "<a href='https://openathena.com/'>OpenAthena.com</a><br>"
         + "<br>OpenAthena\u{2122} allows common drones to spot precise geodetic locations.<br>"
         
-        + "<br>For best results, please calibrate your drone's compass\u{1F9ED} before flight!<br>"
+        + "<br>For best results, please calibrate your drone's compass\u{1F9ED} before flight.<br>"
         
-        + "<br><a href=\"https://github.com/Theta-Limited/OpenAthena\">View the project on GitHub</a>"
-        + "<p>Project maintained by <a href=\"https://github.com/mkrupczak3\">mkrupczak3</a><br>"
+        + "<br><a href='https://github.com/Theta-Limited/'>View the project on GitHub</a><br>"
                 
-        + "<br>Elevation maps/data obtained from <a href='https://www.opentopography.org'>OpenTopography</a> SRTM_GL1 dataset<br>"
+        + "<br>Elevation maps/data obtained from <a href='https://www.opentopography.org'>OpenTopography</a> SRTM_GL1 and GLO-30 datasets.<br>"
         
-        + "<br>NATA/MGRS, WGS84, & UTM output vertical datum is EMG96 meters above mean sea level.  "
-        + "CK-42 output vertical datum is meters height above the Krassowsky 1940 elippsoid.<p>"
-        
+        + "<br>NATO/MGRS, WGS84, UTM output vertical datum is EMG96 meters above mean sea level.  "
+        + "CK-42 output vertical datum is meters height above the Krassowsky 1940 elipsoid.<br>"
+
+        // privacy policy
+        + "<br>See <a href='https://openathena.com/privacy'>this page</a> for the OpenAthena\u{2122} privacy policy<br>"
+        + "<br>Device UID: \(UIDGenerator.getDeviceHostnamePhonetic())<br>"
+
         // add libraries, that we use, here
-        + "Software libraries used:"
+        + "<br>Software libraries used:<br>"
         + "<ul>"
-        + "<li><a href='https://github.com/ngageoint'>National Geospatial-Intelligence Agency TIFF library</a></li>"
-        + "<li><a href='https://github.com/Dimowner/WGS84_TO_SK42/'>WGS84 to CK42 library</a></li>"
-        + "<li><a href='https://github.com/ngageoint/'>National Geospatial-Intelligence Agency MGRS conversion library</a></li>"
-        + "<li><a href='https://github.com/wtw-software/UTMConversion'>UTMConversion</a></li>"
-        + "<li><a href='https://github.com/ky1vstar/NSExceptionSwift'>NSExceptionSwift</a></li>"
-        + "<li><a href='https://github.com/matthiaszimmermann/EGM96'>EGM96 offset</a></li>"
+        + "<li><a href='https://github.com/ngageoint'>National Geospatial-Intelligence Agency TIFF library</a> "
+        + "<li><a href='https://github.com/Dimowner/WGS84_TO_SK42/'>WGS84 to CK42 library</a> "
+        + "<li><a href='https://github.com/ngageoint/'>National Geospatial-Intelligence Agency MGRS conversion library</a> "
+        + "<li><a href='https://github.com/wtw-software/UTMConversion'>UTMConversion</a> "
+        + "<li><a href='https://github.com/ky1vstar/NSExceptionSwift'>NSExceptionSwift</a>  "
+        + "<li><a href='https://github.com/matthiaszimmermann/EGM96'>EGM96 offset</a>  "
         + "</ul>"
         
-        // privacy policy
-        + "<br>See <a href='https://openathena.com/privacy'>this page</a> for the OpenAthena\u{2122} privacy policy"
-           
         setTextViewText(htmlStr: htmlString)
         
     } // getAbout()

@@ -1,9 +1,11 @@
+// TestSettings.swift
+// OpenAthenaIOSTests
 //
-//  TestSettings.swift
-//  OpenAthenaIOSTests
-//
-//  Created by Bobby Krupczak on 5/18/23.
-//  Test app settings loading, saving
+// Created by Bobby Krupczak on 5/18/23.
+// Test app settings loading, saving
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import XCTest
 @testable import OpenAthena

@@ -1,12 +1,14 @@
-//
-//  DroneParams.swift
-//  OpenAthenaIOS
-//  https://github.com/Theta-Limited/OpenAthenaIOS
-//  https://openathena.com//
-//  Created by Bobby Krupczak on 5/26/23.
-//  Encapsulate drone parameter data in this class
-//  both for static out of box and for
-//  updating via local data file or network download
+// DroneParams.swift
+// OpenAthenaIOS
+// https://github.com/Theta-Limited/OpenAthenaIOS
+// https://openathena.com//
+// Created by Bobby Krupczak on 5/26/23.
+// Encapsulate drone parameter data in this class
+// both for static out of box and for
+// updating via local data file or network download
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 // for Drones, we are tracking make, model, width and height (in mm) of a pixel
 // and the width-pixels and height-pixels of the drone's specific CCD/CMOS sensor

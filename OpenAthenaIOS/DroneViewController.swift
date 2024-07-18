@@ -1,14 +1,14 @@
-//
-//  DroneViewController.swift
-//  OpenAthenaIOS
-//
-//  https://github.com/Theta-Limited/OpenAthenaIOS
-//  Created by Bobby Krupczak on 9/7/23.
-//
-//  Load a new droneModels.json file via dialog
-//  Save this choice so its re-loaded on application
-//  startup; if load fails, default back to bundled
-//  droneModels.json file
+// DroneViewController.swift
+// OpenAthenaIOS
+// https://github.com/Theta-Limited/OpenAthenaIOS
+// Created by Bobby Krupczak on 9/7/23.
+// Load a new droneModels.json file via dialog
+// Save this choice so its re-loaded on application
+// startup; if load fails, default back to bundled
+// droneModels.json file
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import UIKit
 import UniformTypeIdentifiers

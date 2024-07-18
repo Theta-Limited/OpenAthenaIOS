@@ -40,6 +40,7 @@
 		597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597CDED52A16FC1D000EF1CC /* TestSettings.swift */; };
 		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
 		59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */; };
+		59AFA1182C333C260008DF8D /* UIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AFA1172C333C260008DF8D /* UIDGenerator.swift */; };
 		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
 		59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */; };
 		59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0929844B6D00F0C6B1 /* ViewController.swift */; };
@@ -122,6 +123,7 @@
 		599339902BE1364F00A57342 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnTargetSender.swift; sourceTree = "<group>"; };
 		59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenAthenaIOS.entitlements; sourceTree = "<group>"; };
+		59AFA1172C333C260008DF8D /* UIDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDGenerator.swift; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				59576BC62BA2441100A400A1 /* LoadCalculateViewController.swift */,
 				599339902BE1364F00A57342 /* PrivacyInfo.xcprivacy */,
 				59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */,
+				59AFA1172C333C260008DF8D /* UIDGenerator.swift */,
 				593A2A412A214ECA0098EAF1 /* DroneParams.swift */,
 				59B62B232988133000F0C6B1 /* AthenaSettings.swift */,
 				59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */,
@@ -484,6 +487,7 @@
 				59B62B28298B15CC00F0C6B1 /* CalculateViewController.swift in Sources */,
 				59B62B242988133000F0C6B1 /* AthenaSettings.swift in Sources */,
 				59576BC72BA2441100A400A1 /* LoadCalculateViewController.swift in Sources */,
+				59AFA1182C333C260008DF8D /* UIDGenerator.swift in Sources */,
 				59B62B3F298DAE7300F0C6B1 /* DigitalElevationModel.swift in Sources */,
 				597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */,
 				597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */,
@@ -710,7 +714,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 917;
+				CURRENT_PROJECT_VERSION = 1064;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -728,7 +732,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.61;
+				MARKETING_VERSION = 2.70;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -747,7 +751,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 917;
+				CURRENT_PROJECT_VERSION = 1064;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -765,7 +769,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.61;
+				MARKETING_VERSION = 2.70;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -783,7 +787,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 917;
+				CURRENT_PROJECT_VERSION = 1064;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -803,7 +807,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 917;
+				CURRENT_PROJECT_VERSION = 1064;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

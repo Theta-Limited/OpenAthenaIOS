@@ -1,10 +1,12 @@
+// TestDEMDownload.swift
+// OpenAthenaIOSTests
 //
-//  TestDEMDownload.swift
-//  OpenAthenaIOSTests
-//
-//  Created by Bobby Krupczak on 3/15/24.
-//  Test DEM auto download code
-//  One successful, one error
+// Created by Bobby Krupczak on 3/15/24.
+// Test DEM auto download code
+// One successful, one error
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import XCTest
 @testable import OpenAthena

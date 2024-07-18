@@ -1,9 +1,11 @@
-//
-//  DemCache.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/12/23.
-//
+// DemCache.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 10/12/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
+// Digital elevation model (DEM) cache class and methods
 
 import Foundation
 import CoreLocation
@@ -119,7 +121,9 @@ class DemCache
     
     func searchCacheFilename(lat: Double, lon: Double) -> String
     {
-        var aDem: DEM_cache_entry? = searchCacheEntry(lat: lat, lon: lon)
+        // var aDem: DEM_cache_entry? = searchCacheEntry(lat: lat, lon: lon)
+        // re issue #43 find entry with max coverage
+        var aDem: DEM_cache_entry? = searchCacheMaxCoverage(lat: lat, lon: lon)
         
         if aDem != nil {
             return aDem!.filename
@@ -137,6 +141,44 @@ class DemCache
             }
         }
         return nil
+    }
+    
+    // re issue #43 we want to find DEM with most local
+    // coverage rather than one closest to center
+    // because we could have maps of varying sizes all
+    // covering the same area;
+    
+    func searchCacheMaxCoverage(lat: Double, lon: Double) -> DEM_cache_entry?
+    {
+        var maxCoverage:Double = -1
+        var anEntry: DEM_cache_entry?
+        var nCoverage, sCoverage, eCoverage, wCoverage, coverage: Double
+        
+        print("searchCacheMaxCoverage: \(lat),\(lon)")
+        
+        for dem in cache {
+            if (lat < dem.n && lat > dem.s && lon > dem.w && lon < dem.e) {
+                nCoverage = abs(dem.n - lat)
+                sCoverage = abs(lat - dem.s)
+                eCoverage = abs(dem.e - lon)
+                wCoverage = abs(lon - dem.w)
+            
+                coverage = min(min(nCoverage,sCoverage),min(eCoverage,wCoverage))
+                
+                print("searchCacheMaxCoverage: \(dem.filename) covers drone \(coverage)")
+
+                if coverage > maxCoverage {
+                    print("searchCacheMaxCoverage: \(dem.filename) max coverage \(coverage)")
+                    maxCoverage = coverage
+                    anEntry = dem
+                }
+            }
+        }
+       
+        if anEntry != nil {
+            print("searchCacheMaxCoverage: returning \(anEntry!.filename)")
+        }
+        return anEntry
     }
     
     func searchCacheEntry(lat: Double, lon: Double) -> DEM_cache_entry?
@@ -175,7 +217,27 @@ class DemCache
         }
     }
     
-    // given a string, load the elevation map
+    // given a lat, lon, load the elevation map
+    // this function is called from various view controllers
+    // issue #43 load dem from cache that has max coverage
+    func loadDemFromCacheMaxCoverage(lat: Double, lon: Double) throws -> DigitalElevationModel
+    {
+        var anEntry: DEM_cache_entry?
+        
+        anEntry = searchCacheMaxCoverage(lat: lat, lon: lon)
+        
+        if anEntry == nil {
+            throw ElevationModuleError.NoSuch
+        }
+        
+        guard let dem = DigitalElevationModel(fromURL: anEntry!.fileURL) else {
+            print("loadFromCacheMaxCoverage: failed to load DEM \(anEntry!.fileURL)")
+            throw ElevationModuleError.NoSuch
+        }
+        
+        return dem 
+    }
+    
     func loadDemFromCache(lat: Double, lon: Double) throws -> DigitalElevationModel
     {
         var leastDistanceToCenter = Double.infinity

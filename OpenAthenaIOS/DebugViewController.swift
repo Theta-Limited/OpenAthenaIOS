@@ -1,10 +1,11 @@
-//
-//  DebugViewController.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 2/3/23.
-//
+// DebugViewController.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 2/3/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import UIKit
@@ -94,7 +95,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
     
     private func debug()
     {
-        self.htmlString = "\(style)<b>OpenAthena\u{2122} Debug Info \(vc.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
+        self.htmlString = "\(style)<b>OpenAthena\u{2122} Debug Info \(ViewController.getAppVersion()) build \(vc.getAppBuildNumber()!)</b><br>"
         
         self.htmlString += "Coordinate system: \(app.settings.outputMode)<br>"
         self.htmlString += "Units: \(app.settings.unitsMode)<br>"
@@ -104,8 +105,9 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         self.htmlString += "EGM96 model loaded: \(EGM96Geoid.s_model_ok)<br>"
         self.htmlString += "Compass correction: \(app.settings.compassCorrection)<br>"
         self.htmlString += "Font size: \(app.settings.fontSize)<br>"
-        self.htmlString += "Device hash: \(CursorOnTargetSender.getDeviceHostnameHash())<br>"
- 
+        //self.htmlString += "Device hash: \(CursorOnTargetSender.getDeviceHostnameHash())<br>"
+        self.htmlString += "Device UID: \(UIDGenerator.getDeviceHostnamePhonetic())<br>"
+        
         // do I have an API key?
         if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
            let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
@@ -120,7 +122,7 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
         // dem cache info
         let demCache = DemCache()
         self.htmlString += "\(demCache.count()) elevation maps in cache<br>"
-        self.htmlString += "\(demCache.totalStorage()) bytes in elevation maps cache<br>"
+        self.htmlString += "\(app.formatSize(bytes: demCache.totalStorage())) in elevation maps cache<br>"
 
         if vc.dem != nil {
             self.htmlString += "<br><b>DEM:</b> \((vc.dem!.tiffURL!.lastPathComponent))<br>"
@@ -319,6 +321,13 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             }
             
         } // if DEM and image loaded, examine altitude data
+        
+        if ViewController.Debug == true && vc.theDroneImage?.calculationInfo != nil {
+            self.htmlString += "<br><b>Calculation info:</b><br>"
+            for (key,value) in vc.theDroneImage!.calculationInfo {
+                self.htmlString += "     \(key): \(value)<br>"
+            }
+        }
             
         // display the text finally
         setTextViewText(htmlStr: self.htmlString)

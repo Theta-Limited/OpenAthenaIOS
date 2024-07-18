@@ -1,15 +1,15 @@
-//
-//  Geodetic.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 4/18/23.
-//
-//  CK42 Coordinate system conversion functions
-//  Originally ported from https://github.com/Dimowner/WGS84_TO_SK42/
-//  http://gis-lab.info/qa/wgs84-sk42-wgs84-formula.html
-//  http://gis-lab.info/qa/datum-transform-methods.html
-//  Port/conversion to Swift done by ChatGPT and then
-//  modified/enhanced by rdk
+// Geodetic.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 4/18/23.
+// CK42 Coordinate system conversion functions
+// Originally ported from https://github.com/Dimowner/WGS84_TO_SK42/
+// http://gis-lab.info/qa/wgs84-sk42-wgs84-formula.html
+// http://gis-lab.info/qa/datum-transform-methods.html
+// Port/conversion to Swift done by ChatGPT and then
+// modified/enhanced by rdk
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 

@@ -1,10 +1,10 @@
-//
-//  DemDownloader.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/12/23.
-//
-//  Handle downloading DEMs from OpenTopography
+// DemDownloader.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 10/12/23.
+// Handle downloading DEMs from OpenTopography
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import UIKit
@@ -39,9 +39,29 @@ class DemDownloader
     
     func download(completionHandler: @escaping (Int, Int, String) -> Void )
     {
+        // re issue #44 use GLO-30 dataset for extreme latitudes
+        
+        var demTypeStr = DemDownloader.demTypeStr
+        
+        if (n <= 60.0) && (s > -56.0) {
+            // SRTM GL1 v3, to be used for locations on Earth within coverage area of 60.0° N to 56.0° S
+            // https://portal.opentopography.org/datasetMetadata?otCollectionID=OT.042013.4326.1
+            
+            demTypeStr = DemDownloader.demTypeStr;
+        }
+        else {
+            // Copernicus GLO-30 generated with X-band SAR data from the TanDEM-X
+            // to be used for extreme latitudes (above 60.0° N or below 56.0° S) only
+            // https://ilrs.gsfc.nasa.gov/missions/satellite_missions/current_missions/tand_general.html
+            // https://portal.opentopography.org/datasetMetadata?otCollectionID=OT.032021.4326.1
+
+            print("DemDownloader: extreme latitude; using GLO30 dataset");
+            demTypeStr = "COP30"
+        }
+        
         // build the URL
         var requestURLStr = DemDownloader.urlStr +
-            "demtype=\(DemDownloader.demTypeStr)" +
+            "demtype=\(demTypeStr)" +
             "&south=\(s)" +
             "&north=\(n)" +
             "&west=\(w)" +

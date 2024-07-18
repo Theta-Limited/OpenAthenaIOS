@@ -1,9 +1,9 @@
-//
-//  PerspectiveDistortionCorrector.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/6/23.
-//
+// PerspectiveDistortionCorrector.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 10/6/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 

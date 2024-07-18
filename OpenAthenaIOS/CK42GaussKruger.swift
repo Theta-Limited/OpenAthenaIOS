@@ -1,14 +1,13 @@
-//
-//  CK42GaussKruger.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 4/19/23.
-//
-//  Code adapted from https://gis.stackexchange.com/a/418152/205005 user Nickname Nick
-//  Modified by mkrupczak3 for use with OpenAthena
-//  Ported to Swift by ChatGPT
-//  Enhanced by rdk for convenience functions, comments, etc.
-//
+// CK42GaussKruger.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 4/19/23.
+// Code adapted from https://gis.stackexchange.com/a/418152/205005 user Nickname Nick
+// Modified by mkrupczak3 for use with OpenAthena
+// Ported to Swift by ChatGPT
+// Enhanced by rdk for convenience functions, comments, etc.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 

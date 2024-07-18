@@ -1,16 +1,18 @@
-//
-//  AppDelegate.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 1/27/23.
-//
+// AppDelegate.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 1/27/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import UIKit
 import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate 
+{
 
     var settings: AthenaSettings = AthenaSettings()
     var uNC = UNUserNotificationCenter.current()
@@ -21,6 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // load defaults
         settings.loadDefaults()
         settings.fontSize = 18
+        
+        // re issue #54 check if version changed and if so
+        // reset some things
+        print("App: version in settings is \(settings.OpenAthenaVersion)")
+        if ViewController.version != settings.OpenAthenaVersion {
+            print("App: going to erase droneParamsURL")
+            settings.droneParamsBookmark = Data()
+            settings.droneParamsURL = URL(string: "")
+        }
+        settings.OpenAthenaVersion = ViewController.version
+        // save the settings before we proceed?  Dont
+        // bother; wait til user updates something
         
         // load the EGM96Geod here so its only loaded one time due to its size
         // and that it needs to be decompressed
@@ -97,5 +111,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return feet
     }
     
+    func formatSize(bytes: Int) -> String 
+    {
+        switch bytes {
+        case 0..<1024:
+            return "\(bytes) B"
+        case 1024..<(1024 * 1024):
+            return String(format: "%.2f KB", Double(bytes) / 1024)
+        case (1024 * 1024)..<(1024 * 1024 * 1024):
+            return String(format: "%.2f MB", Double(bytes) / (1024 * 1024))
+        case (1024 * 1024 * 1024)..<(1024 * 1024 * 1024 * 1024):
+            return String(format: "%.2f GB", Double(bytes) / (1024 * 1024 * 1024))
+        default:
+            return String(format: "%.2f GB", Double(bytes) / (1024 * 1024 * 1024 * 1024))
+        }
+    }
+        
 }
 

@@ -1,17 +1,25 @@
-//
-//  DroneImage.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 2/4/23.
-//
-//  Class to hold the various pieces parts of the
-//  drone image we are examining
+// DroneImage.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 2/4/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
+// Class to hold the various pieces parts of the
+// drone image we are examining
 
 import Foundation
 import UIKit
 
-enum DroneImageError: String, Error {
+public enum ExtendedBoolean: Int {
+    case ExtendedBooleanFalse = 0
+    case ExtendedBooleanTrue = 1
+    case ExtendedBooleanUnknown = 2
+}
+                                
+public enum DroneImageError: String, Error {
     case MetaDataKeyNotFound = "Meta data key not found"
     case NoMetaData = "No meta data"
     case NoMetaGPSData = "No GPS data"
@@ -64,6 +72,8 @@ public class DroneImage {
     var xmlStringCopy: String?
     var droneParams: DroneParams?
     var settings: AthenaSettings?
+    var targetResults: [Double]?
+    var calculationInfo: [String:Any] = [:]
     
     //init(fromImage image: UIImage, withMetaData data: [AnyHashable:Any]) {
     init(suggestedName aName: String, fromImage image: UIImage,
@@ -725,6 +735,12 @@ public class DroneImage {
                 return dict["FocalLength"] as! Double
             }
         }
+        
+        // if we get here and we don't have a focal length, try to get it from
+        // drone info struct issue #41
+        if ccdInfo != nil && ccdInfo!.focalLength != 0.0 {
+            return ccdInfo!.focalLength
+        }
 
         print("getFocalLength: metadata key not found")
         throw DroneImageError.MetaDataKeyNotFound
@@ -875,6 +891,13 @@ public class DroneImage {
         }
         
         return dict["Make"] as! String
+    }
+    
+    // does this drone image have RTK flag set?
+    // subclass override
+    public func isRTK() -> ExtendedBoolean
+    {
+        return .ExtendedBooleanUnknown
     }
     
     // if we have drone CCD info and user has touched somewhere inside image
@@ -1346,6 +1369,7 @@ public class DroneImage {
     // 6 azimuthOffset in degrees
     // 7 thetaOffset or pitch offset in degrees
     // 8 0.0 which used by caller to calculate target[3] + offset
+    // finalTheta = results[5] + results[7]
     
     // add drone ccd info, if available, so we can locate target not at center
     
@@ -1365,6 +1389,10 @@ public class DroneImage {
         var degAzimuth, degTheta: Double
         var azimuthOffset, thetaOffset: Double
         
+        // reset calculationInfo and results
+        calculationInfo = [:]
+        targetResults = []
+
         //print("resolveTarget: starting ******")
         
         // azimuth is direction of aircraft's camera 0 is north, increase clockwise
@@ -1377,6 +1405,16 @@ public class DroneImage {
             try degAzimuth = getGimbalYawDegree()
             try degTheta = getGimbalPitchDegree()
             
+            // during unit tests, settings is not loaded so double-check before
+            // we dereference it
+            if settings != nil {
+                calculationInfo["azimuthOffsetUserCorrection"] = Double(settings!.compassCorrection)
+            }
+            calculationInfo["gimbalPitchDegree"] = degTheta
+            calculationInfo["gimbalYawDegree"] = degAzimuth
+            calculationInfo["cameraSlantAngleDeg"] = degTheta
+            calculationInfo["digitalZoomRatio"] = getZoom()
+
             //print("resolveTarget: got az and theta")
                                     
             // corrected or uncorrected versions of getRayAnglesFromImagePixel
@@ -1410,6 +1448,26 @@ public class DroneImage {
             }
             
             print("resolveTarget: starting lat: \(lat) lon: \(lon) alt: \(alt)")
+            
+            calculationInfo["droneLatitude"] = lat
+            calculationInfo["droneLongitude"] = lon
+            calculationInfo["droneElevationHAE"] = alt
+            try calculationInfo["make"] = getCameraMake()
+            try calculationInfo["model"] = getCameraModel()
+            calculationInfo["isCameraModelRecognized"] = (ccdInfo != nil)
+            calculationInfo["lensType"] = ccdInfo?.lensType
+            try calculationInfo["focalLength"] = getFocalLength()
+            do { try calculationInfo["focalLength35"] = getFocalLengthIn35mm() } catch { } // ignore if not found
+            calculationInfo["imageHeight"] = theImage!.size.height
+            calculationInfo["imageWidth"] = theImage!.size.width
+            calculationInfo["imageSelectedProportionX"] = targetXprop
+            calculationInfo["imageSelectedProportionY"] = targetYprop
+            try calculationInfo["cameraRollAngleDeg"] = getRoll()
+            
+            // get intrinsics and set f_x and f_y intrinsics[0] and intrinsics[4]
+            var matrix = try getIntrinsicMatrix()
+            calculationInfo["f_x"] = matrix[0]
+            calculationInfo["f_y"] = matrix[4]
         }
         catch {
             print("resolveTarget: missing metadata at the start")
@@ -1428,7 +1486,20 @@ public class DroneImage {
                 tarLon = lon
                 tarAlt = terrainAlt
                 finalDist = fabs(alt - terrainAlt)
-                return [ finalDist, tarLat, tarLon, tarAlt, terrainAlt, degTheta, azimuthOffset, thetaOffset, 0.0 ]
+                targetResults = [ finalDist, tarLat, tarLon, tarAlt, terrainAlt, degTheta, azimuthOffset, thetaOffset, 0.0 ]
+                
+                // put results in calculationInfo
+                calculationInfo["targetDistanceMeters"] = finalDist
+                calculationInfo["targetLat"] = tarLat;
+                calculationInfo["tagetLon"] = tarLon;
+                calculationInfo["targetAltHAE"] = tarAlt;
+                calculationInfo["finalTheta"] = degTheta
+                calculationInfo["finalAZ"] = degAzimuth
+                calculationInfo["yawOffsetDegSelectedPoint"] = azimuthOffset
+                calculationInfo["pitchOffsetDegSelectedPoint"] = -1.0 * thetaOffset
+                calculationInfo["slantRange"] = finalDist
+                
+                return targetResults!
             }
         }
         catch {
@@ -1532,7 +1603,21 @@ public class DroneImage {
         finalDist = sqrt(finalHorizDist*finalHorizDist + finalVertDist*finalVertDist)
         terrainAlt = groundAlt
         
-        return [finalDist, curLat, curLon, curAlt, terrainAlt, degTheta, azimuthOffset, thetaOffset, 0.0 ]
+        // save target results
+        targetResults = [finalDist, curLat, curLon, curAlt, terrainAlt, degTheta, azimuthOffset, thetaOffset, 0.0 ]
+        
+        // put results in calculationInfo
+        calculationInfo["targetDistanceMeters"] = finalDist
+        calculationInfo["targetLat"] = curLat;
+        calculationInfo["tagetLon"] = curLon;
+        calculationInfo["targetAltHAE"] = curAlt;
+        calculationInfo["finalTheta"] = degTheta
+        calculationInfo["finalAZ"] = degAzimuth
+        calculationInfo["yawOffsetDegSelectedPoint"] = azimuthOffset
+        calculationInfo["pitchOffsetDegSelectedPoint"] = -1.0 * thetaOffset
+        calculationInfo["slantRange"] = finalDist
+        
+        return targetResults!
         
     } // resolveTarget()
     

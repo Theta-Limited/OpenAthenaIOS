@@ -1,10 +1,11 @@
-//
-//  CalculateViewController.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com
-//  Created by Bobby Krupczak on 1/27/23.
-//
+// CalculateViewController.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com
+// Created by Bobby Krupczak on 1/27/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 // deprecated view controller; loading a DEM and calculating
 // have moved into single LoadCalculateViewController
@@ -537,7 +538,8 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
                                                   // Hae: self.target[8],
                                                   Hae: self.target[3],
                                                   Theta: self.target[5],
-                                                  exifDateTimeISO: imageISO)
+                                                  exifDateTimeISO: imageISO,
+                                                  calculationInfo: self.vc.theDroneImage!.calculationInfo)
                 
                 // if CoT sent, give some sorta notification XXX
                 if ret == false {

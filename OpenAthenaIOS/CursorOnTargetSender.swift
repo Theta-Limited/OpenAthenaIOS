@@ -1,22 +1,23 @@
+// CursorOnTargetSender.swift
+// OpenAthenaIOS
 //
-//  CursorOnTargetSender.swift
-//  OpenAthenaIOS
+// Send TAK Cursor on Target messages via IP multicast
 //
-//  Send TAK Cursor on Target messages via IP multicast
+// Requested com.apple.developer.networking.multicast.entitlement
+// via Apple developer website.
+// Multicast will work in the simulators in the interim
+// Once entitlement is granted, see
+// https://developer.apple.com/forums/thread/663271?answerId=639455022#639455022
+// To add entitlement to developer profile and app based on app ID
+// Then, in Xcode, go into project capabilities and add there.  You may need to
+// create .entitlements files for targets; I also needed to exit Xcode,
+// delete DerivedData, and then start Xcode for the entitlement to take effect
+// Verify entitlement is in app via codesign utility; see URL above for invocation
 //
-//  Requested com.apple.developer.networking.multicast.entitlement
-//  via Apple developer website.
-//  Multicast will work in the simulators in the interim
-//  Once entitlement is granted, see
-//  https://developer.apple.com/forums/thread/663271?answerId=639455022#639455022
-//  To add entitlement to developer profile and app based on app ID
-//  Then, in Xcode, go into project capabilities and add there.  You may need to
-//  create .entitlements files for targets; I also needed to exit Xcode,
-//  delete DerivedData, and then start Xcode for the entitlement to take effect
-//  Verify entitlement is in app via codesign utility; see URL above for invocation
-//
-//  Created by Bobby Krupczak on 9/13/23.
-//
+// Created by Bobby Krupczak on 9/13/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import Network
@@ -36,6 +37,10 @@ public class CursorOnTargetSender
     var group: NWConnectionGroup?
     var settings: AthenaSettings
     var hashedHostname = ""
+   
+    // estimate of max linear error for any SRTM elevation value
+    // from https://doi.org/10.1016/j.asej.2017.01.007
+    static var LINEAR_ERROR: Double = 5.90
     
     init(params: AthenaSettings) {
         settings = params
@@ -44,7 +49,7 @@ public class CursorOnTargetSender
         
         print("CursorOnTarget: init starting")
         
-        hashedHostname = CursorOnTargetSender.getDeviceHostnameHash()
+        //hashedHostname = CursorOnTargetSender.getDeviceHostnameHash()
         
         guard let multicast = try? NWMulticastGroup(for: [ .hostPort(host: host,
                                                                      port: port) ]) else {
@@ -94,7 +99,8 @@ public class CursorOnTargetSender
     // send a CoT message given the selection parameters/location
     // exifDateTimeISO has already been converted
     
-    public func sendCoT(targetLat: Double, targetLon: Double, Hae: Double, Theta: Double, exifDateTimeISO: String) -> Bool 
+    public func sendCoT(targetLat: Double, targetLon: Double, Hae: Double, Theta: Double, exifDateTimeISO: String,
+                        calculationInfo: [String:Any] ) -> Bool
     {
         print("CursorOnTarget: sendCoT starting")
         
@@ -108,9 +114,10 @@ public class CursorOnTargetSender
             return false
         }
         
-        // calculate values, times
-        let linearError:Double = 15.0 / 3.0
-        let circularError:Double = 1.0 / tan(Theta.degreesToRadians) * linearError
+        // calculate values, times, error probabilities
+        // re issue #47,
+        let linearError:Double = CursorOnTargetSender.LINEAR_ERROR
+        let circularError:Double = CursorOnTargetSender.calculateCircularError(theta: Theta)
         let ceStr = roundDigitsToString(val: circularError, precision: 6)
         let leStr = roundDigitsToString(val: linearError, precision: 6)
         let nowStr = getDateTimeISO()
@@ -122,9 +129,13 @@ public class CursorOnTargetSender
         //let uidStr = "openathena-ios+\(UIDevice.current.identifierForVendor!.uuidString)+\(Int(NSDate().timeIntervalSince1970))"
         
         // re issue #31 make this unique id shorter
-        //let uidStr = "openathena-ios-\(hashedHostname)-\(Int(NSDate().timeIntervalSince1970))"
+        // let uidStr = "openathena-ios-\(hashedHostname)-\(Int(NSDate().timeIntervalSince1970))"
+        // let uidStr = "openathena-\(hashedHostname)-\(settings.eventUID)"
         
-        let uidStr = "openathena-\(hashedHostname)-\(settings.eventUID)"
+        // re issue #49 adopt the phonetic alphabet version of uid from Android/Java
+        let uidStr = CursorOnTargetSender.buildUIDString(eventuid: settings.eventUID)
+        
+        // re issue #49, use updated uid format, android #141
         settings.eventUID += 1
         settings.writeDefaults()
         
@@ -149,6 +160,16 @@ public class CursorOnTargetSender
         xmlString += "<precisionLocation altsrc=\"DTED2\" geopointsrc=\"GPS\" />"
         xmlString += "<remarks>Generated by OpenAthena for iOS from sUAS data</remarks>"
         xmlString += "</detail>"
+        
+        // if Debug, add calculation info
+        if ViewController.Debug && calculationInfo.isEmpty == false {
+            xmlString += "<calculationInfo "
+            for (key,value) in calculationInfo {
+                xmlString += "\(key)="
+                xmlString += "\"\(value)\" "
+            }
+            xmlString += " />"
+        }
 
         // add closing
         xmlString += "</event>"
@@ -169,6 +190,11 @@ public class CursorOnTargetSender
         }
        
         return true
+    }
+    
+    public class func buildUIDString(eventuid: Int64) -> String
+    {
+        return "OpenAthena-"+UIDGenerator.getDeviceHostnamePhonetic()+"-"+String(eventuid)
     }
     
     // get current time plus 5 in iso8601 format
@@ -199,23 +225,78 @@ public class CursorOnTargetSender
         return String(num)
     }
     
-    // written with aid of ChatGPT
-    public class func getDeviceHostnameHash() -> String {
-        var aString: String = ""
-        
-        aString = UIDevice.current.name
-        if aString == "" {
-            aString = "unknown-hostname"
-        }
-        if let inputData = aString.data(using: .utf8) {
-            let hashData = SHA256.hash(data: inputData)
-            let hashString = hashData.compactMap { String(format: "%02x",$0) }.joined()
-            let truncatedHash = String(hashString.prefix(8))
-            return truncatedHash
-        }
-        
-        return "feedface"
+    public class func calculateCircularError(theta: Double) -> Double
+    {
+        // re issue #47, take fabs of value so its positive value and
+        // direction agnostic
+        return fabs(1.0 / tan(theta.degreesToRadians) * LINEAR_ERROR)
     }
     
+    public class func getLinearError() -> Double
+    {
+        return LINEAR_ERROR;
+    }
+      
+    // Target Location Error categories
+    // from: https://www.bits.de/NRANEU/others/jp-doctrine/jp3_09_3%2809c%29.pdf
+    // pg. V-4
+        
+    public enum TLE_Categories: Int, CaseIterable {
+         case   CAT_1 = 0  // 0 to < 7 meters
+         case   CAT_2 = 7  // 7 to < 16 meters
+         case   CAT_3 = 16 // 16 to < 30 meters
+         case   CAT_4 = 31 // 31 to < 91 meters
+         case   CAT_5 = 92 // 92 to < 305 meters
+         case   CAT_6 = 305 // > 305 meters
+        
+        var description: String {
+            switch self {
+            case .CAT_1: return "CAT_1"
+            case .CAT_2: return "CAT_2"
+            case .CAT_3: return "CAT_3"
+            case .CAT_4: return "CAT_4"
+            case .CAT_5: return "CAT_5"
+            case .CAT_6: return "CAT_6"
+            }
+        }
+    }
+
+    public class func errorCategoryFromCE(circular_error: Double) -> TLE_Categories
+    {
+        if (circular_error > 305.0) {
+            return TLE_Categories.CAT_6;
+        } else if (circular_error > 92.0) {
+            return TLE_Categories.CAT_5;
+        } else if (circular_error > 31.0) {
+            return TLE_Categories.CAT_4;
+        } else if (circular_error > 16.0) {
+            return TLE_Categories.CAT_3;
+        } else if (circular_error > 7.0) {
+            return TLE_Categories.CAT_2;
+        } else if (circular_error >= 0.0) {
+            return TLE_Categories.CAT_1;
+        } else {
+            // This should never happen
+            return TLE_Categories.CAT_6;
+        }
+    }
+    
+    public class func htmlColorFromTLE_Category(tle_cat: TLE_Categories) -> String
+    {
+        switch tle_cat {
+        case .CAT_1:
+            // green
+            return "#00FF00"
+        case .CAT_2:
+            // yellow
+            return "#FFFF00"
+        case .CAT_3:
+            // red
+            return "#FF0000"
+        default:
+            // regular
+            return ""
+        }
+    }
     
 } // CursorOnTargetSender

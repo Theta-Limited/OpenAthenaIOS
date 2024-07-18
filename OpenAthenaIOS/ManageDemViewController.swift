@@ -1,13 +1,13 @@
-//
-//  ManageDemViewController.swift
-//  OpenAthenaIOS
-//
-//  Created by Bobby Krupczak on 10/12/23.
-//
-//  Manage elevation maps main screen
-//  From here, you can lookup to find a map,
-//  or manage the cache or potentially other
-//  operations go here
+// ManageDemViewController.swift
+// OpenAthenaIOS
+// Created by Bobby Krupczak on 10/12/23.
+// Manage elevation maps main screen
+// From here, you can lookup to find a map,
+// or manage the cache or potentially other
+// operations go here
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import UIKit
@@ -64,6 +64,8 @@ class ManageDemViewController: UIViewController
             if dem != nil {
                 let vct = self.storyboard?.instantiateViewController(withIdentifier: "DemCacheEntryController") as! DemCacheEntryController
                 vct.cacheEntry = dem
+                // re issue #52 set vc so that DemCacheEntryController does not crash due to nil vc value
+                vct.vc = vc
                 self.navigationController?.pushViewController(vct, animated: true)
             }
         }

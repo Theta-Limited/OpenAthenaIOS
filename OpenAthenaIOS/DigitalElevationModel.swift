@@ -1,16 +1,17 @@
-//
-//  DigitalElevationModel.swift
-//  OpenAthenaIOS
-//  https://github.com/rdkgit/OpenAthenaIOS
-//  https://openathena.com//
-//  Created by Bobby Krupczak on 2/3/23.
-//  Formerly GeoTIFFParser in OpenAthenaAndroid
-//  parse and eat GeoTIFF digital elevation models
-//  using https://github.com/ngageoint/tiff-ios
-//  and data from OpenTopography.org
-//  TODO: add support for online lookup via web api XXX
-//  OpenTopography API key: 83423adced07b4c2236fe7e050d182e8
-//  Use GPS coordinates to get DEM surrounding the area
+// DigitalElevationModel.swift
+// OpenAthenaIOS
+// https://github.com/rdkgit/OpenAthenaIOS
+// https://openathena.com//
+// Created by Bobby Krupczak on 2/3/23.
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
+
+// Formerly GeoTIFFParser in OpenAthenaAndroid
+// parse and eat GeoTIFF digital elevation models
+// using https://github.com/ngageoint/tiff-ios
+// and data from OpenTopography.org
+// Use GPS coordinates to get DEM surrounding the area
 
 import Foundation
 import UniformTypeIdentifiers

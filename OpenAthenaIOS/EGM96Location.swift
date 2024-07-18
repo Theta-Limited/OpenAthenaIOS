@@ -2,6 +2,9 @@
 // originally contained in package
 // java package org.matthiaszimmermann.location;
 // ported to swift by ChatGPT-3.5
+// Copyright 2024, Theta Informatics LLC
+// AGPLv3
+// https://www.gnu.org/licenses/agpl-3.0.txt
 
 import Foundation
 import Darwin
