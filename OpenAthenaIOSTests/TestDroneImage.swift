@@ -17,6 +17,7 @@ final class TestDroneImage: XCTestCase {
     var autelImage: DroneImage!
     var skydioImage: DroneImage!
     var parrot2Image: DroneImage!
+    var teal2Image: DroneImage!
     
     override func setUpWithError() throws {
         
@@ -24,55 +25,72 @@ final class TestDroneImage: XCTestCase {
         
         try super.setUpWithError()
         
+        var image: UIImage?
+        
         var imagePath = Bundle.main.path(forResource: "examples/DJI_0419",
                                          ofType: "JPG")
         XCTAssert(imagePath != nil)
         var data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        var image = UIImage(data: data)
-        djiImage = DroneImage()
-        djiImage.rawData = data
-        djiImage.theImage = image
-        djiImage.updateMetaData()
+        //var image = UIImage(data: data)
+        //djiImage = DroneImageDJI()
+        //djiImage.rawData = data
+        //djiImage.theImage = image
+        //djiImage.updateMetaData()
+        djiImage = DroneImageFactory.createDroneImage(data: data)
         
         imagePath = Bundle.main.path(forResource: "examples/parrot-1",
                                          ofType: "jpg")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        parrotImage = DroneImage()
-        parrotImage.rawData = data
-        parrotImage.theImage = image
-        parrotImage.updateMetaData()
+        //image = UIImage(data: data)
+        //parrotImage = DroneImageParrot()
+        //parrotImage.rawData = data
+        //parrotImage.theImage = image
+        //parrotImage.updateMetaData()
+        parrotImage = DroneImageFactory.createDroneImage(data: data)
         
         imagePath = Bundle.main.path(forResource: "examples/parrot-2",
                                          ofType: "jpg")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        parrot2Image = DroneImage()
-        parrot2Image.rawData = data
-        parrot2Image.theImage = image
-        parrot2Image.updateMetaData()
+//        image = UIImage(data: data)
+//        parrot2Image = DroneImageParrot()
+//        parrot2Image.rawData = data
+//        parrot2Image.theImage = image
+//        parrot2Image.updateMetaData()
+        parrot2Image = DroneImageFactory.createDroneImage(data: data)
         
         imagePath = Bundle.main.path(forResource: "examples/skydio-catilina",
                                          ofType: "jpg")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        skydioImage = DroneImage()
-        skydioImage.rawData = data
-        skydioImage.theImage = image
-        skydioImage.updateMetaData()
+        //image = UIImage(data: data)
+        //skydioImage = DroneImageSkydio()
+        //skydioImage.rawData = data
+        //skydioImage.theImage = image
+        //skydioImage.updateMetaData()
+        skydioImage = DroneImageFactory.createDroneImage(data: data)
 
         imagePath = Bundle.main.path(forResource: "examples/waterloo-autell",
                                          ofType: "jpg")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        autelImage = DroneImage()
-        autelImage.rawData = data
-        autelImage.theImage = image
-        autelImage.updateMetaData()
+        //image = UIImage(data: data)
+        //autelImage = DroneImageAutel()
+        //autelImage.rawData = data
+        //autelImage.theImage = image
+        //autelImage.updateMetaData()
+        autelImage = DroneImageFactory.createDroneImage(data: data)
+        
+        imagePath = Bundle.main.path(forResource: "examples/teal2_img_eo_00015", ofType: "jpg")
+        XCTAssert(imagePath != nil)
+        data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
+        //image = UIImage(data: data)
+        //teal2Image = DroneImageTeal()
+        //teal2Image.rawData = data
+        //teal2Image.theImage = image
+        //teal2Image.updateMetaData()
+        teal2Image = DroneImageFactory.createDroneImage(data: data)
         
     } // setup with errors
     
@@ -81,10 +99,17 @@ final class TestDroneImage: XCTestCase {
     func testLoadDroneImage()
     {
         XCTAssertTrue(djiImage.isDroneImage())
+        XCTAssertTrue(djiImage is DroneImageDJI)
         XCTAssertTrue(parrotImage!.isDroneImage())
+        XCTAssertTrue(parrotImage is DroneImageParrot)
         XCTAssertTrue(skydioImage!.isDroneImage())
+        XCTAssertTrue(skydioImage is DroneImageSkydio)
         XCTAssertTrue(autelImage!.isDroneImage())
+        XCTAssertTrue(autelImage is DroneImageAutel)
         XCTAssertTrue(parrot2Image!.isDroneImage())
+        XCTAssertTrue(parrot2Image is DroneImageParrot)
+        XCTAssertTrue(teal2Image!.isDroneImage())
+        XCTAssertTrue(teal2Image is DroneImageTeal)
     }
     
     func testDJIDroneImageMetaData()
@@ -244,5 +269,29 @@ final class TestDroneImage: XCTestCase {
         }
         
     } // parrot-1 and parrot-2
+    
+    func testTeal2ImageMetaData()
+    {
+        XCTAssert(teal2Image != nil)
+        
+        do {
+            try XCTAssertEqual(teal2Image.getLatitude(),40.710335)
+            try XCTAssertEqual(teal2Image.getLongitude(),-111.89434)
+            try XCTAssertEqual(teal2Image.getAltitude(),1337.6200442398874)
+            
+            try XCTAssertTrue(teal2Image.getCameraMake() == "Teledyne FLIR")
+            try XCTAssertTrue(teal2Image.getCameraModel() == "Hadron 640R EO")
+            
+            try XCTAssertEqual(teal2Image.getFocalLength(),4.8)
+            
+            try XCTAssertEqual(teal2Image.getRoll(),-1.027896)
+            try XCTAssertEqual(teal2Image.getGimbalPitchDegree(),58.19441)
+            try XCTAssertEqual(teal2Image.getGimbalYawDegree(),319.002289)
+        }
+        catch {
+            XCTAssert(false)
+        }
+        
+    }
     
 } // TestDroneImage

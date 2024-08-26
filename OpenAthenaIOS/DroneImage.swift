@@ -705,6 +705,8 @@ public class DroneImage {
             return true
         case "skydio":
             return true
+        case "teledyne flir":
+            return true
         default:
             return false
         }

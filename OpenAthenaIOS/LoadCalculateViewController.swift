@@ -207,11 +207,18 @@ class LoadCalculateViewController: UIViewController,
             
             do {
                 
-                var anImage = createDroneImage(imageURL: imageURL!)
+                var droneImage = DroneImageFactory.createDroneImage(imageURL: imageURL!, vc: vc, app: app)
 
                 // no need to save image directory since imagepicker
                 // will save this for us
                 // self.vc.theDroneImage!.updateMetaData()
+                if (droneImage != nil) {
+                    print("LoadViewController: setting the uiimage")
+                    imageView.image = droneImage!.theImage
+                }
+                else {
+                    print("LoadViewController: nil droneImage")
+                }
                 
                 getImageData()
                 
@@ -380,74 +387,7 @@ class LoadCalculateViewController: UIViewController,
         
     } // configure menu items
     
-    // create a drone image or subclass based on the image
-    // and manufacturer; kinda a chicken and egg
-    // in that we have to fetch some metadata
-    // to make the determination
-    // not all the EXIFF data is retrieved by
-    // the ios/swift libs so we use tiff:Make
-    // instead of exif.image.make
     
-    func createDroneImage(imageURL: URL) -> DroneImage?
-    {
-        do {
-            
-            let data = try Data(contentsOf: imageURL)
-            var image = UIImage(data: data)
-            
-            let src = CGImageSourceCreateWithData(data as CFData, nil)
-            let md = CGImageSourceCopyPropertiesAtIndex(src!,0,nil)! as NSDictionary
-            let md2 = CGImageSourceCopyMetadataAtIndex(src!,0,nil)
-            let exifDict = md[kCGImagePropertyExifDictionary as String] as? [String: Any]
-            let metaData = md.mutableCopy() as! NSMutableDictionary
-            let rawMetaData = md2
-
-            //print("createDroneImage: exif dictionary is \(exifDict)")
-            
-            var makeStr = "unknown"
-            if metaData["tiff:Make"] != nil {
-                makeStr = metaData["tiff:Make"] as! String
-            }
-            else {
-                if metaData["{TIFF}"] != nil {
-                    var dict = metaData["{TIFF}"] as! NSDictionary
-                    if dict["Make"] != nil {
-                        makeStr = dict["Make"] as! String
-                    }
-                }
-            }
-            print("createDroneImage: make is \(makeStr)")
-            
-            switch makeStr.lowercased() {
-            case let str where str.contains("dji"):
-                self.vc.theDroneImage = DroneImageDJI()
-            case let str where str.contains("skydio"):
-                self.vc.theDroneImage = DroneImageSkydio()
-            case let str where str.contains("parrot"):
-                self.vc.theDroneImage = DroneImageParrot()
-            case let str where str.contains("autel"):
-                self.vc.theDroneImage = DroneImageAutel()
-            default: // all else including unknown
-                self.vc.theDroneImage = DroneImage()
-            }
-            self.vc.theDroneImage!.rawData = data
-            self.vc.theDroneImage!.theImage = image
-            self.vc.theDroneImage!.name = imageURL.lastPathComponent
-            self.vc.theDroneImage!.droneParams = self.vc.droneParams
-            self.vc.theDroneImage!.settings = app.settings
-            imageView.image = image
-            self.vc.theDroneImage!.updateMetaData()
-            
-            return nil
-        }
-        catch {
-            // error!
-            htmlString += "Loading image resulted in error \(error)<br>"
-        }
-        
-        return nil
-        
-    } // createDroneImage
     
     // get meta data from image and output to textView
     

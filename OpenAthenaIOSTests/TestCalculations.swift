@@ -22,6 +22,8 @@ final class TestCalculations: XCTestCase {
     var parrotDem: DigitalElevationModel!
     var thermalDroneImage: DroneImage!
     var thermalDem: DigitalElevationModel!
+    var teal2DroneImage: DroneImage!
+    var teal2Dem: DigitalElevationModel!
     var droneParams: DroneParams?
     
     // load cobb.tiff DEM and DJI_0419.JPG image for use
@@ -39,11 +41,12 @@ final class TestCalculations: XCTestCase {
         var imagePath = Bundle.main.path(forResource: "examples/DJI_0419", ofType: "JPG")
         XCTAssert(imagePath != nil)
         var data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        var image = UIImage(data: data)
-        djiDroneImage = DroneImage()
-        djiDroneImage.rawData = data
-        djiDroneImage.updateMetaData()
-        djiDroneImage.theImage = image
+        //var image = UIImage(data: data)
+        //djiDroneImage = DroneImageDJI()
+        //djiDroneImage.rawData = data
+        //djiDroneImage.updateMetaData()
+        //djiDroneImage.theImage = image
+        djiDroneImage = DroneImageFactory.createDroneImage(data: data)
         djiDroneImage.targetXprop = 0.5
         djiDroneImage.targetYprop = 0.5
         
@@ -58,11 +61,12 @@ final class TestCalculations: XCTestCase {
                                      ofType: "jpg")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        skydioDroneImage = DroneImage()
-        skydioDroneImage.rawData = data
-        skydioDroneImage.updateMetaData()
-        skydioDroneImage.theImage = image
+        //image = UIImage(data: data)
+        //skydioDroneImage = DroneImageSkydio()
+        //skydioDroneImage.rawData = data
+        //skydioDroneImage.updateMetaData()
+        //skydioDroneImage.theImage = image
+        skydioDroneImage = DroneImageFactory.createDroneImage(data: data)
         skydioDroneImage.targetXprop = 0.5
         skydioDroneImage.targetYprop = 0.5
         
@@ -76,11 +80,12 @@ final class TestCalculations: XCTestCase {
                                      ofType: "jpg")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        autelDroneImage = DroneImage()
-        autelDroneImage.rawData = data
-        autelDroneImage.updateMetaData()
-        autelDroneImage.theImage = image
+        //image = UIImage(data: data)
+        //autelDroneImage = DroneImageAutel()
+        //autelDroneImage.rawData = data
+        //autelDroneImage.updateMetaData()
+        //autelDroneImage.theImage = image
+        autelDroneImage = DroneImageFactory.createDroneImage(data: data)
         autelDroneImage.targetXprop = 0.5
         autelDroneImage.targetYprop = 0.5
         
@@ -93,11 +98,12 @@ final class TestCalculations: XCTestCase {
         imagePath = Bundle.main.path(forResource: "examples/parrot-1", ofType: "jpg")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        parrotDroneImage = DroneImage()
-        parrotDroneImage.rawData = data
-        parrotDroneImage.updateMetaData()
-        parrotDroneImage.theImage = image
+        //image = UIImage(data: data)
+        //parrotDroneImage = DroneImageParrot()
+        //parrotDroneImage.rawData = data
+        //parrotDroneImage.updateMetaData()
+        //parrotDroneImage.theImage = image
+        parrotDroneImage = DroneImageFactory.createDroneImage(data: data)
         parrotDroneImage.targetXprop = 0.5
         parrotDroneImage.targetYprop = 0.5
         
@@ -110,11 +116,12 @@ final class TestCalculations: XCTestCase {
         imagePath = Bundle.main.path(forResource: "examples/S1008521", ofType: "JPG")
         XCTAssert(imagePath != nil)
         data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
-        image = UIImage(data: data)
-        thermalDroneImage = DroneImage()
-        thermalDroneImage.rawData = data
-        thermalDroneImage.updateMetaData()
-        thermalDroneImage.theImage = image
+        //image = UIImage(data: data)
+        //thermalDroneImage = DroneImageSkydio()
+        //thermalDroneImage.rawData = data
+        //thermalDroneImage.updateMetaData()
+        //thermalDroneImage.theImage = image
+        thermalDroneImage = DroneImageFactory.createDroneImage(data: data)
         thermalDroneImage.targetXprop = 0.5
         thermalDroneImage.targetYprop = 0.5
         
@@ -123,6 +130,22 @@ final class TestCalculations: XCTestCase {
         thermalDem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
         XCTAssert(thermalDem != nil)
         
+        imagePath = Bundle.main.path(forResource: "examples/teal2_img_eo_00015", ofType: "jpg")
+        XCTAssert(imagePath != nil)
+        data = try Data(contentsOf: URL(fileURLWithPath: imagePath!))
+        //image = UIImage(data: data)
+        //teal2DroneImage = DroneImageTeal()
+        //teal2DroneImage.rawData = data
+        //teal2DroneImage.updateMetaData()
+        //teal2DroneImage.theImage = image
+        teal2DroneImage = DroneImageFactory.createDroneImage(data: data)
+        teal2DroneImage.targetXprop = 0.5
+        teal2DroneImage.targetYprop = 0.5
+        
+        imagePath = Bundle.main.path(forResource: "examples/teal2", ofType: "tiff")
+        XCTAssert(imagePath != nil)
+        teal2Dem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
+        XCTAssert(teal2Dem != nil)
         
     } // setUpWithError
 
@@ -553,6 +576,43 @@ final class TestCalculations: XCTestCase {
         XCTAssertEqual(target[2],-96.34298992555385)
         
     } // testAutel
+    
+    func testTeal2() throws
+    {
+        var target: [Double] = [0,0,0,0,0]
+        
+        XCTAssert(teal2Dem != nil)
+        XCTAssert(teal2DroneImage != nil)
+        
+        print("testTeal2 starting")
+        
+        // find the CCDInfo for this drone
+        do {
+            let ccdInfo = try droneParams!.lookupDrone(make: teal2DroneImage.getCameraMake(),
+                                                       model: teal2DroneImage.getCameraModel(),
+                                                       targetWidth: teal2DroneImage!.theImage!.size.width)
+            teal2DroneImage.ccdInfo = ccdInfo
+        }
+        catch {
+            print("testTeal2: failed to find \(try teal2DroneImage.getCameraMake()) \(try teal2DroneImage.getCameraModel())")
+        }
+        
+        teal2DroneImage.targetXprop = 0.50
+        teal2DroneImage.targetYprop = 0.50
+        
+        try target = teal2DroneImage.resolveTarget(dem: teal2Dem, altReference: DroneTargetResolution.AltitudeFromGPS)
+        
+        // altitude
+        XCTAssertEqual(target[3],1318.0736948671251)
+        
+        // distance to target
+        XCTAssertEqual(target[0],23.00909075677245)
+        
+        // target lat, lon
+        XCTAssertEqual(target[1],40.71041728495734)
+        XCTAssertEqual(target[2],-111.89443435609874)
+        
+    }
     
     func testParrot() throws
     {

@@ -39,8 +39,10 @@
 		597CDED02A16D590000EF1CC /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 592CABB42A0ACF61006E28AF /* examples */; };
 		597CDED62A16FC1D000EF1CC /* TestSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597CDED52A16FC1D000EF1CC /* TestSettings.swift */; };
 		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
+		5999392A2C7A4A010061F7B9 /* DroneImageTeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599939292C7A4A010061F7B9 /* DroneImageTeal.swift */; };
 		59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */; };
 		59AFA1182C333C260008DF8D /* UIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AFA1172C333C260008DF8D /* UIDGenerator.swift */; };
+		59B2BE032C7B6418004112A2 /* DroneImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B2BE022C7B6418004112A2 /* DroneImageFactory.swift */; };
 		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
 		59B62B0829844B6D00F0C6B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */; };
 		59B62B0A29844B6D00F0C6B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0929844B6D00F0C6B1 /* ViewController.swift */; };
@@ -121,9 +123,11 @@
 		597CDED52A16FC1D000EF1CC /* TestSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettings.swift; sourceTree = "<group>"; };
 		5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDigitalElevationModel.swift; sourceTree = "<group>"; };
 		599339902BE1364F00A57342 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		599939292C7A4A010061F7B9 /* DroneImageTeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DroneImageTeal.swift; sourceTree = "<group>"; };
 		59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnTargetSender.swift; sourceTree = "<group>"; };
 		59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenAthenaIOS.entitlements; sourceTree = "<group>"; };
 		59AFA1172C333C260008DF8D /* UIDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDGenerator.swift; sourceTree = "<group>"; };
+		59B2BE022C7B6418004112A2 /* DroneImageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DroneImageFactory.swift; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 		59B62B0429844B6D00F0C6B1 /* OpenAthenaIOS */ = {
 			isa = PBXGroup;
 			children = (
+				59B2BE022C7B6418004112A2 /* DroneImageFactory.swift */,
 				59BEF5E92AB61C3700D5A56D /* OpenAthenaIOSRelease.entitlements */,
 				597089DA2A3FD35600B5E1BF /* Cubic.swift */,
 				59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */,
@@ -236,13 +241,14 @@
 				5958A58929EF21EB00CBEF99 /* CK42Geodetic.swift */,
 				59B62B0929844B6D00F0C6B1 /* ViewController.swift */,
 				59109B8C2AD88D16000E75C4 /* ManageDemViewController.swift */,
-				59109B8A2AD884E6000E75C4 /* DemCacheEntryController.swift */,
 				59109B842AD868F6000E75C4 /* DemCacheController.swift */,
+				59109B8A2AD884E6000E75C4 /* DemCacheEntryController.swift */,
 				59109B862AD86BE1000E75C4 /* DemDownloader.swift */,
 				59109B822AD866F9000E75C4 /* DemCache.swift */,
 				59B62B1F29860BF400F0C6B1 /* ImageViewController.swift */,
 				59B62B45298F3D5200F0C6B1 /* DroneImage.swift */,
 				593130422B48BA2E00DCE75B /* DroneImageDJI.swift */,
+				599939292C7A4A010061F7B9 /* DroneImageTeal.swift */,
 				59109B882AD874D8000E75C4 /* NewDemController.swift */,
 				593130442B48BB9E00DCE75B /* DroneImageAutel.swift */,
 				593130482B48BC3600DCE75B /* DroneImageSkydio.swift */,
@@ -493,6 +499,7 @@
 				597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */,
 				59109B8D2AD88D16000E75C4 /* ManageDemViewController.swift in Sources */,
 				59B62B42298DE4C900F0C6B1 /* DebugViewController.swift in Sources */,
+				5999392A2C7A4A010061F7B9 /* DroneImageTeal.swift in Sources */,
 				59B62B2029860BF400F0C6B1 /* ImageViewController.swift in Sources */,
 				59B62B1E2984564300F0C6B1 /* AboutViewController.swift in Sources */,
 				597089E12A3FD35600B5E1BF /* EGM96Location.swift in Sources */,
@@ -511,6 +518,7 @@
 				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
 				59B62B2229876E6A00F0C6B1 /* SettingsViewController.swift in Sources */,
 				59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */,
+				59B2BE032C7B6418004112A2 /* DroneImageFactory.swift in Sources */,
 				59DBFF122AD0C48A003C4B33 /* PerspectiveDistortionCorrector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -714,7 +722,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1065;
+				CURRENT_PROJECT_VERSION = 1082;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -732,7 +740,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.70;
+				MARKETING_VERSION = 2.80;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -751,7 +759,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1065;
+				CURRENT_PROJECT_VERSION = 1082;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -769,7 +777,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.70;
+				MARKETING_VERSION = 2.80;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.openathena.OpenAthenaIOS;
 				PRODUCT_NAME = OpenAthena;
@@ -787,7 +795,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1065;
+				CURRENT_PROJECT_VERSION = 1082;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -807,7 +815,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1065;
+				CURRENT_PROJECT_VERSION = 1082;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

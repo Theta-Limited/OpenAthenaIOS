@@ -13,7 +13,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    static var version: Double = 2.70
+    static var version: Double = 2.80
     @IBOutlet var textView: UITextView!
     @IBOutlet var imageView: UIImageView!
     var dem: DigitalElevationModel?

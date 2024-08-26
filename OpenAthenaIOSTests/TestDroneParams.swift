@@ -32,7 +32,7 @@ final class TestDroneParams: XCTestCase {
         XCTAssertTrue((droneParams!.numberDroneModels()) > 1)
     }
     
-    // current for Apr 28 2024 droneModels release
+    // current for Aug 24, 2024 droneModels release
     func testLookupDroneParams()
     {
         let ccdInfo = try? droneParams!.lookupDrone(makeModel: "djiFC3582")
@@ -98,7 +98,7 @@ final class TestDroneParams: XCTestCase {
         ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "parrotANAFITHERMAL", targetWidth: 320.0)
         XCTAssert(ccdInfo2!.isThermal == true)
         XCTAssert(ccdInfo2!.radialR1 == 0.0)
-        XCTAssert(ccdInfo2!.radialR2 == 0.0)
+        XCTAssert(ccdInfo2!.radialR2 == 0.0) 
         XCTAssert(ccdInfo2!.radialR3 == 0.0)
         XCTAssert(ccdInfo2!.tangentialT1 == 0.0)
         XCTAssert(ccdInfo2!.tangentialT2 == 0.0)
@@ -112,7 +112,12 @@ final class TestDroneParams: XCTestCase {
         XCTAssert(ccdInfo2!.radialR3 == 0.0)
         XCTAssert(ccdInfo2!.tangentialT1 == 0.0)
         XCTAssert(ccdInfo2!.tangentialT2 == 0.0)
-
+        
+        ccdInfo2 = try? droneParams!.getMatchingDrone(makeModel: "teledyne flirhadron 640r eo", targetWidth: 4624)
+        XCTAssert(ccdInfo2!.isThermal == false)
+        XCTAssert(ccdInfo2!.lensType == "perspective")
+        XCTAssert(ccdInfo2!.widthPixels == 9248)
+        
     }
     
     func testMatchingDroneParams()
