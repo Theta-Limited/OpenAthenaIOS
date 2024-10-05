@@ -41,6 +41,12 @@ public class MGRSGeodetic {
         return str
     }
     
+    // re issue #58 support USNG which is MGRS10m
+    
+    static func convertToUSNG(Lat: Double, Lon: Double) -> String {
+        return convertToMGRS(Lat: Lat, Lon: Lon, G: GridType.TEN_METER)
+    }
+    
     // given an MGRS coordinate in string format, split it into
     // subcomponents GZD, square identifier, easting, and northing
     // ChatGPT derived code to split apart an MGRS coordinate
@@ -94,5 +100,8 @@ public class MGRSGeodetic {
             return mgrs
         }
     }
+    
+    // re issue #58 add support for USNG which is MGRS10m
+    
     
 } // MGRSGeodetic class

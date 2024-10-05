@@ -41,6 +41,9 @@
 		5981F66A2A16599900652DF8 /* TestDigitalElevationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5981F6692A16599900652DF8 /* TestDigitalElevationModel.swift */; };
 		5999392A2C7A4A010061F7B9 /* DroneImageTeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599939292C7A4A010061F7B9 /* DroneImageTeal.swift */; };
 		59A2554B2AB1F33F009EB5BC /* CursorOnTargetSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */; };
+		59A62E072CB02B9F00A5672F /* WGS84Geodetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A62E062CB02B9F00A5672F /* WGS84Geodetic.swift */; };
+		59A62E092CB02FC800A5672F /* TestConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A62E082CB02FC800A5672F /* TestConversions.swift */; };
+		59A62E0B2CB07D1700A5672F /* SeaLevelDEMEmulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A62E0A2CB07D1700A5672F /* SeaLevelDEMEmulator.swift */; };
 		59AFA1182C333C260008DF8D /* UIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AFA1172C333C260008DF8D /* UIDGenerator.swift */; };
 		59B2BE032C7B6418004112A2 /* DroneImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B2BE022C7B6418004112A2 /* DroneImageFactory.swift */; };
 		59B62B0629844B6D00F0C6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */; };
@@ -126,6 +129,9 @@
 		599939292C7A4A010061F7B9 /* DroneImageTeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DroneImageTeal.swift; sourceTree = "<group>"; };
 		59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorOnTargetSender.swift; sourceTree = "<group>"; };
 		59A2554C2AB4A5C5009EB5BC /* OpenAthenaIOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenAthenaIOS.entitlements; sourceTree = "<group>"; };
+		59A62E062CB02B9F00A5672F /* WGS84Geodetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WGS84Geodetic.swift; sourceTree = "<group>"; };
+		59A62E082CB02FC800A5672F /* TestConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConversions.swift; sourceTree = "<group>"; };
+		59A62E0A2CB07D1700A5672F /* SeaLevelDEMEmulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelDEMEmulator.swift; sourceTree = "<group>"; };
 		59AFA1172C333C260008DF8D /* UIDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDGenerator.swift; sourceTree = "<group>"; };
 		59B2BE022C7B6418004112A2 /* DroneImageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DroneImageFactory.swift; sourceTree = "<group>"; };
 		59B62B0229844B6D00F0C6B1 /* OpenAthena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenAthena.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +231,7 @@
 				597089DD2A3FD35600B5E1BF /* EGM96Location.swift */,
 				592CABB42A0ACF61006E28AF /* examples */,
 				59B62B0529844B6D00F0C6B1 /* AppDelegate.swift */,
+				59A62E0A2CB07D1700A5672F /* SeaLevelDEMEmulator.swift */,
 				59576BC62BA2441100A400A1 /* LoadCalculateViewController.swift */,
 				599339902BE1364F00A57342 /* PrivacyInfo.xcprivacy */,
 				59A2554A2AB1F33F009EB5BC /* CursorOnTargetSender.swift */,
@@ -234,6 +241,7 @@
 				59B62B0729844B6D00F0C6B1 /* SceneDelegate.swift */,
 				59B62B27298B15CC00F0C6B1 /* CalculateViewController.swift */,
 				5958A58F29F051D200CBEF99 /* MGRSGeodetic.swift */,
+				59A62E062CB02B9F00A5672F /* WGS84Geodetic.swift */,
 				5958A58D29F02DB000CBEF99 /* CK42GaussKruger.swift */,
 				59B62B252989B97900F0C6B1 /* ElevationViewController.swift */,
 				596E927B2AAA0AC2003E35CD /* DroneViewController.swift */,
@@ -277,6 +285,7 @@
 				597089E22A4126DD00B5E1BF /* TestEGM96.swift */,
 				59DBFEEC2AB9DBFC003C4B33 /* OpenAthenaIOSTests.xctestplan */,
 				59576BC82BA4C8B400A400A1 /* TestDEMDownload.swift */,
+				59A62E082CB02FC800A5672F /* TestConversions.swift */,
 			);
 			path = OpenAthenaIOSTests;
 			sourceTree = "<group>";
@@ -498,6 +507,7 @@
 				597089E02A3FD35600B5E1BF /* EGM96Geoid.swift in Sources */,
 				597089DE2A3FD35600B5E1BF /* Cubic.swift in Sources */,
 				59109B8D2AD88D16000E75C4 /* ManageDemViewController.swift in Sources */,
+				59A62E072CB02B9F00A5672F /* WGS84Geodetic.swift in Sources */,
 				59B62B42298DE4C900F0C6B1 /* DebugViewController.swift in Sources */,
 				5999392A2C7A4A010061F7B9 /* DroneImageTeal.swift in Sources */,
 				59B62B2029860BF400F0C6B1 /* ImageViewController.swift in Sources */,
@@ -514,6 +524,7 @@
 				596E927C2AAA0AC2003E35CD /* DroneViewController.swift in Sources */,
 				59109B892AD874D8000E75C4 /* NewDemController.swift in Sources */,
 				59B62B46298F3D5200F0C6B1 /* DroneImage.swift in Sources */,
+				59A62E0B2CB07D1700A5672F /* SeaLevelDEMEmulator.swift in Sources */,
 				59B62B262989B97900F0C6B1 /* ElevationViewController.swift in Sources */,
 				5958A59029F051D200CBEF99 /* MGRSGeodetic.swift in Sources */,
 				59B62B2229876E6A00F0C6B1 /* SettingsViewController.swift in Sources */,
@@ -528,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				593A2A462A2642400098EAF1 /* TestDroneParams.swift in Sources */,
+				59A62E092CB02FC800A5672F /* TestConversions.swift in Sources */,
 				593A29C92A17B3170098EAF1 /* TestCalculations.swift in Sources */,
 				597089E32A4126DD00B5E1BF /* TestEGM96.swift in Sources */,
 				593A2A402A20FCF30098EAF1 /* TestMakeModel.swift in Sources */,
@@ -722,7 +734,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1082;
+				CURRENT_PROJECT_VERSION = 1105;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -759,7 +771,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OpenAthenaIOS/OpenAthenaIOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1082;
+				CURRENT_PROJECT_VERSION = 1105;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenAthenaIOS/Info.plist;
@@ -795,7 +807,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1082;
+				CURRENT_PROJECT_VERSION = 1105;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -815,7 +827,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1082;
+				CURRENT_PROJECT_VERSION = 1105;
 				DEVELOPMENT_TEAM = S9737SV7NZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

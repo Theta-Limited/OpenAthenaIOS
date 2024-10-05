@@ -21,6 +21,8 @@ class ManageDemViewController: UIViewController
     //@IBOutlet var lookupResults: UILabel!
     @IBOutlet var borderLabel: UILabel!
     @IBOutlet var lookupResultsButton: UIButton!
+    @IBOutlet var maritimeSwitch: UISwitch!
+    var maritimeWarning: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,8 @@ class ManageDemViewController: UIViewController
         // in label mode
         lookupResultsButton.isEnabled = false
         
+        // check on maritimeToggle
+    
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -43,6 +47,29 @@ class ManageDemViewController: UIViewController
         super.viewWillAppear(animated)
         
         print("Loaded \(vc.demCache!.count()) cache entries")
+    }
+    
+    // re issue #56 handle maritime switch
+    @IBAction func maritimeSwitchChanged(_ sender: UISwitch)
+    {
+        if maritimeSwitch.isOn {
+            print("maritime mode enabled")
+            app.settings.maritimeMode = true
+            // raise alert if first time
+            if maritimeWarning == false {
+                // warn each time its enabled
+                // maritimeWarning = true
+                let alert = UIAlertController(title: "Warning",
+                                              message: "Maritime mode is enabled.  Calculations will be very inaccurate over land!",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        else {
+            print("maritime mode disabled")
+            app.settings.maritimeMode = false
+        }
     }
     
     // we enabled results button and user tapped it

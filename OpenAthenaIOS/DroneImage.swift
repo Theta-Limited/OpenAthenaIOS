@@ -74,6 +74,7 @@ public class DroneImage {
     var settings: AthenaSettings?
     var targetResults: [Double]?
     var calculationInfo: [String:Any] = [:]
+    var maritimeMode: Bool = false
     
     //init(fromImage image: UIImage, withMetaData data: [AnyHashable:Any]) {
     init(suggestedName aName: String, fromImage image: UIImage,
@@ -269,6 +270,18 @@ public class DroneImage {
         }
         
         return direction * lat
+    }
+    
+    // re issue #56 maritime mode
+    public func isMaritimeMode() -> Bool
+    {
+        return maritimeMode
+    }
+    public func setMaritimeMode(mode: Bool)
+    {
+        maritimeMode = mode
+        // owner of this object is ressponsible for using SeaLevelDEMEmulator class
+        // for the dem when calling resolveTarget()
     }
     
     // get longitude (-180,180)
@@ -699,6 +712,9 @@ public class DroneImage {
         switch make.lowercased() {
         case "dji":
             return true
+        case "hasselblad":
+            // re issue #59
+            return true
         case "parrot":
             return true
         case "autel robotics":
@@ -897,9 +913,29 @@ public class DroneImage {
     
     // does this drone image have RTK flag set?
     // subclass override
+    // match Android and Core
+    
     public func isRTK() -> ExtendedBoolean
     {
-        return .ExtendedBooleanUnknown
+        if metaData == nil {
+            return .ExtendedBooleanUnknown
+        }
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        if metaData!["drone:RtkFlag"] != nil {
+            print("isRtk: autel drone:RtkFlag present")
+            return .ExtendedBooleanTrue
+        }
+        if metaData!["drone-dji:AltitudeType"] != nil {
+            let aStr = metaData!["drone-dji:AltitudeType"] as! String
+            if aStr.caseInsensitiveCompare("RtkAlt") == .orderedSame {
+                print("isRTK: drone-dji:AltitudeType RtkAlt")
+                return .ExtendedBooleanTrue
+            }
+        }
+
+        return .ExtendedBooleanFalse
     }
     
     // if we have drone CCD info and user has touched somewhere inside image
@@ -1543,6 +1579,11 @@ public class DroneImage {
         
         // meters of acceptable distance between constructed line and datapoint.  somewhat arbitrary
         var THRESHOLD: Double = post_spacing_meters / 16.0
+        
+        // re issue #56 for maritime mode, set threshold to 1.0
+        if isMaritimeMode() {
+            THRESHOLD = 1.0
+        }
         
         print("resolveTarget: setting THRESHOLD \(THRESHOLD)")
         

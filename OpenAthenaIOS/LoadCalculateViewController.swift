@@ -165,6 +165,14 @@ class LoadCalculateViewController: UIViewController,
         // create a cursor on target sender and pass Athena settings
         cotSender = CursorOnTargetSender(params: app.settings)
         
+        // check if maritime mode has been enabled
+        if app.settings.maritimeMode == true {
+            if vc.theDroneImage != nil {
+                vc.theDroneImage!.setMaritimeMode(mode: true)
+                vc.dem = SeaLevelDEMEmulator()
+            }
+        }
+        
         doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
          
     } // willAppear
@@ -387,8 +395,6 @@ class LoadCalculateViewController: UIViewController,
         
     } // configure menu items
     
-    
-    
     // get meta data from image and output to textView
     
     private func getImageData()
@@ -485,7 +491,7 @@ class LoadCalculateViewController: UIViewController,
             print("Can't perform calculations without a digital elevation module (DEM) or image")
             return
         }
-                
+        
         // try to get CCD info for drone make/model
         do {
             ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
@@ -510,12 +516,27 @@ class LoadCalculateViewController: UIViewController,
             htmlString += "Bad altitude data<br>"
             // raise alert
             let alert = UIAlertController(title: "Bad Altitude Data",
-                                          message: "Image contains bad altitude data.  Would you like me to re-try using altitude above ground estimate if available?",
+                                          message: "Image contains bad altitude data.  Would you like me to re-try using altitude above ground estimate if available?  Results may be very inaccurate.",
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
                 print("doCalculate: attempting re-calculate with altitude above ground estimate")
                 self.htmlString += "Attempting to re-calculate with altitude above ground estimate<br>"
                 self.doCalculations(altReference: DroneTargetResolution.AltitudeAboveGround)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler:nil))
+            self.present(alert, animated: true)
+        }
+        catch DroneImageError.ParameterNotImplemented {
+            htmlString += "Unimplemented parameter<br>"
+            // raise alert
+            let alert = UIAlertController(title: "Bad Altitude Data",
+                                          message: "Image contains bad altitude data.  Would you like me to re-try using relative altitude estimate if available?  Results may be very inaccurate.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
+                print("doCalculate: attempting re-calculate with relative altitude above ground estimate")
+                self.htmlString += "Attempting to re-calculate with relative altitude above ground estimate<br>"
+                self.doCalculations(altReference: DroneTargetResolution.AltitudeFromRelative)
             }))
             
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler:nil))
@@ -618,6 +639,10 @@ class LoadCalculateViewController: UIViewController,
             errorStr = "CircErr: \(LoadCalculateViewController.roundDigitsToString(val: app.metersToFeet(meters: predictedCE), precision: 0)) ft, "+TLE_Cat.description + "<br>"
         }
         
+        if vc.theDroneImage!.isMaritimeMode() {
+            htmlString += "Maritime mode enabled<br>"
+        }  
+        
         // would love a URL that we could have two pins on -- one for where drone is
         // and one for where target is; don't think we can do that w/o an Maps API key
         // and that would cost us
@@ -686,6 +711,16 @@ class LoadCalculateViewController: UIViewController,
             let utmStr = LoadCalculateViewController.utmToString(coord: utmCoordinate)
             htmlString += "<h2>UTM: \(utmStr)</h2><br>"
         } // UTM
+        
+        if app.settings.outputMode == AthenaSettings.OutputModes.WGS84DMS {
+            let aStr = WGS84Geodetic.toLatLonDMS(latitude: target[1], longitude: target[2])
+            htmlString += "<h2>WGS84DM: \(aStr)</h2><br>"
+        }
+        
+        if app.settings.outputMode == AthenaSettings.OutputModes.USNG {
+            let aStr = MGRSGeodetic.convertToUSNG(Lat: target[1], Lon: target[2])
+            htmlString += "<h2>USNG: \(aStr)</h2><br>"
+        }
         
         //htmlString += "Elevation map: \(vc.dem?.tiffURL?.lastPathComponent ?? "")<br>"
         //htmlString += "Image \(vc.theDroneImage!.name ?? "Unknown")<br>"
@@ -944,6 +979,14 @@ class LoadCalculateViewController: UIViewController,
         
         print("findLoadElevationMap: starting")
         
+        // right away, if MaritimeMode, set the DEM and return
+        // re issue #56 handle maritime mode
+        if vc.theDroneImage!.isMaritimeMode() == true {
+            print("findLoadElevationMap: maritime mode, using sea level emulator")
+            vc.dem = SeaLevelDEMEmulator()
+            return true
+        }
+        
         do {
             lat = try vc.theDroneImage!.getLatitude()
             lon = try vc.theDroneImage!.getLongitude()
@@ -1068,6 +1111,12 @@ class LoadCalculateViewController: UIViewController,
                         self.doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
                     }
                 }
+            } else if resultCode == 204 {
+                // re issue #56, set maritime mode if we get back NO DATA return code
+                print("DEM download returned 204; setting maritime mode")
+                self.htmlString += "DEM download returned no data; setting maritime mode<br>"
+                self.vc.theDroneImage!.setMaritimeMode(mode: true)
+                self.vc.dem = SeaLevelDEMEmulator()
             }
             else {
                 self.htmlString += "Unable to download elevation map: \(resultStr)<br>"

@@ -49,6 +49,12 @@ public class DigitalElevationModel {
     var rasters: TIFFRasters!
     var xParams = GeoDataAxisParams()
     var yParams = GeoDataAxisParams()
+    
+    // basic init for subclasses like SeaLevelDEMEmulator
+    init()
+    {
+        // do nothing
+    }
 
     // ? means its a failable initializer; return nil on error
     // catch NSExceptions via NSExceptionSwift cocopod and return nil

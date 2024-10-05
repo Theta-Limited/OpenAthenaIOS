@@ -199,7 +199,7 @@ class DemDownloader
         case 200:
             return "Success"
         case 204:
-            return "No elevation data for coordinates"
+            return "No data elevation data for coordinates; maritime mode?"
         case 400...499:
             return "Error \(resultCode) with API; please report"
         default:

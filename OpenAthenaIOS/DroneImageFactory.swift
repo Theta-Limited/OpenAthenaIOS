@@ -56,7 +56,8 @@ class DroneImageFactory
             print("createDroneImage: make is \(makeStr)")
             
             switch makeStr.lowercased() {
-            case let str where str.contains("dji"):
+            case let str where str.contains("dji"), let str where str.contains("hasselblad"):
+                // re issue #59, hasselblad is DJI
                 vc.theDroneImage = DroneImageDJI()
             case let str where str.contains("skydio"):
                 vc.theDroneImage = DroneImageSkydio()
@@ -122,7 +123,7 @@ class DroneImageFactory
         print("createDroneImage(data): make is \(makeStr)")
         
         switch makeStr.lowercased() {
-        case let str where str.contains("dji"):
+        case let str where str.contains("dji"), let str where str.contains("hasselblad"):
             droneImage = DroneImageDJI()
         case let str where str.contains("skydio"):
             droneImage = DroneImageSkydio()

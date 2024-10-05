@@ -42,6 +42,7 @@ public class AthenaSettings {
         case EGM96 = 1
         case NAVD88 = 2
         case UNKNOWN_OTHER = 3
+    
         
         var description: String {
             switch self {
@@ -75,6 +76,10 @@ public class AthenaSettings {
         // all MGRS
         case MGRS = 4
         
+        case USNG = 5
+        
+        case WGS84DMS = 6
+        
         var description: String {
             switch self {
             case .WGS84: return "WGS84"
@@ -85,6 +90,8 @@ public class AthenaSettings {
             case .CK42GaussKruger: return "CK42GaussKruger"
             case .UTM: return "UTM"
             case .MGRS: return "MGRS"
+            case .USNG: return "USNG"
+            case .WGS84DMS: return "WGS84DMS"
             }
         }
     } // enum outputmodes
@@ -117,6 +124,9 @@ public class AthenaSettings {
     var demDirectoryURL: URL?
     var imageDirectoryURL: URL?
     var droneParamsBookmark: Data?
+    
+    // empheral settings that are reset each time we restart
+    var maritimeMode: Bool = false
     
     public func loadDefaults()
     {

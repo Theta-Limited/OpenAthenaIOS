@@ -78,10 +78,10 @@ public class DroneImageDJI: DroneImage
     }
     
     // does this drone image have RTK flag set?
-    override public func isRTK() -> ExtendedBoolean
-    {
-        return .ExtendedBooleanUnknown
-    }
+    //override public func isRTK() -> ExtendedBoolean
+    //{
+    //   return .ExtendedBooleanUnknown
+    //}
     
     override public func getRelativeAltitude() throws -> Double
     {
