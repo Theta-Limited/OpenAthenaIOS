@@ -81,6 +81,20 @@ class DroneImageFactory
             // imageView.image = image
             vc.theDroneImage!.updateMetaData()
             
+            // try to find drone ccd info from drone database
+            // re issue #60 do it here and display warning
+            do {
+                var ccdInfo: DroneCCDInfo?
+                
+                ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
+                                                                            model: vc.theDroneImage!.getCameraModel(),
+                                                                            targetWidth: vc.theDroneImage!.theImage!.size.width)
+                vc.theDroneImage!.ccdInfo = ccdInfo
+            }
+            catch {
+                vc.theDroneImage!.ccdInfo = nil
+            }
+            
             print("createDroneImage: returning drone image")
             
             return vc.theDroneImage

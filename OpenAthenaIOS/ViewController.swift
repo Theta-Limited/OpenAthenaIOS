@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     var demCache: DemCache?
     var style: String = ""
     // super secret debug variable; for release builds, set to false
+    // if true, we'll send very detailed Cursor on Target calc info
     static var Debug: Bool = false
     
     override func viewDidLoad() {

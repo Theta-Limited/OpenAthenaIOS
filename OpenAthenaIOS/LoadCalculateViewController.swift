@@ -49,10 +49,10 @@ class LoadCalculateViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // set html style
         style = "<style>body {font-size: \(app.settings.fontSize); } h1, h2 { display: inline; } </style>"
-
+        
         self.title = "Analyze"
         view.backgroundColor = .secondarySystemBackground
         
@@ -71,7 +71,7 @@ class LoadCalculateViewController: UIViewController,
         scrollView.backgroundColor = .secondarySystemBackground
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         // image setup
         imageView.contentMode = .scaleAspectFit
         if vc.theDroneImage != nil {
@@ -127,7 +127,7 @@ class LoadCalculateViewController: UIViewController,
         selectButton.heightAnchor.constraint(equalToConstant: 0.1*view.frame.size.height).isActive = true
         textView.heightAnchor.constraint(equalToConstant: 0.45*view.frame.size.height).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 0.45*view.frame.size.height).isActive = true
-
+        
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -143,7 +143,7 @@ class LoadCalculateViewController: UIViewController,
         stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-                
+        
     } // viewDidLoad
     
     // re issue #36, don't forget this function so that we can pinch/zoom
@@ -221,6 +221,9 @@ class LoadCalculateViewController: UIViewController,
             
             do {
                 
+                // use DroneImageFactory to create object;
+                // factory will also look up drone make/model in drone database and set ccdInfo
+                // if found re issue #60
                 var droneImage = DroneImageFactory.createDroneImage(imageURL: imageURL!, vc: vc, app: app)
 
                 // no need to save image directory since imagepicker
@@ -232,6 +235,15 @@ class LoadCalculateViewController: UIViewController,
                 }
                 else {
                     print("LoadViewController: nil droneImage")
+                }
+                
+                // re issue #60 check here if we did not find drone intrinsicts info in database
+                if droneImage?.isDroneModelRecognized() == false {
+                    let alert = UIAlertController(title: "Warning",
+                                                  message: "Camera internal properties were not found in database.  Target calculations will be significantly less accurage than normal. Email support@theta.limited",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
                 
                 getImageData()

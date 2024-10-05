@@ -284,6 +284,11 @@ public class DroneImage {
         // for the dem when calling resolveTarget()
     }
     
+    public func isDroneModelRecognized() -> Bool
+    {
+            return ccdInfo != nil
+    }
+    
     // get longitude (-180,180)
     // exif:GPSLongitude
     // 19,30.672W
