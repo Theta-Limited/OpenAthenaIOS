@@ -38,7 +38,8 @@ class ManageDemViewController: UIViewController
         // in label mode
         lookupResultsButton.isEnabled = false
         
-        // check on maritimeToggle
+        // set maritimeSwitch
+        maritimeSwitch.setOn(app.settings.maritimeMode, animated: true)
     
     }
     
@@ -65,10 +66,22 @@ class ManageDemViewController: UIViewController
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
+            if vc.theDroneImage != nil {
+                vc.theDroneImage!.setMaritimeMode(mode: true)
+            }
+            if vc.dem != nil {
+                vc.dem = nil
+            }
         }
         else {
             print("maritime mode disabled")
             app.settings.maritimeMode = false
+            if vc.theDroneImage != nil {
+                vc.theDroneImage!.setMaritimeMode(mode: false)
+            }
+            if vc.dem != nil {
+                vc.dem = nil // force re-load of DEM
+            }
         }
     }
     

@@ -172,6 +172,12 @@ class LoadCalculateViewController: UIViewController,
                 vc.dem = SeaLevelDEMEmulator()
             }
         }
+        else {
+            // if we have an image already but not a dem, look up dem just in case
+            if vc.theDroneImage != nil && vc.dem == nil {
+                let result = findLoadElevationMap()
+            }
+        }
         
         doCalculations(altReference: DroneTargetResolution.AltitudeFromGPS)
          
@@ -488,7 +494,7 @@ class LoadCalculateViewController: UIViewController,
         // if no DEM or no image, return as they may not be loaded just yet
         
         if vc.dem == nil || vc.theDroneImage == nil {
-            print("Can't perform calculations without a digital elevation module (DEM) or image")
+            print("doCalculations: Can't perform calculations without a digital elevation module (DEM) or image")
             return
         }
         
@@ -714,7 +720,7 @@ class LoadCalculateViewController: UIViewController,
         
         if app.settings.outputMode == AthenaSettings.OutputModes.WGS84DMS {
             let aStr = WGS84Geodetic.toLatLonDMS(latitude: target[1], longitude: target[2])
-            htmlString += "<h2>WGS84DM: \(aStr)</h2><br>"
+            htmlString += "<h2>WGS84DMS: \(aStr)</h2><br>"
         }
         
         if app.settings.outputMode == AthenaSettings.OutputModes.USNG {

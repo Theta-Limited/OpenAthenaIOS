@@ -1577,6 +1577,8 @@ public class DroneImage {
         
         var post_spacing_meters: Double = DroneImage.haversine(lat1: lat, lon1: 0, lat2: lat, lon2: dem.getXResolution(), alt: alt)
         
+        print("resolveTarget: post_spacing_meters is \(post_spacing_meters)")
+        
         // meters of acceptable distance between constructed line and datapoint.  somewhat arbitrary
         var THRESHOLD: Double = post_spacing_meters / 16.0
         

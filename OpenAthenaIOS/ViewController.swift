@@ -128,6 +128,9 @@ class ViewController: UIViewController {
         htmlString = "\(style)<body><b>OpenAthena\u{2122} v\(ViewController.getAppVersion())</b><br>"
         htmlString += "Coordinate system is \(app.settings.outputMode)<p>"
         htmlString += "Units: \(app.settings.unitsMode)<p>"
+        if app.settings.maritimeMode {
+            htmlString += "Maritime mode enabled<p>"
+        }
         
         // we dont explicitly load a DEM now since adding support for
         // automatic DEM downloading/loading

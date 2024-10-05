@@ -68,7 +68,9 @@ final class TestConversions: XCTestCase
     {
         let wgs84lat = 33.83655034474734
         let wgs84lon = -84.52260287037062
-        let expectedUSNG = "16SGC29244679"
+        let expectedUSNG = "16S GC 29240 46790"
+        
+        // the NGA MGRS functions add a trailing 0 to 2924 and 4679 XXX
 
         let usng = MGRSGeodetic.convertToUSNG(Lat: wgs84lat, Lon: wgs84lon)
         print("testUSNG: usng is \(usng)")

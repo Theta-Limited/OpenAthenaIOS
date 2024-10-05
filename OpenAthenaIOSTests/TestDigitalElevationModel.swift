@@ -15,6 +15,7 @@ final class TestDigitalElevationModel: XCTestCase {
     // load the cobb.tiff and check it
     // against known parameters
     var dem: DigitalElevationModel!
+    var mslDem: DigitalElevationModel!
     
     override func setUpWithError() throws {
         
@@ -29,6 +30,9 @@ final class TestDigitalElevationModel: XCTestCase {
         dem = DigitalElevationModel(fromURL: URL(fileURLWithPath: imagePath!))
     
         XCTAssert(dem != nil)
+        
+        mslDem = SeaLevelDEMEmulator()
+        XCTAssert(mslDem != nil)
     }
     
     func testLoadDEM()
@@ -45,6 +49,28 @@ final class TestDigitalElevationModel: XCTestCase {
     {
         XCTAssert(dem != nil)
 
+    }
+    
+    func testMaritimeDEM()
+    {
+        var alt: Double
+        
+        do {
+            try alt = mslDem.getAltitudeFromLatLong(targetLat: 0.0, targetLong: 0.0)
+            XCTAssertEqual(-17.16,alt)
+            
+            try alt = mslDem.getAltitudeFromLatLong(targetLat: -10.0, targetLong: -10.0)
+            XCTAssertEqual(-12.66,alt)
+            
+            try alt = mslDem.getAltitudeFromLatLong(targetLat: 20.0, targetLong: -50.0)
+            XCTAssertEqual(32.98,alt)
+            
+            try alt = mslDem.getAltitudeFromLatLong(targetLat: 20.0,targetLong: -150.0)
+            XCTAssertEqual(6.97,alt)
+        }
+        catch {
+            XCTFail("testMaritimeDEM failed")
+        }
     }
     
 }

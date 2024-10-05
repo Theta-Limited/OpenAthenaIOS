@@ -44,7 +44,9 @@ public class MGRSGeodetic {
     // re issue #58 support USNG which is MGRS10m
     
     static func convertToUSNG(Lat: Double, Lon: Double) -> String {
-        return convertToMGRS(Lat: Lat, Lon: Lon, G: GridType.TEN_METER)
+        // USNG should be space separated
+        let aStr = convertToMGRS(Lat: Lat, Lon: Lon, G: GridType.TEN_METER)
+        return splitMGRS(mgrs: aStr)
     }
     
     // given an MGRS coordinate in string format, split it into

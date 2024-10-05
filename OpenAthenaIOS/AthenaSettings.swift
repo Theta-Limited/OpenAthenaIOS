@@ -150,7 +150,7 @@ public class AthenaSettings {
         }
         if var outputModeRaw = defaults.object(forKey: "outputMode") as? Int {
             print("loadSettings: read outputModeRaw \(outputModeRaw)")
-            if outputModeRaw < 0 || outputModeRaw > 4 {
+            if outputModeRaw < 0 || outputModeRaw > 6 {
                 outputModeRaw = 0
             }
             outputMode = OutputModes(rawValue: outputModeRaw)!
