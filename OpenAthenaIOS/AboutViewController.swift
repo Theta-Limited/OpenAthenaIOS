@@ -128,6 +128,13 @@ class AboutViewController: UIViewController, UIScrollViewDelegate {
         + "<li><a href='https://github.com/matthiaszimmermann/EGM96'>EGM96 offset</a>  "
         + "</ul>"
         
+        // add any issues here like ios/tak multicast issue
+        + "<br>"
+        + "Open Issues:<br><br>"
+        + "iTAK and OpenAthena can both run on the same device; however both cannot "
+        + "join the TAK default multicast group because of underlying iOS/Swift library "
+        + "does not allow multiple applications to bind to the same multicast port."
+
         setTextViewText(htmlStr: htmlString)
         
     } // getAbout()

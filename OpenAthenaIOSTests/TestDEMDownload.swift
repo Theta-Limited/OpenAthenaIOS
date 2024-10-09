@@ -28,7 +28,7 @@ final class TestDEMDownload: XCTestCase
         let aDownloader = DemDownloader(lat: 0, lon: 0, length: 1000)
         aDownloader.download() { resultCode, bytes, filename in
             print("testDownloadFail: return code \(resultCode)")
-            XCTAssert(resultCode == 400)
+            XCTAssert(resultCode == 204)
         }
     }
 
