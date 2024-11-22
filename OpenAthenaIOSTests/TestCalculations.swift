@@ -174,17 +174,17 @@ final class TestCalculations: XCTestCase {
         
         // altitude
         // XCTAssertEqual(target[3], 276.5093247021014)
-        XCTAssertEqual(target[3],306.5846816880375)
+        XCTAssertEqual(target[3],245.25839721158042)
 
         // distance to target
         // XCTAssertEqual(target[0],239.16353221862235)
-        XCTAssertEqual(target[0],240.164222893169)
+        XCTAssertEqual(target[0],240.16422446122968)
 
         // target lat, lon
         // XCTAssertEqual(target[1],33.835465932500185)
         // XCTAssertEqual(target[2],-84.53849326691132)
-        XCTAssertEqual(target[1],33.835458730005925)
-        XCTAssertEqual(target[2],-84.53849210995045)
+        XCTAssertEqual(target[1],33.83545871335009)
+        XCTAssertEqual(target[2],-84.53849210727509)
     
         djiDroneImage.targetXprop = 0.25
         djiDroneImage.targetYprop = 0.25
@@ -197,14 +197,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],324.8879767296192)
+        XCTAssertEqual(target[3],263.5616922531621)
 
         // distance to target
-        XCTAssertEqual(target[0],354.32508924079326)
+        XCTAssertEqual(target[0],354.325092364044)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],33.834557006016766)
-        XCTAssertEqual(target[2],-84.53707402053148)
+        XCTAssertEqual(target[1],33.83455698068224)
+        XCTAssertEqual(target[2],-84.53707400420772)
         
     } // testDJIExif35
     
@@ -226,12 +226,12 @@ final class TestCalculations: XCTestCase {
         print("testSkydioExif35 is \(target)")
         
         // altitude
-        XCTAssertEqual(target[3],1019.4415581971641)
+        XCTAssertEqual(target[3],960.2743743564303)
         // distance to target
-        XCTAssertEqual(target[0],343.32610143042746)
+        XCTAssertEqual(target[0],343.32610444880345)
         // target lat, lon
-        XCTAssertEqual(target[1],32.517076053635684)
-        XCTAssertEqual(target[2],-110.92166815563021)
+        XCTAssertEqual(target[1],32.5170760363771)
+        XCTAssertEqual(target[2],-110.9216681289032)
         
         // 0.25, 0.25 throws DEM out of bounds on OA iOS and Android
         // thats OK; make sure an error is thrown
@@ -264,14 +264,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],378.5206141840482)
+        XCTAssertEqual(target[3],323.95101262995206)
 
         // distance to target
-        XCTAssertEqual(target[0],84.10228287675572)
+        XCTAssertEqual(target[0],84.10228375270978)
 
         // target lat, lon
-        XCTAssertEqual(target[1],41.30333157351147)
-        XCTAssertEqual(target[2],-96.34221452108417)
+        XCTAssertEqual(target[1],41.3033315794224)
+        XCTAssertEqual(target[2],-96.34221452075164)
     
         autelDroneImage.targetXprop = 0.25
         autelDroneImage.targetYprop = 0.25
@@ -280,14 +280,14 @@ final class TestCalculations: XCTestCase {
         print("testAutelExif35 \(target)")
                 
         // altitude
-        XCTAssertEqual(target[3],374.7118896180626)
+        XCTAssertEqual(target[3],320.1422880639665)
 
         // distance to target
-        XCTAssertEqual(target[0],447.64718832788265)
+        XCTAssertEqual(target[0],447.6471938791034)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],41.30647978318685)
-        XCTAssertEqual(target[2],-96.3437836011802)
+        XCTAssertEqual(target[1],41.30647981607087)
+        XCTAssertEqual(target[2],-96.34378361429144)
         
     } // testAutelExif35
     
@@ -376,17 +376,17 @@ final class TestCalculations: XCTestCase {
         
         // altitude
         // XCTAssertEqual(target[3], 276.5093247021014)
-        XCTAssertEqual(target[3],306.5846816880375)
+        XCTAssertEqual(target[3],245.25839721158042)
 
         // distance to target
         // XCTAssertEqual(target[0],239.16353221862235)
-        XCTAssertEqual(target[0],240.164222893169)
+        XCTAssertEqual(target[0],240.16422446122968)
 
         // target lat, lon
         // XCTAssertEqual(target[1],33.835465932500185)
         // XCTAssertEqual(target[2],-84.53849326691132)
-        XCTAssertEqual(target[1],33.835458730005925)
-        XCTAssertEqual(target[2],-84.53849210995045)
+        XCTAssertEqual(target[1],33.83545871335009)
+        XCTAssertEqual(target[2],-84.53849210727509)
     
         djiDroneImage.targetXprop = 0.25
         djiDroneImage.targetYprop = 0.25
@@ -399,14 +399,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],315.1154544888293)
+        XCTAssertEqual(target[3],253.78917001237238)
 
         // distance to target
-        XCTAssertEqual(target[0],319.27572548120145)
+        XCTAssertEqual(target[0],319.27572813788794)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],33.83487295818643)
-        XCTAssertEqual(target[2],-84.53732437862318)
+        XCTAssertEqual(target[1],33.83487293589259)
+        XCTAssertEqual(target[2],-84.53732436470915)
         
     } // testDJI
     
@@ -437,12 +437,12 @@ final class TestCalculations: XCTestCase {
         print("testSkydio: \(target)")
         
         // altitude
-        XCTAssertEqual(target[3],1019.4415581971641)
+        XCTAssertEqual(target[3],960.2743743564303)
         // distance to target
-        XCTAssertEqual(target[0],343.32610143042746)
+        XCTAssertEqual(target[0],343.32610444880345)
         // target lat, lon
-        XCTAssertEqual(target[1],32.517076053635684)
-        XCTAssertEqual(target[2],-110.92166815563021)
+        XCTAssertEqual(target[1],32.5170760363771)
+        XCTAssertEqual(target[2],-110.9216681289032)
         
         // 0.25, 0.25 throws DEM out of bounds on OA iOS and Android
         // thats OK; make sure an error is thrown
@@ -488,14 +488,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],59.079129567708435)
+        XCTAssertEqual(target[3],1.888934027508045)
 
         // distance to target
-        XCTAssertEqual(target[0],18.003780235200725)
+        XCTAssertEqual(target[0],18.003780268917858)
 
         // target lat, lon
-        XCTAssertEqual(target[1],29.786015029765696)
-        XCTAssertEqual(target[2],-95.63541650179917)
+        XCTAssertEqual(target[1],29.786015030498834)
+        XCTAssertEqual(target[2],-95.63541650179769)
     
         thermalDroneImage.targetXprop = 0.25
         thermalDroneImage.targetYprop = 0.25
@@ -507,14 +507,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],59.091028582754305)
+        XCTAssertEqual(target[3],1.9008330425538593)
 
         // distance to target
-        XCTAssertEqual(target[0],19.00520183825258)
+        XCTAssertEqual(target[0],19.005201884671287)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],29.78603127806782)
-        XCTAssertEqual(target[2],-95.6354282850735)
+        XCTAssertEqual(target[1],29.786031278946766)
+        XCTAssertEqual(target[2],-95.63542828517778)
     }
     
     func testAutel() throws
@@ -547,14 +547,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],378.5206141840482)
+        XCTAssertEqual(target[3],323.95101262995206)
 
         // distance to target
-        XCTAssertEqual(target[0],84.10228287675572)
+        XCTAssertEqual(target[0],84.10228375270978)
 
         // target lat, lon
-        XCTAssertEqual(target[1],41.30333157351147)
-        XCTAssertEqual(target[2],-96.34221452108417)
+        XCTAssertEqual(target[1],41.3033315794224)
+        XCTAssertEqual(target[2],-96.34221452075164)
     
         autelDroneImage.targetXprop = 0.25
         autelDroneImage.targetYprop = 0.25
@@ -566,14 +566,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],375.4248301078454)
+        XCTAssertEqual(target[3],320.85522855374927)
 
         // distance to target
-        XCTAssertEqual(target[0],222.31463841691848)
+        XCTAssertEqual(target[0],222.31464110937708)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],41.304531096648645)
-        XCTAssertEqual(target[2],-96.34298992555385)
+        XCTAssertEqual(target[1],41.30453111283675)
+        XCTAssertEqual(target[2],-96.3429899318648)
         
     } // testAutel
     
@@ -603,14 +603,14 @@ final class TestCalculations: XCTestCase {
         try target = teal2DroneImage.resolveTarget(dem: teal2Dem, altReference: DroneTargetResolution.AltitudeFromGPS)
         
         // altitude
-        XCTAssertEqual(target[3],1318.0736948671251)
+        XCTAssertEqual(target[3],1283.7435183873504)
         
         // distance to target
-        XCTAssertEqual(target[0],23.00909075677245)
+        XCTAssertEqual(target[0],23.009090808226624)
         
         // target lat, lon
-        XCTAssertEqual(target[1],40.71041728495734)
-        XCTAssertEqual(target[2],-111.89443435609874)
+        XCTAssertEqual(target[1],40.71041728540079)
+        XCTAssertEqual(target[2],-111.8944343566073)
         
     }
     

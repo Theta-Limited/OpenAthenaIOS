@@ -602,7 +602,7 @@ class LoadCalculateViewController: UIViewController,
         // 5 is the gimbalPitchDegree or theta
         // 6 azimuthOffset in degrees
         // 7 thetaOffset or pitch offset in degrees
-        // 8 is adjusted alt target[3] + offset which we calculate and set
+        // 8 is adjusted alt target[3] - offset which we calculate and set (egm96 alt)
         // check for [ 0,0,0,0, 0,0,0,0, 0 ]
         // internally, all distances/altitudes are in meters
         
@@ -623,11 +623,14 @@ class LoadCalculateViewController: UIViewController,
         let lonStr = LoadCalculateViewController.roundDigitsToString(val: target[2], precision: 6)
         // issue #30, round distance, alt to nearest meter
         var distanceStr = LoadCalculateViewController.roundDigitsToString(val: target[0], precision: 0)
-        var altStr = LoadCalculateViewController.roundDigitsToString(val: target[3] + offset, precision: 0)
+        // re issue #61 egm96alt = wgs84alt - offset
+        var altStr = LoadCalculateViewController.roundDigitsToString(val: target[3] - offset, precision: 0)
         let azOff = LoadCalculateViewController.roundDigitsToString(val: target[6], precision: 2)
         // swap sign of thetaOff to keep with aircraft conventions (tait-bryan)
         let thetaOff = LoadCalculateViewController.roundDigitsToString(val: -1.0 * target[7], precision: 2)
-        target[8] = target[3] + offset
+             
+        // re issue #61 egm96alt = wgs84 - offset
+        target[8] = target[3] - offset
         
         // re issue #48 calculate errors
         let predictedCE = CursorOnTargetSender.calculateCircularError(theta: finalTheta)
@@ -646,12 +649,12 @@ class LoadCalculateViewController: UIViewController,
         let urlStr = LoadCalculateViewController.getMapsUrlStr(latStr: latStr, lonStr: lonStr)
         htmlString += "<a href='\(urlStr)'><h2>Lat,Lon: \(latStr),\(lonStr)</h2></a><br>"
         if app.settings.unitsMode == .Metric {
-            htmlString += "<h2>Alt: \(altStr)m</h2><br>"
+            htmlString += "<h2>Alt: \(altStr)m (amsl)</h2><br>"
         }
         else {
             let altFt = app.metersToFeet(meters: target[3])
             altStr = LoadCalculateViewController.roundDigitsToString(val: altFt, precision: 0)
-            htmlString += "<h2>Alt: \(altStr)ft</h2><br>"
+            htmlString += "<h2>Alt: \(altStr)ft (amsl)</h2><br>"
             let distanceFt = app.metersToFeet(meters: target[0])
             distanceStr = LoadCalculateViewController.roundDigitsToString(val: distanceFt, precision: 0)
             errorStr = "CircErr: \(LoadCalculateViewController.roundDigitsToString(val: app.metersToFeet(meters: predictedCE), precision: 0)) ft, "+TLE_Cat.description + "<br>"
@@ -665,7 +668,7 @@ class LoadCalculateViewController: UIViewController,
         // and one for where target is; don't think we can do that w/o an Maps API key
         // and that would cost us
         
-        // reported WGS84 altitude is target[3] or altStr
+        // reported WGS84 altitude is target[3] or altStr/egm96/amsl
         
         // check the settings for output mode and see if we need to do any conversions
         // by default, everything internally is in WGS84 format
@@ -702,10 +705,10 @@ class LoadCalculateViewController: UIViewController,
             let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(mgrsStr)"
             htmlString += "<a href='\(urlStr)'><h2>MGRS1m: \(mgrsSplitStr)</h2></a><br>"
             if app.settings.unitsMode == .Metric {
-                htmlString += "<h2>Alt: \(altStr)m</h2><br>"
+                htmlString += "<h2>Alt: \(altStr)m (amsl)</h2><br>"
             }
             else {
-                htmlString += "<h2>Alt: \(altStr)ft</h2><br>"
+                htmlString += "<h2>Alt: \(altStr)ft (amsl)</h2><br>"
             }
 
             let mgrs10Str = MGRSGeodetic.WGS84_MGRS10m(Lat: target[1], Lon: target[2],Alt: target[3])

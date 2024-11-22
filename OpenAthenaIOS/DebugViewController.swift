@@ -170,8 +170,10 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
             do {
                 var lat = try self.vc.theDroneImage!.getLatitude()
                 var lon = try self.vc.theDroneImage!.getLongitude()
+                var alt = try self.vc.theDroneImage!.getAltitude()
                 self.htmlString += "Latitude: \(lat)<br>"
                 self.htmlString += "Longitude: \(lon)<br>"
+                self.htmlString += "Altitude (hae): \(alt)<br>"
                 let urlStr = "https://www.google.com/maps/search/?api=1&t=k&query=\(lat),\(lon)"
                 self.htmlString += "<a href='\(urlStr)'>\(urlStr)</a><br>"
                 try self.htmlString += "Make: \(vc.theDroneImage!.getCameraMake())<br>"

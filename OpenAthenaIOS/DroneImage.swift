@@ -542,7 +542,8 @@ public class DroneImage {
         
         print("getAltitude: \(alt) offset: \(offset)")
         
-        alt = alt - offset
+        // re issue #61 wgs84alt = egm96alt + offset
+        alt = alt + offset
         
         print("getAltitude: returning \(alt)")
         

@@ -116,11 +116,12 @@ public class DroneImageParrot: DroneImage
         // otherwise, convert egm96 to wgs84
         let offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
         print("getAltitudeParrot: alt \(alt) offset \(offset)")
-        alt = alt - offset
+        // re issue #61 wgs84alt = egm96alt + offset
+        alt = alt + offset
         
         print("getAltitudeParrot: alt \(alt) superAlt \(superAlt)")
         
-        if superAlt != alt { return superAlt }
+        // if superAlt != alt { return superAlt }
         return alt
     }
     

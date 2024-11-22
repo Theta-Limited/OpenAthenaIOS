@@ -120,7 +120,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(djiImage.getLatitude(),33.8371893)
             try XCTAssertEqual(djiImage.getLongitude(),-84.5387701)
-            try XCTAssertEqual(djiImage.getAltitude(),447.65314223822855)
+            try XCTAssertEqual(djiImage.getAltitude(),386.32685776177146)
             
             // check drone maker
             try XCTAssertTrue(djiImage.getCameraMake() == "DJI")
@@ -156,7 +156,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(skydioImage.getLatitude(),32.518935)
             try XCTAssertEqual(skydioImage.getLongitude(),-110.924547)
-            try XCTAssertEqual(skydioImage.getAltitude(),1064.0255019203844)
+            try XCTAssertEqual(skydioImage.getAltitude(),1004.8583180796156)
             
             // check drone maker
             try XCTAssertTrue(skydioImage.getCameraMake() == "Skydio")
@@ -194,7 +194,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(autelImage.getLatitude(),41.302641666666666)
             try XCTAssertEqual(autelImage.getLongitude(),-96.34225333333333)
-            try XCTAssertEqual(autelImage.getAltitude(),412.6329107770481)
+            try XCTAssertEqual(autelImage.getAltitude(),358.06330922295194)
             
             // check drone maker
             try XCTAssertTrue(autelImage.getCameraMake() == "Autel Robotics")
@@ -233,7 +233,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(parrotImage.getLatitude(),57.99953166666667)
             try XCTAssertEqual(parrotImage.getLongitude(),25.549638333333334)
-            try XCTAssertEqual(parrotImage.getAltitude(),59.190811490558836)
+            try XCTAssertEqual(parrotImage.getAltitude(),98.78350952365065)
             
             // check drone maker
             try XCTAssertTrue(parrotImage.getCameraMake() == "PARROT")
@@ -277,7 +277,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(teal2Image.getLatitude(),40.710335)
             try XCTAssertEqual(teal2Image.getLongitude(),-111.89434)
-            try XCTAssertEqual(teal2Image.getAltitude(),1337.6200442398874)
+            try XCTAssertEqual(teal2Image.getAltitude(),1303.2898677601127)
             
             try XCTAssertTrue(teal2Image.getCameraMake() == "Teledyne FLIR")
             try XCTAssertTrue(teal2Image.getCameraModel() == "Hadron 640R EO")

@@ -57,16 +57,16 @@ final class TestDigitalElevationModel: XCTestCase {
         
         do {
             try alt = mslDem.getAltitudeFromLatLong(targetLat: 0.0, targetLong: 0.0)
-            XCTAssertEqual(-17.16,alt)
+            XCTAssertEqual(17.16,alt)
             
             try alt = mslDem.getAltitudeFromLatLong(targetLat: -10.0, targetLong: -10.0)
-            XCTAssertEqual(-12.66,alt)
+            XCTAssertEqual(12.66,alt)
             
             try alt = mslDem.getAltitudeFromLatLong(targetLat: 20.0, targetLong: -50.0)
-            XCTAssertEqual(32.98,alt)
+            XCTAssertEqual(-32.98,alt)
             
             try alt = mslDem.getAltitudeFromLatLong(targetLat: 20.0,targetLong: -150.0)
-            XCTAssertEqual(6.97,alt)
+            XCTAssertEqual(-6.97,alt)
         }
         catch {
             XCTFail("testMaritimeDEM failed")

@@ -59,7 +59,8 @@ public class DroneImageDJI: DroneImage
             
             if rtkFlag == false {
                 offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
-                alt = alt - offset
+                // re issue #61 wgs84alt = egm96alt + offset
+                alt = alt + offset
                 print("getAltitudeDJI: EGM96 offset is \(offset)")
             }
         }

@@ -40,7 +40,8 @@ public class SeaLevelDEMEmulator: DigitalElevationModel
         // converts to WGS84 height above ellipsoide (HAE)
         
         let offset = EGM96Geoid.getOffset(lat: lat, lng: lon)
-        let alt = 0.0 - offset
+        // re issue #61 wgs84alt = egm96alt + offset
+        let alt = 0.0 + offset
         
         return alt
     }

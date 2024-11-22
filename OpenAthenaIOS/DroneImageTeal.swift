@@ -185,7 +185,8 @@ public class DroneImageTeal: DroneImage
         // convert from sea level to WGS84
         offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
         print("getAltitudeTeal: \(alt) \(offset)")
-        alt = alt - offset
+        // re issue #61 wgs84alt = egm96alt + offset
+        alt = alt + offset
         
         return alt
     }

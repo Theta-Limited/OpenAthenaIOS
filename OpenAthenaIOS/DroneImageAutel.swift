@@ -56,7 +56,8 @@ public class DroneImageAutel: DroneImage
             // convert from EGM96 to WGS84
             var offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
             print("getAltitudeAutel: adjusting \(alt) with offset \(offset)")
-            alt = alt - offset
+            // re issue #61 wgs84alt = egm96alt + offset
+            alt = alt + offset
         }
         
         print("getAltitudeAutel: \(alt) superAlt: \(superAlt)")

@@ -325,14 +325,14 @@ public class DigitalElevationModel {
             throw error
         }
         
-        var target = GeoLocation(lat: lat, lon: lon, alt: 0.0)
+        let target = GeoLocation(lat: lat, lon: lon, alt: 0.0)
         
-        var neighbors: [GeoLocation] = [L1, L2, L3, L4]
+        let neighbors: [GeoLocation] = [L1, L2, L3, L4]
         
         // power parameter controls degeree influence that the neighboring points have
         // on the interpolated value.  Higher power will result in higher influence on closer
         // points and a lower influence on more distance points.
-        var power = 2.0
+        let power = 2.0
 
         // Inverse Distance Weighting interpolation using 4 neighbors
         // see https://doi.org/10.3846/gac.2023.16591
@@ -340,10 +340,11 @@ public class DigitalElevationModel {
         
         //print("Going to call idwInterpolation")
         
-        var altEGM96 = idwInterpolation(target: target, neighbors: neighbors, power: power)
+        let altEGM96 = idwInterpolation(target: target, neighbors: neighbors, power: power)
         let offset = EGM96Geoid.getOffset(lat: lat, lng: lon)
        
-        let altWGS84 = altEGM96 - offset
+        // re issue #61 wgs84alt = EGM96alt + offset
+        let altWGS84 = altEGM96 + offset
         
         //print("altEGM96: \(altEGM96) offset: \(offset) altWGS84: \(altWGS84)")
         
@@ -446,6 +447,22 @@ public class DigitalElevationModel {
         return (R,L)
         
     } // binarySearchNearest
+    
+    public func getEGM96AltFromLatLon(targetLat lat: Double, targetLong lon: Double) throws -> Double
+    {
+        do {
+            let wgs84alt = try getAltitudeFromLatLong(targetLat: lat, targetLong: lon)
+            let offset = EGM96Geoid.getOffset(lat: lat , lng: lon)
+            
+            // re issue #61, egm96alt = wgs84alt - offset
+            let egm96alt = wgs84alt - offset
+            
+            return egm96alt
+        }
+        catch {
+            throw error
+        }
+    }
     
     
 } // DigitalElevationModel

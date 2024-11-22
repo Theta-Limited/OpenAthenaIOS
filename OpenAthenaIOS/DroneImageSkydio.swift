@@ -41,7 +41,8 @@ public class DroneImageSkydio: DroneImage
         var offset: Double = 0.0
         offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
         print("getAltitudeSkydio: \(alt) offset: \(offset)")
-        alt = alt - offset
+        // re issue #61 wgs84alt = egm96alt + offset
+        alt = alt + offset
         
         print("getAltitudeSkydio: alt: \(alt), superAlt: \(superAlt)")
         

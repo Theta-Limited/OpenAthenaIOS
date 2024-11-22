@@ -257,6 +257,7 @@ class CalculateViewController: UIViewController, UIScrollViewDelegate {
         let azOff = roundDigitsToString(val: target[6], precision: 2)
         // swap sign of thetaOff to keep with aircraft conventions (tait-bryan)
         let thetaOff = roundDigitsToString(val: -1.0 * target[7], precision: 2)
+        // re issue #61, 
         target[8] = target[3] + offset
         
         //let nearestAltStr = roundDigitsToString(val: target[4] + offset, precision: 6)
