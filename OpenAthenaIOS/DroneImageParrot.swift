@@ -24,16 +24,16 @@ public class DroneImageParrot: DroneImage
             version = metaData!["drone-parrot:SoftwareVersion"] as! String
         }
         
-        print("getVersionParrot: \(version)")
+        return version;
         
-        var ret = compareVersions("1.8.0",version)
+        // put this in unit test
+//        print("getVersionParrot: \(version)")
+//        var ret = compareVersionStrings("1.8.0",version)
+//        print("getVersionParrot 1.8.0 <=> \(version) is \(ret)")
+//        ret = compareVersionStrings("1.9","1.9.0")
+//        print("getVersionParrot 1.9 <=> 1.9.0 is \(ret)")
+//        return version
         
-        print("getVersionParrot 1.8.0 <=> \(version) is \(ret)")
-        
-        ret = compareVersions("1.9","1.9.0")
-        print("getVersionParrot 1.9 <=> 1.9.0 is \(ret)")
-        
-        return version
     }
     
     // get altitude in meters
@@ -195,37 +195,28 @@ public class DroneImageParrot: DroneImage
         return .ExtendedBooleanUnknown
     }
     
-    // chatgpt derived code!
-    // compare two version strings of format x.y.z
+    // return the vertical datum used by this drone
+    // which lets us know what the altitude in meta data is
     
-    func compareVersions(_ version1: String, _ version2: String) -> Int {
-        let components1 = version1.components(separatedBy: ".")
-        let components2 = version2.components(separatedBy: ".")
+    override public func getVerticalDatum() -> DroneVerticalDatumType
+    {
+        var model = ""
         
-        // Ensure both versions have the same number of components
-        let maxLength = max(components1.count, components2.count)
-        let paddedComponents1 = components1 + Array(repeating: "0", count: maxLength - components1.count)
-        let paddedComponents2 = components2 + Array(repeating: "0", count: maxLength - components2.count)
-        
-        // Compare each component numerically
-        for (component1, component2) in zip(paddedComponents1, paddedComponents2) {
-            if let num1 = Int(component1), let num2 = Int(component2) {
-                if num1 < num2 {
-                    return -1
-                } else if num1 > num2 {
-                    return 1
-                }
-            } else {
-                // If components are not numeric, compare them lexicographically
-                let comparisonResult = component1.compare(component2)
-                if comparisonResult != .orderedSame {
-                    return comparisonResult == .orderedAscending ? -1 : 1
-                }
-            }
+        do {
+            model = try getCameraModel()
+        }
+        catch {
+            // do nothing
         }
         
-        // If all components are equal, versions are equal
-        return 0
+        // if its parrot anafiai, alt is in wgs84
+                
+        if model.lowercased().contains("anafiai") == true {
+            return DroneVerticalDatumType.WGS84
+        }
+        
+        return DroneVerticalDatumType.ORTHOMETRIC
     }
+    
 
 } // DroneImageParrot

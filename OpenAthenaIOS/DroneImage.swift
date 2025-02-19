@@ -18,6 +18,14 @@ public enum ExtendedBoolean: Int {
     case ExtendedBooleanTrue = 1
     case ExtendedBooleanUnknown = 2
 }
+
+public enum DroneVerticalDatumType: Int {
+    case WGS84 = 0
+    case ORTHOMETRIC = 1
+    // case AMSL = 1
+    case NAVD88 = 2
+    case UNKNOWN = 3
+}
                                 
 public enum DroneImageError: String, Error {
     case MetaDataKeyNotFound = "Meta data key not found"
@@ -348,6 +356,10 @@ public class DroneImage {
     // For older Autel drones, check if GPSAltitudeRef exists and is 1
     // If so, its below sea level and we should negate the value
     // return altitude in WGS84
+    
+    // this code is mostly deprecated because subclasses
+    // override it and apply drone-make/model specific decisions
+    // on how to interpret altitude
     
     public func getAltitude() throws -> Double {
         
@@ -889,9 +901,13 @@ public class DroneImage {
     }
     
     // lookup tiff:Make
-    public func getCameraMake() throws -> String {
-        
+    public func getCameraMake() throws -> String 
+    {
         var dict: NSDictionary
+        var makeStr: String
+        var modelStr: String
+                
+        try modelStr = getCameraModel()
         
         if metaData == nil {
             throw DroneImageError.NoMetaData
@@ -900,7 +916,10 @@ public class DroneImage {
         if xmpDataRead == false {
             parseXmpMetaDataNoError()
         }
+        // this condition probably never be met because meta data not
+        // stored this way; its caught below as dictionary with {TIFF} label
         if metaData!["tiff:Make"] != nil {
+            makeStr = metaData!["tiff:Make"] as! String
             return metaData!["tiff:Make"] as! String
         }
         
@@ -914,7 +933,16 @@ public class DroneImage {
             throw DroneImageError.NoMetaData
         }
         
-        return dict["Make"] as! String
+        makeStr = dict["Make"] as! String
+        
+        // re issue #62 clean up camera make parsing for some Autel quirks
+        if makeStr.caseInsensitiveCompare("Camera") == .orderedSame && modelStr.starts(with: "XL") {
+            makeStr = "Autel Robotics"
+        }
+        
+        print("getCameraMake: returning \(makeStr)")
+        
+        return makeStr
     }
     
     // does this drone image have RTK flag set?
@@ -1978,6 +2006,80 @@ public class DroneImage {
         throw DroneImageError.BadAltitude
     }
     
+    // return the vertical datum used by this drone
+    // which lets us know what the altitude in meta data is
+    // subclasses should override this
+    
+    public func getVerticalDatum() -> DroneVerticalDatumType
+    {
+        return DroneVerticalDatumType.UNKNOWN
+    }
+    
+    // See if GPS Altitude Ref is in meta data and return
+    // -1 not present
+    // 0, 1 Exif.GpsInfo.GPSAltitude ref 0=above sea level, 1 below sea level
+    // Some Internet documentation incorrectly states it indicates msl or wgs84
+    
+    public func getAltitudeReference() -> Int
+    {
+        var altitudeRef = -1 // not present, unknown
+        var gpsInfo: NSDictionary
+        
+        if metaData!["{GPS}"] == nil {
+            print("getAltitudeReference: no gps meta data, bugging out")
+            return altitudeRef
+        }
+        gpsInfo = metaData!["{GPS}"] as! NSDictionary
+        
+        // re autel drones, check altitude ref for 1 meaning below sea level XXX
+        if gpsInfo["GPSAltitudeRef"] != nil {
+            altitudeRef = gpsInfo["GPSAltitudeRef"] as! Int
+        }
+        if gpsInfo["AltitudeRef"] != nil {
+            altitudeRef = gpsInfo["AltitudeRef"] as! Int
+        }
+        
+        if metaData!["exif:GPSAltitudeRef"] != nil {
+            altitudeRef = Int((metaData!["exif:GPSAltitudeRef"] as! NSString).intValue)
+        }
+        
+        return altitudeRef
+    }
+    
+    // chatgpt derived code!
+    // compare two version strings of format x.y.z
+    // -1, 0, 1 if a < b, a = b, a > b
+    
+    public static func compareVersionStrings(_ version1: String, _ version2: String) -> Int
+    {
+        let components1 = version1.components(separatedBy: ".")
+        let components2 = version2.components(separatedBy: ".")
+        
+        // Ensure both versions have the same number of components
+        let maxLength = max(components1.count, components2.count)
+        let paddedComponents1 = components1 + Array(repeating: "0", count: maxLength - components1.count)
+        let paddedComponents2 = components2 + Array(repeating: "0", count: maxLength - components2.count)
+        
+        // Compare each component numerically
+        for (component1, component2) in zip(paddedComponents1, paddedComponents2) {
+            if let num1 = Int(component1), let num2 = Int(component2) {
+                if num1 < num2 {
+                    return -1
+                } else if num1 > num2 {
+                    return 1
+                }
+            } else {
+                // If components are not numeric, compare them lexicographically
+                let comparisonResult = component1.compare(component2)
+                if comparisonResult != .orderedSame {
+                    return comparisonResult == .orderedAscending ? -1 : 1
+                }
+            }
+        }
+        
+        // If all components are equal, versions are equal
+        return 0
+    }
     
 } // DroneImage
     

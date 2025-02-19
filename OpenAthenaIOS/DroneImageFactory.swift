@@ -53,6 +53,24 @@ class DroneImageFactory
                     }
                 }
             }
+            
+            var modelStr = "unknown"
+            if metaData["tiff:Model"] != nil {
+                modelStr = metaData["tiff:Model"] as! String
+            }
+            else {
+                if metaData["{TIFF}"] != nil {
+                    var dict = metaData["{TIFF}"] as! NSDictionary
+                    if dict["Model"] != nil {
+                        modelStr = dict["Model"] as! String
+                    }
+                }
+            }
+
+            // re issue #62 clean up camera make parsing for some Autel quirks
+            if makeStr.caseInsensitiveCompare("Camera") == .orderedSame && modelStr.starts(with: "XL") {
+                makeStr = "Autel Robotics"
+            }
             print("createDroneImage: make is \(makeStr)")
             
             switch makeStr.lowercased() {

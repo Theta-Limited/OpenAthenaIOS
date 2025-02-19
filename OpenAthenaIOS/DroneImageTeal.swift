@@ -190,5 +190,14 @@ public class DroneImageTeal: DroneImage
         
         return alt
     }
+    
+    // return the vertical datum used by this drone
+    // which lets us know what the altitude in meta data is
+    
+    override public func getVerticalDatum() -> DroneVerticalDatumType
+    {
+        return DroneVerticalDatumType.ORTHOMETRIC
+    }
+    
         
 } // DroneImageTeal

@@ -18,14 +18,11 @@ public class DroneImageDJI: DroneImage
     // GPS->Altitude or drone specific AbsoluteAltitude
     // if below sea level, we should negate the value
     // return altitude in WGS84
+    // re issue #65 fix for newer DJIs reporting in WGS84
     
     override public func getAltitude() throws -> Double
     {
         var alt = 0.0
-        var gpsInfo: NSDictionary
-        
-        //print("getAltitudeDJI: invoked")
-        
         let superAlt = try super.getAltitude()
         
         if metaData == nil {
@@ -37,44 +34,28 @@ public class DroneImageDJI: DroneImage
             parseXmpMetaDataNoError()
         }
         
+        var djiVersion = getDjiVersion();
+        var offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
+        var rtkFlag:ExtendedBoolean = isRTK()
+        var status = getGpsStatus()
+        var altitudeRef = getAltitudeReference()
+        
+        print("getAltitudeDJI: version: \(djiVersion) offset: \(offset) rtk: \(rtkFlag) altRef: \(altitudeRef) status: \(status)")
+        
+        alt = superAlt
+        
         if metaData!["drone-dji:AbsoluteAltitude"] != nil {
             alt = (metaData!["drone-dji:AbsoluteAltitude"] as! NSString).doubleValue
-            //print("getAltitudeDJI: drone-dji:AbsoluteAltitude \(alt)")
-        }
-        
-        //print("getAltitudeDJI: alt is \(alt) now going to make corrections")
-        
-        // for DJI drones, look for this flag bug ignore RtkAlt in drone-dji:AltitudeType=RtkAlt
-        var rtkFlag = false
-        
-        if xmlStringCopy?.lowercased().contains("rtkflag") == true {
-            print("getAltitudeDJI: rtkflag is true")
-            rtkFlag = true
-        }
-        
-        do {
-            // DJI are EGM96
-            // if tag rtkflag then its already in WGS84
-            var offset: Double = 0.0
             
-            if rtkFlag == false {
-                offset = try EGM96Geoid.getOffset(lat: getLatitude(), lng: getLongitude())
-                // re issue #61 wgs84alt = egm96alt + offset
-                alt = alt + offset
-                print("getAltitudeDJI: EGM96 offset is \(offset)")
+            print("getAltitudeDJI: AbsoluteAltitude is \(alt)")
+
+            if DroneImage.compareVersionStrings(djiVersion,"1.5") == -1 && rtkFlag == .ExtendedBooleanFalse {
+                alt = alt + offset // convert EGM96 to WGS84
             }
         }
-        catch {
-            print("getAltitudeDJI: error getting alt offset \(error)")
-            throw error
-        }
-                
-        print("getAltitudeDJI: alt is \(alt), super is \(superAlt)")
         
-        if alt == 0.0 {
-            return superAlt
-        }
-        
+        print("getAltitudeDJI: returning \(alt)")
+
         return alt
     }
     
@@ -132,5 +113,71 @@ public class DroneImageDJI: DroneImage
         // altitude is in WGS84
         return alt
     }
+    
+    // return the vertical datum used by this drone
+    // which lets us know what the altitude in meta data is
+    // some DJIs report altitude in WGS84 while others
+    // report in EGM96/Ortho/AMSL
+    
+    override public func getVerticalDatum() -> DroneVerticalDatumType
+    {
+        let djiVersion = getDjiVersion()
+        let rtkFlag = isRTK()
+        
+        if DroneImage.compareVersionStrings(djiVersion,"1.5") == -1 && rtkFlag == .ExtendedBooleanFalse {
+            // if older rev and not RTK, its orthometric altitude e.g. egm96
+            return DroneVerticalDatumType.ORTHOMETRIC
+        }
+        return DroneVerticalDatumType.WGS84 
+    }
+    
+    // find Xmp.drone-dji.Version and return it if found; 0 otherwise
+    // return as string so that 1.10 > 1.6 > 1.5 > 1.2 > 0
+    
+    public func getDjiVersion() -> String
+    {
+        var version = "0.0";
+        
+        if metaData!["drone-dji:Version"] != nil {
+            version = metaData!["drone-dji:Version"] as! String
+        }
+        
+        print("getDjiVersion: \(version)")
+        
+        // run a few tests
+//        var ret = DroneImage.compareVersionStrings(version,"2.0")
+//        print("compareVersions \(version) 2.0 -> \(ret)")
+//        
+//        ret = DroneImage.compareVersionStrings("2.0",version)
+//        print("compareVersions 2.0 \(version) -> \(ret)")
+//        
+//        ret = DroneImage.compareVersionStrings("1.9","1.9.0")
+//        print("compareVersions 1.9 1.9.0 -> \(ret)")
+//        
+//        ret = DroneImage.compareVersionStrings("1.9","1.9.1")
+//        print("compareVersions 1.9 1.9.1 -> \(ret)")
+        
+        return version;
+    }
+    
+    // look for drone-dji:GpsStatus
+    // return "unknown" or value if present
+    // https://dl.djicdn.com/downloads/DJI_Mavic_3_Enterprise/20230829/Mavic_3M_Image_Processing_Guide_EN.pdf
+    // rtk, invalid, normal
+    // our mini3pro says invalid but it is giving appropriate WGS84 altitudes though
+    // therefore, don't think we can rely on this value
+    
+    public func getGpsStatus() -> String
+    {
+        var status = "unknown";
+        
+        if metaData!["drone-dji:GpsStatus"] != nil {
+            status = metaData!["drone-dji:GpsStatus"] as! String;
+        }
+
+        return status;
+    }
+    
+    
 } // DroneImageDJI
 
