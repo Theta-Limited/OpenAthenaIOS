@@ -746,7 +746,9 @@ public class DroneImage {
         }
     }
     
-    public func getFocalLength() throws -> Double
+    // get Focal Length from image and ignore any droneInfo values
+
+    public func getImageFocalLength() throws -> Double
     {
         if metaData == nil {
             throw DroneImageError.NoMetaData
@@ -754,6 +756,40 @@ public class DroneImage {
         if xmpDataRead == false {
             parseXmpMetaDataNoError()
         }
+        if metaData!["Exif:FocalLength"] != nil {
+            return metaData!["Exif:FocalLength"] as! Double
+        }
+        if metaData!["{Exif}"] != nil {
+            var dict = metaData!["{Exif}"] as! NSDictionary
+            if dict["FocalLength"] != nil {
+                return dict["FocalLength"] as! Double
+            }
+        }
+        
+        throw DroneImageError.MetaDataKeyNotFound
+        
+    } // getImageFocalLength()
+    
+    public func getFocalLength() throws -> Double
+    {
+        var fl:Double = 0.0
+        var droneFl:Double = -1.0
+        
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        // re issue #63 override any image FL with the value that
+        // is in droneInfo entry
+        if ccdInfo != nil && ccdInfo!.focalLength != 0.0 {
+            droneFl = ccdInfo!.focalLength
+            print("getFocalLength: returning override FL \(droneFl)")
+            return droneFl
+        }
+        
         if metaData!["Exif:FocalLength"] != nil {
             return metaData!["Exif:FocalLength"] as! Double
         }
@@ -768,14 +804,18 @@ public class DroneImage {
         if metaData!["{Exif}"] != nil {
             var dict = metaData!["{Exif}"] as! NSDictionary
             if dict["FocalLength"] != nil {
-                return dict["FocalLength"] as! Double
+                fl = dict["FocalLength"] as! Double
+                print("getFocalLength: returning image fl \(fl)")
+                return fl
             }
         }
         
         // if we get here and we don't have a focal length, try to get it from
         // drone info struct issue #41
         if ccdInfo != nil && ccdInfo!.focalLength != 0.0 {
-            return ccdInfo!.focalLength
+            fl = ccdInfo!.focalLength
+            print("getFocalLength: image didnt have fl, returning droneInfo fl \(fl)")
+            return fl
         }
 
         print("getFocalLength: metadata key not found")

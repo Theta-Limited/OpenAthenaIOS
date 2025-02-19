@@ -104,6 +104,18 @@ class DroneImageFactory
             do {
                 var ccdInfo: DroneCCDInfo?
                 
+                print("DromeImageFactory: looking up drone info for width \(vc.theDroneImage!.theImage!.size.width)")
+                print("DroneImageFactory: image scale is \(vc.theDroneImage!.theImage!.scale)")
+                var width = vc.theDroneImage!.theImage!.size.width * vc.theDroneImage!.theImage!.scale
+                print("DroneImageFactory: calculated width is \(width)")
+                print("DroneImageFactory: cg image width is \(md[kCGImagePropertyPixelWidth] as? Int)")
+                print("DroneImageFactory exif width \(exifDict?[kCGImagePropertyExifPixelXDimension as String] as? Int)")
+
+                let tiffProperties = md[kCGImagePropertyTIFFDictionary] as? [CFString: Any]
+                print("DroneImageFactory: tiff width is \(tiffProperties?[kCGImagePropertyPixelWidth])")
+                
+                print("DroneImageFactory: cg width is \(image?.cgImage?.width)")
+                
                 ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
                                                                             model: vc.theDroneImage!.getCameraModel(),
                                                                             targetWidth: vc.theDroneImage!.theImage!.size.width)
