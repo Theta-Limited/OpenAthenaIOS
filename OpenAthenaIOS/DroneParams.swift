@@ -195,12 +195,32 @@ public class DroneParams
                 
         try theDrones = getMatchingDrones(makeModel: makeModel)
         
+        print("getMatchingDrone: matched \(theDrones.count) drones")
+        
         for drone in theDrones {
+
+            print("getMatchingDrone: examining \(drone.widthPixels) \(drone.comment)")
+            
             //difference = fabs(drone.widthPixels - targetWidth)
             difference_ratio = drone.widthPixels / targetWidth
             if difference_ratio < 1.0 {
                 difference_ratio = 1 / difference_ratio
             }
+            
+            // re issue #66 sometimes images are scaled by ios and
+            // they then won't match the drone model entry
+            // causing us to potentially match a smaller thermal camera
+            // on same make/model; if we've matched a thermal camera
+            // for make/model, skip it if the widths don't match
+            // we're assuming that a smaller thermal image won't get scaled 
+            
+            if drone.isThermal == true && drone.widthPixels != targetWidth {
+                print("getMatchingDrone: skipping thermal drone that does not match width")
+                difference_ratio = Double.infinity
+            }
+
+            print("getMatchingDrone: diff ratio is \(difference_ratio)")
+            
             //if difference < smallestDifference {
             if difference_ratio < smallestDifference {
                 closestDrone = drone
@@ -212,6 +232,8 @@ public class DroneParams
         if closestDrone == nil {
             throw DroneParamsError.droneNotFound
         }
+        
+        print("getMatchingDrone: returning \(closestDrone!.comment)")
         
         return closestDrone 
     }
