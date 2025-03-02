@@ -53,6 +53,24 @@ class DroneImageFactory
                     }
                 }
             }
+            
+            var modelStr = "unknown"
+            if metaData["tiff:Model"] != nil {
+                modelStr = metaData["tiff:Model"] as! String
+            }
+            else {
+                if metaData["{TIFF}"] != nil {
+                    var dict = metaData["{TIFF}"] as! NSDictionary
+                    if dict["Model"] != nil {
+                        modelStr = dict["Model"] as! String
+                    }
+                }
+            }
+
+            // re issue #62 clean up camera make parsing for some Autel quirks
+            if makeStr.caseInsensitiveCompare("Camera") == .orderedSame && modelStr.starts(with: "XL") {
+                makeStr = "Autel Robotics"
+            }
             print("createDroneImage: make is \(makeStr)")
             
             switch makeStr.lowercased() {
@@ -85,6 +103,18 @@ class DroneImageFactory
             // re issue #60 do it here and display warning
             do {
                 var ccdInfo: DroneCCDInfo?
+                
+                print("DromeImageFactory: looking up drone info for width \(vc.theDroneImage!.theImage!.size.width)")
+                print("DroneImageFactory: image scale is \(vc.theDroneImage!.theImage!.scale)")
+                var width = vc.theDroneImage!.theImage!.size.width * vc.theDroneImage!.theImage!.scale
+                print("DroneImageFactory: calculated width is \(width)")
+                print("DroneImageFactory: cg image width is \(md[kCGImagePropertyPixelWidth] as? Int)")
+                print("DroneImageFactory exif width \(exifDict?[kCGImagePropertyExifPixelXDimension as String] as? Int)")
+
+                let tiffProperties = md[kCGImagePropertyTIFFDictionary] as? [CFString: Any]
+                print("DroneImageFactory: tiff width is \(tiffProperties?[kCGImagePropertyPixelWidth])")
+                
+                print("DroneImageFactory: cg width is \(image?.cgImage?.width)")
                 
                 ccdInfo = try vc.droneParams?.lookupDrone(make: vc.theDroneImage!.getCameraMake(),
                                                                             model: vc.theDroneImage!.getCameraModel(),

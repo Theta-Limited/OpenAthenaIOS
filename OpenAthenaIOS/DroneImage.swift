@@ -18,7 +18,8 @@ public enum ExtendedBoolean: Int {
     case ExtendedBooleanTrue = 1
     case ExtendedBooleanUnknown = 2
 }
-                                
+
+            
 public enum DroneImageError: String, Error {
     case MetaDataKeyNotFound = "Meta data key not found"
     case NoMetaData = "No meta data"
@@ -143,7 +144,8 @@ public class DroneImage {
     // parses for us
     
     // digital zoom, optical zoom, etc
-    public func getZoom() -> Double {
+    public func getZoom() throws -> Double 
+    {
         var zoom = 1.00
         var dict: NSDictionary
         
@@ -183,6 +185,19 @@ public class DroneImage {
             zoom = 1.0
         }
         return zoom
+    }
+    
+    public func isThermal() -> Bool 
+    {
+        if ccdInfo == nil {
+            return false
+        }
+        
+        if ccdInfo!.isThermal == true {
+            return true
+        }
+        
+        return false
     }
     
     public func getRoll() throws -> Double
@@ -348,6 +363,10 @@ public class DroneImage {
     // For older Autel drones, check if GPSAltitudeRef exists and is 1
     // If so, its below sea level and we should negate the value
     // return altitude in WGS84
+    
+    // this code is mostly deprecated because subclasses
+    // override it and apply drone-make/model specific decisions
+    // on how to interpret altitude
     
     public func getAltitude() throws -> Double {
         
@@ -734,7 +753,9 @@ public class DroneImage {
         }
     }
     
-    public func getFocalLength() throws -> Double
+    // get Focal Length from image and ignore any droneInfo values
+
+    public func getImageFocalLength() throws -> Double
     {
         if metaData == nil {
             throw DroneImageError.NoMetaData
@@ -742,6 +763,40 @@ public class DroneImage {
         if xmpDataRead == false {
             parseXmpMetaDataNoError()
         }
+        if metaData!["Exif:FocalLength"] != nil {
+            return metaData!["Exif:FocalLength"] as! Double
+        }
+        if metaData!["{Exif}"] != nil {
+            var dict = metaData!["{Exif}"] as! NSDictionary
+            if dict["FocalLength"] != nil {
+                return dict["FocalLength"] as! Double
+            }
+        }
+        
+        throw DroneImageError.MetaDataKeyNotFound
+        
+    } // getImageFocalLength()
+    
+    public func getFocalLength() throws -> Double
+    {
+        var fl:Double = 0.0
+        var droneFl:Double = -1.0
+        
+        if metaData == nil {
+            throw DroneImageError.NoMetaData
+        }
+        if xmpDataRead == false {
+            parseXmpMetaDataNoError()
+        }
+        
+        // re issue #63 override any image FL with the value that
+        // is in droneInfo entry
+        if ccdInfo != nil && ccdInfo!.focalLength != 0.0 {
+            droneFl = ccdInfo!.focalLength
+            print("getFocalLength: returning override FL \(droneFl)")
+            return droneFl
+        }
+        
         if metaData!["Exif:FocalLength"] != nil {
             return metaData!["Exif:FocalLength"] as! Double
         }
@@ -756,14 +811,18 @@ public class DroneImage {
         if metaData!["{Exif}"] != nil {
             var dict = metaData!["{Exif}"] as! NSDictionary
             if dict["FocalLength"] != nil {
-                return dict["FocalLength"] as! Double
+                fl = dict["FocalLength"] as! Double
+                print("getFocalLength: returning image fl \(fl)")
+                return fl
             }
         }
         
         // if we get here and we don't have a focal length, try to get it from
         // drone info struct issue #41
         if ccdInfo != nil && ccdInfo!.focalLength != 0.0 {
-            return ccdInfo!.focalLength
+            fl = ccdInfo!.focalLength
+            print("getFocalLength: image didnt have fl, returning droneInfo fl \(fl)")
+            return fl
         }
 
         print("getFocalLength: metadata key not found")
@@ -889,9 +948,13 @@ public class DroneImage {
     }
     
     // lookup tiff:Make
-    public func getCameraMake() throws -> String {
-        
+    public func getCameraMake() throws -> String 
+    {
         var dict: NSDictionary
+        var makeStr: String
+        var modelStr: String
+                
+        try modelStr = getCameraModel()
         
         if metaData == nil {
             throw DroneImageError.NoMetaData
@@ -900,7 +963,10 @@ public class DroneImage {
         if xmpDataRead == false {
             parseXmpMetaDataNoError()
         }
+        // this condition probably never be met because meta data not
+        // stored this way; its caught below as dictionary with {TIFF} label
         if metaData!["tiff:Make"] != nil {
+            makeStr = metaData!["tiff:Make"] as! String
             return metaData!["tiff:Make"] as! String
         }
         
@@ -914,7 +980,16 @@ public class DroneImage {
             throw DroneImageError.NoMetaData
         }
         
-        return dict["Make"] as! String
+        makeStr = dict["Make"] as! String
+        
+        // re issue #62 clean up camera make parsing for some Autel quirks
+        if makeStr.caseInsensitiveCompare("Camera") == .orderedSame && modelStr.starts(with: "XL") {
+            makeStr = "Autel Robotics"
+        }
+        
+        print("getCameraMake: returning \(makeStr)")
+        
+        return makeStr
     }
     
     // does this drone image have RTK flag set?
@@ -964,7 +1039,7 @@ public class DroneImage {
         var matrix = [Double](repeating: 0.0, count: 9)
         
         var focalLength35mmEquiv = try getFocalLengthIn35mm()
-        var zoomRatio = getZoom()
+        var zoomRatio = try getZoom()
         var imageWidth = theImage!.size.width
         var imageHeight = theImage!.size.height
         
@@ -1025,7 +1100,7 @@ public class DroneImage {
             }
         }
         
-        var zoomRatio = getZoom()
+        var zoomRatio = try getZoom()
         var imageWidth = theImage!.size.width
         var imageHeight = theImage!.size.height
         var pixelAspectRatio = ccdInfo!.ccdWidthMMPerPixel / ccdInfo!.ccdHeightMMPerPixel
@@ -1125,19 +1200,20 @@ public class DroneImage {
                 
                 print("Perspective correction")
                 
-                let p2 = aDrone?.tangentialT2
-                let p1 = aDrone?.tangentialT1
-                let k1 = aDrone?.radialR1
-                let k2 = aDrone?.radialR2
-                let k3 = aDrone?.radialR3
+                //let p2 = aDrone?.tangentialT2
+                //let p1 = aDrone?.tangentialT1
+                let k1 = aDrone?.radialR1 ?? 0.0
+                let k2 = aDrone?.radialR2 ?? 0.0
+                let k3 = aDrone?.radialR3 ?? 0.0
                 
                 // see OpenAthenaAndroid for explanation of code
                 // "A Flexible New Technique for Camera Calibration", 1998 Microsoft
-                if !(k1 == 0.0 && k2 == 0.0 && k3 == 0.0 && p1 == 0.0 && p2 == 0.0) {
+                // re issue #64 use simplified correction
+                if !(k1 == 0.0 && k2 == 0.0) {
                     
-                    let pdc = PerspectiveDistortionCorrector(k1: k1!, k2: k2!, p1: p1!, p2: p2!)
+                    let pdc = PerspectiveDistortionCorrector(k1: k1, k2: k2, k3: k3)
                     
-                    (xUndistorted,yUndistorted) = pdc.correctDistortion(xNormalized: xNormalized, yNormalized: yNormalized)
+                    (xUndistorted,yUndistorted) = pdc.correctDistortion(xNormalizedDistorted: xNormalized, yNormalizedDistorted: yNormalized)
                     xUndistorted = xUndistorted * fx
                     yUndistorted = yUndistorted * fy
                 }
@@ -1457,7 +1533,7 @@ public class DroneImage {
             calculationInfo["gimbalPitchDegree"] = degTheta
             calculationInfo["gimbalYawDegree"] = degAzimuth
             calculationInfo["cameraSlantAngleDeg"] = degTheta
-            calculationInfo["digitalZoomRatio"] = getZoom()
+            calculationInfo["digitalZoomRatio"] = try getZoom()
 
             //print("resolveTarget: got az and theta")
                                     
@@ -1978,6 +2054,80 @@ public class DroneImage {
         throw DroneImageError.BadAltitude
     }
     
+    // return the vertical datum used by this drone
+    // which lets us know what the altitude in meta data is
+    // subclasses should override this
+    
+    public func getVerticalDatum() -> AthenaSettings.VerticalDatumType
+    {
+        return AthenaSettings.VerticalDatumType.UNKNOWN_OTHER
+    }
+    
+    // See if GPS Altitude Ref is in meta data and return
+    // -1 not present
+    // 0, 1 Exif.GpsInfo.GPSAltitude ref 0=above sea level, 1 below sea level
+    // Some Internet documentation incorrectly states it indicates msl or wgs84
+    
+    public func getAltitudeReference() -> Int
+    {
+        var altitudeRef = -1 // not present, unknown
+        var gpsInfo: NSDictionary
+        
+        if metaData!["{GPS}"] == nil {
+            print("getAltitudeReference: no gps meta data, bugging out")
+            return altitudeRef
+        }
+        gpsInfo = metaData!["{GPS}"] as! NSDictionary
+        
+        // re autel drones, check altitude ref for 1 meaning below sea level XXX
+        if gpsInfo["GPSAltitudeRef"] != nil {
+            altitudeRef = gpsInfo["GPSAltitudeRef"] as! Int
+        }
+        if gpsInfo["AltitudeRef"] != nil {
+            altitudeRef = gpsInfo["AltitudeRef"] as! Int
+        }
+        
+        if metaData!["exif:GPSAltitudeRef"] != nil {
+            altitudeRef = Int((metaData!["exif:GPSAltitudeRef"] as! NSString).intValue)
+        }
+        
+        return altitudeRef
+    }
+    
+    // chatgpt derived code!
+    // compare two version strings of format x.y.z
+    // -1, 0, 1 if a < b, a = b, a > b
+    
+    public static func compareVersionStrings(_ version1: String, _ version2: String) -> Int
+    {
+        let components1 = version1.components(separatedBy: ".")
+        let components2 = version2.components(separatedBy: ".")
+        
+        // Ensure both versions have the same number of components
+        let maxLength = max(components1.count, components2.count)
+        let paddedComponents1 = components1 + Array(repeating: "0", count: maxLength - components1.count)
+        let paddedComponents2 = components2 + Array(repeating: "0", count: maxLength - components2.count)
+        
+        // Compare each component numerically
+        for (component1, component2) in zip(paddedComponents1, paddedComponents2) {
+            if let num1 = Int(component1), let num2 = Int(component2) {
+                if num1 < num2 {
+                    return -1
+                } else if num1 > num2 {
+                    return 1
+                }
+            } else {
+                // If components are not numeric, compare them lexicographically
+                let comparisonResult = component1.compare(component2)
+                if comparisonResult != .orderedSame {
+                    return comparisonResult == .orderedAscending ? -1 : 1
+                }
+            }
+        }
+        
+        // If all components are equal, versions are equal
+        return 0
+    }
     
 } // DroneImage
     

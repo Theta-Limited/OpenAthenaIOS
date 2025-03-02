@@ -135,6 +135,19 @@ final class TestDroneParams: XCTestCase {
         drone = try? droneParams!.getMatchingDrone(makeModel: "djiFC2403", targetWidth: 4056)
         XCTAssert(drone != nil)
         XCTAssertEqual(drone!.widthPixels,4056)
+        
+        // re issue #66 test a few thermal entries and see if our workaround works
+        drone = try? droneParams!.getMatchingDrone(makeModel: "skydioX2 NARROW", targetWidth: 512.0)
+        XCTAssert(drone != nil)
+        XCTAssertEqual(drone!.isThermal,true)
+        XCTAssertEqual(drone!.widthPixels,320.0)
+        
+        drone = try? droneParams!.getMatchingDrone(makeModel: "Autel RoboticsXL715", targetWidth: 2048.0)
+        XCTAssert(drone != nil)
+        XCTAssertEqual(drone!.isThermal,false)
+        XCTAssertEqual(drone!.widthPixels,8000.0)
+        
     }
+    
 
 } // TestDroneParams

@@ -142,6 +142,8 @@ final class TestDroneImage: XCTestCase {
             try XCTAssert(djiImage.metaData!["drone-dji:GimbalPitchDegree"] as! String == "-36.00")
             try XCTAssert(djiImage.metaData!["drone-dji:GimbalYawDegree"] as! String == "+172.40")
             
+            try XCTAssertEqual(djiImage.getZoom(),1.0)
+            
         }
         catch {
             XCTAssert(false)
@@ -174,6 +176,8 @@ final class TestDroneImage: XCTestCase {
             
             try XCTAssert(skydioImage.getExifDateTime() != "")
             
+            try XCTAssertEqual(skydioImage.getZoom(),1.0)
+            
             XCTAssert(skydioImage.metaData!["drone-skydio:AbsoluteAltitude"] as! String  == "1034.441910")
             XCTAssert(skydioImage.metaData!["drone-skydio:CameraOrientationNED:Pitch"] as! String == "-7.468572")
             XCTAssert(skydioImage.metaData!["drone-skydio:CameraOrientationNED:Roll"] as! String == "0.186841")
@@ -194,7 +198,7 @@ final class TestDroneImage: XCTestCase {
         do {
             try XCTAssertEqual(autelImage.getLatitude(),41.302641666666666)
             try XCTAssertEqual(autelImage.getLongitude(),-96.34225333333333)
-            try XCTAssertEqual(autelImage.getAltitude(),358.06330922295194)
+            try XCTAssertEqual(autelImage.getAltitude(),385.34811)
             
             // check drone maker
             try XCTAssertTrue(autelImage.getCameraMake() == "Autel Robotics")
@@ -209,6 +213,8 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(autelImage.getFocalLength(),4.74)
             try XCTAssertEqual(autelImage.getFocalLengthIn35mm(),26.0)
             try XCTAssertEqual(autelImage.getRoll(),0.0)
+            
+            try XCTAssertEqual(autelImage.getZoom(),1.0)
             
             try XCTAssert(autelImage.getExifDateTime() != "")
             
@@ -250,6 +256,8 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(parrotImage.getRoll(),-2.391976595)
             
             try XCTAssert(parrotImage.getExifDateTime() != "")
+            
+            try XCTAssertEqual(parrotImage.getZoom(),1.0)
         }
         catch {
             XCTAssert(false)
@@ -287,6 +295,8 @@ final class TestDroneImage: XCTestCase {
             try XCTAssertEqual(teal2Image.getRoll(),-1.027896)
             try XCTAssertEqual(teal2Image.getGimbalPitchDegree(),58.19441)
             try XCTAssertEqual(teal2Image.getGimbalYawDegree(),319.002289)
+            
+            try XCTAssertEqual(teal2Image.getZoom(),1.0)
         }
         catch {
             XCTAssert(false)

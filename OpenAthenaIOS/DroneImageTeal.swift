@@ -13,7 +13,7 @@ import UIKit
 public class DroneImageTeal: DroneImage
 {
     
-    public func isThermal() -> Bool
+    override public func isThermal() -> Bool
     {
         if ccdInfo != nil {
             if ccdInfo!.isThermal == true {
@@ -190,5 +190,14 @@ public class DroneImageTeal: DroneImage
         
         return alt
     }
+    
+    // return the vertical datum used by this drone
+    // which lets us know what the altitude in meta data is
+    
+    override public func getVerticalDatum() -> AthenaSettings.VerticalDatumType
+    {
+        return AthenaSettings.VerticalDatumType.ORTHOMETRIC
+    }
+    
         
 } // DroneImageTeal
