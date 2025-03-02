@@ -119,16 +119,16 @@ public class DroneImageDJI: DroneImage
     // some DJIs report altitude in WGS84 while others
     // report in EGM96/Ortho/AMSL
     
-    override public func getVerticalDatum() -> DroneVerticalDatumType
+    override public func getVerticalDatum() -> AthenaSettings.VerticalDatumType
     {
         let djiVersion = getDjiVersion()
         let rtkFlag = isRTK()
         
         if DroneImage.compareVersionStrings(djiVersion,"1.5") == -1 && rtkFlag == .ExtendedBooleanFalse {
             // if older rev and not RTK, its orthometric altitude e.g. egm96
-            return DroneVerticalDatumType.ORTHOMETRIC
+            return AthenaSettings.VerticalDatumType.ORTHOMETRIC
         }
-        return DroneVerticalDatumType.WGS84 
+        return AthenaSettings.VerticalDatumType.WGS84 
     }
     
     // find Xmp.drone-dji.Version and return it if found; 0 otherwise

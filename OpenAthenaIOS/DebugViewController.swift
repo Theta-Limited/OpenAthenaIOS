@@ -199,7 +199,12 @@ class DebugViewController: UIViewController, UIScrollViewDelegate {
                 catch {
                     self.htmlString += "GimbalYaw/Az: \(error)<br>"
                 }
-                self.htmlString += "DigitalZoom: \(vc.theDroneImage!.getZoom())<br>"
+                do {
+                    try self.htmlString += "DigitalZoom: \(vc.theDroneImage!.getZoom())<br>"
+                }
+                catch {
+                    self.htmlString += "DigitalZoom: unknown<br>"
+                }
                 self.htmlString += "Is Drone? \(self.vc.theDroneImage!.isDroneImage())<br>"
                 
                 do {

@@ -88,4 +88,27 @@ final class TestConversions: XCTestCase
         XCTAssertEqual(dms, expectedDMS)
     }
     
+    func testVersionStrings()
+    {
+        var ret: Int
+        
+        print("testVersionStringComparisons")
+        
+        ret = DroneImage.compareVersionStrings("1.8.0", "1.10.2")
+        XCTAssertEqual(-1,ret)
+        print("1.8.0 " + (ret < 0 ? "<": (ret > 0 ? ">" : "=")) + " 1.10.2")
+        
+        ret = DroneImage.compareVersionStrings("2.1.0", "2.1")
+        XCTAssertEqual(0,ret)
+        print("2.1.0 " + (ret < 0 ? "<" : (ret > 0 ? ">" : "=")) + " 2.1")
+        
+        ret = DroneImage.compareVersionStrings("3.0.5", "3.0.1")
+        XCTAssertEqual(1,ret)
+        print("3.0.5 " + (ret < 0 ? "<" : (ret > 0 ? ">" : "=")) + " 3.0.1")
+        
+        ret = DroneImage.compareVersionStrings("1.2.1", "1.20")
+        XCTAssertEqual(-1,ret)
+        print("1.2.1 " + (ret < 0 ? "<" : (ret > 0 ? ">" : "=")) + " 1.20")
+    }
+    
 }

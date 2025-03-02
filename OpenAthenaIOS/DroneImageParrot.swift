@@ -43,7 +43,6 @@ public class DroneImageParrot: DroneImage
     
     override public func getAltitude() throws -> Double
     {
-        print("getAltitude: Parrot started")
         var superAlt = try super.getAltitude()
         
         // ignore Camera:AboveGroundAltitude
@@ -198,7 +197,7 @@ public class DroneImageParrot: DroneImage
     // return the vertical datum used by this drone
     // which lets us know what the altitude in meta data is
     
-    override public func getVerticalDatum() -> DroneVerticalDatumType
+    override public func getVerticalDatum() -> AthenaSettings.VerticalDatumType
     {
         var model = ""
         
@@ -212,11 +211,43 @@ public class DroneImageParrot: DroneImage
         // if its parrot anafiai, alt is in wgs84
                 
         if model.lowercased().contains("anafiai") == true {
-            return DroneVerticalDatumType.WGS84
+            return AthenaSettings.VerticalDatumType.WGS84
         }
         
-        return DroneVerticalDatumType.ORTHOMETRIC
+        return AthenaSettings.VerticalDatumType.ORTHOMETRIC
     }
     
+    // re issue #67 add workaround for broken zoom on certain
+    // Parrot Aanfi* drones
+    
+    override public func getZoom() throws -> Double
+    {
+        let superZoom = try super.getZoom()
+        var zoom = 1.0;
+        var version = getVersion()
+        let model = try getCameraModel()
+        var imageWidth = theImage!.size.width
+        
+        // if its a parrot anafi|anafiusa|anafiua
+        // since we're here, we know its a parrot though
+        
+        print("getZoomParrot: \(model) \(imageWidth)")
+        
+        if model.caseInsensitiveCompare("anafi") == .orderedSame ||
+            model.caseInsensitiveCompare("anafiusa") == .orderedSame ||
+            model.caseInsensitiveCompare("anafiua") == .orderedSame {
+            
+            if isThermal() == false {
+                zoom = 5344.0 / imageWidth
+            }
+            
+            print("getZoomParrot: anafi* zoom is \(zoom)")
+        }
+        
+        print("getZoomParrot: returning zoom \(zoom)")
+        
+        return zoom
+    }
+
 
 } // DroneImageParrot

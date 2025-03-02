@@ -264,14 +264,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],323.95101262995206)
+        XCTAssertEqual(target[3],323.2149983484645)
 
         // distance to target
-        XCTAssertEqual(target[0],84.10228375270978)
+        XCTAssertEqual(target[0],153.18658538289796)
 
         // target lat, lon
-        XCTAssertEqual(target[1],41.3033315794224)
-        XCTAssertEqual(target[2],-96.34221452075164)
+        XCTAssertEqual(target[1],41.30389829087341)
+        XCTAssertEqual(target[2],-96.34218263882705)
     
         autelDroneImage.targetXprop = 0.25
         autelDroneImage.targetYprop = 0.25
@@ -280,14 +280,14 @@ final class TestCalculations: XCTestCase {
         print("testAutelExif35 \(target)")
                 
         // altitude
-        XCTAssertEqual(target[3],320.1422880639665)
+        XCTAssertEqual(target[3],321.0435595782752)
 
         // distance to target
-        XCTAssertEqual(target[0],447.6471938791034)
+        XCTAssertEqual(target[0],759.0990932711086)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],41.30647981607087)
-        XCTAssertEqual(target[2],-96.34378361429144)
+        XCTAssertEqual(target[1],41.3091501924753)
+        XCTAssertEqual(target[2],-96.34484835401022)
         
     } // testAutelExif35
     
@@ -465,7 +465,10 @@ final class TestCalculations: XCTestCase {
         XCTAssert(thermalDem != nil)
         XCTAssert(thermalDroneImage != nil)
         
-        print("testSkydioX2DThermal() starting")
+        print("testSkydioX2DThermal starting")
+        print("testSkydioX2DThermal: \(try thermalDroneImage.getCameraMake())")
+        print("testSkydioX2DThermal: \(try thermalDroneImage.getCameraModel())")
+        print("testSkydioX2DThermal: image width \(thermalDroneImage!.theImage!.size.width)")
         
         // find the CCDInfo for this drone
         do {
@@ -477,6 +480,10 @@ final class TestCalculations: XCTestCase {
         catch {
             XCTFail("Error looking up thermal drone model info")
         }
+        
+        print("testSkydioX2DThermal: \(thermalDroneImage.ccdInfo!.makeModel)")
+        print("testSkydioX2DThermal: ccdinfo fl is \(thermalDroneImage.ccdInfo!.focalLength)")
+        print("testSkydioX2DThermal: isThermal \(thermalDroneImage.ccdInfo!.isThermal)")
         
         thermalDroneImage.targetXprop = 0.50
         thermalDroneImage.targetYprop = 0.50
@@ -547,14 +554,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],323.95101262995206)
+        XCTAssertEqual(target[3],323.2149983484645)
 
         // distance to target
-        XCTAssertEqual(target[0],84.10228375270978)
+        XCTAssertEqual(target[0],153.18658538289796)
 
         // target lat, lon
-        XCTAssertEqual(target[1],41.3033315794224)
-        XCTAssertEqual(target[2],-96.34221452075164)
+        XCTAssertEqual(target[1],41.30389829087341)
+        XCTAssertEqual(target[2],-96.34218263882705)
     
         autelDroneImage.targetXprop = 0.25
         autelDroneImage.targetYprop = 0.25
@@ -566,14 +573,14 @@ final class TestCalculations: XCTestCase {
         // have changed just slightly for alpha 1.1 and newer
         
         // altitude
-        XCTAssertEqual(target[3],320.85522855374927)
+        XCTAssertEqual(target[3],322.664226350082)
 
         // distance to target
-        XCTAssertEqual(target[0],222.31464110937708)
+        XCTAssertEqual(target[0],374.53081049936617)
                        
         // target lat, lon
-        XCTAssertEqual(target[1],41.30453111283675)
-        XCTAssertEqual(target[2],-96.3429899318648)
+        XCTAssertEqual(target[1],41.305824780541435)
+        XCTAssertEqual(target[2],-96.34349427912005)
         
     } // testAutel
     

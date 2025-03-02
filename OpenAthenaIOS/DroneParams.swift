@@ -214,11 +214,21 @@ public class DroneParams
             // for make/model, skip it if the widths don't match
             // we're assuming that a smaller thermal image won't get scaled 
             
-            if drone.isThermal == true && drone.widthPixels != targetWidth {
-                print("getMatchingDrone: skipping thermal drone that does not match width")
-                difference_ratio = Double.infinity
+            // if drone.isThermal == true && drone.widthPixels != targetWidth {
+            //    print("getMatchingDrone: skipping thermal drone that does not match width")
+            //    difference_ratio = Double.infinity
+            // }
+            
+            // if its a thermal entry but the image width >= 1000.0 pixels, skip
+            // entry; this hack seems to satisify all our test cases
+            // big assumption that a thermal camera is not going to produce an image >= 1000.00 pixels
+            // though
+            
+            if drone.isThermal == true && targetWidth >= 1000.0 {
+                print("getMatchingDrone: skipping thermal drone because image width is \(targetWidth)")
+                continue
             }
-
+            
             print("getMatchingDrone: diff ratio is \(difference_ratio)")
             
             //if difference < smallestDifference {

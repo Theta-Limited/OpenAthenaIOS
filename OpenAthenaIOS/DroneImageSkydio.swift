@@ -74,9 +74,9 @@ public class DroneImageSkydio: DroneImage
     // return the vertical datum used by this drone
     // which lets us know what the altitude in meta data is
     
-    override public func getVerticalDatum() -> DroneVerticalDatumType
+    override public func getVerticalDatum() -> AthenaSettings.VerticalDatumType
     {
-        return DroneVerticalDatumType.ORTHOMETRIC
+        return AthenaSettings.VerticalDatumType.ORTHOMETRIC
     }
     
 } // DroneImageSkydio

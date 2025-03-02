@@ -19,14 +19,7 @@ public enum ExtendedBoolean: Int {
     case ExtendedBooleanUnknown = 2
 }
 
-public enum DroneVerticalDatumType: Int {
-    case WGS84 = 0
-    case ORTHOMETRIC = 1
-    // case AMSL = 1
-    case NAVD88 = 2
-    case UNKNOWN = 3
-}
-                                
+            
 public enum DroneImageError: String, Error {
     case MetaDataKeyNotFound = "Meta data key not found"
     case NoMetaData = "No meta data"
@@ -151,7 +144,8 @@ public class DroneImage {
     // parses for us
     
     // digital zoom, optical zoom, etc
-    public func getZoom() -> Double {
+    public func getZoom() throws -> Double 
+    {
         var zoom = 1.00
         var dict: NSDictionary
         
@@ -191,6 +185,19 @@ public class DroneImage {
             zoom = 1.0
         }
         return zoom
+    }
+    
+    public func isThermal() -> Bool 
+    {
+        if ccdInfo == nil {
+            return false
+        }
+        
+        if ccdInfo!.isThermal == true {
+            return true
+        }
+        
+        return false
     }
     
     public func getRoll() throws -> Double
@@ -1032,7 +1039,7 @@ public class DroneImage {
         var matrix = [Double](repeating: 0.0, count: 9)
         
         var focalLength35mmEquiv = try getFocalLengthIn35mm()
-        var zoomRatio = getZoom()
+        var zoomRatio = try getZoom()
         var imageWidth = theImage!.size.width
         var imageHeight = theImage!.size.height
         
@@ -1093,7 +1100,7 @@ public class DroneImage {
             }
         }
         
-        var zoomRatio = getZoom()
+        var zoomRatio = try getZoom()
         var imageWidth = theImage!.size.width
         var imageHeight = theImage!.size.height
         var pixelAspectRatio = ccdInfo!.ccdWidthMMPerPixel / ccdInfo!.ccdHeightMMPerPixel
@@ -1193,19 +1200,20 @@ public class DroneImage {
                 
                 print("Perspective correction")
                 
-                let p2 = aDrone?.tangentialT2
-                let p1 = aDrone?.tangentialT1
-                let k1 = aDrone?.radialR1
-                let k2 = aDrone?.radialR2
-                let k3 = aDrone?.radialR3
+                //let p2 = aDrone?.tangentialT2
+                //let p1 = aDrone?.tangentialT1
+                let k1 = aDrone?.radialR1 ?? 0.0
+                let k2 = aDrone?.radialR2 ?? 0.0
+                let k3 = aDrone?.radialR3 ?? 0.0
                 
                 // see OpenAthenaAndroid for explanation of code
                 // "A Flexible New Technique for Camera Calibration", 1998 Microsoft
-                if !(k1 == 0.0 && k2 == 0.0 && k3 == 0.0 && p1 == 0.0 && p2 == 0.0) {
+                // re issue #64 use simplified correction
+                if !(k1 == 0.0 && k2 == 0.0) {
                     
-                    let pdc = PerspectiveDistortionCorrector(k1: k1!, k2: k2!, p1: p1!, p2: p2!)
+                    let pdc = PerspectiveDistortionCorrector(k1: k1, k2: k2, k3: k3)
                     
-                    (xUndistorted,yUndistorted) = pdc.correctDistortion(xNormalized: xNormalized, yNormalized: yNormalized)
+                    (xUndistorted,yUndistorted) = pdc.correctDistortion(xNormalizedDistorted: xNormalized, yNormalizedDistorted: yNormalized)
                     xUndistorted = xUndistorted * fx
                     yUndistorted = yUndistorted * fy
                 }
@@ -1525,7 +1533,7 @@ public class DroneImage {
             calculationInfo["gimbalPitchDegree"] = degTheta
             calculationInfo["gimbalYawDegree"] = degAzimuth
             calculationInfo["cameraSlantAngleDeg"] = degTheta
-            calculationInfo["digitalZoomRatio"] = getZoom()
+            calculationInfo["digitalZoomRatio"] = try getZoom()
 
             //print("resolveTarget: got az and theta")
                                     
@@ -2050,9 +2058,9 @@ public class DroneImage {
     // which lets us know what the altitude in meta data is
     // subclasses should override this
     
-    public func getVerticalDatum() -> DroneVerticalDatumType
+    public func getVerticalDatum() -> AthenaSettings.VerticalDatumType
     {
-        return DroneVerticalDatumType.UNKNOWN
+        return AthenaSettings.VerticalDatumType.UNKNOWN_OTHER
     }
     
     // See if GPS Altitude Ref is in meta data and return

@@ -12,7 +12,7 @@ import UIKit
 
 public class AthenaSettings {
     
-    enum DEMLookupModes: Int, CaseIterable {
+    public enum DEMLookupModes: Int, CaseIterable {
         case DEMStatic = 0   // use static tiff file that is downloaded
         case DEMOnline = 1   // use online lookup assuming mobile data
         
@@ -25,7 +25,7 @@ public class AthenaSettings {
     } // DEM lookup modes
     
     // re issue #32
-    enum ImperialVsMetric: Int, CaseIterable {
+    public enum ImperialVsMetric: Int, CaseIterable {
         case Imperial = 0  // use imperial for distances, heights
         case Metric = 1    // use metric for distances, heights
         
@@ -37,24 +37,24 @@ public class AthenaSettings {
         }
     }
     
-    enum VerticalDatumTypes: Int, CaseIterable {
+    public enum VerticalDatumType: Int, CaseIterable {
         case WGS84 = 0
-        case EGM96 = 1
+        case ORTHOMETRIC = 1
         case NAVD88 = 2
         case UNKNOWN_OTHER = 3
     
         
         var description: String {
             switch self {
-            case .WGS84: return "WGS84"    // HAE, GPS, or WGS84 ref ellipsoid
-            case .EGM96: return "EGM96"    // MSL or orthometric
+            case .WGS84: return "WGS84"                // HAE, GPS, or WGS84 ref ellipsoid
+            case .ORTHOMETRIC: return "ORTHOMETRIC"    // MSL or EGM96
             case .NAVD88: return "NAVD88"
             case .UNKNOWN_OTHER: return "Unknown/other"
             }
         }
     }
     
-    enum OutputModes: Int, CaseIterable {
+    public enum OutputModes: Int, CaseIterable {
         case WGS84 = 0               // standard lat, long format
         
         //case MGRS1m = 1              // NATO Military grid ref 1m square
