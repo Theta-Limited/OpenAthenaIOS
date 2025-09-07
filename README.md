@@ -23,6 +23,9 @@ src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept
  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main.png">
 </p>
 
+OpenAthena for iOS is no longer open source.  To request source code,
+please email [support@theta.limited](mailto:support@theta.limited)
+
 # Operation Guide
 
 ## A note about GeoTIFF Digital Elevation Models/Maps:
