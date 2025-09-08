@@ -23,8 +23,13 @@ src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept
  <img width="270" style="border:1px solid black" src="./OpenAthenaIOS/examples/oa-main.png">
 </p>
 
-OpenAthena for iOS is no longer open source.  To request source code,
-please email [support@theta.limited](mailto:support@theta.limited)
+**NOTICE: OpenAthena for Android is no longer open source to the
+general public, following a license change from Theta Informatics
+LLC.  While no longer open source, it will remain available as a free
+app download on Google Play.**
+
+U.S. Government, Military, and other trusted end users can request
+source code access by emailing [support@theta.limited](mailto:support@theta.limited).
 
 # Operation Guide
 
