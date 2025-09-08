@@ -26,7 +26,7 @@ src="https://github.com/mkrupczak3/OpenAthena/raw/main/assets/OpenAthena_Concept
 **NOTICE: OpenAthena for iOS is no longer open source to the general
 public, following a license change from Theta Informatics LLC.  While
 no longer open source, it will remain available as a free app download
-on Google Play.**
+in the Apple App Store.**
 
 U.S. Government, Military, and other trusted end users can request
 source code access by emailing [support@theta.limited](mailto:support@theta.limited).
